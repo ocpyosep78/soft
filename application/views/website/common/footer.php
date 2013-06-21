@@ -18,3 +18,13 @@
 <script type="text/javascript" src="<?php echo base_url('static/theme/job_board/bootstrap/js/bootstrap.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/theme/job_board/js/global.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/theme/job_board/js/stylesheetToggle.js'); ?>"></script>
+<script>
+$(function() {
+	$.stylesheetInit();
+	$('#theme_switcher').val('job_blue');
+	$('#theme_switcher_btn').bind('click', function(e) {
+		$.stylesheetSwitch($('#theme_switcher').val());
+		return false;
+	} );
+});
+</script>

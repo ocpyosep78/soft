@@ -225,19 +225,6 @@
 </div>
 </div></div> <!-- /container -->
 
-	<?php $this->load->view( 'website/common/footer' ); ?>
-<script>
-	$(function() {
-		$.stylesheetInit();
-		$('#theme_switcher').val('job_blue');
-		$('#theme_switcher_btn').bind('click',
-		function(e) {
-			$.stylesheetSwitch($('#theme_switcher').val());
-			return false;
-		}
-		);
-	});
-</script>
-
+<?php $this->load->view( 'website/common/footer' ); ?>
 </body>
 </html>

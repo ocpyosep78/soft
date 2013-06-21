@@ -38,6 +38,15 @@
 |
 */
 
+$url = (isset($_SERVER['argv']) && isset($_SERVER['argv'][0])) ? $_SERVER['argv'][0] : '';
+$url = preg_replace('/^\//i', '', $url);
+$url = preg_replace('/\/$/i', '', $url);
+$array_url = explode('/', $url);
+
+if ($array_url[0] != 'panel') {
+	$route['login'] = "website/login";
+}
+
 $route['default_controller'] = "website/home";
 $route['404_override'] = '';
 
