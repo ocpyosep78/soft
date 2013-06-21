@@ -16,6 +16,9 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('SHA_SECRET',							'raHa5!4');
 
+define('ITEM',									'item');
+define('USER',									'user');
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

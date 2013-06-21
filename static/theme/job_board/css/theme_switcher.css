@@ -47,3 +47,6 @@
 .color_box.grey_box {
   background: #E9E9E9;
 }
+
+.cursor { cursor: pointer; }
+.center { text-align: center; }
