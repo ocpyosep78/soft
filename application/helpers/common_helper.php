@@ -769,14 +769,7 @@
             return $record;
         }
     }
-	
-    if (! function_exists('get_store')) {
-        function get_store() {
-            $store_name = (isset($_SERVER['store_name']) && !empty($_SERVER['store_name'])) ? $_SERVER['store_name'] : '';
-            return $store_name;
-        }
-    }
-    
+
     if(! function_exists('GenerateInsertQueryByTypeData'))
     {
         function 

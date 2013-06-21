@@ -18,21 +18,11 @@
 $PortAddress = ($_SERVER['SERVER_PORT'] != 80) ? ':8666' : '';
 
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
-	$config['base_url']		= 'http://localhost'.$PortAddress.'/soft/trunk';
+	$config['base_url']		= 'http://localhost'.$PortAddress.'/software/trunk';
 	$config['base_path']	= realpath(dirname(__FILE__) . '/../..');
-	$config['share_media']	= 'off';
-	
-	$config['paypal_cert']    = realpath(dirname(__FILE__) . '/../../application/libraries/api.paypal.com.cert');
-	$config['paypal_cert']    = '';
-	$config['indocrm_api']	= 'http://localhost'.$PortAddress.'/indocrm/trunk/index.php/api/';
 } else if ($_SERVER['SERVER_NAME'] == 'software.simetri.in') {
 	$config['base_url']		= 'http://software.simetri.in';
 	$config['base_path']    = realpath(dirname(__FILE__) . '/../..');
-	$config['share_media']	= 'on';
-	
-	$config['paypal_cert']    = realpath(dirname(__FILE__) . '/../../application/libraries/api.paypal.com.cert');
-	$config['paypal_cert']    = '';
-	$config['indocrm_api']	= 'http://www.indocrm.com/index.php/api/';
 } else {
 	echo 'Please set up config.';
 	exit;
