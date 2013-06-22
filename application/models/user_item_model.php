@@ -4,7 +4,7 @@ class User_Item_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 		
-		$this->field = array( 'id', 'user_id', 'item_id' );
+		$this->field = array( 'id', 'user_id', 'item_id', 'price', 'invoice_no', 'payment_name' );
 	}
 	
 	function update($param) {
@@ -34,6 +34,15 @@ class User_Item_model extends CI_Model {
 		
 		if (isset($param['id'])) {
 			$select_query  = "SELECT * FROM ".USER_ITEM." WHERE id = '".$param['id']."' LIMIT 1";
+		} else if (isset($param['invoice_no'])) {
+			$select_query  = "
+				SELECT UserItem.*, Item.name item_name, User.fullname user_fullname, User.name user_name
+				FROM ".USER_ITEM." UserItem
+				LEFT JOIN ".ITEM." Item ON Item.id = UserItem.item_id
+				LEFT JOIN ".USER." User ON User.id = UserItem.user_id
+				WHERE UserItem.invoice_no = '".$param['invoice_no']."'
+				LIMIT 1
+			";
 		}
 		
 		$select_result = mysql_query($select_query) or die(mysql_error());
@@ -79,6 +88,16 @@ class User_Item_model extends CI_Model {
 		return $TotalRecord;
 	}
 	
+	function get_max_no() {
+		$select_query = "SELECT MAX(invoice_no) invoice_no FROM ".USER_ITEM."";
+		$select_result = mysql_query($select_query) or die(mysql_error());
+		$row = mysql_fetch_assoc($select_result);
+		$invoice_no = $row['invoice_no'];
+		$invoice_no = (empty($invoice_no)) ? 1 : $invoice_no + 1;
+		
+		return $invoice_no;
+	}
+	
 	function delete($param) {
 		if (isset($param['id'])) {
 			$delete_query  = "DELETE FROM ".USER_ITEM." WHERE id = '".$param['id']."' LIMIT 1";
@@ -95,8 +114,21 @@ class User_Item_model extends CI_Model {
 	function sync($row, $column = array()) {
 		$row = StripArray($row);
 		
+		if (!empty($row['price'])) {
+			$row['price_text'] = show_price($row['price']);
+		}
+		
 		// link item
 		$row['item_link'] = site_url('item/'.$row['id']);
+		
+		// user
+		if (!empty($row['user_fullname'])) {
+			$row['user_name'] = $row['user_fullname'];
+		} else if (!empty($row['user_name'])) {
+			$row['user_name'] = $row['user_name'];
+		} else {
+			$row['user_name'] = 'guest';
+		}
 		
 		if (count($column) > 0) {
 			$row = dt_view($row, $column, array('is_edit' => 1));

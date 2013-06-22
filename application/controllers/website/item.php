@@ -18,6 +18,10 @@ class item extends CI_Controller {
 		$this->load->view( 'website/item_buy' );
 	}
 	
+	function invoice() {
+		$this->load->view( 'website/item_invoice' );
+	}
+	
 	function payment() {
 		// action
 		$action = (!empty($_POST['action'])) ? $_POST['action'] : '';
@@ -91,7 +95,7 @@ class item extends CI_Controller {
 				)
 			);
 			$payment = $this->paypal->make_post_call($payment_param);
-			$this->paypal->set_session(array( 'link' => $payment['links'], 'item_id' => $param['item_id'] ));
+			$this->paypal->set_session(array( 'link' => $payment['links'], 'item_id' => $param['item_id'], 'price' => $param['price'] ));
 			
 			// get paypal approve url
 			$paypal_approve_url = '';
@@ -128,9 +132,18 @@ class item extends CI_Controller {
 			$payment = $this->paypal->make_post_call($payment_param);
 			
 			if ($payment['state'] == 'approved') {
-				$this->User_Item_model->update(array( 'item_id' => $paypal_session['item_id'], 'user_id' => $user['id'] ));
+				$invoice_no = $this->User_Item_model->get_max_no();
 				
-				$redirect_url = base_url('item/download/'.$paypal_session['item_id']);
+				$param_update = array(
+					'user_id' => $user['id'],
+					'price' => $paypal_session['price'],
+					'item_id' => $paypal_session['item_id'],
+					'invoice_no' => $invoice_no,
+					'payment_name' => 'paypal'
+				);
+				$this->User_Item_model->update($param_update);
+				
+				$redirect_url = base_url('item/invoice/'.$invoice_no);
 				header("Location: ".$redirect_url);
 				exit;
 			}
