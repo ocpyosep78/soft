@@ -16,8 +16,6 @@
 		<br />
 		<h2><i class="icon-suitcase"></i>&nbsp;&nbsp;Upload Item</h2>
 		
-		<!--	'id', 'user_id', 'item_status_id', 'name', 'description', 'price', 'thumbnail', 'filename'	-->
-		
 		<form id="form-item">
 			<input type="hidden" name="action" value="update" />
 			
@@ -216,6 +214,9 @@ $(document).ready(function() {
 		
 		Func.ajax({ url: web.host + 'ajax/item', param: param, callback: function(result) {
 			Func.show_notice({ title: 'Informasi', text: result.message });
+			if (result.status) {
+				window.location = result.link_next;
+			}
 		} });
 	});
 });

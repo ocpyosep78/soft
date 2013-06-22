@@ -26,6 +26,9 @@ class ajax extends CI_Controller {
 			}
 			
 			$result = $this->Item_model->update($_POST);
+			if ($result['status']) {
+				$result['link_next'] = base_url('post/confirm/'.$result['id']);
+			}
 		}
 		
 		echo json_encode($result);

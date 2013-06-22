@@ -35,16 +35,8 @@ class Item_model extends CI_Model {
        
         if (isset($param['id'])) {
 			$select_query  = "
-				SELECT Item.*, ItemPrice.price, Currency.name currency_name,
-					Catalog.id catalog_id, Catalog.name catalog_name, Catalog.title catalog_title,
-					Category.name category_name, Category.title category_title
+				SELECT Item.*
 				FROM ".ITEM." Item
-				LEFT JOIN ".ITEM_PRICE." ItemPrice ON ItemPrice.item_id = Item.id
-				LEFT JOIN ".ITEM_CATALOG." ItemCatalog ON ItemCatalog.item_id = Item.id
-				LEFT JOIN ".CATALOG." Catalog ON Catalog.id = ItemCatalog.catalog_id
-				LEFT JOIN ".ITEM_CATEGORY." ItemCategory ON ItemCategory.item_id = Item.id
-				LEFT JOIN ".CATEGORY." Category ON Category.id = ItemCategory.category_id
-				LEFT JOIN ".CURRENCY." Currency ON Currency.id = ItemPrice.currency_id
 				WHERE Item.id = '".$param['id']."'
 				LIMIT 1
 			";
@@ -53,18 +45,6 @@ class Item_model extends CI_Model {
         $select_result = mysql_query($select_query) or die(mysql_error());
         if (false !== $row = mysql_fetch_assoc($select_result)) {
             $array = $this->sync($row);
-			
-			// add catalog & category
-			$param = array(
-				'filter' => '[' .
-					'{"type":"numeric","comparison":"eq","value":"'.$array['id'].'","field":"item_id"},' .
-					'{"type":"numeric","comparison":"eq","value":"'.$array['store_id'].'","field":"store_id"}' .
-				']'
-			);
-			$array['array_catalog'] = $this->Item_Catalog_model->get_array($param);
-			$array['array_category'] = $this->Item_Category_model->get_array($param);
-			$array['array_picture'] = $this->Item_Picture_model->get_array(array('item_id' => $array['id']));
-			$array['array_file'] = $this->Item_File_model->get_array(array('item_id' => $array['id']));
         }
 		
         return $array;
@@ -144,7 +124,11 @@ class Item_model extends CI_Model {
 		}
 		
 		// item link
-		$row['item_link'] = site_url('item/'.$row['id']);
+		$row['item_link'] = base_url('item/'.$row['id']);
+		
+		if (!empty($row['filename'])) {
+			$row['array_filename'] = json_decode($row['filename']);
+		}
 		
 		/*
 		// user dt_view_set for more improvement
