@@ -16,7 +16,9 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('SHA_SECRET',							'raHa5!4');
 
+define('CATEGORY',								'category');
 define('ITEM',									'item');
+define('PLATFORM',								'platform');
 define('USER',									'user');
 
 
