@@ -46,6 +46,7 @@ $array_url = explode('/', $url);
 if ($array_url[0] != 'panel') {
 	$route['login'] = "website/login";
 	$route['ajax/(:any)'] = "website/ajax";
+	$route['post'] = "website/post";
 }
 
 $route['default_controller'] = "website/home";
