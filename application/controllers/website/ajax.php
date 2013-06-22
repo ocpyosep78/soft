@@ -13,6 +13,24 @@ class ajax extends CI_Controller {
 		$this->$method();
     }
 	
+	function item() {
+		$action = (empty($_POST['action'])) ? '' : $_POST['action'];
+		
+		$result = array('status' => false, 'message' => '');
+		if ($action == 'update') {
+			if (empty($_POST['id'])) {
+				$_POST['item_status_id'] = ITEM_STATUS_PENDING;
+			}
+			if (isset($_POST['item_file'])) {
+				$_POST['filename'] = json_encode($_POST['item_file']);
+			}
+			
+			$result = $this->Item_model->update($_POST);
+		}
+		
+		echo json_encode($result);
+	}
+	
 	function user() {
 		$action = (empty($_POST['action'])) ? '' : $_POST['action'];
 		
