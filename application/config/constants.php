@@ -23,6 +23,11 @@ define('PAYPAL_HOST',							'https://api.sandbox.paypal.com');
 define('PAYPAL_CLIENT_ID',						'AU0L0hAN7pMABeNL9E0EFb_wZx8SEAxoL1iXlt5FMsPJP_Oyb5WzABfnr07X');
 define('PAYPAL_CLIENT_SECRET',					'EHdp9hAuOnRUC603-FvyabES7kQ6Yv38MYRjHGQ4lUWO20qLlfUg4w3Hp0ks');
 
+/* USER */
+define('STATUS_USER_NEW',							'0');
+define('STATUS_USER_CONFIRM',							'1');
+define('STATUS_USER_BANNED',							'2');
+
 define('CATEGORY',								'category');
 define('DEFAULT_VALUE',							'default_value');
 define('ITEM',									'item');
