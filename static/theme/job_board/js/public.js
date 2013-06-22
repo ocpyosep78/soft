@@ -321,5 +321,18 @@ var Func = {
 				p.callback(data);
 			}
 		} });
+	},
+	show_notice: function(p) {
+		p.title = (p.title == null) ? 'Message' : p.title;
+		p.text = (p.text == null) ? '-' : p.text;
+		
+		$('.gritter-close').click();
+		$.gritter.add({ title: p.title, text: p.text, sticky: true, time: 3000 });
+		
+		// close glitter
+		setTimeout(function() {
+			var id = $('.gritter-item-wrapper').last().attr('id');
+			$('#' + id).find('.gritter-close').click();
+		}, 3000);
 	}
 }

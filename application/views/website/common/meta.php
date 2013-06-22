@@ -9,6 +9,7 @@
 	<script>var web = { host: '<?php echo base_url(); ?>' } </script>
 	<link rel="stylesheet" href="<?php echo base_url('static/theme/job_board/css/theme_switcher.css'); ?>" type="text/css">
 	<link rel="stylesheet" href="<?php echo base_url('static/theme/job_board/css/job_blue.responsive.css'); ?>" title="job_blue" type="text/css">
+	<link rel="stylesheet" href="<?php echo base_url('static/lib/gritter/jquery.gritter.css'); ?>" title="job_blue" type="text/css">
 	
     <!--[if lt IE 9]>
 		<link rel="stylesheet" href="<?php echo base_url('static/theme/job_board/css/bootstrap_ie7.css'); ?>" title="job_blue" type="text/css">

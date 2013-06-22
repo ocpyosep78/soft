@@ -93,11 +93,6 @@
 		
 	</div>	
 </div>
-
-    <div id="sticker">
-      <p>This is the sticky thingy that is really cool.</p>
-    </div>
-
 <?php $this->load->view( 'website/common/footer' ); ?>
 
 <script>
@@ -134,7 +129,7 @@ $(document).ready(function() {
 		
 		var param = Site.Form.GetValue('form-register');
 		Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
-			console.log(result);
+			Func.show_notice({ title: 'Informasi', text: result.message });
 		} });
 	});
 	$('.btn-login').click(function() {
@@ -145,6 +140,7 @@ $(document).ready(function() {
 		var param = Site.Form.GetValue('form-login');
 		Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
 			console.log(result);
+			Func.show_notice({ title: 'Informasi', text: result.message });
 		} });
 	});
 });
