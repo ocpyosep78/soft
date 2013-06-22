@@ -26,7 +26,7 @@
 					<span class="icon-bar"></span>
 				</a>
 				<div class="logo">
-					<a href="index.html">
+					<a href="<?php echo base_url(); ?>">
 						<img src="<?php echo base_url('static/img/logo.png'); ?>" style="width: 200px;" />
 					</a>
 				</div>
