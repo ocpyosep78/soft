@@ -77,7 +77,8 @@
                 <div class="accordion-body collapse <?php echo ($group_name == 'master') ? 'in' : ''; ?>" id="sub-5">
                     <div class="accordion-inner">
                         <ul class="nav nav-list">
-                            <li><a href="<?php echo site_url('panel/master/item_status'); ?>">Item Status</a></li>
+                                <li><a href="<?php echo site_url('panel/master/category'); ?>">Category</a></li>
+                                <li><a href="<?php echo site_url('panel/master/item_status'); ?>">Item Status</a></li>
                             <!--
                                 <li><a href="<?php echo site_url('panel/master/store'); ?>">Store</a></li>
                                 <li><a href="<?php echo site_url('panel/master/blog_status'); ?>">Blog Status</a></li>
