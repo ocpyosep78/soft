@@ -36,19 +36,15 @@
  * @access	public
  * @param	string
  * @return	string
- */
-if ( ! function_exists('site_url'))
+*/
+ if ( ! function_exists('site_url'))
 {
 	function site_url($uri = '')
 	{
-		if (!empty($uri)) {
-			$base_url .= '/'.$uri;
-		}
-		
-		return $base_url;
+		$CI =& get_instance();
+		return $CI->config->site_url($uri);
 	}
 }
-
 // ------------------------------------------------------------------------
 
 /**
