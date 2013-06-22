@@ -1,6 +1,6 @@
 <?php
 
-class post extends CI_Controller {
+class item extends CI_Controller {
     function __construct() {
         parent::__construct();
     }
@@ -10,11 +10,11 @@ class post extends CI_Controller {
 		if (method_exists($this, $method_name)) {
 			$this->$method_name();
 		} else {
-			$this->load->view( 'website/post' );
+			$this->load->view( 'website/item' );
 		}
     }
 	
-	function confirm() {
-		$this->load->view( 'website/post_confirm' );
+	function buy() {
+		$this->load->view( 'website/item_buy' );
 	}
 }

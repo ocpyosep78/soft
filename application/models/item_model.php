@@ -35,8 +35,13 @@ class Item_model extends CI_Model {
        
         if (isset($param['id'])) {
 			$select_query  = "
-				SELECT Item.*
+				SELECT
+					Item.*, User.fullname user_fullname, User.name user_name,
+					Category.name category_name, Platform.name platform_name
 				FROM ".ITEM." Item
+				LEFT JOIN ".CATEGORY." Category ON Category.id = Item.category_id
+				LEFT JOIN ".PLATFORM." Platform ON Platform.id = Item.platform_id
+				LEFT JOIN ".USER." User ON User.id = Item.user_id
 				WHERE Item.id = '".$param['id']."'
 				LIMIT 1
 			";
@@ -117,6 +122,7 @@ class Item_model extends CI_Model {
 		
 		// item link
 		$row['item_link'] = base_url('item/'.$row['id']);
+		$row['item_buy_link'] = base_url('item/buy/'.$row['id']);
 		
 		// item file
 		if (!empty($row['filename'])) {
