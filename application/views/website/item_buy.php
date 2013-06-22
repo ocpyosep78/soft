@@ -13,7 +13,9 @@
 		<br />
 		<h2><i class="icon-suitcase"></i>&nbsp;&nbsp;<?php echo $item['name']; ?></h2>
 		
-		<div class="row-fluid form-tooltip">	
+		<div class="row-fluid form-tooltip" id="form-payment">	
+			<input type="hidden" name="id" value="<?php echo $item['id']; ?>" />
+			
 			<div class="span12">
 				<div>Item : <?php echo $item['name']; ?></div>
 				<div>Harga : <?php echo $item['price_text']; ?></div>
@@ -45,7 +47,20 @@
 <script>
 $(document).ready(function() {
 	$('.btn-pay').click(function() {
+		var param = Site.Form.GetValue('form-payment');
+		param.payment = $('input[name=payment]:checked').val();
+		if (param.payment == null) {
+			Func.show_notice({ title: 'Informasi', text: 'Harap memilih cara pembayaran' });
+			return false;
+		}
 		
+		$('.btn-pay').parent('div').text('Harap tunggu sebentar, pembayaran anda sedang diproses.');
+		Func.ajax({ url: web.host + 'item/payment', param: param, callback: function(result) {
+			Func.show_notice({ title: 'Informasi', text: result.message });
+			if (result.status) {
+				window.location = result.link_next;
+			}
+		} });
 	});
 });
 </script>

@@ -18,10 +18,17 @@ define('SHA_SECRET',							'raHa5!4');
 define('ITEM_STATUS_PENDING',					'1');
 define('ITEM_STATUS_APPROVE',					'2');
 
+/*	PAYPAL */
+define('PAYPAL_HOST',							'https://api.sandbox.paypal.com');
+define('PAYPAL_CLIENT_ID',						'AU0L0hAN7pMABeNL9E0EFb_wZx8SEAxoL1iXlt5FMsPJP_Oyb5WzABfnr07X');
+define('PAYPAL_CLIENT_SECRET',					'EHdp9hAuOnRUC603-FvyabES7kQ6Yv38MYRjHGQ4lUWO20qLlfUg4w3Hp0ks');
+
 define('CATEGORY',								'category');
+define('DEFAULT_VALUE',							'default_value');
 define('ITEM',									'item');
 define('PLATFORM',								'platform');
 define('USER',									'user');
+define('USER_ITEM',								'user_item');
 
 
 /* End of file constants.php */

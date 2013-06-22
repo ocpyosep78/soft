@@ -71,15 +71,38 @@ class paypal {
 		return $jsonResponse;
 	}
 	
-	/*	Region Paypal Session */
-	
-	function set_link($link) {
-		$_SESSION['paypal_link'] = $link;
+	function get_execute_link() {
+		// session
+		$session = $this->get_session();
+		
+		// get paypal execute url
+		$array_link = $session['link'];
+		$paypal_execute_url = '';
+		foreach ($array_link as $array) {
+			if ($array['rel'] == 'execute') {
+				$paypal_execute_url = $array['href'];
+				break;
+			}
+		}
+		
+		return $paypal_execute_url;
 	}
 	
-	function get_link() {
-		$link = $_SESSION['paypal_link'];
-		return $link;
+	/*	Region Paypal Session */
+	
+	function set_session($array) {
+		foreach ($array as $key => $value) {
+			$_SESSION['paypal'][$key] = $value;
+		}
+	}
+	
+	function get_session() {
+		$session = array();
+		if (isset($_SESSION['paypal'])) {
+			$session = $_SESSION['paypal'];
+		}
+		
+		return $session;
 	}
 	
 	/*	End Paypal Session */

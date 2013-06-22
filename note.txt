@@ -20,3 +20,16 @@ Panel Admin:
 1. backend approval registrasi toko
 2. admin/pending item, 
 3. admin/publish item, 
+
+account paypal pemilik toko :
+bisnis@simetri.in
+bisnis*96
+
+account paypal untuk pembeli :
+personal@simetri.in
+personal*96
+
+account admin :
+link : http://software.simetri.in/lintasgps/panel
+user : herry@simetri.in
+pass : qwertyui
