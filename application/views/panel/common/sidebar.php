@@ -49,9 +49,9 @@
 						<!--	<li><a href="<?php echo site_url('panel/store/theme'); ?>">Theme</a></li>	-->
 						<li><a href="<?php echo site_url('panel/store/store_image_slide'); ?>">Image Slide</a></li>
 						<?php if (in_array($user['id'], $admin_user)) { ?>
-						<li><a href="<?php echo site_url('panel/store/store_payment_method'); ?>">Payment</a></li>
-						<li><a href="<?php echo site_url('panel/store/bank_account'); ?>">Bank Account</a></li>
-						<?php } ?>
+                            <li><a href="<?php echo site_url('panel/store/store_payment_method'); ?>">Payment</a></li>
+                            <li><a href="<?php echo site_url('panel/store/bank_account'); ?>">Bank Account</a></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -77,14 +77,17 @@
                 <div class="accordion-body collapse <?php echo ($group_name == 'master') ? 'in' : ''; ?>" id="sub-5">
                     <div class="accordion-inner">
                         <ul class="nav nav-list">
-                            <li><a href="<?php echo site_url('panel/master/store'); ?>">Store</a></li>
-                            <li><a href="<?php echo site_url('panel/master/blog_status'); ?>">Blog Status</a></li>
                             <li><a href="<?php echo site_url('panel/master/item_status'); ?>">Item Status</a></li>
-                            <li><a href="<?php echo site_url('panel/master/currency'); ?>">Currency</a></li>
-                            <li><a href="<?php echo site_url('panel/master/payment_method'); ?>">Payment Method</a></li>
-                            <li><a href="<?php echo site_url('panel/master/bank'); ?>">Bank</a></li>
-                            <!--<li><a href="<?php echo site_url('panel/master/shipment'); ?>">Shipment</a></li>-->
-                            <li><a href="<?php echo site_url('panel/master/default_value'); ?>">Default Value</a></li>
+                            <!--
+                                <li><a href="<?php echo site_url('panel/master/store'); ?>">Store</a></li>
+                                <li><a href="<?php echo site_url('panel/master/blog_status'); ?>">Blog Status</a></li>
+                                
+                                <li><a href="<?php echo site_url('panel/master/currency'); ?>">Currency</a></li>
+                                <li><a href="<?php echo site_url('panel/master/payment_method'); ?>">Payment Method</a></li>
+                                <li><a href="<?php echo site_url('panel/master/bank'); ?>">Bank</a></li>
+                                <li><a href="<?php echo site_url('panel/master/shipment'); ?>">Shipment</a></li>
+                                <li><a href="<?php echo site_url('panel/master/default_value'); ?>">Default Value</a></li>
+                            -->
                         </ul>
                     </div>
                 </div>
