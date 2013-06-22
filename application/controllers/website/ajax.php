@@ -25,21 +25,24 @@ class ajax extends CI_Controller {
 				$_POST['passwd'] = EncriptPassword($_POST['passwd']);
 				$result = $this->User_model->update($_POST);
 			}
-		} else if ($action == 'login') {
+		}
+		else if ($action == 'login') {
 			$passwd = EncriptPassword($_POST['passwd']);
-			$user = $this->User_model->get_by_id(array('email' => $_POST['email']));
+			$user = $this->User_model->get_by_id(array('name' => $_POST['name']));
 			
 			$result = array('status' => false, 'message' => 'User dan Password anda tidak ada yang sama dalam data kami.');
 			if (count($user) > 0) {
 				if ($user['passwd'] == $passwd) {
 					$result['status'] = true;
 					$result['message'] = '';
+					$result['link_next'] = base_url();
 					
 					unset($user['passwd']);
 					$this->User_model->set_session($user);
 				}
 			}
-		} else if ($action == 'ResetPassword') {
+		}
+		else if ($action == 'ResetPassword') {
 			$result['message'] = 'Akan dilanjutkan';
 		}
 		
