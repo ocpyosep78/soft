@@ -16,6 +16,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('SHA_SECRET',							'raHa5!4');
 define('ITEM_STATUS_PENDING',					'1');
+define('ITEM_STATUS_APPROVE',					'2');
 
 define('CATEGORY',								'category');
 define('ITEM',									'item');

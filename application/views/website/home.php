@@ -1,5 +1,9 @@
 <?php
 	$array_platform = $this->Platform_model->get_array();
+	
+	$param_item['item_status_id'] = ITEM_STATUS_APPROVE;
+	$param_item['sort'] = '[{"property":"Item.date_update","direction":"DESC"}]';
+	$array_item = $this->Item_model->get_array($param_item);
 ?>
 
 <?php $this->load->view( 'website/common/meta' ); ?>
@@ -36,16 +40,16 @@
 		<div class="span9"><div class="row-fluid">
 			<div class="span12">
 				<h2>latest jobs</h2>
-				<table class="table table-striped">
-					<tbody>
-						<tr >
-							<td><strong><a href="view-job.html">Refrigeration Repair Technician</a></strong><br />
-								<a href="#">Sears Corp</a> &ndash; Posted by <a href="#">appthemedemo</a>
-							</td>
-							<td>Austin<br />Texas, United States</td>
-							<td> 23 Jan 2013</td>
-							<td><a><span class="label label-success">Part time</span></a></td>
-						</tr>	                
+				<table class="table table-striped"><tbody>
+					<?php foreach ($array_item as $item) { ?>
+						<tr>
+							<td style="width: 90%;">
+								<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
+								<?php echo $item['description']; ?><br />
+								By <a><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>
+							<td style="width: 10%; text-align: center;"><a><span class="label label-success">Part time</span></a></td></tr>
+					<?php } ?>
+					<!--
 						<tr   class="success">
 							<td><strong><a href="view-job.html">UI Developer</a></strong><br />
 								<a href="#">BioWare Intl</a> &ndash; Posted by <a href="#">Bio</a>
@@ -95,8 +99,8 @@
 							<td> 23 Jan 2013</td>
 							<td><span class="label label-inverse">Freelance</span></td>
 						</tr>
-					</tbody>
-				</table>
+					-->
+				</tbody></table>
 			</div>
 		</div></div>
 		

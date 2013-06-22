@@ -4,7 +4,7 @@ class Item_model extends CI_Model {
     function __construct() {
         parent::__construct();
         $this->field = array(
-			'id', 'user_id', 'item_status_id', 'name', 'description', 'price', 'thumbnail', 'filename'
+			'id', 'user_id', 'item_status_id', 'name', 'description', 'price', 'thumbnail', 'filename', 'date_update'
 		);
     }
 
@@ -53,34 +53,26 @@ class Item_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
-		$string_store = (!empty($param['store_id'])) ? "AND Item.store_id = '".$param['store_id']."'" : '';
+		$string_item_status = (!empty($param['item_status_id'])) ? "AND Item.item_status_id = '".$param['item_status_id']."'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
-		$string_sorting = GetStringSorting($param, @$param['column'], 'Item.update_date ASC');
+		$string_sorting = GetStringSorting($param, @$param['column'], 'Item.id DESC');
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
 			SELECT
-				SQL_CALC_FOUND_ROWS Item.*,
-				ItemPrice.price, Currency.name currency_name
+				SQL_CALC_FOUND_ROWS Item.*, User.fullname user_fullname, User.name user_name,
+				Category.name category_name, Platform.name platform_name
 			FROM ".ITEM." Item
-			LEFT JOIN ".ITEM_PRICE." ItemPrice ON ItemPrice.item_id = Item.id
-			LEFT JOIN ".ITEM_CATALOG." ItemCatalog ON ItemCatalog.item_id = Item.id
-			LEFT JOIN ".ITEM_CATEGORY." ItemCategory ON ItemCategory.item_id = Item.id
-			LEFT JOIN ".CURRENCY." Currency ON Currency.id = ItemPrice.currency_id
-			WHERE 1 $string_store $string_filter
-			GROUP BY
-				Item.id, Item.store_id, Item.item_status_id, Item.code, Item.name, Item.title, Item.description, Item.stock, Item.stock_min, Item.tax, Item.discount, Item.thumbnail, Item.update_date,
-				price, currency_name
+			LEFT JOIN ".CATEGORY." Category ON Category.id = Item.category_id
+			LEFT JOIN ".PLATFORM." Platform ON Platform.id = Item.platform_id
+			LEFT JOIN ".USER." User ON User.id = Item.user_id
+			WHERE 1 $string_item_status $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
         $select_result = mysql_query($select_query) or die(mysql_error());
 		while ( $row = mysql_fetch_assoc( $select_result ) ) {
 			$array[] = $this->sync($row, @$param['column']);
-		}
-		
-		if (!empty($param['add_detail'])) {
-			$array = $this->get_item_detail($array);
 		}
 		
         return $array;
@@ -126,8 +118,22 @@ class Item_model extends CI_Model {
 		// item link
 		$row['item_link'] = base_url('item/'.$row['id']);
 		
+		// item file
 		if (!empty($row['filename'])) {
 			$row['array_filename'] = json_decode($row['filename']);
+		}
+		
+		// user
+		if (!empty($row['user_fullname'])) {
+			$row['user_name'] = $row['user_fullname'];
+		} else if (!empty($row['user_name'])) {
+			$row['user_name'] = $row['user_name'];
+		} else {
+			$row['user_name'] = 'guest';
+		}
+		
+		if (isset($row['price'])) {
+			$row['price_text'] = show_price($row['price']);
 		}
 		
 		/*

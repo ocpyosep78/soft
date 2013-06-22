@@ -113,6 +113,12 @@
             return number_format($Value, 2, ',', '.');
         }
     }
+	
+    if (! function_exists('show_price')) {
+        function show_price($Value) {
+            return 'Rp. '.number_format($Value, 2, ',', '.');
+        }
+    }
     
     if (! function_exists('Upload')) {
         function Upload($InputName, $PathDir = 'User', $Param = array()) {
