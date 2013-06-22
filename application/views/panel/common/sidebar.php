@@ -66,7 +66,6 @@
                     <div class="accordion-inner">
                         <ul class="nav nav-list">
                             <li><a href="<?php echo site_url('panel/account/user'); ?>">User</a></li>
-                            <li><a href="<?php echo site_url('panel/account/user_payment'); ?>">User Payment</a></li>
                         </ul>
                     </div>
                 </div>
