@@ -29,6 +29,8 @@ class ajax extends CI_Controller {
 			if ($result['status']) {
 				$result['link_next'] = base_url('post/confirm/'.$result['id']);
 			}
+		} else if ($action == 'get_item') {
+			$result = $this->Item_model->get_by_id(array( 'id' => $_POST['item_id'] ));
 		}
 		
 		echo json_encode($result);

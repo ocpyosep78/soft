@@ -34,6 +34,8 @@ class User_Item_model extends CI_Model {
 		
 		if (isset($param['id'])) {
 			$select_query  = "SELECT * FROM ".USER_ITEM." WHERE id = '".$param['id']."' LIMIT 1";
+		} else if (isset($param['user_id']) && isset($param['item_id'])) {
+			$select_query  = "SELECT * FROM ".USER_ITEM." WHERE user_id = '".$param['user_id']."' AND item_id = '".$param['item_id']."' LIMIT 1";
 		} else if (isset($param['invoice_no'])) {
 			$select_query  = "
 				SELECT UserItem.*, Item.name item_name, User.fullname user_fullname, User.name user_name
@@ -135,5 +137,11 @@ class User_Item_model extends CI_Model {
 		}
 		
 		return $row;
+	}
+	
+	function is_buy($param) {
+		$array = $this->get_by_id($param);
+		$result = (count($array) > 0) ? true : false;
+		return $result;
 	}
 }

@@ -22,6 +22,32 @@ class item extends CI_Controller {
 		$this->load->view( 'website/item_invoice' );
 	}
 	
+	function download() {
+		preg_match('/([\d]+)\/([\d]+)/i', $_SERVER['REQUEST_URI'], $match);
+		$item_id = (!empty($match[1])) ? $match[1] : 0;
+		$file_no = (!empty($match[2])) ? $match[2] : 0;
+		
+		// data
+		$user = $this->User_model->get_session();
+		$item = $this->Item_model->get_by_id(array( 'id' => $item_id ));
+		
+		// make sure this user have buy this file
+		$is_buy = $this->User_Item_model->is_buy(array( 'item_id' => $item_id, 'user_id' => $user['id'] ));
+		if (! $is_buy) {
+			echo 'Please login / buy this item';
+			exit;
+		}
+		
+		// get file info
+		$path_file = $this->config->item('base_path').'/../files';
+		$path_file = realpath($path_file).'/'.$item['array_filename'][$file_no];
+		
+		// force download
+		header('Content-Disposition: attachment; filename=' . basename($path_file));
+		readfile($path_file);
+		exit;
+	}
+	
 	function payment() {
 		// action
 		$action = (!empty($_POST['action'])) ? $_POST['action'] : '';

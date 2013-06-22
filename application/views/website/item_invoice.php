@@ -14,6 +14,8 @@
 		<h2><i class="icon-suitcase"></i>&nbsp;&nbsp; INVOICE NO <?php echo $item['invoice_no']; ?></h2>
 		
 		<div class="row-fluid form-tooltip">
+			<input type="hidden" name="item_id" value="<?php echo $item['item_id']; ?>" />
+			
 			<div class="span12">
 				<h4>Terima kasih, berikut invoice anda:</h4>
 				<div>No : <?php echo $item['invoice_no']; ?></div>
@@ -21,7 +23,8 @@
 				<div>Item : <?php echo $item['item_name']; ?> | <?php echo $item['price_text']; ?></div>
 				<div>Bayar melalui : <?php echo $item['payment_name']; ?></div>
 				
-				<h4><a href="">Download</a></h4>
+				<h4><a class="cursor btn-download">Download</a></h4>
+				<ul id="cnt-list-item"></ul>
 			</div>	
 		</div>
 	</div>
@@ -39,20 +42,23 @@
 
 <script>
 $(document).ready(function() {
-	$('.btn-pay').click(function() {
-		var param = Site.Form.GetValue('form-payment');
-		param.payment = $('input[name=payment]:checked').val();
-		if (param.payment == null) {
-			Func.show_notice({ title: 'Informasi', text: 'Harap memilih cara pembayaran' });
-			return false;
-		}
-		
-		$('.btn-pay').parent('div').text('Harap tunggu sebentar, pembayaran anda sedang diproses.');
-		Func.ajax({ url: web.host + 'item/payment', param: param, callback: function(result) {
+	$('.btn-download').click(function() {
+		var param = { action: 'get_item', item_id: $('[name="item_id"]').val() };
+		Func.ajax({ url: web.host + 'ajax/item', param: param, callback: function(result) {
+			var content = '';
+			for (var i = 0; i < result.array_filename.length; i++) {
+				var link = download = web.host + 'item/download/' + param.item_id + '/' + i;
+				window.open(link);
+			}
+			
+			wooe = result;
+			result = wooe;
+			/*
 			Func.show_notice({ title: 'Informasi', text: result.message });
 			if (result.status) {
 				window.location = result.link_next;
 			}
+			/*	*/
 		} });
 	});
 });
