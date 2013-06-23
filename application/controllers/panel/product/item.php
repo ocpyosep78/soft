@@ -1,5 +1,4 @@
 <?php
-    
     class item extends PANEL_Controller {
         function __construct() {
             parent::__construct();
@@ -22,17 +21,9 @@
                 $result = $this->Item_model->get_by_id(array('id' => $_POST['id']));
             }
             else if ($action == 'update') {
-				$_POST['store_id'] = $user['store_active']['store_id'];
-                $_POST['update_date'] = $this->config->item('current_datetime');
+               // $_POST['update_date'] = $this->config->item('current_datetime');
                 $result = $this->Item_model->update($_POST);
-                
-                // insert catalog
-                $this->Item_Catalog_model->delete(array('item_id' => $result['id']));
-                if (is_array($_POST['catalog_id'])) {
-                    foreach($_POST['catalog_id'] as $value) {
-                        $this->Item_Catalog_model->update(array('item_id' => $result['id'], 'catalog_id' => $value));
-                    }
-                }
+               
                 
                 // insert category
                 $this->Item_Category_model->delete(array('item_id' => $result['id']));
@@ -116,9 +107,7 @@
 		function grid() {
             // user
             $user = $this->User_model->get_session();
-            
-            $_POST['column'] = array( 'code', 'title', 'stock', 'discount' );
-            $_POST['store_id'] = $user['store_active']['store_id'];
+            $_POST['column'] = array( 'name', 'description', 'price' );
             $output = array(
 			"sEcho" => intval($_POST['sEcho']),
 			"aaData" => $this->Item_model->get_array($_POST),

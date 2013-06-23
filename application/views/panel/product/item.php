@@ -1,13 +1,10 @@
 <?php
 	$user = $this->User_model->get_session();
 	$array_menu = array( 'menu' => array('Product', 'Item') );
-	$array_currency = $this->Currency_model->get_array();
+	//$array_currency = $this->Currency_model->get_array();
 	
-	$param_catalog = array('filter' => '[{"type":"numeric","comparison":"eq","value":"'.$user['store_active']['store_id'].'","field":"Catalog.store_id"}]');
-	$array_catalog = $this->Catalog_model->get_array($param_catalog);
 	
-	$param_category = array('filter' => '[{"type":"numeric","comparison":"eq","value":"'.$user['store_active']['store_id'].'","field":"Category.store_id"}]');
-	$array_category = $this->Category_model->get_array($param_category);
+	$array_category = $this->Category_model->get_array(null);
 ?>
 
 <?php $this->load->view( 'panel/common/meta' ); ?>
@@ -34,21 +31,9 @@
 									<div class="pad-alert" style="padding-left: 15px;"></div>
 									<input type="hidden" name="id" value="0" />
 									<div class="control-group">
-										<label class="control-label" for="input_code">Code</label>
-										<div class="controls">
-											<input type="text" id="input_code" name="code" placeholder="Code Item" class="span12" rel="twipsy" data-placement="right" data-original-title="Code Item" />
-                                        </div>
-                                    </div>
-									<div class="control-group">
 										<label class="control-label" for="input_title">Nama</label>
 										<div class="controls">
-											<input type="text" id="input_title" name="title" placeholder="Nama" class="span12" rel="twipsy" data-placement="right" data-original-title="Nama Catalog" />
-                                        </div>
-                                    </div>
-									<div class="control-group">
-										<label class="control-label" for="input_name">Alias</label>
-										<div class="controls">
-											<input type="text" id="input_name" name="name" placeholder="Alias Catalog" class="span12" rel="twipsy" readonly="readonly" data-placement="right" data-original-title="Alias Catalog" />
+											<input type="text" id="input_name" name="name" placeholder="Nama" class="span12" rel="twipsy" data-placement="right" data-original-title="Nama Catalog" />
                                         </div>
                                     </div>
 									<div class="control-group">
@@ -57,35 +42,14 @@
 											<textarea id="input_description" name="description" class="span12 tinymce" style="width: 100%; height: 250px;"></textarea>
                                         </div>
                                     </div>
-									<div class="control-group">
-										<label class="control-label" for="input_discount">Discount</label>
-										<div class="controls">
-											<input type="text" id="input_discount" name="discount" placeholder="Discount Item" class="span12" rel="twipsy" data-placement="right" data-original-title="Discount Item" />
-                                        </div>
-                                    </div>
                                 </div>
 								<div class="span4">
-									<div class="control-group">
-										<label class="control-label" for="input_catalog">Catalog</label>
-										<div class="controls">
-											<select id="input_catalog" name="catalog_id" multiple="multiple" size="5">
-												<?php echo ShowOption(array('Array' => $array_catalog, 'ArrayID' => 'id', 'ArrayTitle' => 'title', 'WithEmptySelect' => 0)); ?>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    
 									<div class="control-group">
 										<label class="control-label" for="input_category">Category</label>
 										<div class="controls">
 											<select id="input_category" name="category_id" multiple="multiple" size="5">
 												<?php echo ShowOption(array('Array' => $array_category, 'ArrayID' => 'id', 'ArrayTitle' => 'title', 'WithEmptySelect' => 0)); ?>
-                                            </select>
-                                        </div>
-                                    </div>
-									<div class="control-group">
-										<label class="control-label" for="input_currency">Currency</label>
-										<div class="controls">
-											<select id="input_currency" name="currency_id">
-												<?php echo ShowOption(array('Array' => $array_currency, 'ArrayID' => 'id', 'ArrayTitle' => 'name', 'WithEmptySelect' => 0)); ?>
                                             </select>
                                         </div>
                                     </div>
@@ -101,7 +65,7 @@
 											<div class="upload_multi">
 												<div class="upload-list"></div>
 												<div class="clear"></div>
-												<iframe frameborder="0" class="iframe" src="<?php echo site_url('panel/upload/upload_single?callback=image_item'); ?>" scrolling="no"></iframe>
+												<iframe frameborder="0" class="iframe" src="<?php echo site_url('upload/upload_single?callback=image_item'); ?>" scrolling="no"></iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -142,10 +106,9 @@
 								<thead>
 									<tr>
 										<th style="width: 50px;">&nbsp;</th>
-										<th style="width: 100px;">Code</th>
-										<th>Title</th>
-										<th style="width: 100px;">Stock</th>
-										<th style="width: 100px;">Discount</th>
+										<th>Name</th>
+										<th style="width: 100px;">Description</th>
+										<th style="width: 100px;">Price</th>
                                     </tr>
                                 </thead>
 								<tbody><tr><td class="dataTables_empty">Loading data from server</td></tr></tbody>
@@ -160,67 +123,67 @@
     <?php $this->load->view( 'panel/common/js' ); ?>
     
     <script>
-	$(document).ready(function() {
-		var isSubmit = false,
-		getExt = function(filename) {
-            var index = filename.lastIndexOf('.'), ext = '';
-            if (index > 0) ext = filename.toLowerCase().substring( index+1 );
-            if (!ext) {
-                ext = 'file';
-                } if (/txt|doc|ppt|xls|pdf/i.test( ext )) {
-                ext = 'document ' + ext;
-                } else if (/png|jpg|jpeg/i.test( ext )) {
-                ext = 'image ' + ext;
-                } else if (/mp3|aac|wav|au|ogg|wma/i.test( ext )) {
-                ext = 'audio ' + ext;
-                } else if (/mpg|wmv|mov|flv/i.test( ext )) {
-                ext = 'video ' + ext;
-            }
-            return ext;
-        };
-        var uploader = new plupload.Uploader({
-            runtimes : 'gears,html5,flash,silverlight,browserplus',
-            browse_button : 'pickfiles',
-            container : 'uploadcontainer',
-            max_file_size : '100mb',
-            url: web.host + 'panel/upload/uploads',
-            flash_swf_url: web.base + 'static/js/plupload/plupload.flash.swf',
-            silverlight_xap_url : web.base + 'static/js/plupload/plupload.silverlight.xap'
-        });
-        $('#uploadfiles').click(function(e) {
-            if ( $("#filelist .addedfile").length > 0 )
-            uploader.start();
-            return false;
-        });
-        uploader.init();
-        
-        uploader.bind('FilesAdded', function(up, files) {
-            $.each(files, function(i, file) {
-                var ext = getExt(file.name);
-                $('#filelist').append('<div class="addedfile uploadfile '+ext+'" id="' + file.id + '"><span class="filename">' + file.name + '</span> (' + plupload.formatSize(file.size) + ') <b></b>' + '</div>');
+        $(document).ready(function() {
+            var isSubmit = false,
+            getExt = function(filename) {
+                var index = filename.lastIndexOf('.'), ext = '';
+                if (index > 0) ext = filename.toLowerCase().substring( index+1 );
+                if (!ext) {
+                    ext = 'file';
+                    } if (/txt|doc|ppt|xls|pdf/i.test( ext )) {
+                    ext = 'document ' + ext;
+                    } else if (/png|jpg|jpeg/i.test( ext )) {
+                    ext = 'image ' + ext;
+                    } else if (/mp3|aac|wav|au|ogg|wma/i.test( ext )) {
+                    ext = 'audio ' + ext;
+                    } else if (/mpg|wmv|mov|flv/i.test( ext )) {
+                    ext = 'video ' + ext;
+                }
+                return ext;
+            };
+            var uploader = new plupload.Uploader({
+                runtimes : 'gears,html5,flash,silverlight,browserplus',
+                browse_button : 'pickfiles',
+                container : 'uploadcontainer',
+                max_file_size : '100mb',
+                url: web.host + 'upload/file',
+                flash_swf_url: web.base + 'static/js/plupload/plupload.flash.swf',
+                silverlight_xap_url : web.base + 'static/js/plupload/plupload.silverlight.xap'
             });
-            up.refresh(); // Reposition Flash/Silverlight
-			$('#uploadfiles').click();
-        });
-        uploader.bind('UploadProgress', function(up, file) {
-            $('#' + file.id + " b").html(file.percent + "%");
-        });
-        uploader.bind('Error', function(up, err) {
-            $('#filelist').append("<div class='alert alert-error'>Error: " + err.code + ", Message: " + err.message + (err.file ? ", File: " + err.file.name : "") + "</div>");
-            up.refresh(); // Reposition Flash/Silverlight
-        });
-        uploader.bind('FileUploaded', function(up, file, jsonresp) {
-            var div = $("#"+file.id);
-            var json = eval('('+jsonresp.response+')');
-			
-			if (json.error != null && json.error.code != null) {
-				div.remove();
-				$.sticky(json.error.message, {autoclose : 2500, position: "top-right" });
-			} else {
-				div.removeClass('addedfile').addClass('completefile').find('b').html("100%");
-				div.after('<input type="hidden" name="item_file[]" value="' + json.new_dir + '/' + json.fileName + '">');
-			}
-        });
+            $('#uploadfiles').click(function(e) {
+                if ( $("#filelist .addedfile").length > 0 )
+                uploader.start();
+                return false;
+            });
+            uploader.init();
+            
+            uploader.bind('FilesAdded', function(up, files) {
+                $.each(files, function(i, file) {
+                    var ext = getExt(file.name);
+                    $('#filelist').append('<div class="addedfile uploadfile '+ext+'" id="' + file.id + '"><span class="filename">' + file.name + '</span> (' + plupload.formatSize(file.size) + ') <b></b>' + '</div>');
+                });
+                up.refresh(); // Reposition Flash/Silverlight
+                $('#uploadfiles').click();
+            });
+            uploader.bind('UploadProgress', function(up, file) {
+                $('#' + file.id + " b").html(file.percent + "%");
+            });
+            uploader.bind('Error', function(up, err) {
+                $('#filelist').append("<div class='alert alert-error'>Error: " + err.code + ", Message: " + err.message + (err.file ? ", File: " + err.file.name : "") + "</div>");
+                up.refresh(); // Reposition Flash/Silverlight
+            });
+            uploader.bind('FileUploaded', function(up, file, jsonresp) {
+                var div = $("#"+file.id);
+                var json = eval('('+jsonresp.response+')');
+                
+                if (json.error != null && json.error.code != null) {
+                    div.remove();
+                    $.sticky(json.error.message, {autoclose : 2500, position: "top-right" });
+                    } else {
+                    div.removeClass('addedfile').addClass('completefile').find('b').html("100%");
+                    div.after('<input type="hidden" name="item_file[]" value="' + json.new_dir + '/' + json.fileName + '">');
+                }
+            });
             
             var grid_item = null;
             setTimeout('$("html").removeClass("js")', 300);
@@ -315,7 +278,6 @@
                     "sAjaxSource": web.host + 'panel/product/item/grid',
                     "aoColumns": [
                     { "sClass": "center", "bSortable": false },
-                    { "sClass": "center" },
                     null,
                     { "sClass": "center" },
                     { "sClass": "center" }
@@ -336,9 +298,6 @@
                         $('#form-item [name="title"]').val(record.title);
                         $('#form-item [name="description"]').text(record.description);
                         $('#form-item [name="price"]').val(record.price);
-                        $('#form-item [name="stock"]').val(record.stock);
-                        $('#form-item [name="stock_min"]').val(record.stock_min);
-                        $('#form-item [name="discount"]').val(record.discount);
                         
                         // catalog
                         var array_catalog = [];
@@ -366,13 +325,13 @@
 								content += '<span class="remove cursor">(&times;)</span> ';
 								content += '<input type="hidden" name="item_file[]" value="' + record.array_file[i].file_name + '"> ';
 								content += '</div>';
-							}
-						}
+                            }
+                        }
 						$('#filelist').html(content);
 						// init remove file
 						$('#filelist .remove').click(function() {
 							$(this).parent('.file-uploader').remove();
-						});
+                        });
 						
                         $("#grid-data").hide();
                         $("#form-item").show();
