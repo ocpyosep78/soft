@@ -28,6 +28,11 @@ define('STATUS_USER_NEW',							'0');
 define('STATUS_USER_CONFIRM',							'1');
 define('STATUS_USER_BANNED',							'2');
 
+/*NOTA*/
+define('STATUS_NOTA_PENDING',							'1');
+define('STATUS_NOTA_CONFIRM',							'2');
+define('STATUS_NOTA_CANCEL',							'3');
+
 define('CATEGORY',								'category');
 define('DEFAULT_VALUE',							'default_value');
 define('ITEM',									'item');
@@ -35,6 +40,8 @@ define('ITEM_STATUS',									'item_status');
 define('PLATFORM',								'platform');
 define('USER',									'user');
 define('USER_ITEM',								'user_item');
+define('NOTA',								'nota');
+define('STATUS_NOTA',								'status_nota');
 
 
 /* End of file constants.php */
