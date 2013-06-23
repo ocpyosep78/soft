@@ -1,32 +1,30 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Platform_model extends CI_Model {
+class Item_Status_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 		
-		$this->field = array('id', 'name');
+		$this->field = array( 'id', 'name' );
 	}
 	
 	function update($param) {
 		$result = array();
 		
 		if (empty($param['id'])) {
-			$insert_query  = GenerateInsertQuery($this->field, $param, PLATFORM);
+			$insert_query  = GenerateInsertQuery($this->field, $param, ITEM_STATUS);
 			$insert_result = mysql_query($insert_query) or die(mysql_error());
 			
 			$result['id'] = mysql_insert_id();
 			$result['status'] = '1';
 			$result['message'] = 'Data berhasil disimpan.';
-			} else {
-			$update_query  = GenerateUpdateQuery($this->field, $param, PLATFORM);
+		} else {
+			$update_query  = GenerateUpdateQuery($this->field, $param, ITEM_STATUS);
 			$update_result = mysql_query($update_query) or die(mysql_error());
 			
 			$result['id'] = $param['id'];
 			$result['status'] = '1';
 			$result['message'] = 'Data berhasil diperbaharui.';
 		}
-		
-		//$this->resize_image($param);
 		
 		return $result;
 	}
@@ -35,9 +33,7 @@ class Platform_model extends CI_Model {
 		$array = array();
 		
 		if (isset($param['id'])) {
-			$select_query  = "SELECT * FROM ".PLATFORM." WHERE id = '".$param['id']."' LIMIT 1";
-		} else if (isset($param['name'])) {
-			$select_query  = "SELECT * FROM ".PLATFORM." WHERE name = '".$param['name']."' LIMIT 1";
+			$select_query  = "SELECT * FROM ".ITEM_STATUS." WHERE id = '".$param['id']."' LIMIT 1";
 		}
 		
 		$select_result = mysql_query($select_query) or die(mysql_error());
@@ -56,8 +52,8 @@ class Platform_model extends CI_Model {
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS Platform.*
-			FROM ".PLATFORM." Platform
+			SELECT SQL_CALC_FOUND_ROWS *
+			FROM ".ITEM_STATUS." ItemStatus
 			WHERE 1 $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
@@ -80,7 +76,7 @@ class Platform_model extends CI_Model {
 	}
 	
 	function delete($param) {
-		$delete_query  = "DELETE FROM ".PLATFORM." WHERE id = '".$param['id']."' LIMIT 1";
+		$delete_query  = "DELETE FROM ".ITEM_STATUS." WHERE id = '".$param['id']."' LIMIT 1";
 		$delete_result = mysql_query($delete_query) or die(mysql_error());
 		
 		$result['status'] = '1';
@@ -94,6 +90,7 @@ class Platform_model extends CI_Model {
 		if (count($column) > 0) {
 			$row = dt_view($row, $column, array('is_edit' => 1));
 		}
+		
 		return $row;
 	}
 }
