@@ -11,6 +11,7 @@ if ($array_url[0] != 'panel') {
 	$route['post'] = "website/post";
 	$route['post/(:any)'] = "website/post";
 	$route['item/(:any)'] = "website/item";
+	$route['browse'] = "website/browse";
 }
 
 $route['default_controller'] = "website/home";

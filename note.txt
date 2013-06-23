@@ -2,12 +2,12 @@ Website :
 1. registrasi toko/user
 2. login toko/user
 3. upload item
-
 4. index
 5. search
-6. item by author
 7. item detail
 8. Checkout Paypal
+
+6. item by author
 9. Download ( kirim email link )
 10. history user
 11. Forget password

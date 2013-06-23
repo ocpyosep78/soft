@@ -857,6 +857,8 @@
 		function get_page_active() {
 			preg_match('/\/page_(\d+)/i', $_SERVER['REQUEST_URI'], $match);
 			$page_no = (isset($match[1])) ? $match[1] : 1;
+			$page_no = (!empty($_POST['page_no'])) ? $_POST['page_no'] : $page_no;
+			
 			
 			return $page_no;
 		}

@@ -58,6 +58,9 @@ class Item_model extends CI_Model {
     function get_array($param = array()) {
         $array = array();
 		
+		$string_keyword = (!empty($param['keyword'])) ? "AND Item.name LIKE '%".$param['keyword']."%'" : '';
+		$string_category = (!empty($param['category_id'])) ? "AND Item.category_id = '".$param['category_id']."'" : '';
+		$string_platform = (!empty($param['platform_id'])) ? "AND Item.platform_id = '".$param['platform_id']."'" : '';
 		$string_item_status = (!empty($param['item_status_id'])) ? "AND Item.item_status_id = '".$param['item_status_id']."'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'Item.id DESC');
@@ -71,7 +74,7 @@ class Item_model extends CI_Model {
 			LEFT JOIN ".CATEGORY." Category ON Category.id = Item.category_id
 			LEFT JOIN ".PLATFORM." Platform ON Platform.id = Item.platform_id
 			LEFT JOIN ".USER." User ON User.id = Item.user_id
-			WHERE 1 $string_item_status $string_filter
+			WHERE 1 $string_keyword $string_category $string_platform $string_item_status $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
