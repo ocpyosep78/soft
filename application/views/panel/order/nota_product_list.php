@@ -17,7 +17,7 @@
 		<?php $currency = $item['currency']; ?>
 		<tr>
 			<td><?php echo $counter++; ?></td>
-			<td><a href="<?php echo $item['item_link']; ?>" target="_blank"><?php echo $item['title']; ?></a></td>
+			<td><a href="<?php echo $item['item_link']; ?>" target="_blank"><?php echo $item['name']; ?></a></td>
 			<td><?php echo $item['quantity']; ?></td>
 			<td><?php echo $item['currency_total']; ?></td></tr>
 	<?php } ?>
