@@ -4,7 +4,7 @@ class Platform_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 		
-		$this->field = array('id', 'name' );
+		$this->field = array('id', 'name','title');
 	}
 	
 	function update($param) {
@@ -26,7 +26,7 @@ class Platform_model extends CI_Model {
 			$result['message'] = 'Data berhasil diperbaharui.';
 		}
 		
-		$this->resize_image($param);
+		//$this->resize_image($param);
 		
 		return $result;
 	}
@@ -91,7 +91,9 @@ class Platform_model extends CI_Model {
 	
 	function sync($row, $column = array()) {
 		$row = StripArray($row);
-		
+		if (count($column) > 0) {
+			$row = dt_view($row, $column, array('is_edit' => 1));
+		}
 		return $row;
 	}
 }

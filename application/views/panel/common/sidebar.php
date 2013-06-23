@@ -78,6 +78,7 @@
                     <div class="accordion-inner">
                         <ul class="nav nav-list">
                                 <li><a href="<?php echo site_url('panel/master/category'); ?>">Category</a></li>
+                                <li><a href="<?php echo site_url('panel/master/platform'); ?>">Platform</a></li>
                                 <li><a href="<?php echo site_url('panel/master/item_status'); ?>">Item Status</a></li>
                             <!--
                                 <li><a href="<?php echo site_url('panel/master/store'); ?>">Store</a></li>
