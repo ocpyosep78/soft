@@ -866,14 +866,10 @@
 	
 	if (! function_exists('sent_mail')) {
 		function sent_mail($param) {
-			$param['subject'] = (isset($param['subject'])) ? $param['subject'] : '';
-			$param['message'] = (isset($param['message'])) ? $param['message'] : '';
-			$param['header'] = (isset($param['header'])) ? $param['header'] : 'From: Karimun Shop <info@simetri.web.id>';
-			if (empty($param['message'])) {
-				return;
-			}
-			
-			@mail($param['email'], $param['subject'], $param['message'], $param['header']);
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers .= 'From: Info Simetri <info@simetri.com>' . "\r\n";
+			@mail($param['to'], $param['subject'], $param['message'], $headers);
 		}
 	}
 	

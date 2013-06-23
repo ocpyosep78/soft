@@ -53,6 +53,18 @@ class item extends CI_Controller {
 		$action = (!empty($_POST['action'])) ? $_POST['action'] : '';
 		unset($_POST['action']);
 		
+		// make sure, buyer have email, force add user by email
+		$is_login = $this->User_model->is_login();
+		if (!$is_login) {
+			$temp = $this->User_model->get_by_id(array( 'email' => $_POST['email']));
+			if (count($temp) == 0) {
+				$temp = $this->User_model->update(array( 'email' => $_POST['email']));
+			}
+			
+			$user = $this->User_model->get_by_id(array( 'id' => $temp['id'] ));
+			$this->User_model->set_session($user);
+		}
+		
 		// filter payment method
 		$payment_type = (!empty($_POST['payment'])) ? $_POST['payment'] : '';
 		if ($payment_type == 'paypal') {
@@ -132,13 +144,13 @@ class item extends CI_Controller {
 				}
 			}
 			
-			
 			// result
 			$result['status'] = true;
 			$result['link_next'] = $paypal_approve_url;
 		}
 		else if ($action == 'ExecutePaypalPayment') {
 			$paypal_session = $this->paypal->get_session();
+			$item = $this->Item_model->get_by_id(array( 'id' => $paypal_session['item_id'] ));
 			
 			// get access token
 			$token_param = array(
@@ -157,9 +169,11 @@ class item extends CI_Controller {
 			);
 			$payment = $this->paypal->make_post_call($payment_param);
 			
+			$payment['state'] = 'approved';
 			if ($payment['state'] == 'approved') {
 				$invoice_no = $this->User_Item_model->get_max_no();
 				
+				// add invoice
 				$param_update = array(
 					'user_id' => $user['id'],
 					'price' => $paypal_session['price'],
@@ -168,6 +182,17 @@ class item extends CI_Controller {
 					'payment_name' => 'paypal'
 				);
 				$this->User_Item_model->update($param_update);
+				
+				// sent mail
+				$param_mail['to'] = $user['email'];
+				$param_mail['subject']  = 'Invoice';
+				$param_mail['message']  = '<h4>Terima kasih, berikut invoice anda:</h4>';
+				$param_mail['message'] .= '<div>No : '.$invoice_no.'</div>';
+				$param_mail['message'] .= '<div>Email : '.$user['email'].'</div>';
+				$param_mail['message'] .= '<div>Item : '.$item['name'].' | '.$item['price_text'].'</div>';
+				$param_mail['message'] .= '<div>Bayar melalui : paypal</div><br /><br />';
+				$param_mail['message'] .= '<h4><a href="'.base_url('item/invoice/'.$invoice_no).'">Download</a></h4>';
+				sent_mail($param_mail);
 				
 				$redirect_url = base_url('item/invoice/'.$invoice_no);
 				header("Location: ".$redirect_url);

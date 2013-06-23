@@ -24,7 +24,6 @@
 				<div>Bayar melalui : <?php echo $item['payment_name']; ?></div>
 				
 				<h4><a class="cursor btn-download">Download</a></h4>
-				<ul id="cnt-list-item"></ul>
 			</div>	
 		</div>
 	</div>
@@ -50,15 +49,6 @@ $(document).ready(function() {
 				var link = download = web.host + 'item/download/' + param.item_id + '/' + i;
 				window.open(link);
 			}
-			
-			wooe = result;
-			result = wooe;
-			/*
-			Func.show_notice({ title: 'Informasi', text: result.message });
-			if (result.status) {
-				window.location = result.link_next;
-			}
-			/*	*/
 		} });
 	});
 });

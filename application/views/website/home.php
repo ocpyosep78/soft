@@ -41,7 +41,9 @@
 								<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
 								<?php echo $item['description']; ?><br />
 								By <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>
-							<td style="width: 10%; text-align: center;"><a><span class="label label-success">Part time</span></a></td></tr>
+							<td style="width: 10%; text-align: center;">
+								<a href="<?php echo $item['item_buy_link']; ?>"><span class="label label-success">BUY</span></a>
+							</td></tr>
 					<?php } ?>
 				</tbody></table>
 			</div>
