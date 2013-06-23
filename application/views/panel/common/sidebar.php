@@ -17,9 +17,9 @@
 			<div class="accordion-body collapse <?php echo ($group_name == 'product') ? 'in' : ''; ?>" id="sub-1">
 				<div class="accordion-inner">
 					<ul class="nav nav-list">
-						<li><a href="<?php echo site_url('panel/product/blog'); ?>">Blog</a></li>
+						<!--<li><a href="<?php echo site_url('panel/product/blog'); ?>">Blog</a></li>
 						<li><a href="<?php echo site_url('panel/product/catalog'); ?>">Catalog</a></li>
-                        <li><a href="<?php echo site_url('panel/product/category'); ?>">Category</a></li>
+                        <li><a href="<?php echo site_url('panel/product/category'); ?>">Category</a></li>-->
 						<li><a href="<?php echo site_url('panel/product/item'); ?>">Item</a></li>
                     </ul>
                 </div>
