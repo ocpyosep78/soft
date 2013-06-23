@@ -6,6 +6,8 @@ class Item_model extends CI_Model {
         $this->field = array(
 			'id', 'user_id', 'category_id', 'platform_id', 'item_status_id', 'name', 'description', 'price', 'thumbnail', 'filename', 'date_update'
 		);
+        // user
+		//$this->user = $this->User_model->get_session();
     }
 
     function update($param) {
@@ -46,16 +48,27 @@ class Item_model extends CI_Model {
 				LIMIT 1
 			";
         }
-       
+       //print_r($select_query);
         $select_result = mysql_query($select_query) or die(mysql_error());
         if (false !== $row = mysql_fetch_assoc($select_result)) {
             $array = $this->sync($row);
+            // add category & platform
+			$param = array(
+				'filter' => '[' .
+					'{"type":"numeric","comparison":"eq","value":"'.$array['id'].'","field":"item_id"}' .
+				']'
+			);
+            //$array['array_platfrom'] = $this->Item_Platform_model->get_array($param);
+			//$array['array_category'] = $this->Item_Category_model->get_array($param);
+			//$array['array_picture'] = $this->Item_Picture_model->get_array(array('item_id' => $array['id']));
+			//$array['array_file'] = $this->Item_File_model->get_array(array('item_id' => $array['id']));
         }
 		
         return $array;
     }
 	
     function get_array($param = array()) {
+
         $array = array();
 		
 		$string_keyword = (!empty($param['keyword'])) ? "AND Item.name LIKE '%".$param['keyword']."%'" : '';
@@ -151,15 +164,12 @@ class Item_model extends CI_Model {
 			$row['price_text'] = show_price($row['price']);
 		}
 		
-		/*
+		
 		// user dt_view_set for more improvement
 		
-		$p = array(
-			'is_edit' => 1,
-			'is_custom' => '<img class="cursor store" src="'.base_url('static/img/store.png').'" /> '
-		);
-		$row = dt_view($row, $column, $p);
-		/*	*/
+		if (count($column) > 0) {
+			$row = dt_view($row, $column, array('is_edit' => 1));
+		}
 		
 		return $row;
 	}

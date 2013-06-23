@@ -4,7 +4,7 @@ class Category_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 		
-		$this->field = array( 'id', 'name' ,'title');
+		$this->field = array( 'id', 'name' );
 	}
 	
 	function update($param) {

@@ -23,7 +23,7 @@
             else if ($action == 'update') {
                // $_POST['update_date'] = $this->config->item('current_datetime');
                 $result = $this->Item_model->update($_POST);
-               
+               /*
                 
                 // insert category
                 $this->Item_Category_model->delete(array('item_id' => $result['id']));
@@ -96,6 +96,7 @@
 						$this->Item_File_model->update(array( 'item_id'=> $result['id'], 'file_id' => $file['id'] ));
 					}
 				}
+                */
             }
             else if ($action == 'delete') {
                 $result = $this->Item_model->delete($_POST);
@@ -107,7 +108,7 @@
 		function grid() {
             // user
             $user = $this->User_model->get_session();
-            $_POST['column'] = array( 'name', 'description', 'price' );
+            $_POST['column'] = array('name', 'description', 'price' );
             $output = array(
 			"sEcho" => intval($_POST['sEcho']),
 			"aaData" => $this->Item_model->get_array($_POST),

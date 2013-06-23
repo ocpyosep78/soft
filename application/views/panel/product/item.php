@@ -5,6 +5,8 @@
 	
 	
 	$array_category = $this->Category_model->get_array(null);
+	$array_platform = $this->Platform_model->get_array(null);
+  
 ?>
 
 <?php $this->load->view( 'panel/common/meta' ); ?>
@@ -30,6 +32,7 @@
 								<div class="span7">
 									<div class="pad-alert" style="padding-left: 15px;"></div>
 									<input type="hidden" name="id" value="0" />
+									<input type="hidden" name="user_id" value="<?php echo $user['id'];?>" />
 									<div class="control-group">
 										<label class="control-label" for="input_title">Nama</label>
 										<div class="controls">
@@ -48,8 +51,16 @@
 									<div class="control-group">
 										<label class="control-label" for="input_category">Category</label>
 										<div class="controls">
-											<select id="input_category" name="category_id" multiple="multiple" size="5">
-												<?php echo ShowOption(array('Array' => $array_category, 'ArrayID' => 'id', 'ArrayTitle' => 'title', 'WithEmptySelect' => 0)); ?>
+											<select id="input_category" name="category_id">
+												<?php echo ShowOption(array('Array' => $array_category, 'ArrayID' => 'id', 'ArrayTitle' => 'name', 'WithEmptySelect' => 0)); ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+										<label class="control-label" for="input_category">Platform</label>
+										<div class="controls">
+											<select id="input_category" name="platform_id" >
+												<?php echo ShowOption(array('Array' => $array_platform, 'ArrayID' => 'id', 'ArrayTitle' => 'name', 'WithEmptySelect' => 0)); ?>
                                             </select>
                                         </div>
                                     </div>
@@ -293,18 +304,19 @@
                     Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
                         // common data
                         $('#form-item [name="id"]').val(record.id);
-                        $('#form-item [name="code"]').val(record.code);
                         $('#form-item [name="name"]').val(record.name);
-                        $('#form-item [name="title"]').val(record.title);
                         $('#form-item [name="description"]').text(record.description);
                         $('#form-item [name="price"]').val(record.price);
                         
+                        $('#form-item [name="platform_id"]').val(record.platform_id);
+                        $('#form-item [name="category_id"]').val(record.category_id);
+                        /*
                         // catalog
-                        var array_catalog = [];
-                        for (var i = 0; i < record.array_catalog.length; i++) {
-                            array_catalog.push(record.array_catalog[i].id);
+                        var array_platform = [];
+                        for (var i = 0; i < record.array_platform.length; i++) {
+                            array_platform.push(record.array_platform[i].id);
                         }
-                        $('#form-item [name="catalog_id"]').val(array_catalog);
+                        $('#form-item [name="platform_id_id"]').val(array_platform);
                         
                         // category
                         var array_category = [];
@@ -313,30 +325,14 @@
                         }
                         $('#form-item [name="category_id"]').val(array_category);
                         
-                        // picture
-                        upload.generate(record);
-						
-						// file
-						var content = '';
-						if (record.array_file.length > 0) {
-							for (var i = 0; i < record.array_file.length; i++) {
-								content += '<div class="file-uploader">';
-								content += '<span class="filename">' + record.array_file[i].base_name + '</span> ';
-								content += '<span class="remove cursor">(&times;)</span> ';
-								content += '<input type="hidden" name="item_file[]" value="' + record.array_file[i].file_name + '"> ';
-								content += '</div>';
-                            }
-                        }
-						$('#filelist').html(content);
-						// init remove file
-						$('#filelist .remove').click(function() {
-							$(this).parent('.file-uploader').remove();
-                        });
+                        */
 						
                         $("#grid-data").hide();
                         $("#form-item").show();
                     } });
                 });
+                
+                
                 $('#item-grid').on('click','tbody td img.delete', function () {
                     var raw = $(this).parent('td').find('.hide').text();
                     eval('var record = ' + raw);
