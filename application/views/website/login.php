@@ -66,7 +66,7 @@
 		</div>
 		
 		<div class="span4 sidebar"><br />
-			<?php $this->load->view( 'website/common/info' ); ?>
+			<?php //$this->load->view( 'website/common/info' ); ?>
 		</div>
 		
 	</div>	
