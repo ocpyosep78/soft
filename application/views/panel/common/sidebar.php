@@ -38,6 +38,7 @@
                 </div>
             </div>
         </div>
+        <!--
 		<div class="accordion-group">
 			<div class="accordion-heading">
 				<a href="#sub-3" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"><i class="icon-th"></i> Store</a>
@@ -46,7 +47,7 @@
 				<div class="accordion-inner">
 					<ul class="nav nav-list">
 						<li><a href="<?php echo site_url('panel/store/store'); ?>">Config</a></li>
-						<!--	<li><a href="<?php echo site_url('panel/store/theme'); ?>">Theme</a></li>	-->
+						<!--	<li><a href="<?php echo site_url('panel/store/theme'); ?>">Theme</a></li>	
 						<li><a href="<?php echo site_url('panel/store/store_image_slide'); ?>">Image Slide</a></li>
 						<?php if (in_array($user['id'], $admin_user)) { ?>
                             <li><a href="<?php echo site_url('panel/store/store_payment_method'); ?>">Payment</a></li>
@@ -56,7 +57,7 @@
                 </div>
             </div>
         </div>
-		
+		-->
 		<?php if (in_array($user['id'], $admin_user)) { ?>
             <div class="accordion-group">
                 <div class="accordion-heading">
