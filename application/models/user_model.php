@@ -100,7 +100,7 @@
         
         function sync($row, $param = array()) {
             $row = StripArray($row);
-            //print_r($row['is_active']);
+            
             $param['is_edit'] = 1;
             if (in_array($row['is_active'], array(STATUS_USER_NEW))) {
                 $param['is_custom']  = (isset($param['is_custom'])) ? $param['is_custom'] : '';
@@ -130,11 +130,7 @@
         function login_user_required() {
             $user = $this->get_session();
             
-            $valid = true;
-            if (count($user) == 0) {
-                $valid = false;
-            }
-            
+            $valid = $this->is_login();
             if (! $valid) {
                 header("Location: ".site_url('login'));
                 exit;
@@ -143,7 +139,7 @@
         
         function is_login() {
             $user = $this->get_session();
-            $is_login = (count($user) == 0) ? false : true;
+			$is_login = (count($user) == 0) ? false : true;
             return $is_login;
         }
         

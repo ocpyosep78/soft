@@ -139,8 +139,11 @@ $(document).ready(function() {
 		
 		var param = Site.Form.GetValue('form-login');
 		Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
-			Func.show_notice({ title: 'Informasi', text: result.message });
-			window.location = result.link_next;
+			if (result.status) {
+				window.location = result.link_next;
+			} else {
+				Func.show_notice({ title: 'Informasi', text: result.message });
+			}
 		} });
 	});
 });

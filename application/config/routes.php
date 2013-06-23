@@ -7,11 +7,14 @@ $array_url = explode('/', $url);
 
 if ($array_url[0] != 'panel') {
 	$route['login'] = "website/login";
+	$route['logout'] = "website/logout";
 	$route['ajax/(:any)'] = "website/ajax";
 	$route['post'] = "website/post";
 	$route['post/(:any)'] = "website/post";
 	$route['item/(:any)'] = "website/item";
 	$route['browse'] = "website/browse";
+	$route['author'] = "website/author";
+	$route['author/(:any)'] = "website/author";
 }
 
 $route['default_controller'] = "website/home";

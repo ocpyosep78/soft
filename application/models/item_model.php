@@ -59,6 +59,7 @@ class Item_model extends CI_Model {
         $array = array();
 		
 		$string_keyword = (!empty($param['keyword'])) ? "AND Item.name LIKE '%".$param['keyword']."%'" : '';
+		$string_username = (!empty($param['user_name'])) ? "AND User.name = '".$param['user_name']."'" : '';
 		$string_category = (!empty($param['category_id'])) ? "AND Item.category_id = '".$param['category_id']."'" : '';
 		$string_platform = (!empty($param['platform_id'])) ? "AND Item.platform_id = '".$param['platform_id']."'" : '';
 		$string_item_status = (!empty($param['item_status_id'])) ? "AND Item.item_status_id = '".$param['item_status_id']."'" : '';
@@ -74,7 +75,7 @@ class Item_model extends CI_Model {
 			LEFT JOIN ".CATEGORY." Category ON Category.id = Item.category_id
 			LEFT JOIN ".PLATFORM." Platform ON Platform.id = Item.platform_id
 			LEFT JOIN ".USER." User ON User.id = Item.user_id
-			WHERE 1 $string_keyword $string_category $string_platform $string_item_status $string_filter
+			WHERE 1 $string_keyword $string_username $string_category $string_platform $string_item_status $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
@@ -130,6 +131,11 @@ class Item_model extends CI_Model {
 		// item file
 		if (!empty($row['filename'])) {
 			$row['array_filename'] = json_decode($row['filename']);
+		}
+		
+		// link author
+		if (!empty($row['user_name'])) {
+			$row['author_link'] = base_url('author/'.$row['user_name']);
 		}
 		
 		// user
