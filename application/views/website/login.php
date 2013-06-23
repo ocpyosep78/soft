@@ -65,31 +65,9 @@
 			</div>
 		</div>
 		
-		<div class="span4 sidebar"> 
-			<br />
-			<h2>Posting a job is Free!!!</h2>
-			
-			<div class="row-fluid form-tooltip">  
-				<div class="span12">
-					<h4>Reach thousands of users</h4>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. In congue turpis sed enim posuere malesuada. Aliquam a urna et dolor blandit tincidunt.
-				</div>  
-			</div>  
-		
-			<div class="row-fluid form-tooltip"> 
-				<div class="span12">
-					<h4>View CVs instantly</h4>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. In congue turpis sed enim posuere malesuada. Aliquam a urna et dolor blandit tincidunt.
-				</div>      
-			</div>  
-			
-			<div class="row-fluid form-tooltip"> 
-				<div class="span12">
-					<h4>Integrated analytics</h4>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. In congue turpis sed enim posuere malesuada. Aliquam a urna et dolor blandit tincidunt.
-				</div>
-			</div>
-		</div>  
+		<div class="span4 sidebar"><br />
+			<?php $this->load->view( 'website/common/info' ); ?>
+		</div>
 		
 	</div>	
 </div>

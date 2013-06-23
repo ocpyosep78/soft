@@ -33,7 +33,7 @@
 	<div class="container-fluid home_main_content"><div class="row-fluid">
 		<div class="span9"><div class="row-fluid">
 			<div class="span12">
-				<h2>latest jobs</h2>
+				<h2>latest software</h2>
 				<table class="table table-striped"><tbody>
 					<?php foreach ($array_item as $item) { ?>
 						<tr>

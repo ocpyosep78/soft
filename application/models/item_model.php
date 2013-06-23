@@ -4,7 +4,7 @@ class Item_model extends CI_Model {
     function __construct() {
         parent::__construct();
         $this->field = array(
-			'id', 'user_id', 'item_status_id', 'name', 'description', 'price', 'thumbnail', 'filename', 'date_update'
+			'id', 'user_id', 'category_id', 'platform_id', 'item_status_id', 'name', 'description', 'price', 'thumbnail', 'filename', 'date_update'
 		);
     }
 

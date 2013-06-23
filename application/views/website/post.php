@@ -100,33 +100,8 @@
 		
 	</div>
 	
-	<div class="span4 sidebar">	
-		<br />
-		<br />
-		<h3>Posting a job is Free!!!</h3>
-		
-		<div class="row-fluid form-tooltip">	
-			
-			<div class="span12">
-				<h4>Reach thousands of users</h4>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. In congue turpis sed enim posuere malesuada. Aliquam a urna et dolor blandit tincidunt.
-			</div>	
-		</div>	
-		<div class="row-fluid">
-			
-			<div class="span12">
-				<h4>View CVs instantly</h4>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. In congue turpis sed enim posuere malesuada. Aliquam a urna et dolor blandit tincidunt.
-			</div>			
-		</div>			
-		<div class="row-fluid">
-			
-			<div class="span12">
-				<h4>Integrated analytics</h4>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. In congue turpis sed enim posuere malesuada. Aliquam a urna et dolor blandit tincidunt.
-			</div>
-		</div>
-		
+	<div class="span4 sidebar"><br /><br />
+		<?php $this->load->view( 'website/common/info' ); ?>
 	</div>		
 </div></div>
 
@@ -191,14 +166,14 @@ $(document).ready(function() {
 			price: { required: true },
 			platform_id: { required: true },
 			category_id: { required: true },
-			description: { required: true },
+			description: { required: true }
 		},
 		messages: {
 			name: { required: 'Silahkan mengisi field ini' },
 			price: { required: 'Silahkan mengisi field ini' },
 			platform_id: { required: 'Silahkan mengisi field ini' },
 			category_id: { required: 'Silahkan mengisi field ini' },
-			description: { required: 'Silahkan mengisi field ini' },
+			description: { required: 'Silahkan mengisi field ini' }
 		}
 	});
 	$('.btn-item-submit').click(function() {

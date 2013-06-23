@@ -13,12 +13,15 @@
 			<a href="index.html" class="brand">Job Board</a>
 			<div id="main-menu" class="nav-collapse collapse">
 				<ul id="main-menu-right" class="nav pull-right">
-					<li class=""><a href="<?php echo base_url('browse'); ?>">Browse jobs</a></li>
-					<li class=""><a href="<?php echo base_url('post'); ?>">Post</a></li>
+					<?php if ($is_login) { ?>
+					<li><a href="<?php echo base_url('history'); ?>">History</a></li>
+					<?php } ?>
+					<li><a href="<?php echo base_url('browse'); ?>">Browse jobs</a></li>
+					<li><a href="<?php echo base_url('post'); ?>">Post</a></li>
 					<?php if (! $is_login) { ?>
-					<li class=""><a href="<?php echo base_url('login'); ?>">Login</a></li>
+					<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
 					<?php } else { ?>
-					<li class=""><a href="<?php echo base_url('logout'); ?>">Logout</a></li>
+					<li><a href="<?php echo base_url('logout'); ?>">Logout</a></li>
 					<?php } ?>
 				</ul>
 			</div>
@@ -41,12 +44,15 @@
 			
 			<div class="nav-collapse pull-right">
 				<ul class="nav nav-pills">
-					<li class=""><a href="<?php echo base_url('browse'); ?>">Browse jobs</a></li>
-					<li class=""><a href="<?php echo base_url('post'); ?>">Post</a></li>
+					<?php if ($is_login) { ?>
+					<li><a href="<?php echo base_url('history'); ?>">History</a></li>
+					<?php } ?>
+					<li><a href="<?php echo base_url('browse'); ?>">Browse jobs</a></li>
+					<li><a href="<?php echo base_url('post'); ?>">Post</a></li>
 					<?php if (! $is_login) { ?>
-					<li class=""><a href="<?php echo base_url('login'); ?>">Login</a></li>
+					<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
 					<?php } else { ?>
-					<li class=""><a href="<?php echo base_url('logout'); ?>">Logout</a></li>
+					<li><a href="<?php echo base_url('logout'); ?>">Logout</a></li>
 					<?php } ?>
 				</ul>
 			</div>

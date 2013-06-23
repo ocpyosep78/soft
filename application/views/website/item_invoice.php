@@ -2,6 +2,15 @@
 	preg_match('/([\d]+)/i', $_SERVER['REQUEST_URI'], $match);
 	$invoice_no = (isset($match[1])) ? $match[1] : 0;
 	$item = $this->User_Item_model->get_by_id(array( 'invoice_no' => $invoice_no ));
+	
+	$user = $this->User_model->get_session();
+	
+	$param_invoice = array(
+		'user_id' => $user['id'],
+		'sort' => '[{"property":"UserItem.invoice_no","direction":"DESC"}]',
+		'limit' => 5
+	);
+	$array_invoice = $this->User_Item_model->get_array($param_invoice);
 ?>
 
 <?php $this->load->view( 'website/common/meta' ); ?>
@@ -24,7 +33,19 @@
 				<div>Bayar melalui : <?php echo $item['payment_name']; ?></div>
 				
 				<h4><a class="cursor btn-download">Download</a></h4>
-			</div>	
+			</div>
+			
+			<div class="span12" style="padding: 30px 0 0 0;">
+				<h3>5 Invoice Terbaru<h3>
+				<ul>
+					<?php foreach ($array_invoice as $invoice) { ?>
+						<li>
+							<a href="<?php echo $invoice['invoice_link']; ?>">Invoice <?php echo $invoice['invoice_no']; ?></a> -
+							<a href="<?php echo $invoice['item_link']; ?>"><?php echo $invoice['item_name']; ?></a>
+						</li>
+					<?php } ?>
+				</ul>
+			</div>
 		</div>
 	</div>
 	
@@ -42,14 +63,7 @@
 <script>
 $(document).ready(function() {
 	$('.btn-download').click(function() {
-		var param = { action: 'get_item', item_id: $('[name="item_id"]').val() };
-		Func.ajax({ url: web.host + 'ajax/item', param: param, callback: function(result) {
-			var content = '';
-			for (var i = 0; i < result.array_filename.length; i++) {
-				var link = download = web.host + 'item/download/' + param.item_id + '/' + i;
-				window.open(link);
-			}
-		} });
+		Func.force_download({ item_id: $('[name="item_id"]').val() });
 	});
 });
 </script>

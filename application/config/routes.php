@@ -15,6 +15,9 @@ if ($array_url[0] != 'panel') {
 	$route['browse'] = "website/browse";
 	$route['author'] = "website/author";
 	$route['author/(:any)'] = "website/author";
+	$route['history'] = "website/history";
+	$route['history/(:any)'] = "website/history";
+	$route['contact'] = "website/contact";
 }
 
 $route['default_controller'] = "website/home";

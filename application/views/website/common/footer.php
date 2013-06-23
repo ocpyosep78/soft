@@ -3,8 +3,8 @@
 		<div class="row-fluid footer_section_pre">
 			
 			<div class="span12">
-				<p class="copy center"><a href="typography.html">Terms</a> | <a href="typography.html">Privacy</a> | <a href="typography.html">Typography</a> | <a href="typography.html">About</a></p>
-				<p class="copy center">All content &copy; 2013 <a href="http://appsarea.com/">AppsArea</a></p>
+				<p class="copy center"><a href="<?php echo base_url('contact'); ?>">Contact Us</a></p>
+				<p class="copy center">All content &copy; 2013 <a href="http://simetri.in/">Simetri</a></p>
 				<br />
 			</div>
 		</div>

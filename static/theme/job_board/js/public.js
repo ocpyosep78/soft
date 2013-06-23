@@ -334,5 +334,16 @@ var Func = {
 			var id = $('.gritter-item-wrapper').last().attr('id');
 			$('#' + id).find('.gritter-close').click();
 		}, 3000);
+	},
+	
+	force_download: function(p) {
+		var param = { action: 'get_item', item_id: p.item_id };
+		Func.ajax({ url: web.host + 'ajax/item', param: param, callback: function(result) {
+			var content = '';
+			for (var i = 0; i < result.array_filename.length; i++) {
+				var link = download = web.host + 'item/download/' + param.item_id + '/' + i;
+				window.open(link);
+			}
+		} });
 	}
 }

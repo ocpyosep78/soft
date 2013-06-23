@@ -179,7 +179,8 @@ class item extends CI_Controller {
 					'price' => $paypal_session['price'],
 					'item_id' => $paypal_session['item_id'],
 					'invoice_no' => $invoice_no,
-					'payment_name' => 'paypal'
+					'payment_name' => 'paypal',
+					'payment_date' => $this->config->item('current_datetime')
 				);
 				$this->User_Item_model->update($param_update);
 				

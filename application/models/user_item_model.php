@@ -4,7 +4,7 @@ class User_Item_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 		
-		$this->field = array( 'id', 'user_id', 'item_id', 'price', 'invoice_no', 'payment_name' );
+		$this->field = array( 'id', 'user_id', 'item_id', 'price', 'invoice_no', 'payment_name', 'payment_date' );
 	}
 	
 	function update($param) {
@@ -60,19 +60,22 @@ class User_Item_model extends CI_Model {
 		
 		$string_user = (!empty($param['user_id'])) ? "AND UserItem.user_id = '".$param['user_id']."'" : '';
 		$string_item = (!empty($param['item_id'])) ? "AND UserItem.item_id = '".$param['item_id']."'" : '';
-		$string_store = (!empty($param['store_id'])) ? "AND UserItem.store_id = '".$param['store_id']."'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'item_id ASC');
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS UserItem.*, Item.code item_code, Item.name item_name, Item.title item_title
+			SELECT SQL_CALC_FOUND_ROWS UserItem.*, Item.name item_name, Item.description item_description,
+				Author.name user_name, Category.name category_name
 			FROM ".USER_ITEM." UserItem
 			LEFT JOIN ".ITEM." Item ON Item.id = UserItem.item_id
-			WHERE 1 $string_user $string_item $string_store $string_filter
+			LEFT JOIN ".USER." Author ON Author.id = Item.user_id
+			LEFT JOIN ".CATEGORY." Category ON Category.id = Item.category_id
+			WHERE 1 $string_user $string_item $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
+		
 		$select_result = mysql_query($select_query) or die(mysql_error());
 		while ( $row = mysql_fetch_assoc( $select_result ) ) {
 			$array[] = $this->sync($row, @$param['column']);
@@ -121,7 +124,18 @@ class User_Item_model extends CI_Model {
 		}
 		
 		// link item
-		$row['item_link'] = site_url('item/'.$row['id']);
+		$row['item_link'] = base_url('item/'.$row['item_id']);
+		
+		// link invoice
+		if (isset($row['invoice_no'])) {
+			$row['invoice_link'] = base_url('item/invoice/'.$row['invoice_no']);
+		}
+		
+		// link author
+		$row['author_link'] = '';
+		if (!empty($row['user_name'])) {
+			$row['author_link'] = base_url('author/'.$row['user_name']);
+		}
 		
 		// user
 		if (!empty($row['user_fullname'])) {

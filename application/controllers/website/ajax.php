@@ -16,6 +16,9 @@ class ajax extends CI_Controller {
 	function item() {
 		$action = (empty($_POST['action'])) ? '' : $_POST['action'];
 		
+		// user
+		$user = $this->User_model->get_session();
+		
 		$result = array('status' => false, 'message' => '');
 		if ($action == 'update') {
 			if (empty($_POST['id'])) {
@@ -25,6 +28,7 @@ class ajax extends CI_Controller {
 				$_POST['filename'] = json_encode($_POST['item_file']);
 			}
 			
+			$_POST['user_id'] = @$user['id'];
 			$result = $this->Item_model->update($_POST);
 			if ($result['status']) {
 				$result['link_next'] = base_url('post/confirm/'.$result['id']);
@@ -69,6 +73,16 @@ class ajax extends CI_Controller {
 			$result['message'] = 'Akan dilanjutkan';
 		}
 		
+		echo json_encode($result);
+	}
+	
+	function mail() {
+		$param['to'] = 'info@simetri.com';
+		$param['subject'] = $_POST['subject'];
+		$param['message'] = $_POST['description'];
+		sent_mail($param);
+		
+		$result = array('status' => true, 'message' => 'Email berhasil dikirim.');
 		echo json_encode($result);
 	}
 	
