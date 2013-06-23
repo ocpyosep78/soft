@@ -31,7 +31,7 @@ class platform extends PANEL_Controller {
 		// user
 		$user = $this->User_model->get_session();
 		
-		$_POST['column'] = array( 'title', 'name' );
+		$_POST['column'] = array('name' );
 		$output = array(
 			"sEcho" => intval($_POST['sEcho']),
 			"aaData" => $this->Platform_model->get_array($_POST),
