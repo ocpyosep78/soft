@@ -38,7 +38,7 @@ class Nota_model extends CI_Model {
         if (isset($param['id'])) {
             $select_query  = "
 				SELECT
-					Nota.* StatusNota.name status_nota_name
+					Nota.*, StatusNota.name status_nota_name
 				FROM ".NOTA." Nota
 				LEFT JOIN ".STATUS_NOTA." StatusNota ON StatusNota.id = Nota.status_nota_id
 				WHERE Nota.id = '".$param['id']."'

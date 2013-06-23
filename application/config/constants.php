@@ -42,6 +42,7 @@ define('USER',									'user');
 define('USER_ITEM',								'user_item');
 define('NOTA',								'nota');
 define('STATUS_NOTA',								'status_nota');
+define('TRANSACTION',								'transaction');
 
 
 /* End of file constants.php */

@@ -18,14 +18,14 @@ class nota extends PANEL_Controller {
 		
 		$result = array();
 		if ($action == 'update') {
-            $_POST['store_id'] = $this->user['store_active']['store_id'];
+           // $_POST['store_id'] = $this->user['store_active']['store_id'];
 			$nota = $this->Nota_model->get_by_id(array( 'id' => $_POST['id'] ));
 			
 			// no update for transaction
 			if (! in_array($nota['status_nota_id'], array(STATUS_NOTA_CONFIRM, STATUS_NOTA_CANCEL))) {
 				if ($_POST['status_nota_id'] == STATUS_NOTA_CONFIRM) {
 					// add item to user buyer
-					$array_item = $this->Transaction_model->get_array(array( 'nota_id' => $nota['id'] ));
+					/*$array_item = $this->Transaction_model->get_array(array( 'nota_id' => $nota['id'] ));
 					foreach ($array_item as $item) {
 						$param_user_item = array(
 							'nota_id' => $nota['id'],
@@ -33,10 +33,9 @@ class nota extends PANEL_Controller {
 							'item_id' => $item['item_id']
 						);
 						$this->User_Item_model->update($param_user_item);
-					}
+					}*/
 					
-					// add deposit for user owner
-					$this->Store_model->add_deposit(array( 'store_id' => $nota['store_id'], 'nota_total' => $nota['nota_total'] ));
+				
 				} else if ($_POST['status_nota_id'] == STATUS_NOTA_CANCEL) {
 					$this->User_Item_model->delete(array( 'user_id' => $nota['user_id'], 'nota_id' => $nota['id'] ));
 				}
