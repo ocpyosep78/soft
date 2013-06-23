@@ -19,15 +19,10 @@
                 <form class="form-horizontal" style="padding-left: 0px;">
                     <input type="hidden" name="id" value="0" />
                     <div class="control-group">
-						<label class="control-label" for="input_title">Title</label>
+                        
+                        <label class="control-label" for="input_name">Name</label>
                         <div class="controls">
-                            <input type="text" id="input_title" name="title" placeholder="Nama Platform" class="span5" rel="twipsy" />
-                        </div>
-                    <div class="control-group">
-                    </div>
-                        <label class="control-label" for="input_name">Alias</label>
-                        <div class="controls">
-                            <input type="text" id="input_name" name="name" placeholder="Alias" readonly="readonly"  class="span5" rel="twipsy" />
+                            <input type="text" id="input_name" name="name" placeholder="Name"  class="span5" rel="twipsy" />
                         </div>
                     </div>
                 </form>
@@ -56,7 +51,6 @@
                                 <tr>
                                     <th style="width: 50px;">&nbsp;</th>
 									<th>Nama</th>
-                                    <th>Alias</th>
                                 </tr>
                             </thead>
                             <tbody><tr><td class="dataTables_empty" colspan="1">Loading data from server</td></tr></tbody>
@@ -116,19 +110,17 @@
                 "sAjaxSource": web.host + 'panel/master/platform/grid',
                 "aoColumns": [
                 { "sClass": "center", "bSortable": false },
-                null,
                 null
                 ]
             } );
             grid_platform.load = Func.reload({ id: 'platform' });
-          
+            
             $('#platform').on('click','tbody td img.edit', function () {
                 var raw = $(this).parent('td').find('.hide').text();
                 //console.log($(this).parent('td').find('.hide'));
                 //console.log(eval(raw));
                 eval('var record = ' + raw);
                 $('#WinPlatform input[name="id"]').val(record.id);
-                $('#WinPlatform input[name="title"]').val(record.title);
                 $('#WinPlatform input[name="name"]').val(record.name);
                 $('#WinPlatform').modal();
             });
