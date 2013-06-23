@@ -27,7 +27,6 @@
         
         function grid() {
 			$_POST['status_nota_id'] = STATUS_NOTA_CONFIRM;
-			$_POST['store_id'] = $this->user['store_active']['store_id'];
 			$_POST['column'] = array( 'nota_date', 'id', 'nota_name', 'nota_email', 'nota_tax', 'nota_deposit', 'nota_total', 'nota_currency_total' );
 			$_POST['is_custom']  = '<img class="cursor product" src="'.base_url('static/img/button_product.png').'" style="width: 15px; height: 16px;"> ';
 			
