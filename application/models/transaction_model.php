@@ -54,7 +54,7 @@ class Transaction_model extends CI_Model {
 		$string_limit = GetStringLimit($param);
 		
 		$select_query = "
-			SELECT SQL_CALC_FOUND_ROWS Transaction.*, Item.title, Item.thumbnail
+			SELECT SQL_CALC_FOUND_ROWS Transaction.*, Item.name, Item.thumbnail
 			FROM ".TRANSACTION." Transaction
 			LEFT JOIN ".ITEM." Item ON Item.id = Transaction.item_id
             LEFT JOIN ".NOTA." Nota ON Nota.id = Transaction.nota_id
