@@ -110,7 +110,7 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array(
-	'Item_model', 'User_model', 'Category_model', 'Platform_model', 'Default_Value_model', 'User_Item_model'
+	'Item_model', 'Item_Status_model','User_model', 'Category_model', 'Platform_model', 'Default_Value_model', 'User_Item_model'
 	/*
 	'Item_model','Item_Catalog_model','Item_Category_model', 'Catalog_model', 'Ajax_model', 'Store_Detail_model', 'Blog_model', 'Category_model', 'Store_model','Theme_model', 'Item_Price_model','Picture_model',
 	'Currency_model', 'Theme_model', 'Item_Picture_model', 'Cart_model', 'City_model', 'Country_model', 'Province_model', 'Nota_model', 'Transaction_model', 'User_model', 'Address_model', 'Newsletter_model',

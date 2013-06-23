@@ -31,6 +31,7 @@ define('STATUS_USER_BANNED',							'2');
 define('CATEGORY',								'category');
 define('DEFAULT_VALUE',							'default_value');
 define('ITEM',									'item');
+define('ITEM_STATUS',									'item_status');
 define('PLATFORM',								'platform');
 define('USER',									'user');
 define('USER_ITEM',								'user_item');
