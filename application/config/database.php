@@ -13,6 +13,11 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$db['default']['username'] = 'software';
 	$db['default']['password'] = 'software*97';
 	$db['default']['database'] = 'software';
+} else if ($_SERVER['SERVER_NAME'] == 'www.lintasapps.com' || $_SERVER['SERVER_NAME'] == 'lintasapps.com') {
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'software';
+	$db['default']['password'] = 'software*97';
+	$db['default']['database'] = 'software';
 }
 
 $db['default']['dbdriver'] = 'mysql';

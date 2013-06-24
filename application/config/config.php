@@ -23,6 +23,9 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 } else if ($_SERVER['SERVER_NAME'] == 'software.simetri.in') {
 	$config['base_url']		= 'http://software.simetri.in';
 	$config['base_path']    = realpath(dirname(__FILE__) . '/../..');
+} else if ($_SERVER['SERVER_NAME'] == 'www.lintasapps.com' || $_SERVER['SERVER_NAME'] == 'lintasapps.com') {
+	$config['base_url']		= 'https://www.lintasapps.com';
+	$config['base_path']    = realpath(dirname(__FILE__) . '/../..');
 } else {
 	echo 'Please set up config.';
 	exit;
