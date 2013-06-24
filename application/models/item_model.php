@@ -39,7 +39,7 @@
             if (isset($param['id'])) {
                 $select_query  = "
 				SELECT
-                Item.*, User.fullname user_fullname, User.name user_name,
+                Item.*, User.fullname user_fullname, User.name user_name, User.email user_email,
                 Category.name category_name, Platform.name platform_name
 				FROM ".ITEM." Item
 				LEFT JOIN ".CATEGORY." Category ON Category.id = Item.category_id
@@ -148,9 +148,10 @@
             }
             
             // link author
+			$row['author_link'] = '#';
             if (!empty($row['user_name'])) {
                 $row['author_link'] = base_url('author/'.$row['user_name']);
-            }
+			}
             
             // user
             if (!empty($row['user_fullname'])) {
