@@ -22,6 +22,7 @@
                 $result['message'] = 'Data berhasil disimpan.';
                 } else {
                 $update_query  = GenerateUpdateQuery($this->field, $param, ITEM);
+                //print_r($param);
                 $update_result = mysql_query($update_query) or die(mysql_error());
                 
                 $result['id'] = $param['id'];

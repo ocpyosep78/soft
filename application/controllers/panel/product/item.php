@@ -91,6 +91,7 @@
                 }
                 
                 $_POST['date_update'] = $this->config->item('current_datetime');
+               
                 $result = $this->Item_model->update($_POST);
                 
                 

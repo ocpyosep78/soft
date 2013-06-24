@@ -311,6 +311,7 @@
                     Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
                         // common data
                         $('#form-item [name="id"]').val(record.id);
+                        $('#form-item [name="user_id"]').val(record.user_id);
                         $('#form-item [name="name"]').val(record.name);
                         $('#form-item [name="description"]').text(record.description);
                         $('#form-item [name="price"]').val(record.price);
@@ -323,7 +324,6 @@
                         Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(result) {
                             if (result.status == 1) {
                                 Func.popup_result('.item-message', result.message);
-                                $('#form-item').modal('hide');
                                 grid_item.load();
                                 } else {
                                 Func.popup_error('#form-item', result.message);

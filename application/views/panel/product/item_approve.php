@@ -6,7 +6,7 @@
 	
 	$array_category = $this->Category_model->get_array(null);
 	$array_platform = $this->Platform_model->get_array(null);
-  
+    
 ?>
 
 <?php $this->load->view( 'panel/common/meta' ); ?>
@@ -31,6 +31,7 @@
 						<div class="span12">
 							<form class="form-horizontal">
 								<h3>Form Item</h3>
+                                <input type="text" id="input_item_status_id" name="item_status_id" class="hide" value="<?php echo STATUS_ITEM_PENDING; ?>" />
 								<div class="span7">
 									<div class="pad-alert" style="padding-left: 15px;"></div>
 									<input type="hidden" name="id" value="0" />
@@ -106,278 +107,280 @@
                 </div>
                 
 				<div id="grid-data">
-                <!--
-					<div class="row-fluid">
+                    <!--
+                        <div class="row-fluid">
 						<div class="btn-group">
-							<button class="btn btn-gebo AddItem">Tambah</button>
+                        <button class="btn btn-gebo AddItem">Tambah</button>
                         </div>
-                        -->
-                    </div>
-					
-					<div class="row-fluid">
-						<div class="span12">
-							<div class="item-message"></div>
-							<table id="item-grid" class="table table-striped table-bordered dTableR">
-								<thead>
-									<tr>
-										<th style="width: 50px;">&nbsp;</th>
-										<th>Name</th>
-										<th style="width: 100px;">Description</th>
-										<th style="width: 100px;">Price</th>
-                                    </tr>
-                                </thead>
-								<tbody><tr><td class="dataTables_empty">Loading data from server</td></tr></tbody>
-                            </table>
-                        </div>
+                    -->
+                </div>
+                
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="item-message"></div>
+                        <table id="item-grid" class="table table-striped table-bordered dTableR">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">&nbsp;</th>
+                                    <th>Name</th>
+                                    <th style="width: 100px;">Description</th>
+                                    <th style="width: 100px;">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody><tr><td class="dataTables_empty">Loading data from server</td></tr></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <?php $this->load->view( 'panel/common/sidebar' ); ?>
     </div>
-    <?php $this->load->view( 'panel/common/js' ); ?>
-    
-    <script>
-        $(document).ready(function() {
-            var isSubmit = false,
-            getExt = function(filename) {
-                var index = filename.lastIndexOf('.'), ext = '';
-                if (index > 0) ext = filename.toLowerCase().substring( index+1 );
-                if (!ext) {
-                    ext = 'file';
-                    } if (/txt|doc|ppt|xls|pdf/i.test( ext )) {
-                    ext = 'document ' + ext;
-                    } else if (/png|jpg|jpeg/i.test( ext )) {
-                    ext = 'image ' + ext;
-                    } else if (/mp3|aac|wav|au|ogg|wma/i.test( ext )) {
-                    ext = 'audio ' + ext;
-                    } else if (/mpg|wmv|mov|flv/i.test( ext )) {
-                    ext = 'video ' + ext;
-                }
-                return ext;
-            };
-            var uploader = new plupload.Uploader({
-                runtimes : 'gears,html5,flash,silverlight,browserplus',
-                browse_button : 'pickfiles',
-                container : 'uploadcontainer',
-                max_file_size : '100mb',
-                url: web.host + 'upload/file',
-                flash_swf_url: web.base + 'static/js/plupload/plupload.flash.swf',
-                silverlight_xap_url : web.base + 'static/js/plupload/plupload.silverlight.xap'
+    <?php $this->load->view( 'panel/common/sidebar' ); ?>
+</div>
+<?php $this->load->view( 'panel/common/js' ); ?>
+
+<script>
+    $(document).ready(function() {
+        var isSubmit = false,
+        getExt = function(filename) {
+            var index = filename.lastIndexOf('.'), ext = '';
+            if (index > 0) ext = filename.toLowerCase().substring( index+1 );
+            if (!ext) {
+                ext = 'file';
+                } if (/txt|doc|ppt|xls|pdf/i.test( ext )) {
+                ext = 'document ' + ext;
+                } else if (/png|jpg|jpeg/i.test( ext )) {
+                ext = 'image ' + ext;
+                } else if (/mp3|aac|wav|au|ogg|wma/i.test( ext )) {
+                ext = 'audio ' + ext;
+                } else if (/mpg|wmv|mov|flv/i.test( ext )) {
+                ext = 'video ' + ext;
+            }
+            return ext;
+        };
+        var uploader = new plupload.Uploader({
+            runtimes : 'gears,html5,flash,silverlight,browserplus',
+            browse_button : 'pickfiles',
+            container : 'uploadcontainer',
+            max_file_size : '100mb',
+            url: web.host + 'upload/file',
+            flash_swf_url: web.base + 'static/js/plupload/plupload.flash.swf',
+            silverlight_xap_url : web.base + 'static/js/plupload/plupload.silverlight.xap'
+        });
+        $('#uploadfiles').click(function(e) {
+            if ( $("#filelist .addedfile").length > 0 )
+            uploader.start();
+            return false;
+        });
+        uploader.init();
+        
+        uploader.bind('FilesAdded', function(up, files) {
+            $.each(files, function(i, file) {
+                var ext = getExt(file.name);
+                $('#filelist').append('<div class="addedfile uploadfile '+ext+'" id="' + file.id + '"><span class="filename">' + file.name + '</span> (' + plupload.formatSize(file.size) + ') <b></b>' + '</div>');
             });
-            $('#uploadfiles').click(function(e) {
-                if ( $("#filelist .addedfile").length > 0 )
-                uploader.start();
-                return false;
-            });
-            uploader.init();
+            up.refresh(); // Reposition Flash/Silverlight
+            $('#uploadfiles').click();
+        });
+        uploader.bind('UploadProgress', function(up, file) {
+            $('#' + file.id + " b").html(file.percent + "%");
+        });
+        uploader.bind('Error', function(up, err) {
+            $('#filelist').append("<div class='alert alert-error'>Error: " + err.code + ", Message: " + err.message + (err.file ? ", File: " + err.file.name : "") + "</div>");
+            up.refresh(); // Reposition Flash/Silverlight
+        });
+        uploader.bind('FileUploaded', function(up, file, jsonresp) {
+            var div = $("#"+file.id);
+            var json = eval('('+jsonresp.response+')');
             
-            uploader.bind('FilesAdded', function(up, files) {
-                $.each(files, function(i, file) {
-                    var ext = getExt(file.name);
-                    $('#filelist').append('<div class="addedfile uploadfile '+ext+'" id="' + file.id + '"><span class="filename">' + file.name + '</span> (' + plupload.formatSize(file.size) + ') <b></b>' + '</div>');
-                });
-                up.refresh(); // Reposition Flash/Silverlight
-                $('#uploadfiles').click();
-            });
-            uploader.bind('UploadProgress', function(up, file) {
-                $('#' + file.id + " b").html(file.percent + "%");
-            });
-            uploader.bind('Error', function(up, err) {
-                $('#filelist').append("<div class='alert alert-error'>Error: " + err.code + ", Message: " + err.message + (err.file ? ", File: " + err.file.name : "") + "</div>");
-                up.refresh(); // Reposition Flash/Silverlight
-            });
-            uploader.bind('FileUploaded', function(up, file, jsonresp) {
-                var div = $("#"+file.id);
-                var json = eval('('+jsonresp.response+')');
+            if (json.error != null && json.error.code != null) {
+                div.remove();
+                $.sticky(json.error.message, {autoclose : 2500, position: "top-right" });
+                } else {
+                div.removeClass('addedfile').addClass('completefile').find('b').html("100%");
+                div.after('<input type="hidden" name="item_file[]" value="' + json.new_dir + '/' + json.fileName + '">');
+            }
+        });
+        
+        var grid_item = null;
+        setTimeout('$("html").removeClass("js")', 300);
+        
+        var upload = {
+            get_template: function(p) {
+                var content = '';
+                content += '<div class="item">';
+                content += '<input type="hidden" name="item_picture[]" value="' + p.filename + '" />';
+                content += '<div class="picture"><img src="' + web.base + '/static/upload/' + p.filename + '" /></div>';
+                content += '<div class="delete"><img src="' + web.base + '/static/img/delete.png" alt="Delete Picture" title="Delete Picture" /></div>';
+                //					content += '<div class="thumbail"><img src="' + web.base + '/static/img/thumbnail.png" alt="Set as Thumbnail" title="Set as Thumbnail" /></div>';
+                content += '</div>';
                 
-                if (json.error != null && json.error.code != null) {
-                    div.remove();
-                    $.sticky(json.error.message, {autoclose : 2500, position: "top-right" });
-                    } else {
-                    div.removeClass('addedfile').addClass('completefile').find('b').html("100%");
-                    div.after('<input type="hidden" name="item_file[]" value="' + json.new_dir + '/' + json.fileName + '">');
-                }
-            });
-            
-            var grid_item = null;
-            setTimeout('$("html").removeClass("js")', 300);
-            
-            var upload = {
-                get_template: function(p) {
-                    var content = '';
-                    content += '<div class="item">';
-                    content += '<input type="hidden" name="item_picture[]" value="' + p.filename + '" />';
-                    content += '<div class="picture"><img src="' + web.base + '/static/upload/' + p.filename + '" /></div>';
-                    content += '<div class="delete"><img src="' + web.base + '/static/img/delete.png" alt="Delete Picture" title="Delete Picture" /></div>';
-                    //					content += '<div class="thumbail"><img src="' + web.base + '/static/img/thumbnail.png" alt="Set as Thumbnail" title="Set as Thumbnail" /></div>';
-                    content += '</div>';
-                    
-                    return content;
-                },
-                generate: function(p) {
-                    if (typeof(p.array_picture) == 'undefined') {
-                        return;
-                    }
-                    
-                    // generate content
-                    var cnt_picture = '';
-                    for (var i = 0; i < p.array_picture.length; i++) {
-                        cnt_picture += upload.get_template({ filename: p.array_picture[i].picture_name });
-                    }
-                    
-                    // set content
-                    $('.upload-list .item').remove();
-                    $('.upload-list').prepend(cnt_picture);
-                    upload.delete_picture();
-                },
-                add_picture: function(p) {
-                    var content = upload.get_template({ filename: p.filename });
-                    $('.upload-list').append(content);
-                    upload.delete_picture();
-                },
-                delete_picture: function() {
-                    $('.upload-list .delete').click(function() {
-                        $(this).parent('.item').remove();
-                    });
-                }
-            }
-            image_item = function(p) {
-                upload.add_picture({ filename: p.filename })
-            }
-            
-            
-            $('.AddItem').click(function(){ 
-                $('#form-item form')[0].reset();
-                $('[name="id"]').val(0);
-				$('#filelist').html('');
-				upload.generate({ array_picture: [] });
-				
-                $("#grid-data").hide();
-                $("#form-item").show();
-            });
-            
-            $('#form-item .cancel').click(function() {
-                $("#grid-data").show();
-                $("#form-item").hide();
-            });
-            
-            Func.InitForm({
-                Container: '#form-item',
-                rule: { title: { required: true } }
-            });
-            
-            $('#form-item input[name="title"]').keyup(function() { $('#form-item input[name="name"]').val(Func.GetName($(this).val())); });
-            $('#form-item .save').click(function() {
-                if (! $('#form-item form').valid()) {
+                return content;
+            },
+            generate: function(p) {
+                if (typeof(p.array_picture) == 'undefined') {
                     return;
                 }
                 
-                var param = Site.Form.GetValue('form-item');
-                param.action = 'update';
-                Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(result) {
-                    if (result.status == 1) {
-                        Func.popup_result('.item-message', result.message);
-                        $("#grid-data").show();
-                        $("#form-item").hide();
-                        grid_item.load();
-                    }
+                // generate content
+                var cnt_picture = '';
+                for (var i = 0; i < p.array_picture.length; i++) {
+                    cnt_picture += upload.get_template({ filename: p.array_picture[i].picture_name });
+                }
+                
+                // set content
+                $('.upload-list .item').remove();
+                $('.upload-list').prepend(cnt_picture);
+                upload.delete_picture();
+            },
+            add_picture: function(p) {
+                var content = upload.get_template({ filename: p.filename });
+                $('.upload-list').append(content);
+                upload.delete_picture();
+            },
+            delete_picture: function() {
+                $('.upload-list .delete').click(function() {
+                    $(this).parent('.item').remove();
+                });
+            }
+        }
+        image_item = function(p) {
+            upload.add_picture({ filename: p.filename })
+        }
+        
+        
+        $('.AddItem').click(function(){ 
+            $('#form-item form')[0].reset();
+            $('[name="id"]').val(0);
+            $('#filelist').html('');
+            upload.generate({ array_picture: [] });
+            
+            $("#grid-data").hide();
+            $("#form-item").show();
+        });
+        
+        $('#form-item .cancel').click(function() {
+            $("#grid-data").show();
+            $("#form-item").hide();
+        });
+        
+        Func.InitForm({
+            Container: '#form-item',
+            rule: { title: { required: true } }
+        });
+        
+        $('#form-item input[name="title"]').keyup(function() { $('#form-item input[name="name"]').val(Func.GetName($(this).val())); });
+        $('#form-item .save').click(function() {
+            if (! $('#form-item form').valid()) {
+                return;
+            }
+            
+            var param = Site.Form.GetValue('form-item');
+            param.action = 'update';
+            Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(result) {
+                if (result.status == 1) {
+                    Func.popup_result('.item-message', result.message);
+                    $("#grid-data").show();
+                    $("#form-item").hide();
+                    grid_item.load();
+                }
+            } });
+        });
+        
+        function init_table() {
+            grid_item = $('#item-grid').dataTable( {
+                "aaSorting": [[1, 'asc']], "sServerMethod": "POST",
+                "bProcessing": true, "bServerSide": true, "sPaginationType": "bootstrap",
+                "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+                "sAjaxSource": web.host + 'panel/product/item/grid_appprove',
+                "aoColumns": [
+                { "sClass": "center", "bSortable": false },
+                null,
+                { "sClass": "center" },
+                { "sClass": "center" }
+                ]
+            } );
+            grid_item.load = Func.reload({ id: 'item-grid' });
+            
+            $('#item-grid').on('click','tbody td img.cancel', function () 
+            {
+                var item_status_id = $('div.item_status_id').text();
+                var raw = $(this).parent('td').find('.hide').text();
+                eval('var temp = ' + raw);
+                var param = { action: 'get_item_by_id', id: temp.id };
+                Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
+                    // common data
+                    $('#form-item [name="id"]').val(record.id);
+                    $('#form-item [name="user_id"]').val(record.user_id);
+                    $('#form-item [name="name"]').val(record.name);
+                    $('#form-item [name="description"]').text(record.description);
+                    $('#form-item [name="price"]').val(record.price);
+                    $('#form-item [name="platform_id"]').val(record.platform_id);
+                    $('#form-item [name="category_id"]').val(record.category_id);
+                    $('#form-item [name="item_status_id"]').val(item_status_id);
+                    
+                    var param = Site.Form.GetValue('form-item');
+                    console.log(param);
+                    param.action = 'update';
+                    Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(result) {
+                        if (result.status == 1) 
+                        {
+                            Func.popup_result('.item-message', result.message);
+                            grid_item.load();
+                            } else {
+                            Func.popup_error('#form-item', result.message);
+                        }
+                    } });
                 } });
             });
-            
-            function init_table() {
-                grid_item = $('#item-grid').dataTable( {
-                    "aaSorting": [[1, 'asc']], "sServerMethod": "POST",
-                    "bProcessing": true, "bServerSide": true, "sPaginationType": "bootstrap",
-                    "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-                    "sAjaxSource": web.host + 'panel/product/item/grid_appprove',
-                    "aoColumns": [
-                    { "sClass": "center", "bSortable": false },
-                    null,
-                    { "sClass": "center" },
-                    { "sClass": "center" }
-                    ]
-                } );
-                grid_item.load = Func.reload({ id: 'item-grid' });
+            $('#item-grid').on('click','tbody td img.edit', function () {
+                var raw = $(this).parent('td').find('.hide').text();
+                eval('var temp = ' + raw);
                 
-                $('#item-grid').on('click','tbody td img.cancel', function () 
-                {
-                    var item_status_id = $('div.item_status_id').text();
-                    var raw = $(this).parent('td').find('.hide').text();
-                    eval('var temp = ' + raw);
-                    var param = { action: 'get_item_by_id', id: temp.id };
-                    Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
-                        // common data
-                        $('#form-item [name="id"]').val(record.id);
-                        $('#form-item [name="name"]').val(record.name);
-                        $('#form-item [name="description"]').text(record.description);
-                        $('#form-item [name="price"]').val(record.price);
-                        $('#form-item [name="platform_id"]').val(record.platform_id);
-                        $('#form-item [name="category_id"]').val(record.category_id);
-                        $('#form-item [name="item_status_id"]').val(item_status_id);
-                        
-                        var param = Site.Form.GetValue('form-item');
-                        param.action = 'update';
-                        Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(result) {
-                            if (result.status == 1) {
-                                Func.popup_result('.item-message', result.message);
-                                $('#form-item').modal('hide');
-                                grid_item.load();
-                                } else {
-                                Func.popup_error('#form-item', result.message);
-                            }
-                        } });
-                    } });
-                });
-                $('#item-grid').on('click','tbody td img.edit', function () {
-                    var raw = $(this).parent('td').find('.hide').text();
-                    eval('var temp = ' + raw);
+                var param = { action: 'get_item_by_id', id: temp.id };
+                Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
+                    // common data
+                    $('#form-item [name="id"]').val(record.id);
+                    $('#form-item [name="name"]').val(record.name);
+                    $('#form-item [name="description"]').text(record.description);
+                    $('#form-item [name="price"]').val(record.price);
                     
-                    var param = { action: 'get_item_by_id', id: temp.id };
-                    Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
-                        // common data
-                        $('#form-item [name="id"]').val(record.id);
-                        $('#form-item [name="name"]').val(record.name);
-                        $('#form-item [name="description"]').text(record.description);
-                        $('#form-item [name="price"]').val(record.price);
-                        
-                        $('#form-item [name="platform_id"]').val(record.platform_id);
-                        $('#form-item [name="category_id"]').val(record.category_id);
-                        /*
+                    $('#form-item [name="platform_id"]').val(record.platform_id);
+                    $('#form-item [name="category_id"]').val(record.category_id);
+                    /*
                         // catalog
                         var array_platform = [];
                         for (var i = 0; i < record.array_platform.length; i++) {
-                            array_platform.push(record.array_platform[i].id);
+                        array_platform.push(record.array_platform[i].id);
                         }
                         $('#form-item [name="platform_id_id"]').val(array_platform);
                         
                         // category
                         var array_category = [];
                         for (var i = 0; i < record.array_category.length; i++) {
-                            array_category.push(record.array_category[i].id);
+                        array_category.push(record.array_category[i].id);
                         }
                         $('#form-item [name="category_id"]').val(array_category);
                         
-                        */
-						
-                        $("#grid-data").hide();
-                        $("#form-item").show();
-                    } });
-                });
-                
-                
-                $('#item-grid').on('click','tbody td img.delete', function () {
-                    var raw = $(this).parent('td').find('.hide').text();
-                    eval('var record = ' + raw);
+                    */
                     
-                    Func.confirm_delete({
-                        data: { action: 'delete', id: record.id },
-                        url: web.host + 'panel/product/item/action', grid: grid_item
-                    });
+                    $("#grid-data").hide();
+                    $("#form-item").show();
+                } });
+            });
+            
+            
+            $('#item-grid').on('click','tbody td img.delete', function () {
+                var raw = $(this).parent('td').find('.hide').text();
+                eval('var record = ' + raw);
+                
+                Func.confirm_delete({
+                    data: { action: 'delete', id: record.id },
+                    url: web.host + 'panel/product/item/action', grid: grid_item
                 });
-            }
-            init_table();
-        });
-    </script>
+            });
+        }
+        init_table();
+    });
+</script>
 </body>
 </html>
