@@ -30,15 +30,15 @@
 							<td style="width: 90%;">
 								<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
 								<?php echo $item['description']; ?><br />
-								By <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>
-							<td style="width: 10%; text-align: center;"><a href="<?php echo $item['item_buy_link']; ?>"><span class="label label-success">Buy</span></a></td></tr>
+								Oleh <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>
+							<td style="width: 10%; text-align: center;"><a href="<?php echo $item['item_buy_link']; ?>"><span class="label label-success">Beli</span></a></td></tr>
 					<?php } ?>
 				</tbody></table>
 				
 				<div class="pagination pull-right cnt-paging"><ul>
 					<?php if ($page_active > 1) { ?>
 					<?php $page_prev = $page_active - 1; ?>
-					<li><a class="cursor" data-page_no="<?php echo $page_prev; ?>">Prev</a></li>
+					<li><a class="cursor" data-page_no="<?php echo $page_prev; ?>">Sebelumnya</a></li>
 					<?php } ?>
 					
 					<?php for ($i = -5; $i <= 5; $i++) { ?>
@@ -51,7 +51,7 @@
 					
 					<?php if ($page_active < $page_count) { ?>
 					<?php $page_next = $page_active + 1; ?>
-					<li><a class="cursor" data-page_no="<?php echo $page_next; ?>">Next</a></li>
+					<li><a class="cursor" data-page_no="<?php echo $page_next; ?>">Selanjutnya</a></li>
 					<?php } ?>
 				</ul></div>
 				

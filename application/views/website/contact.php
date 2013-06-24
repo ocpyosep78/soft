@@ -10,7 +10,7 @@
 <div class="container-fluid sidebar_content"><div class="row-fluid">
 	<div class="span8">	
 		<br />
-		<h2><i class="icon-suitcase"></i>&nbsp;&nbsp;Contact Us</h2>
+		<h2><i class="icon-suitcase"></i>&nbsp;&nbsp;Hubungi Kami</h2>
 		
 		<form id="form-contact">
 			<input type="hidden" name="action" value="sent_mail" />
@@ -26,7 +26,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="control-group">
-						<label class="control-label">Subject</label>
+						<label class="control-label">Subjek</label>
 						<div class="controls"><input type="text" class="span12" name="subject" /></div>
 					</div>
 				</div>
@@ -34,19 +34,19 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="control-group">
-						<label class="control-label">Description</label>
+						<label class="control-label">Deskripsi</label>
 						<div class="controls"><textarea rows="3" class="span12" name="description"></textarea></div>
 					</div>
 				</div>
 			</div>
 			<h3>&nbsp;</h3>
-			<a class="btn btn-primary btn-large pull-right btn-item-submit">Submit</a><br /><br />
+			<a class="btn btn-primary btn-large pull-right btn-item-submit">Kirim</a><br /><br />
 		</form>
 		
 	</div>
 	
 	<div class="span4 sidebar"><br /><br />
-		<?php $this->load->view( 'website/common/info' ); ?>
+		<?php //$this->load->view( 'website/common/info' ); ?>
 	</div>		
 </div></div>
 

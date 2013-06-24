@@ -10,14 +10,14 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			</a>
-			<a href="index.html" class="brand">Job Board</a>
+			<a href="index.html" class="brand">lintasapps</a>
 			<div id="main-menu" class="nav-collapse collapse">
 				<ul id="main-menu-right" class="nav pull-right">
 					<?php if ($is_login) { ?>
 					<li><a href="<?php echo base_url('history'); ?>">History</a></li>
 					<?php } ?>
 					<li><a href="<?php echo base_url('browse'); ?>">Browse</a></li>
-					<li><a href="<?php echo base_url('post'); ?>">Post</a></li>
+					<li><a href="<?php echo base_url('post'); ?>">Mulai Berjualan</a></li>
 					<?php if (! $is_login) { ?>
 					<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
 					<?php } else { ?>
@@ -48,7 +48,7 @@
 					<li><a href="<?php echo base_url('history'); ?>">History</a></li>
 					<?php } ?>
 					<li><a href="<?php echo base_url('browse'); ?>">Browse</a></li>
-					<li><a href="<?php echo base_url('post'); ?>">Post</a></li>
+					<li><a href="<?php echo base_url('post'); ?>">Mulai Berjualan</a></li>
 					<?php if (! $is_login) { ?>
 					<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
 					<?php } else { ?>

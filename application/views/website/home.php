@@ -15,7 +15,7 @@
 		<div class="row-fluid"><br />
 			<div class="span9 offset1 home-hero"><div class="row-fluid"><div class="span11 offset1">
 				<div class="row-fluid">
-					<div class="span5"><h3>I'm looking for...</h3></div>				
+					<div class="span5"><h3>Saya mencari...</h3></div>				
 					<div class="span5"><h3>Platform</h3></div>
 				</div>
 				
@@ -33,16 +33,16 @@
 	<div class="container-fluid home_main_content"><div class="row-fluid">
 		<div class="span9"><div class="row-fluid">
 			<div class="span12">
-				<h2>latest software</h2>
+				<h2>Apps terbaru</h2>
 				<table class="table table-striped"><tbody>
 					<?php foreach ($array_item as $item) { ?>
 						<tr>
 							<td style="width: 90%;">
 								<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
 								<?php echo $item['description']; ?><br />
-								By <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>
+								Oleh <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>
 							<td style="width: 10%; text-align: center;">
-								<a href="<?php echo $item['item_buy_link']; ?>"><span class="label label-success">BUY</span></a>
+								<a href="<?php echo $item['item_buy_link']; ?>"><span class="label label-success">Beli</span></a>
 							</td></tr>
 					<?php } ?>
 				</tbody></table>
