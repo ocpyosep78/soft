@@ -27,8 +27,8 @@
 			<br />
 			<div class="row-fluid">
 				<div class="span12">
-					<h2><i class="icon-key"></i>&nbsp;&nbsp;Login/Register</h2>
-					<p>You must login or create an account in order to post a job - this will enable you to view, remove, or relist your listing in the future.</p>
+					<h2><i class="icon-key"></i>&nbsp;&nbsp;Login / Daftar </h2>
+					<p>Anda harus login atau membuat account baru, untuk dapat mengunggah appas and.</p>
 				</div>
 			</div>
 			<hr />
@@ -41,7 +41,7 @@
 			
 			<div class="row-fluid">
 				<div class="span6">
-					<h2>Create a free account</h2>
+					<h2>Daftar account gratis</h2>
 					<form id="form-register">
 						<input type="hidden" name="action" value="register" />
 						
@@ -59,17 +59,17 @@
 								<div class="controls"><input type="password" placeholder="Enter your password" name="passwd" id="passwd" class="input-xlarge"></div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Confirm password</label>
+								<label class="control-label">konfirmasi password</label>
 								<div class="controls"><input type="password" placeholder="Enter your password" name="passwd_check" class="input-xlarge"></div>
 							</div>
-							<a class="cursor btn btn-primary btn-register">Create an account</a>
+							<a class="cursor btn btn-primary btn-register">Buat account</a>
 						</fieldset>
 					</form>
 				</div>      
 				
 				<div class="span6 pull-right">
 					<div id="cnt-login">
-						<h2>Already have an account?</h2>
+						<h2>Sudah memiliki account?</h2>
 						<form id="form-login">
 							<input type="hidden" name="action" value="login" />
 							
@@ -85,11 +85,11 @@
 								<a class="cursor btn btn-login btn-primary">Login</a>
 							</fieldset>
 						</form>
-						<h4><a class="cursor show-forgot">Forgot Password</a></h4>
+						<h4><a class="cursor show-forgot">Lupa Kata Sandi</a></h4>
 					</div>
 					
 					<div id="cnt-forgot" class="hide">
-						<h2>Forgot password?</h2>
+						<h2>Lupa Kata Sandi ?</h2>
 						<form id="form-forgot">
 							<input type="hidden" name="action" value="forgot" />
 							
