@@ -283,12 +283,31 @@
                 } });
             });
             
-            $('#item-grid').on('click','tbody td img.confirm', function () {
+           
+            
+            function init_table() {
+                grid_item = $('#item-grid').dataTable( {
+                    "aaSorting": [[1, 'asc']], "sServerMethod": "POST",
+                    "bProcessing": true, "bServerSide": true, "sPaginationType": "bootstrap",
+                    "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+                    "sAjaxSource": web.host + 'panel/product/item/grid_pending',
+                    "aoColumns": [
+                    { "sClass": "center", "bSortable": false },
+                    null,
+                    { "sClass": "center" },
+                    { "sClass": "center" }
+                    ]
+                } );
+                grid_item.load = Func.reload({ id: 'item-grid' });
+                
+                 $('#item-grid').on('click','tbody td img.confirm', function () {
+            
                 var raw = $(this).parent('td').find('.hide').text();
                 eval('var temp = ' + raw);
                 
                 var param = { action: 'get_item_by_id', id: temp.id };
                 Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
+          
                     // common data
                     $('#form-item [name="id"]').val(record.id);
                     $('#form-item [name="name"]').val(record.name);
@@ -315,21 +334,6 @@
                     }
                 } });
             });
-            
-            function init_table() {
-                grid_item = $('#item-grid').dataTable( {
-                    "aaSorting": [[1, 'asc']], "sServerMethod": "POST",
-                    "bProcessing": true, "bServerSide": true, "sPaginationType": "bootstrap",
-                    "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-                    "sAjaxSource": web.host + 'panel/product/item/grid_pending',
-                    "aoColumns": [
-                    { "sClass": "center", "bSortable": false },
-                    null,
-                    { "sClass": "center" },
-                    { "sClass": "center" }
-                    ]
-                } );
-                grid_item.load = Func.reload({ id: 'item-grid' });
                 
                 $('#item-grid').on('click','tbody td img.edit', function () {
                     var raw = $(this).parent('td').find('.hide').text();
