@@ -28,7 +28,7 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <h2><i class="icon-key"></i>&nbsp;&nbsp;Login / Daftar </h2>
-                        <p>Anda harus login atau membuat account baru, untuk dapat mengunggah appas and.</p>
+                        <p>Anda harus login atau membuat account baru, untuk dapat mengunggah apps anda.</p>
                     </div>
                 </div>
                 <hr />
@@ -48,21 +48,29 @@
                             <fieldset>
                                 <div class="control-group">
                                     <label class="control-label">Username</label>
-                                    <div class="controls"><input type="text" placeholder="Enter your username" name="name" class="input-xlarge focused"></div>
+                                    <div class="controls"><input type="text" placeholder="Masukkan username anda" name="name" class="input-xlarge focused"></div>
                                 </div>           
                                 <div class="control-group">
                                     <label class="control-label">Email</label>
-                                    <div class="controls"><input type="text" placeholder="Enter your username" name="email" class="input-xlarge focused"></div>
+                                    <div class="controls"><input type="text" placeholder="Masukkan email anda" name="email" class="input-xlarge focused"></div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Password</label>
-                                    <div class="controls"><input type="password" placeholder="Enter your password" name="passwd" id="passwd" class="input-xlarge"></div>
+                                    <div class="controls"><input type="password" placeholder="Masukkan passowrd anda" name="passwd" id="passwd" class="input-xlarge"></div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">konfirmasi password</label>
-                                    <div class="controls"><input type="password" placeholder="Enter your password" name="passwd_check" class="input-xlarge"></div>
+                                    <div class="controls"><input type="password" placeholder="Konfirmasi password anda" name="passwd_check" class="input-xlarge"></div>
                                 </div>
-                                <a class="cursor btn btn-primary btn-register">Buat account</a>
+                                <a class="cursor btn btn-primary btn-register">Daftar account</a>
+                                <hr/>
+                                <div class="control-group">
+                                    <ol>
+                                        <li>Dengan mendaftar account, Anda menyetujui Ketentuan Kami dan bahwa Anda telah membaca Kebijakan Penggunaan Data, termasuk penggunaan Cookie </li>
+                                        <li>Link verifikasi akan dikirim ke email Anda </li>
+                                        <li>Apabila email tidak terkirim, mohon cek folder spam ada terlebih dahulu, atau hubungi team support LintasAPPS </li>
+                                    </ol>
+                                </div>
                             </fieldset>
                         </form>
                     </div>      
@@ -76,11 +84,11 @@
                                 <fieldset>
                                     <div class="control-group">
                                         <label class="control-label">Username</label>
-                                        <div class="controls"><input type="text" placeholder="Enter your username" name="name" class="input-xlarge focused"></div>
+                                        <div class="controls"><input type="text" placeholder="Masukkan username anda" name="name" class="input-xlarge focused"></div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Password</label>
-                                        <div class="controls"><input type="password" placeholder="Enter your password" name="passwd" class="input-xlarge"></div>
+                                        <div class="controls"><input type="password" placeholder="Masukkan password anda" name="passwd" class="input-xlarge"></div>
                                     </div>
                                     <a class="cursor btn btn-login btn-primary">Login</a>
                                 </fieldset>
@@ -96,12 +104,13 @@
                                 <fieldset>
                                     <div class="control-group">
                                         <label class="control-label">Username</label>
-                                        <div class="controls"><input type="text" placeholder="Enter your username" name="name" class="input-xlarge focused"></div>
+                                        <div class="controls"><input type="text" placeholder="Masukkan username anda" name="name" class="input-xlarge focused"></div>
                                     </div>
                                     <a class="cursor btn btn-forgot btn-primary">Reset</a>
                                 </fieldset>
                             </form>
                             <h4><a class="cursor show-login">Login</a></h4>
+                            
                         </div>
                     </div>
                 </div>

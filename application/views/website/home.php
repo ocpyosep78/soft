@@ -20,7 +20,7 @@
 				</div>
 				
 				<div class="row-fluid"><form id="form-search-short" action="<?php echo base_url('browse'); ?>" method="post">
-					<div class="span5"><input type="text" class="span12 search_input" name="keyword" placeholder="What type of software are you looking for?" /></div>
+					<div class="span5"><input type="text" class="span12 search_input" name="keyword" placeholder="Apa jenis perangkat lunak yang Anda cari?" /></div>
 					<div class="span4"><select class="home_select" name="platform_id">
 						<?php echo ShowOption(array( 'Array' => $array_platform, 'ArrayID' => 'id', 'ArrayTitle' => 'name', 'Selected' => 1 )); ?>
 					</select></div>

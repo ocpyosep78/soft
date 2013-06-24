@@ -8,7 +8,7 @@
 	<input type="hidden" name="page_no" value="1" />
 	
 	<div class="span12">
-		<input type="text" class="span12" name="keyword" placeholder="Keyword" value="<?php echo @$_POST['keyword']; ?>" />
+		<input type="text" class="span12" name="keyword" placeholder="Kata kunci" value="<?php echo @$_POST['keyword']; ?>" />
 		<select name="category_id" class="span12">
 			<option value="">Kategori...</option>
 			<?php echo ShowOption(array( 'Array' => $array_category, 'ArrayID' => 'id', 'ArrayTitle' => 'name', 'WithEmptySelect' => 0, 'Selected' => @$_POST['category_id'] )); ?>
