@@ -1,6 +1,6 @@
 <?php
 	$user = $this->User_model->get_session();
-	$array_menu = array( 'menu' => array('Product', 'Item') );
+	$array_menu = array( 'menu' => array('Product', 'Item Approved') );
 	//$array_currency = $this->Currency_model->get_array();
 	
 	

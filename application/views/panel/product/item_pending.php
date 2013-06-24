@@ -1,6 +1,6 @@
 <?php
 	$user = $this->User_model->get_session();
-	$array_menu = array( 'menu' => array('Product', 'Item') );
+	$array_menu = array( 'menu' => array('Product', 'Item Pending') );
 	//$array_currency = $this->Currency_model->get_array();
 	
 	
@@ -283,6 +283,39 @@
                 } });
             });
             
+            $('#item-grid').on('click','tbody td img.confirm', function () {
+                var raw = $(this).parent('td').find('.hide').text();
+                eval('var temp = ' + raw);
+                
+                var param = { action: 'get_item_by_id', id: temp.id };
+                Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
+                    // common data
+                    $('#form-item [name="id"]').val(record.id);
+                    $('#form-item [name="name"]').val(record.name);
+                    $('#form-item [name="description"]').text(record.description);
+                    $('#form-item [name="price"]').val(record.price);
+                    $('#form-item [name="platform_id"]').val(record.platform_id);
+                    $('#form-item [name="category_id"]').val(record.category_id);
+                    
+                } });
+                
+                if (! $('#form-item').valid()) {
+                    return;
+                }
+                
+                var param = Site.Form.GetValue('form-item');
+                param.action = 'update';
+                Func.ajax({ url: web.host + 'panel/order/nota/action', param: param, callback: function(result) {
+                    if (result.status == 1) {
+                        Func.popup_result('.nota-message', result.message);
+                        $('#form-item').modal('hide');
+                        item-grid.load();
+                        } else {
+                        Func.popup_error('#form-item', result.message);
+                    }
+                } });
+            });
+            
             function init_table() {
                 grid_item = $('#item-grid').dataTable( {
                     "aaSorting": [[1, 'asc']], "sServerMethod": "POST",
@@ -334,38 +367,7 @@
                     } });
                 });
                 
-                $('#item-grid').on('click','tbody td img.confirm', function () {
-                    var raw = $(this).parent('td').find('.hide').text();
-                    eval('var temp = ' + raw);
-                    
-                    var param = { action: 'get_item_by_id', id: temp.id };
-                    Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
-                        // common data
-                        $('#form-item [name="id"]').val(record.id);
-                        $('#form-item [name="name"]').val(record.name);
-                        $('#form-item [name="description"]').text(record.description);
-                        $('#form-item [name="price"]').val(record.price);
-                        $('#form-item [name="platform_id"]').val(record.platform_id);
-                        $('#form-item [name="category_id"]').val(record.category_id);
-                        
-                    } });
-                    
-                    if (! $('#form-item').valid()) {
-                        return;
-                    }
-                    
-                    var param = Site.Form.GetValue('form-item');
-                    param.action = 'update';
-                    Func.ajax({ url: web.host + 'panel/order/nota/action', param: param, callback: function(result) {
-                        if (result.status == 1) {
-                            Func.popup_result('.nota-message', result.message);
-                            $('#form-item').modal('hide');
-                            item-grid.load();
-                            } else {
-                            Func.popup_error('#form-item', result.message);
-                        }
-                    } });
-                });
+                
                 
                 $('#item-grid').on('click','tbody td img.delete', function () {
                     var raw = $(this).parent('td').find('.hide').text();
