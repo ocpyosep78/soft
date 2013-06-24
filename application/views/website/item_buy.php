@@ -33,7 +33,7 @@
 				<label><input type="radio" value="paypal" name="payment" style="margin: -3px 0 0 0;" /> Paypal</label>
 				
 				<div style="text-align: center; padding: 0 0 20px 0;">
-					<a class="cursor btn btn-primary btn-pay">Pay</a>
+					<a class="cursor btn btn-primary btn-pay">Bayar</a>
 				</div>
 			</div>
 		</form></div>
