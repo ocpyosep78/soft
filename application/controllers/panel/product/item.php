@@ -8,7 +8,12 @@
         function index() {
             $this->load->view( 'panel/product/item');
         }
-        
+        function item_pending() {
+            $this->load->view( 'panel/product/item_pending' );  
+        }
+        function item_approve() {
+            $this->load->view( 'panel/product/item_approve' );  
+        }	       
         function action() {
             $action = (isset($_POST['action'])) ? $_POST['action'] : '';
             unset($_POST['action']);
@@ -174,11 +179,40 @@
             // user
             $user = $this->User_model->get_session();
             $_POST['column'] = array('name', 'description', 'price' );
+            $_POST['user_name'] = $user['name'];
+            
             $output = array(
 			"sEcho" => intval($_POST['sEcho']),
-			"aaData" => $this->Item_model->get_array($_POST),
+			"aaData" => $this->Item_model->get_array($_POST,$pendingApprove = false,null,null),
 			"iTotalDisplayRecords" => $this->Item_model->get_count()
             );
             echo json_encode( $output );
         }
-    }    
+        
+        function grid_pending() {
+            // user
+            $user = $this->User_model->get_session();
+            $_POST['column'] = array('name', 'description', 'price' );
+            $_POST['item_status_id'] = STATUS_ITEM_PENDING;
+            $_POST['is_custom']  = '<img class="cursor product" src="'.base_url('static/img/button_confirm.png').'" style="width: 15px; height: 16px;">  ';
+            $output = array(
+			"sEcho" => intval($_POST['sEcho']),
+			"aaData" => $this->Item_model->get_array($_POST,$pendingApprove = true,true,false),
+			"iTotalDisplayRecords" => $this->Item_model->get_count()
+            );
+            echo json_encode( $output );
+        }
+        function grid_appprove() {
+            // user
+            $user = $this->User_model->get_session();
+            $_POST['column'] = array('name', 'description', 'price' );
+            $_POST['item_status_id'] = STATUS_ITEM_APPROVE;
+            $_POST['is_custom']  = '<img class="cursor product" src="'.base_url('static/img/button_product.png').'" style="width: 15px; height: 16px;">  ';
+            $output = array(
+			"sEcho" => intval($_POST['sEcho']),
+			"aaData" => $this->Item_model->get_array($_POST,$pendingApprove = true,false,true),
+			"iTotalDisplayRecords" => $this->Item_model->get_count()
+            );
+            echo json_encode( $output );
+        }
+    }                

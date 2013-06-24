@@ -52,7 +52,7 @@ class nota extends PANEL_Controller {
 	function grid() {
 		$_POST['is_edit'] = 1;
 		$_POST['column'] = array( 'id', 'nota_date', 'nota_name', 'nota_email', 'nota_currency_total', 'status_nota_name' );
-		$_POST['store_id'] = $this->user['store_active']['store_id'];
+		//$_POST['store_id'] = $this->user['store_active']['store_id'];
 		$_POST['is_custom']  = '<img class="cursor product" src="'.base_url('static/img/button_product.png').'" style="width: 15px; height: 16px;">  ';
 		$output = array(
 			"sEcho" => intval($_POST['sEcho']),

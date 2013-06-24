@@ -21,6 +21,10 @@
                             <li><a href="<?php echo site_url('panel/product/catalog'); ?>">Catalog</a></li>
                         <li><a href="<?php echo site_url('panel/product/category'); ?>">Category</a></li>-->
 						<li><a href="<?php echo site_url('panel/product/item'); ?>">Item</a></li>
+                        <?php if (in_array($user['id'], $admin_user)) { ?>
+                            <li><a href="<?php echo site_url('panel/product/item/item_pending'); ?>">Item Pending</a></li>
+                            <li><a href="<?php echo site_url('panel/product/item/item_approve'); ?>">Item Approve</a></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
