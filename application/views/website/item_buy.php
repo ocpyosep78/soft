@@ -45,7 +45,7 @@
 				<h4>Detail</h4>
 				<div>Platform : <?php echo $item['platform_name']; ?></div>
 				<div>Category : <?php echo $item['category_name']; ?></div>
-				<div>Owner : <?php echo $item['user_name']; ?></div>
+				<div>Pemilik : <?php echo $item['user_name']; ?></div>
 			</div>	
 		</div>
 	</div>		
