@@ -48,5 +48,6 @@
   background: #E9E9E9;
 }
 
+.error { color: #FF0000; }
 .cursor { cursor: pointer; }
 .center { text-align: center; }
