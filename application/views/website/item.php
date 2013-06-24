@@ -42,9 +42,9 @@
 			<?php if ($is_buy) { ?>
 			<a class="cursor btn btn-primary btn-success btn-download">Download</a>
 			<?php } else if ($item['item_status_id'] == ITEM_STATUS_APPROVE) { ?>
-			<a href="<?php echo $item['item_buy_link']; ?>" class="btn btn-primary btn-success">Buy</a>
+			<a href="<?php echo $item['item_buy_link']; ?>" class="btn btn-primary btn-success">Beli</a>
 			<?php } else { ?>
-			<a class="btn btn-primary btn-success">Waiting Approval</a>
+			<a class="btn btn-primary btn-success">Menunggu Persetujuan</a>
 			<?php } ?>
 		</div>
 		
