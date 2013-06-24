@@ -24,7 +24,7 @@
 					<div class="span4"><select class="home_select" name="platform_id">
 						<?php echo ShowOption(array( 'Array' => $array_platform, 'ArrayID' => 'id', 'ArrayTitle' => 'name', 'Selected' => 1 )); ?>
 					</select></div>
-					<div class="span2"><a class="cursor btn btn-primary btn-success search_btn btn-search-short">Search</a></div>
+					<div class="span2"><a class="cursor btn btn-primary btn-success search_btn btn-search-short">Cari ...</a></div>
 				</form></div>
 			</div></div></div>
 		</div>

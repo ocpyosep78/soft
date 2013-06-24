@@ -14,16 +14,16 @@
 <div class="container-fluid sidebar_content"><div class="row-fluid">
 	<div class="span8">	
 		<br />
-		<h2><i class="icon-suitcase"></i>&nbsp;&nbsp;Upload Item</h2>
+		<h2><i class="icon-suitcase"></i>&nbsp;&nbsp;Unggah Apps</h2>
 		
 		<form id="form-item">
 			<input type="hidden" name="action" value="update" />
 			
-			<h3>Item Detail</h3>
+			<h3>Detil Apps</h3>
 			<div class="row-fluid">
 				<div class="span6">
 					<div class="control-group">
-						<label class="control-label">Nama Software</label>
+						<label class="control-label">Nama Apps</label>
 						<div class="controls"><input type="text" class="span12" name="name" /></div>
 					</div>
 				</div>
@@ -83,25 +83,25 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="control-group">
-						<label class="control-label">Upload Source</label>
+						<label class="control-label">Unggah Sumber</label>
 						<div class="controls">
 							<div id="uploadcontainer">
 								<div id="filelist" style="padding: 0 0 15px 0;"></div>
-								<a id="pickfiles" class="btn btn-primary btn-success">Select files</a>
-								<a id="uploadfiles" class="hide">Upload files</a>
+								<a id="pickfiles" class="btn btn-primary btn-success">Pilih files</a>
+								<a id="uploadfiles" class="hide">Unggah files</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<h3>&nbsp;</h3>
-			<a class="btn btn-primary btn-large pull-right btn-item-submit">Submit</a><br /><br />
+			<a class="btn btn-primary btn-large pull-right btn-item-submit">Kirim</a><br /><br />
 		</form>
 		
 	</div>
 	
 	<div class="span4 sidebar"><br /><br />
-		<?php $this->load->view( 'website/common/info' ); ?>
+		<?php //$this->load->view( 'website/common/info' ); ?>
 	</div>		
 </div></div>
 
