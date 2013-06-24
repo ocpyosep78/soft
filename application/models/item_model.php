@@ -67,7 +67,7 @@
             return $array;
         }
         
-        function get_array($param = array(),$pendingApprove,$pending,$approve) {
+        function get_array($param = array(),$pendingApprove = null,$pending = null,$approve = null) {
             
             $array = array();
             

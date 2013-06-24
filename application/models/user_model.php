@@ -4,7 +4,7 @@
         function __construct() {
             parent::__construct();
             
-            $this->field = array('id', 'name', 'email', 'fullname', 'passwd', 'address', 'deposit','is_active');
+            $this->field = array('id', 'name', 'email', 'fullname', 'passwd', 'address', 'deposit','is_active', 'reset');
             
             /*	User Info */
             /*	User Session
@@ -43,6 +43,8 @@
                 $select_query  = "SELECT * FROM ".USER." WHERE email = '".$param['email']."' LIMIT 1";
                 } else if (isset($param['name'])) {
                 $select_query  = "SELECT * FROM ".USER." WHERE name = '".$param['name']."' LIMIT 1";
+                } else if (isset($param['reset'])) {
+                $select_query  = "SELECT * FROM ".USER." WHERE reset = '".$param['reset']."' LIMIT 1";
             }
             
             $select_result = mysql_query($select_query) or die(mysql_error());

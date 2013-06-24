@@ -69,8 +69,26 @@ class ajax extends CI_Controller {
 				}
 			}
 		}
-		else if ($action == 'ResetPassword') {
-			$result['message'] = 'Akan dilanjutkan';
+		else if ($action == 'forgot') {
+			$user = $this->User_model->get_by_id(array( 'name' => $_POST['name'] ));
+			if (count($user) == 0) {
+				$result['message'] = 'User anda tidak ditemukan';
+				echo json_encode($result);
+				exit;
+			}
+			
+			$reset = EncriptPassword($user['id'] . time());
+			$param_update['id'] = $user['id'];
+			$param_update['reset'] = $reset;
+			$this->User_model->update($param_update);
+			
+			$param['to'] = $user['email'];
+			$param['subject']  = 'Request Reset Password';
+			$param['message']  = 'Berikut link untuk mereset password lama anda, harap abakain email ini jika anda tidak ingin merubah password saat ini.<br />';
+			$param['message'] .= base_url('login/?reset='.$reset);
+			sent_mail($param);
+			
+			$result['message'] = 'Email untuk mereset password anda berhasil dikirim';
 		}
 		
 		echo json_encode($result);

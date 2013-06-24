@@ -1,3 +1,21 @@
+<?php
+	$message = '';
+	$reset = (empty($_GET['reset'])) ? '' : $_GET['reset'];
+	if (!empty($reset)) {
+		$user = $this->User_model->get_by_id(array( 'reset' => $reset ));
+		if (count($user) == 0) {
+			$message = 'Maaf, link ini sudah tidak valid.';
+		} else {
+			$passwd = substr(EncriptPassword(time()), 0, 8);
+			$param_update['id'] = $user['id'];
+			$param_update['passwd'] = EncriptPassword($passwd);
+			$this->User_model->update($param_update);
+			
+			$message = 'Password anda berhasil diperbaharui, silahkan memeriksa email anda.';
+		}
+	}
+?>
+
 <?php $this->load->view( 'website/common/meta' ); ?>
 <body>
 	<?php $this->load->view( 'website/common/header' ); ?>
@@ -14,6 +32,12 @@
 				</div>
 			</div>
 			<hr />
+			
+			<?php if (!empty($message)) { ?>
+			<div class="row-fluid" style="text-align: center; color: #FF0000;">
+				<?php echo $message; ?>
+			</div>
+			<?php } ?>
 			
 			<div class="row-fluid">
 				<div class="span6">
@@ -44,23 +68,41 @@
 				</div>      
 				
 				<div class="span6 pull-right">
-					<h2>Already have an account?</h2>
-					<form id="form-login">
-						<input type="hidden" name="action" value="login" />
-						
-						<fieldset>
-							<div class="control-group">
-								<label class="control-label">Username</label>
-								<div class="controls"><input type="text" placeholder="Enter your username" name="name" class="input-xlarge focused"></div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Password</label>
-								<div class="controls"><input type="password" placeholder="Enter your password" name="passwd" class="input-xlarge"></div>
-							</div>
-							<a class="cursor btn btn-login btn-primary">Login</a>
-						</fieldset>
-					</form>
+					<div id="cnt-login">
+						<h2>Already have an account?</h2>
+						<form id="form-login">
+							<input type="hidden" name="action" value="login" />
+							
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label">Username</label>
+									<div class="controls"><input type="text" placeholder="Enter your username" name="name" class="input-xlarge focused"></div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Password</label>
+									<div class="controls"><input type="password" placeholder="Enter your password" name="passwd" class="input-xlarge"></div>
+								</div>
+								<a class="cursor btn btn-login btn-primary">Login</a>
+							</fieldset>
+						</form>
+						<h4><a class="cursor show-forgot">Forgot Password</a></h4>
+					</div>
 					
+					<div id="cnt-forgot" class="hide">
+						<h2>Forgot password?</h2>
+						<form id="form-forgot">
+							<input type="hidden" name="action" value="forgot" />
+							
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label">Username</label>
+									<div class="controls"><input type="text" placeholder="Enter your username" name="name" class="input-xlarge focused"></div>
+								</div>
+								<a class="cursor btn btn-forgot btn-primary">Reset</a>
+							</fieldset>
+						</form>
+						<h4><a class="cursor show-login">Login</a></h4>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -99,6 +141,14 @@ $(document).ready(function() {
 			passwd: { required: 'Silahkan mengisi field ini', minlength: '5 minimal karakter' }
 		}
 	});
+	$("#form-forgot").validate({
+		rules: {
+			name: { required: true, minlength: 2 }
+		},
+		messages: {
+			name: { required: 'Silahkan mengisi field ini', minlength: '2 minimal karakter' }
+		}
+	});
 	
 	$('.btn-register').click(function() {
 		if (! $("#form-register").valid()) {
@@ -123,6 +173,25 @@ $(document).ready(function() {
 				Func.show_notice({ title: 'Informasi', text: result.message });
 			}
 		} });
+	});
+	$('.btn-forgot').click(function() {
+		if (! $("#form-forgot").valid()) {
+			return false;
+		}
+		
+		var param = Site.Form.GetValue('form-forgot');
+		Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
+			Func.show_notice({ title: 'Informasi', text: result.message });
+		} });
+	});
+	
+	$('.show-forgot').click(function() {
+		$('#cnt-login').hide();
+		$('#cnt-forgot').show();
+	});
+	$('.show-login').click(function() {
+		$('#cnt-forgot').hide();
+		$('#cnt-login').show();
 	});
 });
 </script>
