@@ -88,7 +88,7 @@
 							<div id="uploadcontainer">
 								<div id="filelist" style="padding: 0 0 15px 0;"></div>
 								<a id="pickfiles" class="btn btn-primary btn-success">Pilih files</a>
-								<a id="uploadfiles" class="hide">Unggah files</a>
+								<a id="uploadfiles" class="hide">Unggah file</a>
 							</div>
 						</div>
 					</div>
