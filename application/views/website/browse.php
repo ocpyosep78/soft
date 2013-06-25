@@ -22,7 +22,7 @@
 	<div class="container-fluid home_main_content"><div class="row-fluid">
 		<div class="span9"><div class="row-fluid">
 			<div class="span12">
-				<h2>latest jobs</h2>
+				<h2>APPS TERBARU</h2>
 				<?php if (count($array_item) > 0) { ?>
 				<table class="table table-striped"><tbody>
 					<?php foreach ($array_item as $item) { ?>

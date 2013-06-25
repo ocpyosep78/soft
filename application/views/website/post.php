@@ -19,7 +19,7 @@
 		<form id="form-item">
 			<input type="hidden" name="action" value="update" />
 			
-			<h3>Detil Apps</h3>
+			<h3>Detail Apps</h3>
 			<div class="row-fluid">
 				<div class="span6">
 					<div class="control-group">
@@ -64,7 +64,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="control-group">
-						<label class="control-label">Description</label>
+						<label class="control-label">Deskripsi</label>
 						<div class="controls"><textarea rows="3" class="span12" name="description"></textarea></div>
 					</div>
 				</div>
@@ -72,7 +72,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="control-group">
-						<label class="control-label">Screenshot</label>
+						<label class="control-label">Unggah Tampilan Apps</label>
 						<div class="controls">
 							<input type="text" class="span6" name="thumbnail" readonly="readonly" style="margin: 0px;" />
 							<a class="btn btn-primary btn-success btn-thumbnail">Browse</a>
@@ -83,11 +83,11 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="control-group">
-						<label class="control-label">Unggah Sumber</label>
+						<label class="control-label">Unggah File Apps</label>
 						<div class="controls">
 							<div id="uploadcontainer">
 								<div id="filelist" style="padding: 0 0 15px 0;"></div>
-								<a id="pickfiles" class="btn btn-primary btn-success">Pilih files</a>
+								<a id="pickfiles" class="btn btn-primary btn-success">Pilih file</a>
 								<a id="uploadfiles" class="hide">Unggah file</a>
 							</div>
 						</div>

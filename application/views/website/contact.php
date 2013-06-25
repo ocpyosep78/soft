@@ -26,7 +26,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="control-group">
-						<label class="control-label">Subjek</label>
+						<label class="control-label">Judul</label>
 						<div class="controls"><input type="text" class="span12" name="subject" /></div>
 					</div>
 				</div>
