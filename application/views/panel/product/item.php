@@ -36,13 +36,13 @@
 									<div class="control-group">
 										<label class="control-label" for="input_title">Nama</label>
 										<div class="controls">
-											<input type="text" id="input_name" name="name" placeholder="Nama" class="span12" rel="twipsy" data-placement="right" data-original-title="Nama Catalog" />
+											<input type="text" id="input_name" name="name" placeholder="Nama" class="span12" rel="twipsy" data-placement="right" data-original-title="Nama Item Anda" />
                                         </div>
                                     </div>
 									<div class="control-group">
 										<label class="control-label" for="input_name" >Description</label>
 										<div class="controls">
-											<textarea id="input_description" name="description" class="span12 tinymce" style="width: 100%; height: 250px;"></textarea>
+											<textarea id="input_description" name="description" class="span12 tinymce" style="width: 100%; height: 250px;" data-original-title="Deskripsikan Item Anda"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
 									<div class="control-group">
 										<label class="control-label" for="input_price">Price</label>
 										<div class="controls">
-											<input type="text" id="input_price" name="price" placeholder="Price" class="span12" rel="twipsy" data-placement="right" data-original-title="Price" />
+											<input type="text" id="input_price" name="price" placeholder="Price" class="span12" rel="twipsy" data-placement="right" data-original-title="Harga dari Item Anda" />
                                         </div>
                                     </div>
 									<div class="control-group" id="picture-upload">
