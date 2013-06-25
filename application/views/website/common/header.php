@@ -47,7 +47,7 @@
 				<?php if ($is_login) { ?>
 				<div class="my-title">Hallo <?php echo $user['name']; ?></div>
 				<?php } else { ?>
-				<div>&nbsp;</div>
+				<div class="my-title">&nbsp;</div>
 				<?php } ?>
 				
 				<ul class="nav nav-pills">

@@ -53,6 +53,7 @@ class ajax extends CI_Controller {
 			} else if (count($user_email) > 0) {
 				$result['message'] = 'Email sudah terdaftar dalam database kami, mohon melakukan login atau reset password.';
 			} else {
+				$passwd_raw = $_POST['passwd'];
 				$_POST['passwd'] = EncriptPassword($_POST['passwd']);
 				$result = $this->User_model->update($_POST);
 				$result['status'] = true;
@@ -71,7 +72,7 @@ class ajax extends CI_Controller {
 				$param['message']  = 'Terima kasih telah mendaftar pada website kami, berikut informasi user Anda :<br />';
 				$param['message'] .= 'username : '.$user_login['name'].'<br />';
 				$param['message'] .= 'email : '.$user_login['email'].'<br />';
-				$param['message'] .= 'password : '.$_POST['passwd'].'<br />';
+				$param['message'] .= 'password : '.$passwd_raw.'<br />';
 				sent_mail($param);
 				
 			}
