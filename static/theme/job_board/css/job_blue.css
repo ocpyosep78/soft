@@ -7354,12 +7354,18 @@ blockquote.pull-right small:after {
 .navbar label {
   color: #eeeeee;
 }
+.navbar-inner .my-title {
+	color: #FFFFFF;
+	font-weight: 700;
+	text-align: right;
+	padding: 8px 27px 0 0;
+}
 .navbar .nav > li {
   height: 30px;
   line-height: 30px;
   text-align: center;
   width: auto;
-  margin-top: 15px;
+  margin-top: 0px;
 }
 .navbar .nav > li > a {
   border-right: 1px solid #222222;

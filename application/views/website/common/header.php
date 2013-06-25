@@ -1,5 +1,6 @@
 <?php
 	$is_login = $this->User_model->is_login();
+	$user = $this->User_model->get_session();
 ?>
 
 <div class="navbar navbar-fixed-top custom-theme">
@@ -43,6 +44,12 @@
 			</div>
 			
 			<div class="nav-collapse pull-right">
+				<?php if ($is_login) { ?>
+				<div class="my-title">Hallo <?php echo $user['name']; ?></div>
+				<?php } else { ?>
+				<div>&nbsp;</div>
+				<?php } ?>
+				
 				<ul class="nav nav-pills">
 					<?php if ($is_login) { ?>
 					<li><a href="<?php echo base_url('history'); ?>">History</a></li>

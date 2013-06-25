@@ -38,6 +38,7 @@
 					<?php foreach ($array_item as $item) { ?>
 						<tr>
 							<td style="width: 90%;">
+								<img src="<?php echo $item['thumbnail_link']; ?>" style="float: left; width: 80px; height: 55px; margin: 0 20px 0 0;" />
 								<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
 								<?php echo $item['description']; ?><br />
 								Oleh <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>

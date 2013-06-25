@@ -166,7 +166,11 @@
                 
                 var param = Site.Form.GetValue('form-register');
                 Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
-                    Func.show_notice({ title: 'Informasi', text: result.message });
+                    if (result.status) {
+                        window.location = result.link_next;
+					} else {
+                        Func.show_notice({ title: 'Informasi', text: result.message });
+                    }
                 } });
             });
             $('.btn-login').click(function() {

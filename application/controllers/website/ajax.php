@@ -45,12 +45,35 @@ class ajax extends CI_Controller {
 		
 		$result = array('status' => false, 'message' => '');
 		if ($action == 'register') {
-			$user = $this->User_model->get_by_id(array('email' => $_POST['email']));
-			if (count($user) > 0) {
+			$user_name = $this->User_model->get_by_id(array('name' => $_POST['name']));
+			$user_email = $this->User_model->get_by_id(array('email' => $_POST['email']));
+			
+			if (count($user_name) > 0) {
+				$result['message'] = 'Username sudah terdaftar dalam database kami, mohon menggunakan username yang lain.';
+			} else if (count($user_email) > 0) {
 				$result['message'] = 'Email sudah terdaftar dalam database kami, mohon melakukan login atau reset password.';
 			} else {
 				$_POST['passwd'] = EncriptPassword($_POST['passwd']);
 				$result = $this->User_model->update($_POST);
+				$result['status'] = true;
+				$result['link_next'] = base_url('thank');
+				
+				// user
+				$user_login = $this->User_model->get_by_id(array( 'id' => $result['id'] ));
+				
+				// force login
+				unset($user_login['passwd']);
+				$this->User_model->set_session($user_login);
+				
+				// sent mail
+				$param['to'] = $user_login['email'];
+				$param['subject']  = 'Registrasi Lintas Apps';
+				$param['message']  = 'Terima kasih telah mendaftar pada website kami, berikut informasi user Anda :<br />';
+				$param['message'] .= 'username : '.$user_login['name'].'<br />';
+				$param['message'] .= 'email : '.$user_login['email'].'<br />';
+				$param['message'] .= 'password : '.$_POST['passwd'].'<br />';
+				sent_mail($param);
+				
 			}
 		}
 		else if ($action == 'login') {
