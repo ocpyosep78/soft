@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Password</label>
-                                    <div class="controls"><input type="password" placeholder="Masukkan passowrd anda" name="passwd" id="passwd" class="input-xlarge"></div>
+                                    <div class="controls"><input type="password" placeholder="Masukkan password anda" name="passwd" id="passwd" class="input-xlarge"></div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">konfirmasi password</label>
