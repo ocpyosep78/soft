@@ -48,21 +48,23 @@
                             <fieldset>
                                 <div class="control-group">
                                     <label class="control-label">Username</label>
-                                    <div class="controls"><input type="text" placeholder="Masukkan username anda" name="name" class="input-xlarge focused"></div>
+                                    <div class="controls"><input type="text" placeholder="Masukkan username anda" name="name" class="input-xlarge focused input_tooltips" data-placement="right" title="Masukkan username Anda disini"></div>
                                 </div>           
                                 <div class="control-group">
                                     <label class="control-label">Email</label>
-                                    <div class="controls"><input type="text" placeholder="Masukkan email anda" name="email" class="input-xlarge focused"></div>
+                                    <div class="controls">
+                                    <input type="text"  placeholder="Masukkan email anda" name="email" class="input-xlarge focused input_tooltips" data-placement="right" title="Masukkan email Anda disini">
+                                        </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">Password</label>
-                                    <div class="controls"><input type="password" placeholder="Masukkan password anda" name="passwd" id="passwd" class="input-xlarge"></div>
+                                    <div class="controls"><input type="password" placeholder="Masukkan password anda" name="passwd" id="passwd" class="input-xlarge input_tooltips" data-placement="right" title="Masukkan password Anda disini"></div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">konfirmasi password</label>
-                                    <div class="controls"><input type="password" placeholder="Konfirmasi password anda" name="passwd_check" class="input-xlarge"></div>
+                                    <label class="control-label">Konfirmasi password</label>
+                                    <div class="controls"><input type="password" placeholder="Konfirmasi password anda" name="passwd_check" class="input-xlarge input_tooltips" data-placement="right" title="Konfirmasi password Anda disini"></div>
                                 </div>
-                                <a class="cursor btn btn-primary btn-register">Daftar account</a>
+                                <a class="cursor btn btn-primary btn-register input_tooltips" data-placement="right" title="Tekan tombol daftar account, setelah anda melengkapi form daftar account">Daftar account</a>
                                 <hr/>
                                 <div class="control-group">
                                     <ol>
@@ -84,16 +86,16 @@
                                 <fieldset>
                                     <div class="control-group">
                                         <label class="control-label">Username</label>
-                                        <div class="controls"><input type="text" placeholder="Masukkan username anda" name="name" class="input-xlarge focused"></div>
+                                        <div class="controls"><input type="text" placeholder="Masukkan username anda" name="name" class="input-xlarge focused input_tooltips" data-placement="right" title="Masukkan username Anda disini"></div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Password</label>
-                                        <div class="controls"><input type="password" placeholder="Masukkan password anda" name="passwd" class="input-xlarge"></div>
+                                        <div class="controls"><input type="password" placeholder="Masukkan password anda" name="passwd" class="input-xlarge input_tooltips" data-placement="right" title="Masukkan password Anda disini"></div>
                                     </div>
-                                    <a class="cursor btn btn-login btn-primary">Login</a>
+                                    <a class="cursor btn btn-login btn-primary input_tooltips" data-placement="right" title="Tekan tombol login, untuk masuk kedalam lintasapps">Login</a>
                                 </fieldset>
                             </form>
-                            <h4><a class="cursor show-forgot">Lupa Kata Sandi</a></h4>
+                            <h4><a class="cursor show-forgot input_tooltips" data-placement="right" title="Jika Anda lupa password / kata sandi, tekan link ini">Lupa Kata Sandi</a></h4>
                         </div>
                         
                         <div id="cnt-forgot" class="hide">

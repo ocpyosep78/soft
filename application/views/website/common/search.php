@@ -8,13 +8,13 @@
 	<input type="hidden" name="page_no" value="1" />
 	
 	<div class="span12">
-		<input type="text" class="span12" name="keyword" placeholder="Kata kunci" value="<?php echo @$_POST['keyword']; ?>" />
-		<select name="category_id" class="span12">
+		<input type="text" class="span12 input_tooltips" name="keyword" placeholder="Kata kunci" value="<?php echo @$_POST['keyword']; ?>" data-placement="right"  title="Masukkan kata kunci yang ingin Anda cari"/>
+		<select name="category_id" class="span12 input_tooltips" data-placement="right"  title="Pilih Kategori yang ingin Anda cari">
 			<option value="">Kategori...</option>
 			<?php echo ShowOption(array( 'Array' => $array_category, 'ArrayID' => 'id', 'ArrayTitle' => 'name', 'WithEmptySelect' => 0, 'Selected' => @$_POST['category_id'] )); ?>
 		</select>
 		
-		<select name="platform_id" class="span12">
+		<select name="platform_id" class="span12 input_tooltips" data-placement="right"  title="Pilih Platform yang ingin Anda cari">
 			<option value="">Platform...</option>
 			<?php echo ShowOption(array( 'Array' => $array_platform, 'ArrayID' => 'id', 'ArrayTitle' => 'name', 'WithEmptySelect' => 0, 'Selected' => @$_POST['platform_id'] )); ?>
 		</select>

@@ -19,7 +19,7 @@
 				<div class="span6">
 					<div class="control-group">
 						<label class="control-label">Email</label>
-						<div class="controls"><input type="text" class="span12" name="email" /></div>
+						<div class="controls"><input type="text" class="span12 input_tooltips" name="email" rel="twipsy" data-placement="right" title="Masukkan email Anda disini" /></div>
 					</div>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 				<div class="span12">
 					<div class="control-group">
 						<label class="control-label">Judul</label>
-						<div class="controls"><input type="text" class="span12" name="subject" /></div>
+						<div class="controls"><input type="text" class="span12 input_tooltips" name="subject" data-placement="right" title="Masukkan judul Anda disini"/></div>
 					</div>
 				</div>
 			</div>
@@ -35,12 +35,12 @@
 				<div class="span12">
 					<div class="control-group">
 						<label class="control-label">Deskripsi</label>
-						<div class="controls"><textarea rows="3" class="span12" name="description"></textarea></div>
+						<div class="controls"><textarea rows="3" class="span12 input_tooltips" name="description" data-placement="right" title="Masukkan deskiripsi Anda disini"></textarea></div>
 					</div>
 				</div>
 			</div>
 			<h3>&nbsp;</h3>
-			<a class="btn btn-primary btn-large pull-right btn-item-submit">Kirim</a><br /><br />
+			<a class="btn btn-primary btn-large pull-right btn-item-submit input_tooltips" data-placement="right" title="Setelah semua Anda isi, tekan kirim">Kirim</a><br /><br />
 		</form>
 		
 	</div>

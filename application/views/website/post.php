@@ -24,7 +24,7 @@
 				<div class="span6">
 					<div class="control-group">
 						<label class="control-label">Nama Apps</label>
-						<div class="controls"><input type="text" class="span12" name="name" /></div>
+						<div class="controls"><input type="text" class="span12 input_tooltips" name="name" data-placement="right" title="Masukkan nama Apps Anda, disini"/></div>
 					</div>
 				</div>
 				<div class="span6">
@@ -33,7 +33,7 @@
 						<div class="controls">
 							<div class="input-prepend">
 								<span class="add-on">Rp.</span>
-								<input class="span12" id="prependedInput" type="text" name="price" />
+								<input class="input_tooltips" id="prependedInput" type="text" name="price" data-placement="right" title="Masukkan harga Apps Anda, disini" />
 							</div>
 						</div>
 					</div>
@@ -44,7 +44,7 @@
 					<div class="control-group">
 						<label class="control-label">Platform</label>
 						<div class="controls">
-							<select class="span12" name="platform_id">
+							<select class="span12 input_tooltips" name="platform_id" data-placement="right" title="Pilih Platform yang sesuai dengan Apps">
 								<?php echo ShowOption(array( 'Array' => $array_platform, 'ArrayID' => 'id', 'ArrayTitle' => 'name' )); ?>
 							</select>
 						</div>
@@ -54,7 +54,7 @@
 					<div class="control-group">
 						<label class="control-label">Kategori</label>
 						<div class="controls">
-							<select class="span12" name="category_id">
+							<select class="span12 input_tooltips" name="category_id" data-placement="right" title="Pilih Kategori yang sesuai dengan Apps" >
 								<?php echo ShowOption(array( 'Array' => $array_category, 'ArrayID' => 'id', 'ArrayTitle' => 'name' )); ?>
 							</select>
 						</div>
@@ -65,7 +65,7 @@
 				<div class="span12">
 					<div class="control-group">
 						<label class="control-label">Deskripsi</label>
-						<div class="controls"><textarea rows="3" class="span12" name="description"></textarea></div>
+						<div class="controls"><textarea rows="3" class="span12 input_tooltips" name="description" data-placement="right" title="Tambahkan deskripsi untuk Apps Anda"></textarea></div>
 					</div>
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 						<label class="control-label">Unggah Tampilan Apps</label>
 						<div class="controls">
 							<input type="text" class="span6" name="thumbnail" readonly="readonly" style="margin: 0px;" />
-							<a class="btn btn-primary btn-success btn-thumbnail">Browse</a>
+							<a class="btn btn-primary btn-success btn-thumbnail input_tooltips" data-placement="right"  title="Tekan tombol browse, untuk menambahkan tampilan Apps Anda">Browse</a>
 						</div>
 					</div>
 				</div>
@@ -87,7 +87,7 @@
 						<div class="controls">
 							<div id="uploadcontainer">
 								<div id="filelist" style="padding: 0 0 15px 0;"></div>
-								<a id="pickfiles" class="btn btn-primary btn-success">Pilih file</a>
+								<a id="pickfiles" class="btn btn-primary btn-success input_tooltips" data-placement="right"  title="Tekan tombol pilih file, untuk menambahkan file Apps Anda">Pilih file</a>
 								<a id="uploadfiles" class="hide">Unggah file</a>
 							</div>
 						</div>
@@ -95,7 +95,7 @@
 				</div>
 			</div>
 			<h3>&nbsp;</h3>
-			<a class="btn btn-primary btn-large pull-right btn-item-submit">Kirim</a><br /><br />
+			<a class="btn btn-primary btn-large pull-right btn-item-submit input_tooltips" data-placement="right"  title="Setelah semua informasi Anda lengkapi, silakan tekan tombol kirim">Kirim</a><br /><br />
 		</form>
 		
 	</div>
