@@ -5000,6 +5000,7 @@ a.badge:focus {
 }
 .label-success,
 .badge-success {
+    padding:7px 12px;
   background-color: #468847;
 }
 .label-success[href],
