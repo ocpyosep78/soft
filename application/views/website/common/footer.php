@@ -23,7 +23,6 @@
 <script type="text/javascript" src="<?php echo base_url('static/lib/gritter/jquery.gritter.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/plupload/browserplus-min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/js/plupload/plupload.full.js'); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('static/theme/job_board/js/bootstrap-tooltip.js'); ?>"></script>
 <script>
                     
 
