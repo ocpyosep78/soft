@@ -88,7 +88,7 @@ LintasApps.com", "From: info@lintasapps.com" );
 				unset($user_login['passwd']);
 				$this->User_model->set_session($user_login);
 				
-				mail($user_login['email'], "Selamat datang di LintasApps.com", "Hello,
+				@mail($user_login['email'], "Selamat datang di LintasApps.com", "Hello,
 
 Terima kasih telah mendaftar di LintasApps.com, berikut informasi akun anda:
 
@@ -135,7 +135,7 @@ LintasApps.com
 			$param_update['reset'] = $reset;
 			$this->User_model->update($param_update);
 			
-			mail($user['email'], "Permintaan Reset Password | LintasApps.com", "Hallo
+			@mail($user['email'], "Permintaan Reset Password | LintasApps.com", "Hallo
 
 Anda melakukan permintaan reset password akun anda di LintasApps.com. Silahkan klik link dibawah untuk me-reset password akun anda
 ".base_url('login/?reset='.$reset).".

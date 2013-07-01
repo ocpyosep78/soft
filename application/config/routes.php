@@ -13,6 +13,7 @@ if ($array_url[0] != 'panel') {
 	$route['post/(:any)'] = "website/post";
 	$route['item/(:any)'] = "website/item";
 	$route['browse'] = "website/browse";
+	$route['browse/(:any)'] = "website/browse";
 	$route['author'] = "website/author";
 	$route['author/(:any)'] = "website/author";
 	$route['history'] = "website/history";

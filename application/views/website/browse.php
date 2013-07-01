@@ -3,9 +3,13 @@
 	$page_item = 25;
 	$page_active = get_page_active();
 	
+	// category
+	preg_match('/category\/(\d+)$/i', $_SERVER['REQUEST_URI'], $match);
+	$category_id = (isset($match[1])) ? $match[1] : @$_POST['category_id'];
+	
 	$param_item['keyword'] = @$_POST['keyword'];
 	$param_item['platform_id'] = @$_POST['platform_id'];
-	$param_item['category_id'] = @$_POST['category_id'];
+	$param_item['category_id'] = $category_id;
 	$param_item['item_status_id'] = ITEM_STATUS_APPROVE;
 	$param_item['sort'] = '[{"property":"Item.date_update","direction":"DESC"}]';
 	$param_item['start'] = ($page_active - 1) * $page_item;
@@ -17,6 +21,15 @@
 <?php $this->load->view( 'website/common/meta' ); ?>
 <body>
 <?php $this->load->view( 'website/common/header' ); ?>
+
+<div class="hide">
+	<form id="form-search-hidden" method="post">
+		<input type="hidden" name="keyword" value="<?php echo @$_POST['keyword']; ?>" />
+		<input type="hidden" name="platform_id" value="<?php echo @$_POST['platform_id']; ?>" />
+		<input type="hidden" name="category_id" value="<?php echo @$category_id; ?>" />
+		<input type="hidden" name="page_no" value="1" />
+	</form>
+</div>
 
 <div class="home_wrapper">
 	<div class="container-fluid home_main_content"><div class="row-fluid">
@@ -31,7 +44,9 @@
 								<img src="<?php echo $item['thumbnail_link']; ?>" style="float: left; width: 80px; height: 55px; margin: 0 20px 0 0;" />
 								<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
 								<?php echo $item['description']; ?><br />
-								Oleh <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?></td>
+								Oleh
+								<a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> |
+								<a href="<?php echo $item['category_link']; ?>"><?php echo $item['category_name']; ?></a></td>
 							<td style="width: 20%; text-align: center;">
 								<b><?php echo $item['price_text']; ?></b><br>
 								<a class="btn btn-success" href="<?php echo $item['item_buy_link']; ?>">Beli</a>
@@ -79,8 +94,8 @@
 <script>
 $(document).ready(function() {
 	$('.cnt-paging li a').click(function() {
-		$('#form-search-main [name="page_no"]').val($(this).data('page_no'));
-		$('#form-search-main').submit();
+		$('#form-search-hidden [name="page_no"]').val($(this).data('page_no'));
+		$('#form-search-hidden').submit();
 	});
 });
 </script>

@@ -78,7 +78,7 @@ class CI_Session {
 		$this->sess_cookie_name = $this->cookie_prefix.$this->sess_cookie_name;
 		
 		if (!isset($_SESSION))
-			session_start();
+			@session_start();
 
 		// Run the Session routine. If a session doesn't exist we'll
 		// create a new one.  If it does, we'll update it.

@@ -1,5 +1,14 @@
 <?php
-    ob_start();
+	// force download do not support buffer
+	$need_buffer = true;
+	preg_match('/download/i', $_SERVER['REQUEST_URI'], $match);
+	if (count($match) > 0) {
+		$need_buffer = false;
+	}
+	if ($need_buffer) {
+		ob_start();
+	}
+	
     //error_reporting(E_ALL);
     class item extends CI_Controller {
         function __construct() {
@@ -43,7 +52,7 @@
             // get file info
             $path_file = $this->config->item('base_path').'/../files';
             $path_file = realpath($path_file).'/'.$item['array_filename'][$file_no];
-            
+			
             // force download
             header('Content-Disposition: attachment; filename=' . basename($path_file));
             readfile($path_file);
@@ -565,4 +574,7 @@ LintasApps.com
             return $result;
         }
     }
-ob_flush();
+
+	if ($need_buffer) {
+		ob_flush();
+	}

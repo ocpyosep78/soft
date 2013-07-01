@@ -1,4 +1,5 @@
 <?php
+	$this->User_model->login_user_required();
 	$user = $this->User_model->get_session();
 	
 	// page data
@@ -34,14 +35,18 @@
 							}
 						?>
 						<tr>
-							<td style="width: 90%;">
+							<td style="width: 80%;">
 								<img src="<?php echo $item['thumbnail_link']; ?>" style="float: left; width: 80px; height: 55px; margin: 0 20px 0 0;" />
 								<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['item_name']; ?></a></strong><br />
 								<?php echo $item['item_description']; ?><br />
-								By <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>
-							<td style="width: 10%; text-align: center;">
+								By
+								<a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> |
+								<a href="<?php echo $item['category_link']; ?>"><?php echo $item['category_name']; ?></a>
+							</td>
+							<td style="width: 20%; text-align: center;">
 								<a href="<?php echo $item['invoice_link']; ?>"><span class="label label-success">Download</span></a>
-							</td></tr>
+							</td>
+						</tr>
 					<?php } ?>
 				</tbody></table>
 				
@@ -67,7 +72,7 @@
 				</ul></div>
 				
 				<?php } else { ?>
-					Tidak ada item yang ditemukan.
+					Kamu belum membeli sama sekali, kami punya banyak aplikasi keren, silahkan cek <a href="<?php echo base_url('browse'); ?>">disini</a>
 				<?php } ?>
 			</div>
 		</div></div>

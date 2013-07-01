@@ -140,7 +140,10 @@
             // item link
             $row['item_link'] = base_url('item/'.$row['id']);
             $row['item_buy_link'] = base_url('item/buy/'.$row['id']);
-            
+            if (isset($row['category_id'])) {
+				$row['category_link'] = base_url('browse/category/'.$row['category_id']);
+			}
+			
             // item file
             if (!empty($row['filename'])) {
                 $row['array_filename'] = json_decode($row['filename']);

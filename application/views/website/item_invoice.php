@@ -66,7 +66,7 @@
 				<div class="r"><span class="lbl">Harga:</span> Rp<?php echo number_format($item['price'], 2, '.', ''); ?></div>
 				
 				<div style="text-align:center; margin:10px;">
-					<a class="btn btn-primary btn-large btn-item-submit">DOWNLOAD APLIKASI ANDA</a>
+					<a class="btn btn-primary btn-large btn-item-submit btn-download">DOWNLOAD APLIKASI ANDA</a>
 				</div>
 				
 				<?php if (!$user): ?>

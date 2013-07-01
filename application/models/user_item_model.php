@@ -65,7 +65,7 @@ class User_Item_model extends CI_Model {
 		
 		$select_query = "
 			SELECT SQL_CALC_FOUND_ROWS UserItem.*, Item.name item_name, Item.description item_description,
-				Author.name user_name, Category.name category_name
+				Author.name user_name, Category.name category_name, Category.id category_id
 			FROM ".USER_ITEM." UserItem
 			LEFT JOIN ".ITEM." Item ON Item.id = UserItem.item_id
 			LEFT JOIN ".USER." Author ON Author.id = Item.user_id
@@ -124,6 +124,9 @@ class User_Item_model extends CI_Model {
 		
 		// link item
 		$row['item_link'] = base_url('item/'.$row['item_id']);
+		if (isset($row['category_id'])) {
+			$row['category_link'] = base_url('browse/category/'.$row['category_id']);
+		}
 		
 		// link invoice
 		if (isset($row['invoice_no'])) {

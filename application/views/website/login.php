@@ -67,7 +67,8 @@
                                     <label class="control-label">Konfirmasi password</label>
                                     <div class="controls"><input type="password" placeholder="Konfirmasi password anda" name="passwd_check" class="input-xlarge input_tooltips" data-placement="right" title="Konfirmasi password Anda disini"></div>
                                 </div>
-                                <a class="cursor btn btn-primary btn-register input_tooltips" data-placement="right" title="Tekan tombol daftar account, setelah anda melengkapi form daftar account">Daftar account</a>
+								<input type="submit" class="cursor btn btn-primary input_tooltips" data-placement="right" title="Tekan tombol daftar account, setelah anda melengkapi form daftar account" value="Daftar account" />
+								
                                 <hr/>
                                 <div class="control-group">
                                     <ol>
@@ -96,7 +97,7 @@
                                         <label class="control-label">Password</label>
                                         <div class="controls"><input type="password" placeholder="Masukkan password anda" name="passwd" class="input-xlarge input_tooltips" data-placement="right" title="Masukkan password Anda disini"></div>
                                     </div>
-                                    <a class="cursor btn btn-login btn-primary input_tooltips" data-placement="right" title="Tekan tombol login, untuk masuk kedalam lintasapps">Login</a>
+									<input type="submit" class="cursor btn btn-primary input_tooltips" data-placement="right" title="Tekan tombol login, untuk masuk kedalam lintasapps" value="Login" />
                                 </fieldset>
                             </form>
                             <h4><a class="cursor show-forgot input_tooltips" data-placement="right" title="Jika Anda lupa password / kata sandi, tekan link ini">Lupa Kata Sandi</a></h4>
@@ -112,7 +113,8 @@
                                         <label class="control-label">Username</label>
                                         <div class="controls"><input type="text" placeholder="Masukkan username anda" name="name" class="input-xlarge focused"></div>
                                     </div>
-                                    <a class="cursor btn btn-forgot btn-primary">Reset</a>
+									
+									<input type="submit" class="cursor btn btn-primary" value="Reset" />
                                 </fieldset>
                             </form>
                             <h4><a class="cursor show-login">Login</a></h4>
@@ -165,7 +167,7 @@
                 }
             });
             
-            $('.btn-register').click(function() {
+			$("#form-register").submit(function() {
                 if (! $("#form-register").valid()) {
                     return false;
                 }
@@ -178,8 +180,9 @@
                         Func.show_notice({ title: 'Informasi', text: result.message });
                     }
                 } });
+				return false;
             });
-            $('.btn-login').click(function() {
+            $('#form-login').submit(function() {
                 if (! $("#form-login").valid()) {
                     return false;
                 }
@@ -188,12 +191,13 @@
                 Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
                     if (result.status) {
                         window.location = result.link_next;
-                        } else {
+					} else {
                         Func.show_notice({ title: 'Informasi', text: result.message });
                     }
                 } });
+				return false;
             });
-            $('.btn-forgot').click(function() {
+            $('#form-forgot').submit(function() {
                 if (! $("#form-forgot").valid()) {
                     return false;
                 }
@@ -202,6 +206,7 @@
                 Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
                     Func.show_notice({ title: 'Informasi', text: result.message });
                 } });
+				return false;
             });
             
             $('.show-forgot').click(function() {

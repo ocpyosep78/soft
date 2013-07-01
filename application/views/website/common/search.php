@@ -1,5 +1,5 @@
 <?php
-	$array_category = $this->Category_model->get_array();
+	$array_category = $this->Category_model->get_array(array( 'limit' => 100 ));
 	$array_platform = $this->Platform_model->get_array();
 	$platforms=array();
 	foreach($array_platform as $row) {

@@ -1,4 +1,6 @@
 <?php
+	$this->User_model->login_user_required();
+	
 	$array_category = $this->Category_model->get_array();
 	$array_platform = $this->Platform_model->get_array();
 	$platforms=array();

@@ -55,19 +55,22 @@
         <div class="container-fluid home_main_content"><div class="row-fluid">
             <div class="span9"><div class="row-fluid">
                 <div class="span12">
-                    <h2>Apps terbaru</h2>
+                    <h2>Home > Apps terbaru</h2>
                     <table class="table table-striped"><tbody>
                         <?php foreach ($array_item as $item) { ?>
-                            <tr>
-                                <td style="width: 80%;">
-                                    <img src="<?php echo $item['thumbnail_link']; ?>" style="float: left; width: 80px; height: 55px; margin: 0 20px 0 0;" />
-                                    <strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
-                                    <?php echo $item['description']; ?><br />
-                                Oleh <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?></td>
-                                <td style="width: 20%; text-align: center;">
+							<tr>
+								<td style="width: 80%;">
+									<img src="<?php echo $item['thumbnail_link']; ?>" style="float: left; width: 80px; height: 55px; margin: 0 20px 0 0;" />
+									<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
+									<?php echo $item['description']; ?><br />
+									Oleh
+									<a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> |
+									<a href="<?php echo $item['category_link']; ?>"><?php echo $item['category_name']; ?></a></td>
+								<td style="width: 20%; text-align: center;">
 									<b><?php echo $item['price_text']; ?></b><br>
-                                    <a class="btn btn-success" href="<?php echo $item['item_buy_link']; ?>">Beli</a>
-                                </td></tr>
+									<a class="btn btn-success" href="<?php echo $item['item_buy_link']; ?>">Beli</a>
+								</td>
+							</tr>
                         <?php } ?>
                     </tbody></table>
                 </div>
