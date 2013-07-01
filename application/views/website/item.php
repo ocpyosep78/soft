@@ -52,7 +52,7 @@
                         $screenshot_mini_file = $screenshot_no_ext."_thumb.".$screenshot_mini['extension'];
                         $full_path_screenshot_mini_file = $screenshot_mini['dirname']."/".$screenshot_mini_file;
                         ?>
-                    <img class="image" src="<?php echo $full_path_screenshot_mini_file ?>" alt="screnshot<?php echo $screenshot?>" />
+                    <img style="margin:2px;" class="img-polaroid" src="<?php echo $full_path_screenshot_mini_file ?>" alt="screnshot<?php echo $screenshot?>" />
                     </a>
                     <?php endforeach; ?>    
                 </div>
