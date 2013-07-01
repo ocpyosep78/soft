@@ -32,7 +32,7 @@
 					<div class="clear"></div>
 				<?php } ?>
 				
-				<?php echo $item['description']; ?>
+				<?php echo nl2br($item['description']); ?>
 			</div>	
 		</div>
 	</div>
