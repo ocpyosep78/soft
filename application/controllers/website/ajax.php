@@ -38,6 +38,7 @@ class ajax extends CI_Controller {
 			if ($result['status']) {
 			
 				$result['link_next'] = base_url('post/confirm/'.$result['id']);
+                $item = $this->Item_model->get_by_id(array('id'=>$result['id']));
 				
 				if ($user && $_POST['item_status_id'] == ITEM_STATUS_PENDING) {
 					mail( $user['email'], 'Aplikasi Menunggu Persetujuan | LintasApps.com', "Hallo
