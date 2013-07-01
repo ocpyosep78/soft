@@ -47,6 +47,7 @@
         
 		function file($paramUpload = null) {
             $this->allowed_ext = $this->config->item('allowed_ext');
+            //$this->root_directory = $this->config->item('base_path')."/";
             $this->root_directory = $this->config->item('base_path')."/";
             $this->upload_directory = $this->config->item('upload_directory');
 			
