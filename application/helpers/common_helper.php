@@ -866,8 +866,8 @@
 	
 	if (! function_exists('sent_mail')) {
 		function sent_mail($param) {
-//			$headers  = 'MIME-Version: 1.0' . "\r\n";
-//			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+            //			$headers  = 'MIME-Version: 1.0' . "\r\n";
+            //			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 			$headers  = 'From: noreply@lintasapps.com' . "\r\n";
 			$param['message'] = preg_replace('#<br\s*/?>#', "\n", $param['message']);
 			@mail($param['to'], $param['subject'], $param['message'], $headers);
@@ -994,6 +994,25 @@
         {
             $words = explode(" ",$string);
             return implode(" ",array_splice($words,0,$word_limit));
+        }
+    }
+    
+    // rupiah format
+    if (! function_exists('rupiah')) {
+        function rupiah($data)
+        {
+            $rupiah = "";
+            $jml = strlen($data);
+            
+            while($jml > 3)
+            {
+                $rupiah = "." . substr($data,-3) . $rupiah;
+                $l = strlen($data) - 3;
+                $data = substr($data,0,$l);
+                $jml = strlen($data);
+            }
+            $rupiah = "Rp " . $data . $rupiah . ",-";
+            return $rupiah;
         }
     }
 ?>
