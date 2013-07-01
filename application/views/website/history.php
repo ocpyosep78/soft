@@ -22,10 +22,17 @@
 	<div class="container-fluid home_main_content"><div class="row-fluid">
 		<div class="span9"><div class="row-fluid">
 			<div class="span12">
-				<h2>history - <?php echo $user['email']; ?></h2>
+				<h2>Download Anda</h2>
 				<?php if (count($array_item) > 0) { ?>
 				<table class="table table-striped"><tbody>
 					<?php foreach ($array_item as $item) { ?>
+						<?php 
+							$item['price_text'] = show_price($item['price']);
+							$item['thumbnail_link'] = base_url('static/img/images.jpg');
+							if (!empty($item['thumbnail'])) {
+								$item['thumbnail_link'] = base_url('static/upload/'.$item['thumbnail']);
+							}
+						?>
 						<tr>
 							<td style="width: 90%;">
 								<img src="<?php echo $item['thumbnail_link']; ?>" style="float: left; width: 80px; height: 55px; margin: 0 20px 0 0;" />

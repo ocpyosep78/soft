@@ -17,7 +17,7 @@ class paypal {
 		
 		$curl = curl_init($param['url']); 
 		curl_setopt($curl, CURLOPT_POST, true); 
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($curl, CURLOPT_USERPWD, $param['client_id'] . ":" . $param['client_secret']);
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 

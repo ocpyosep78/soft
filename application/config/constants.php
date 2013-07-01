@@ -18,11 +18,16 @@
     define('ITEM_STATUS_PENDING',					'1');
     define('ITEM_STATUS_APPROVE',					'2');
     
-    /*	PAYPAL */
+    /*	PAYPAL  sandbox */
 	
-    define('PAYPAL_HOST',							'https://api.sandbox.paypal.com');
-    define('PAYPAL_CLIENT_ID',						'AU0L0hAN7pMABeNL9E0EFb_wZx8SEAxoL1iXlt5FMsPJP_Oyb5WzABfnr07X');
-    define('PAYPAL_CLIENT_SECRET',					'EHdp9hAuOnRUC603-FvyabES7kQ6Yv38MYRjHGQ4lUWO20qLlfUg4w3Hp0ks');
+    //define('PAYPAL_HOST',							'https://api.sandbox.paypal.com');
+    //define('PAYPAL_CLIENT_ID',						'AU0L0hAN7pMABeNL9E0EFb_wZx8SEAxoL1iXlt5FMsPJP_Oyb5WzABfnr07X');
+    //define('PAYPAL_CLIENT_SECRET',					'EHdp9hAuOnRUC603-FvyabES7kQ6Yv38MYRjHGQ4lUWO20qLlfUg4w3Hp0ks');
+    
+    /*	PAYPAL  live */
+    define('PAYPAL_HOST',							'https://api.paypal.com');
+    define('PAYPAL_CLIENT_ID',						'AZa_1RBzHEfEo2uNx-ByHsGb3MSr47zrrpoSk_v65JMavPIu-z3q86teJNvp');
+    define('PAYPAL_CLIENT_SECRET',					'EAvOaxBIxUXQiNjSHKkHW_onJG3b1Bmoakl8ISVptzxi_Lb_08I3LjBofNc7');
 	/*	*/
 	
 	/*

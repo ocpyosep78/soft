@@ -1,6 +1,10 @@
 <?php
 	$array_platform = $this->Platform_model->get_array();
-	
+	$platforms=array();
+	foreach($array_platform as $row) {
+		list($parent,$child)=array_map('trim', explode('-', $row['name']));
+		$platforms[$parent][$row['id']]=$child;
+	}
 	$param_item['item_status_id'] = ITEM_STATUS_APPROVE;
 	$param_item['sort'] = '[{"property":"Item.date_update","direction":"DESC"}]';
 	$array_item = $this->Item_model->get_array($param_item);
@@ -22,10 +26,17 @@
                     <div class="row-fluid">
                         <form id="form-search-short" action="<?php echo base_url('browse'); ?>" method="post">
                             <div class="span5">
-                            <input type="text" class="span12 search_input input_tooltips" name="keyword" placeholder="Apa jenis perangkat lunak yang Anda cari?" data-placement="right"  title="Masukkan kata kunci yang ingin Anda cari"/></div>
+                            <input type="text" class="span12 search_input input_tooltips" name="keyword" placeholder="Ingin download apa?"/></div>
                             <div class="span4">
-                                <select class="home_select input_tooltips" name="platform_id" data-placement="right"  title="Pilih Platform yang ingin Anda cari">
-                                    <?php echo ShowOption(array( 'Array' => $array_platform, 'ArrayID' => 'id', 'ArrayTitle' => 'name', 'Selected' => 1 )); ?>
+                                <select class="home_select input_tooltips" name="platform_id">
+									<option value="">--Pilih platform aplikasi--</option>
+									<?php foreach($platforms as $parent=>$children): ?>
+										<optgroup label="<?php echo htmlspecialchars($parent); ?>">
+										<?php foreach($children as $id => $platform): ?>
+										<option value="<?php echo $id; ?>"><?php echo htmlspecialchars($platform); ?></option>
+										<?php endforeach; ?>
+										</optgroup>
+									<?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="span2">
@@ -48,13 +59,14 @@
                     <table class="table table-striped"><tbody>
                         <?php foreach ($array_item as $item) { ?>
                             <tr>
-                                <td style="width: 90%;">
+                                <td style="width: 80%;">
                                     <img src="<?php echo $item['thumbnail_link']; ?>" style="float: left; width: 80px; height: 55px; margin: 0 20px 0 0;" />
                                     <strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
                                     <?php echo $item['description']; ?><br />
-                                Oleh <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>
-                                <td style="width: 10%; text-align: center;">
-                                    <a href="<?php echo $item['item_buy_link']; ?>"><span class="label label-success">Beli</span></a>
+                                Oleh <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?></td>
+                                <td style="width: 20%; text-align: center;">
+									<b><?php echo $item['price_text']; ?></b><br>
+                                    <a class="btn btn-success" href="<?php echo $item['item_buy_link']; ?>">Beli</a>
                                 </td></tr>
                         <?php } ?>
                     </tbody></table>

@@ -1,13 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Category_model extends CI_Model {
+	static $cache=array();
+
 	function __construct() {
 		parent::__construct();
-		
 		$this->field = array( 'id', 'name' );
 	}
 	
 	function update($param) {
+		self::$cache=array();
+		
 		$result = array();
 		if (empty($param['id'])) {
 			$insert_query  = GenerateInsertQuery($this->field, $param, CATEGORY);
@@ -46,6 +49,10 @@ class Category_model extends CI_Model {
 	}
 	
 	function get_array($param = array()) {
+		$key=md5(json_encode($param));
+		if ( !empty(self::$cache[$key]) )
+			return self::$cache[$key];
+			
 		$array = array();
 		
 		$string_filter = GetStringFilter($param, @$param['column']);
@@ -64,6 +71,8 @@ class Category_model extends CI_Model {
 			$array[] = $this->sync($row, @$param['column']);
 		}
 		
+		self::$cache[$key]=$array;
+		
 		return $array;
 	}
 	
@@ -77,6 +86,8 @@ class Category_model extends CI_Model {
 	}
 	
 	function delete($param) {
+		self::$cache=array();
+		
 		$delete_query  = "DELETE FROM ".CATEGORY." WHERE id = '".$param['id']."' LIMIT 1";
 		$delete_result = mysql_query($delete_query) or die(mysql_error());
 		

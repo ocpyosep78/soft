@@ -1,13 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Platform_model extends CI_Model {
+	static $cache=array();
+
 	function __construct() {
 		parent::__construct();
-		
 		$this->field = array('id', 'name');
 	}
 	
 	function update($param) {
+		self::$cache=array();
+		
 		$result = array();
 		
 		if (empty($param['id'])) {
@@ -51,6 +54,10 @@ class Platform_model extends CI_Model {
 	function get_array($param = array()) {
 		$array = array();
 		
+		$key=md5(json_encode($param));
+		if ( !empty(self::$cache[$key]) )
+			return self::$cache[$key];
+		
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'name ASC');
 		$string_limit = GetStringLimit($param);
@@ -67,6 +74,8 @@ class Platform_model extends CI_Model {
 			$array[] = $this->sync($row, @$param['column']);
 		}
 		
+		self::$cache[$key]=$array;
+		
 		return $array;
 	}
 	
@@ -80,6 +89,7 @@ class Platform_model extends CI_Model {
 	}
 	
 	function delete($param) {
+		self::$cache=array();
 		$delete_query  = "DELETE FROM ".PLATFORM." WHERE id = '".$param['id']."' LIMIT 1";
 		$delete_result = mysql_query($delete_query) or die(mysql_error());
 		

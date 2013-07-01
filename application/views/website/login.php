@@ -14,6 +14,8 @@
 			$message = 'Password anda berhasil diperbaharui, silahkan memeriksa email anda.';
         }
     }
+	
+	$next_url = empty($_GET['next']) ? '' : $_GET['next'];
 ?>
 
 <?php $this->load->view( 'website/common/meta' ); ?>
@@ -28,7 +30,7 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <h2><i class="icon-key"></i>&nbsp;&nbsp;Login / Daftar </h2>
-                        <p>Anda harus login atau membuat account baru, untuk dapat mengunggah apps anda.</p>
+                        <p>Silahkan login jika anda memiliki akun di LintasApps atau silahkan daftar untuk membuat akun baru.</p>
                     </div>
                 </div>
                 <hr />
@@ -44,6 +46,7 @@
                         <h2>Daftar account gratis</h2>
                         <form id="form-register">
                             <input type="hidden" name="action" value="register" />
+							<input type="hidden" name="next_url" value="<?php echo $next_url; ?>">
                             
                             <fieldset>
                                 <div class="control-group">
@@ -82,6 +85,7 @@
                             <h2>Sudah memiliki account?</h2>
                             <form id="form-login">
                                 <input type="hidden" name="action" value="login" />
+								<input type="hidden" name="next_url" value="<?php echo $next_url; ?>">
                                 
                                 <fieldset>
                                     <div class="control-group">

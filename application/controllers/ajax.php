@@ -20,9 +20,8 @@
             echo "Asdad";
             exit;
         }
+		
         function user() {
-            echo "Asdad";
-            exit;
             $action = (empty($_POST['action'])) ? '' : $_POST['action'];
             
             $result = array('status' => false, 'message' => '');
@@ -34,7 +33,7 @@
                     $_POST['passwd'] = EncriptPassword($_POST['passwd']);
                     $result = $this->User_model->update($_POST);
                 }
-                } else if ($action == 'Login') {
+            } else if ($action == 'Login') {
                 $passwd = EncriptPassword($_POST['passwd']);
                 $user = $this->User_model->get_by_id(array('email' => $_POST['email']));
                 
@@ -63,7 +62,7 @@
                         $this->User_model->set_session($user);
                     }
                 }
-                } else if ($action == 'ResetPassword') {
+            } else if ($action == 'ResetPassword') {
                 $result['message'] = 'Akan dilanjutkan';
             }
             

@@ -27,12 +27,16 @@
 				<table class="table table-striped"><tbody>
 					<?php foreach ($array_item as $item) { ?>
 						<tr>
-							<td style="width: 90%;">
+							<td style="width: 80%;">
 								<img src="<?php echo $item['thumbnail_link']; ?>" style="float: left; width: 80px; height: 55px; margin: 0 20px 0 0;" />
 								<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
 								<?php echo $item['description']; ?><br />
-								Oleh <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?> | <?php echo $item['price_text']; ?></td>
-							<td style="width: 10%; text-align: center;"><a href="<?php echo $item['item_buy_link']; ?>"><span class="label label-success">Beli</span></a></td></tr>
+								Oleh <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> | <?php echo $item['category_name']; ?></td>
+							<td style="width: 20%; text-align: center;">
+								<b><?php echo $item['price_text']; ?></b><br>
+								<a class="btn btn-success" href="<?php echo $item['item_buy_link']; ?>">Beli</a>
+							</td>
+						</tr>
 					<?php } ?>
 				</tbody></table>
 				

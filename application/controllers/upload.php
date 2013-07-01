@@ -38,18 +38,34 @@
                 $relativePath =  $this->upload_directory.$newDir;
                 $arrayReturn['relativePath'] = str_replace('\/','/',$relativePath);
                 return $arrayReturn;
-            }else
+            }
+			else
             {
                 return;
             }
         }
         
-        function file($paramUpload = null) {
+		function file($paramUpload = null) {
             $this->allowed_ext = $this->config->item('allowed_ext');
             $this->root_directory = $this->config->item('base_path')."/";
             $this->upload_directory = $this->config->item('upload_directory');
-            
-            // HTTP headers for no cache etc
+			
+			if ( empty($_GET['screenshot']) )
+			{
+				$platform_id = $_POST['platform_id'];
+				if (!$platform_id) $platform_id = 5;
+				
+				$query = $this->db->query("SELECT * FROM software.platform WHERE id = ?",array( $platform_id ));
+				if ($rr = $query->row_array()) {
+					$this->allowed_ext = array_filter(array_map('trim', explode(',', $rr['file_type'])));
+				}
+			}
+			else
+			{
+				$this->allowed_ext = array('jpg','png','gif','jpeg');
+				$this->upload_directory = 'screenshots/';
+			}
+			
             header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
             header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
             header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -66,7 +82,7 @@
             if ($newTargetDir['targetDir'] != null or $newTargetDir['targetDir'] != '') {
                 $targetDir      = $newTargetDir['targetDir'];
                 $relativePath   = $newTargetDir['relativePath'];
-                } else {
+			} else {
                 $targetDir  = $this->root_directory.$this->upload_directory;
                 $relativePath = $this->upload_directory;
             }
@@ -77,9 +93,6 @@
             // 5 minutes execution time
             @set_time_limit(5 * 60);
             
-            // Uncomment this one to fake upload time
-            // usleep(5000);
-            
             // Get parameters
             $chunk      = isset($_REQUEST["chunk"]) ? intval($_REQUEST["chunk"]) : 0;
             $chunks     = isset($_REQUEST["chunks"]) ? intval($_REQUEST["chunks"]) : 0;
@@ -87,7 +100,7 @@
             
             $ext = GetExtention($fileName);
             if (!in_array($ext, $this->allowed_ext)) {
-                die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Extention ini tidak bisa diupload.."}, "id" : "id"}');
+				$this->_jsonrpc(100, 'Tipe file tidak valid atau tidak cocok dengan platform aplikasi');
             }
             
             // Clean the fileName for security reasons
@@ -110,7 +123,7 @@
             
             // Create target dir
             if (!file_exists($targetDir))
-            @mkdir($targetDir);
+				@mkdir($targetDir);
             
             // Remove old temp files	
             if ($cleanupTargetDir) {
@@ -124,17 +137,17 @@
                         }
                     }
                     closedir($dir);
-                    } else {
+                } else {
                     die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}');
                 }
             }	
             
             // Look for the content type header
             if (isset($_SERVER["HTTP_CONTENT_TYPE"]))
-            $contentType = $_SERVER["HTTP_CONTENT_TYPE"];
+				$contentType = $_SERVER["HTTP_CONTENT_TYPE"];
             
             if (isset($_SERVER["CONTENT_TYPE"]))
-            $contentType = $_SERVER["CONTENT_TYPE"];
+				$contentType = $_SERVER["CONTENT_TYPE"];
             
             // Handle non multipart uploads older WebKit versions didn't support multipart in HTML5
             if (strpos($contentType, "multipart") !== false) {
@@ -182,14 +195,29 @@
                 rename("{$filePath}.part", $filePath);
             }
             
-            /*
-                // create thumbnail image // sementara off
-                if($fileName_b == ".jpg" || $fileName_b == ".jpeg" || $fileName_b == ".png")
-                {
-                //$thumb = $this->thumbailImage(200,200,$fileName,$targetDir);
+			if ( !empty($_GET['screenshot']) ) {
+                $config2 = array(
+					'image_library' => 'gd2',
+					'source_image' => $filePath,
+					'maintain_ratio' => true,
+					'width' => 450,
+					'height' => 350,
+				);
+                $this->load->library('image_lib', $config2);
+                if($this->image_lib->resize()) {
+					$config2['create_thumb'] = true;
+					$config2['width'] = 100;
+					$config2['height'] = 100;
+					
+					$this->image_lib->initialize($config2);
+					
+					if ($this->image_lib->resize()) {
+						$thumb = substr($this->image_lib->full_dst_path, strlen($this->image_lib->dest_folder));
+						$result['thumbName'] = $thumb;
+					}
                 }
-            /*	*/
-            
+			}
+			
             $result['jsonrpc'] = '2.0';
             $result['filePath'] = $targetDir;
             $result['relativePath'] = $relativePath;
@@ -197,8 +225,8 @@
             $result['new_dir'] = $newTargetDir['newDir'];
             die(json_encode($result));
         }
-        
-         function uploads($paramUpload=null)
+		
+        function uploads($paramUpload=null)
         {
             /**
                 * upload.php

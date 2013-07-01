@@ -27,11 +27,32 @@ class ajax extends CI_Controller {
 			if (isset($_POST['item_file'])) {
 				$_POST['filename'] = json_encode($_POST['item_file']);
 			}
+			if (isset($_POST['item_screenshot'])) {
+				$_POST['screenshot'] = json_encode($_POST['item_screenshot']);
+			}
 			
-			$_POST['user_id'] = @$user['id'];
+			$_POST['user_id'] = empty($user['id'])?0:$user['id'];
 			$result = $this->Item_model->update($_POST);
 			if ($result['status']) {
+			
 				$result['link_next'] = base_url('post/confirm/'.$result['id']);
+				
+				if ($user && $_POST['item_status_id'] == ITEM_STATUS_PENDING) {
+					mail( $user['email'], 'Aplikasi Menunggu Persetujuan | LintasApps.com', "Hallo
+
+Terima kasih telah mengupload aplikasi anda di LintasApps.com
+Saat ini aplikasi anda menunggu persetujuan dari kami.
+ID Aplikasi : $item[id]
+Nama: $item[name]
+
+Proses persetujuan paling lama adalah 7 hari kerja, jika tidak ada respon dalam jangka waktu 7 hari kerja, silahkan kontak kami di info@lintasapps.com atau 0341-406633.
+Sertakan ID Aplikasi anda untuk mempercepat proses eskalasi.
+
+Terima kasih,
+--
+LintasApps.com", "From: info@lintasapps.com" );
+				}
+				
 			}
 		} else if ($action == 'get_item') {
 			$result = $this->Item_model->get_by_id(array( 'id' => $_POST['item_id'] ));
@@ -47,6 +68,7 @@ class ajax extends CI_Controller {
 		if ($action == 'register') {
 			$user_name = $this->User_model->get_by_id(array('name' => $_POST['name']));
 			$user_email = $this->User_model->get_by_id(array('email' => $_POST['email']));
+			$next_url = empty($_POST['next_url']) ? base_url('thank') : $_POST['next_url'];
 			
 			if (count($user_name) > 0) {
 				$result['message'] = 'Username sudah terdaftar dalam database kami, mohon menggunakan username yang lain.';
@@ -57,7 +79,7 @@ class ajax extends CI_Controller {
 				$_POST['passwd'] = EncriptPassword($_POST['passwd']);
 				$result = $this->User_model->update($_POST);
 				$result['status'] = true;
-				$result['link_next'] = base_url('thank');
+				$result['link_next'] = $next_url;
 				
 				// user
 				$user_login = $this->User_model->get_by_id(array( 'id' => $result['id'] ));
@@ -66,27 +88,34 @@ class ajax extends CI_Controller {
 				unset($user_login['passwd']);
 				$this->User_model->set_session($user_login);
 				
-				// sent mail
-				$param['to'] = $user_login['email'];
-				$param['subject']  = 'Registrasi Lintas Apps';
-				$param['message']  = 'Terima kasih telah mendaftar pada website kami, berikut informasi user Anda :<br />';
-				$param['message'] .= 'username : '.$user_login['name'].'<br />';
-				$param['message'] .= 'email : '.$user_login['email'].'<br />';
-				$param['message'] .= 'password : '.$passwd_raw.'<br />';
-				sent_mail($param);
+				mail($user_login['email'], "Selamat datang di LintasApps.com", "Hello,
+
+Terima kasih telah mendaftar di LintasApps.com, berikut informasi akun anda:
+
+Username: $user_login[name]
+Password: $passwd_raw
+
+Silahkan login dan mulai mendownload aplikasi di LintasApps.com dengan link dibawah:
+https://www.lintasapps.com/login
+
+Terima Kasih
+--
+LintasApps.com
+", "From: info@lintasapps.com");
 				
 			}
 		}
 		else if ($action == 'login') {
 			$passwd = EncriptPassword($_POST['passwd']);
 			$user = $this->User_model->get_by_id(array('name' => $_POST['name']));
+			$next_url = empty($_POST['next_url']) ? base_url() : $_POST['next_url'];
 			
 			$result = array('status' => false, 'message' => 'User dan Password anda tidak ada yang sama dalam data kami.');
 			if (count($user) > 0) {
 				if ($user['passwd'] == $passwd) {
 					$result['status'] = true;
 					$result['message'] = '';
-					$result['link_next'] = base_url();
+					$result['link_next'] = $next_url;
 					
 					unset($user['passwd']);
 					$this->User_model->set_session($user);
@@ -106,11 +135,16 @@ class ajax extends CI_Controller {
 			$param_update['reset'] = $reset;
 			$this->User_model->update($param_update);
 			
-			$param['to'] = $user['email'];
-			$param['subject']  = 'Request Reset Password';
-			$param['message']  = 'Berikut link untuk mereset password lama anda, harap abakain email ini jika anda tidak ingin merubah password saat ini.<br />';
-			$param['message'] .= base_url('login/?reset='.$reset);
-			sent_mail($param);
+			mail($user['email'], "Permintaan Reset Password | LintasApps.com", "Hallo
+
+Anda melakukan permintaan reset password akun anda di LintasApps.com. Silahkan klik link dibawah untuk me-reset password akun anda
+".base_url('login/?reset='.$reset).".
+
+Jika anda tidak merasa mengubah password di LintasApps.com, silahkan abaikan e-mail ini.
+
+Terima kasih
+--
+LintasApps.com", "From: info@lintasapps.com");
 			
 			$result['message'] = 'Email untuk mereset password anda berhasil dikirim';
 		}
@@ -119,7 +153,7 @@ class ajax extends CI_Controller {
 	}
 	
 	function mail() {
-		$param['to'] = 'info@simetri.com';
+		$param['to'] = 'info@simetri.web.id';
 		$param['subject'] = $_POST['subject'];
 		$param['message'] = $_POST['description'];
 		sent_mail($param);

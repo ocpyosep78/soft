@@ -10,7 +10,7 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <h2><i class="icon-key"></i>&nbsp;&nbsp;Terima Kasih</h2>
-                        <p>Selamat, anda sudah memiliki account Lintas Apps. Jika anda memiliki pertanyaan, silahkan menghubungi kami pada link dibawah ini.</p>
+                        <p>Selamat, Anda sudah memiliki account Lintas Apps. Jika Anda memiliki pertanyaan, silahkan menghubungi kami pada link dibawah ini.</p>
                         <p><a href="<?php echo base_url('contact'); ?>">Hubungi Kami</a></p>
                     </div>
                 </div>

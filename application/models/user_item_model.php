@@ -3,8 +3,7 @@
 class User_Item_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
-		
-		$this->field = array( 'id', 'user_id', 'item_id', 'price', 'invoice_no', 'payment_name', 'payment_date' );
+		$this->field = array( 'id', 'user_id', 'item_id', 'price', 'invoice_no', 'payment_name', 'payment_date', 'konversi', 'currency', 'terbayar', 'ref_id' );
 	}
 	
 	function update($param) {

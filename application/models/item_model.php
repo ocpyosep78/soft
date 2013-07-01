@@ -4,7 +4,7 @@
         function __construct() {
             parent::__construct();
             $this->field = array(
-			'id', 'user_id', 'category_id', 'platform_id', 'item_status_id', 'name', 'description', 'price', 'thumbnail', 'filename', 'date_update'
+				'id', 'user_id', 'category_id', 'platform_id', 'item_status_id', 'name', 'description', 'price', 'thumbnail', 'filename', 'date_update', 'screenshot',
             );
             // user
             //$this->user = $this->User_model->get_session();
@@ -22,7 +22,6 @@
                 $result['message'] = 'Data berhasil disimpan.';
                 } else {
                 $update_query  = GenerateUpdateQuery($this->field, $param, ITEM);
-                //print_r($param);
                 $update_result = mysql_query($update_query) or die(mysql_error());
                 
                 $result['id'] = $param['id'];
