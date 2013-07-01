@@ -174,22 +174,6 @@
         var uploader, uploader2;
         
         $(document).ready(function() {
-            getExt = function(filename) {
-                var index = filename.lastIndexOf('.'), ext = '';
-                if (index > 0) ext = filename.toLowerCase().substring( index+1 );
-                if (!ext) {
-                    ext = 'file';
-                    } if (/txt|doc|ppt|xls|pdf/i.test( ext )) {
-                    ext = 'document ' + ext;
-                    } else if (/png|jpg|jpeg/i.test( ext )) {
-                    ext = 'image ' + ext;
-                    } else if (/mp3|aac|wav|au|ogg|wma/i.test( ext )) {
-                    ext = 'audio ' + ext;
-                    } else if (/mpg|wmv|mov|flv/i.test( ext )) {
-                    ext = 'video ' + ext;
-                }
-                return ext;
-            };
             // thumbnail
             $('#form-item .btn-thumbnail').click(function() { window.iframe_thumbnail.browse() });
             
