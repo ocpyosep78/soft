@@ -1,5 +1,5 @@
 <?php
-	$array_platform = $this->Platform_model->get_array();
+	$array_platform = $this->Platform_model->get_array(array('limit' => 1000));
 	$platforms=array();
 	foreach($array_platform as $row) {
 		list($parent,$child)=array_map('trim', explode('-', $row['name']));
