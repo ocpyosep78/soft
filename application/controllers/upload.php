@@ -47,8 +47,7 @@
         
 		function file($paramUpload = null) {
             $this->allowed_ext = $this->config->item('allowed_ext');
-            //$this->root_directory = $this->config->item('base_path')."/";
-            $this->root_directory = $this->config->item('base_path')."/";
+            $this->root_directory = $this->config->item('base_path')."/";            
             $this->upload_directory = $this->config->item('upload_directory');
 			
 			if ( empty($_GET['screenshot']) )
@@ -207,6 +206,7 @@
                 $this->load->library('image_lib', $config2);
                 if($this->image_lib->resize()) {
 					$config2['create_thumb'] = true;
+                    $config2['thumb_marker'] = '_thumb';
 					$config2['width'] = 100;
 					$config2['height'] = 100;
 					
