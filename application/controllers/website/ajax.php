@@ -41,7 +41,7 @@ class ajax extends CI_Controller {
                 $item = $this->Item_model->get_by_id(array('id'=>$result['id']));
 				
 				if ($user && $_POST['item_status_id'] == ITEM_STATUS_PENDING) {
-					mail( $user['email'], 'Aplikasi Menunggu Persetujuan | LintasApps.com', "Hallo
+					@mail( $user['email'], 'Aplikasi Menunggu Persetujuan | LintasApps.com', "Hallo
 
 Terima kasih telah mengupload aplikasi anda di LintasApps.com
 Saat ini aplikasi anda menunggu persetujuan dari kami.
