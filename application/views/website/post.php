@@ -1,8 +1,8 @@
 <?php
 	$this->User_model->login_user_required();
 	
-	$array_category = $this->Category_model->get_array();
-	$array_platform = $this->Platform_model->get_array();
+	$array_category = $this->Category_model->get_array(array( 'limit' => 1000 ));
+	$array_platform = $this->Platform_model->get_array(array( 'limit' => 1000 ));
 	$platforms=array();
 	foreach($array_platform as $row) {
 		list($parent,$child)=array_map('trim', explode('-', $row['name']));
