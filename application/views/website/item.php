@@ -20,8 +20,8 @@
     <script type="text/javascript">
         Shadowbox.init({
             // a darker overlay looks better on this particular site
-            overlayOpacity: 0.8
-            // setupDemos is defined in assets/demo.js
+            handleOversize: "drag",
+            modal: true,
         });
     </script>
     <div class="hide">
@@ -45,14 +45,14 @@
                 <div class="span12 control-group"><h4>File Screenshot Aplikasi / Item </h4></div>
                 <div class="span12 control-group">
                     <?php foreach($item_screenshot as $key=>$screenshot):?>
-                    <a href="<?php echo base_url('screenshots/'.$screenshot);?>" rel="shadowbox" title="screenshot">
+                    <a href="<?php echo base_url('screenshots/'.$screenshot);?>" rel="shadowbox[Mixed]" title="screenshot <?php echo $key+1;?>">
                     <?php
                         $screenshot_mini = pathinfo(base_url('screenshots/'.$screenshot));
                         $screenshot_no_ext = basename($screenshot_mini['basename'],".".$screenshot_mini['extension']);
                         $screenshot_mini_file = $screenshot_no_ext."_thumb.".$screenshot_mini['extension'];
                         $full_path_screenshot_mini_file = $screenshot_mini['dirname']."/".$screenshot_mini_file;
-                        ?>
-                    <img style="margin:2px;" class="img-polaroid" src="<?php echo $full_path_screenshot_mini_file ?>" alt="screnshot<?php echo $screenshot?>" />
+                    ?>
+                    <img style="margin:2px;" class="img-polaroid" src="<?php echo $full_path_screenshot_mini_file ?>" alt="screnshot" />
                     </a>
                     <?php endforeach; ?>    
                 </div>
@@ -72,12 +72,14 @@
                 <?php } ?>
             </div>
             
-            <div class="row-fluid form-tooltip">	
+            <div class="row-fluid form-tooltip">
                 <div class="span12">
                     <h4>Detail</h4>
+                    <div>Nama  Apps :  <?php echo $item['name']; ?></div>
                     <div>Platform : <?php echo $item['platform_name']; ?></div>
-                    <div>Category : <?php echo $item['category_name']; ?></div>
+                    <div>Kategori : <?php echo $item['category_name']; ?></div>
                     <div>Owner : <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a></div>
+                    <div>Harga : <?php echo rupiah($item['price']); ?></div>
                 </div>	
             </div>
         </div>		
