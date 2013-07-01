@@ -10,7 +10,7 @@
 <div class="container-fluid sidebar_content"><div class="row-fluid">
 	<div class="span8">	
 		<br />
-		<h2><i class="icon-suitcase"></i>&nbsp;&nbsp;Hubungi Kami</h2>
+		<h2><a href="<?php echo base_url(); ?>">HOME</a> > Hubungi Kami</h2>
 		
 		<form id="form-contact">
 			<input type="hidden" name="action" value="sent_mail" />

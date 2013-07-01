@@ -85,7 +85,7 @@
     <div class="container-fluid sidebar_content"><div class="row-fluid">
         <div class="span8">	
             <br />
-            <h2><i class="icon-suitcase"></i>&nbsp;&nbsp;<?php echo $item['name']; ?></h2>
+            <h2><a href="<?php echo base_url(); ?>">HOME</a> > Beli > <?php echo $item['name']; ?></h2>
             
 			<div class="row-fluid form-tooltip">
 				<input type="hidden" name="id" value="<?php echo $item['id']; ?>" />

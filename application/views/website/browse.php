@@ -7,6 +7,12 @@
 	preg_match('/category\/(\d+)$/i', $_SERVER['REQUEST_URI'], $match);
 	$category_id = (isset($match[1])) ? $match[1] : @$_POST['category_id'];
 	
+	$title = 'Daftar Apps';
+	if (isset($match[1]) && !empty($match[1])) {
+		$category = $this->Category_model->get_by_id(array( 'id' => $match[1] ));
+		$title = $category['name'];
+	}
+	
 	$param_item['keyword'] = @$_POST['keyword'];
 	$param_item['platform_id'] = @$_POST['platform_id'];
 	$param_item['category_id'] = $category_id;
@@ -35,7 +41,7 @@
 	<div class="container-fluid home_main_content"><div class="row-fluid">
 		<div class="span9"><div class="row-fluid">
 			<div class="span12">
-				<h2>APPS TERBARU</h2>
+				<h2><a href="<?php echo base_url(); ?>">HOME</a> > <?php echo $title; ?></h2>
 				<?php if (count($array_item) > 0) { ?>
 				<table class="table table-striped"><tbody>
 					<?php foreach ($array_item as $item) { ?>

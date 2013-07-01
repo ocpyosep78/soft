@@ -29,7 +29,7 @@
                 <br />
                 <div class="row-fluid">
                     <div class="span12">
-                        <h2><i class="icon-key"></i>&nbsp;&nbsp;Login / Daftar </h2>
+                        <h2><i class="icon-key"></i>&nbsp; <a href="<?php echo base_url(); ?>">HOME</a> > Login / Daftar </h2>
                         <p>Silahkan login jika anda memiliki akun di LintasApps atau silahkan daftar untuk membuat akun baru.</p>
                     </div>
                 </div>

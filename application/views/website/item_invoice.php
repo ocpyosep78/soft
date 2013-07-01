@@ -46,7 +46,7 @@
 <div class="container-fluid sidebar_content"><div class="row-fluid">
 	<div class="span8">	
 		<br />
-		<h2><i class="icon-suitcase"></i>&nbsp;&nbsp; INVOICE #<?php echo $item['invoice_no']; ?></h2>
+		<h2><a href="<?php echo base_url(); ?>">HOME</a> > INVOICE #<?php echo $item['invoice_no']; ?></h2>
 		
 		<div class="row-fluid form-tooltip">
 			<input type="hidden" name="item_id" value="<?php echo $item['item_id']; ?>" />

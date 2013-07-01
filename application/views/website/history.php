@@ -23,7 +23,7 @@
 	<div class="container-fluid home_main_content"><div class="row-fluid">
 		<div class="span9"><div class="row-fluid">
 			<div class="span12">
-				<h2>Download Anda</h2>
+				<h2><a href="<?php echo base_url(); ?>">HOME</a> > Download</h2>
 				<?php if (count($array_item) > 0) { ?>
 				<table class="table table-striped"><tbody>
 					<?php foreach ($array_item as $item) { ?>
