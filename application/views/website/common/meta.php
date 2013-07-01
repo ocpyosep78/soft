@@ -17,4 +17,5 @@
 		<link rel="stylesheet" href="<?php echo base_url('static/theme/job_board/css/ie7.css'); ?>" title="job_blue" type="text/css">
 		<link rel="stylesheet" href="<?php echo base_url('static/theme/job_board/js/html5.js'); ?>" title="job_blue" type="text/css">
 	<![endif]-->
+<script type="text/javascript" src="<?php echo base_url('static/theme/job_board/js/jquery.js'); ?>"></script>
 </head>

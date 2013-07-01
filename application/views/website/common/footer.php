@@ -12,7 +12,6 @@
 	</div>
 </footer>
 
-<script type="text/javascript" src="<?php echo base_url('static/theme/job_board/js/jquery.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/theme/job_board/js/jquery-ui.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/theme/job_board/js/jquery.flot.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/theme/job_board/bootstrap/js/bootstrap.js'); ?>"></script>
