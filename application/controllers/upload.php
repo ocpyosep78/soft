@@ -55,7 +55,7 @@
 				$platform_id = $_POST['platform_id'];
 				if (!$platform_id) $platform_id = 5;
 				
-				$query = $this->db->query("SELECT * FROM software.platform WHERE id = ?",array( $platform_id ));
+				$query = $this->db->query("SELECT * FROM platform WHERE id = ?",array( $platform_id ));
 				if ($rr = $query->row_array()) {
 					$this->allowed_ext = array_filter(array_map('trim', explode(',', $rr['file_type'])));
 				}
