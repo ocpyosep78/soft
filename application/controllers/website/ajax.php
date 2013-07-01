@@ -32,6 +32,8 @@ class ajax extends CI_Controller {
 			}
 			
 			$_POST['user_id'] = empty($user['id'])?0:$user['id'];
+            // Strip HTML and PHP tags from a string
+            $_POST['description'] = strip_tags($_POST['description']);
 			$result = $this->Item_model->update($_POST);
 			if ($result['status']) {
 			
