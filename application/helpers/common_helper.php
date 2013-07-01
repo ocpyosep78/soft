@@ -46,7 +46,7 @@
             
             if ($Param['WithEmptySelect'] == 1) {
                 $Content = '<option value="">-</option>';
-			} else {
+                } else {
                 $Content = '';
             }
             
@@ -251,14 +251,14 @@
 			return $ext;
 			
 			/*
-            $FileName = strtolower(trim($FileName));
-            if (empty($FileName)) {
+                $FileName = strtolower(trim($FileName));
+                if (empty($FileName)) {
                 return '';
-            }
-            
-            $ArrayString = explode('.', $FileName);
-            return $ArrayString[count($ArrayString) - 1];
-			/*	*/
+                }
+                
+                $ArrayString = explode('.', $FileName);
+                return $ArrayString[count($ArrayString) - 1];
+            /*	*/
         }
     }
     
@@ -280,7 +280,7 @@
 			$param['field_replace']['id'] = 'Nota.id';
 			$param['field_replace']['nota_currency_total'] = 'Nota.nota_total';
 			$param['field_replace']['status_nota_name'] = 'StatusNota.name';
-		/*	*/
+        /*	*/
 		
         function GetStringFilter($Param, $ReplaceField = array()) {
             $StringFilter = '';
@@ -299,7 +299,7 @@
 								$field_name = (isset($field_replace[$ReplaceField[$i]])) ? $field_replace[$ReplaceField[$i]] : $ReplaceField[$i];
 								if (empty($field_name)) {
 									continue;
-								}
+                                }
 								
                                 $StringFilter .= $field_name." LIKE '%".mysql_real_escape_string( $aWords[$j] )."%' OR ";
                             }
@@ -344,18 +344,18 @@
                         if ($Array->type == 'numeric') {
                             if ($Array->comparison == 'eq') {
                                 $StringFilter .= "AND " . $Field." = '".$Array->value."' ";
-							} else if ($Array->comparison == 'lt') {
+                                } else if ($Array->comparison == 'lt') {
                                 $StringFilter .= "AND " . $Field." < '".$Array->value."' ";
-							} else if ($Array->comparison == 'gt') {
+                                } else if ($Array->comparison == 'gt') {
                                 $StringFilter .= "AND " . $Field." > '".$Array->value."' ";
-							} else if ($Array->comparison == 'not') {
+                                } else if ($Array->comparison == 'not') {
                                 $StringFilter .= "AND " . $Field." != '".$Array->value."' ";
-							} else if ($Array->comparison == 'eq_can_empty' && !empty($Array->value)) {
+                                } else if ($Array->comparison == 'eq_can_empty' && !empty($Array->value)) {
 								$StringFilter .= "AND " . $Field." = '".$Array->value."' ";
-							} else if ($Array->comparison == 'in') {
+                                } else if ($Array->comparison == 'in') {
 								$StringFilter .= "AND " . $Field." IN (".$Array->value.") ";
                             }
-						} else if ($Array->type == 'date') {
+                            } else if ($Array->type == 'date') {
                             if ($Array->comparison == 'eq') {
                                 $StringFilter .= "AND " . $Field." = '".ConvertDateToQuery($Array->value)."' ";
                                 } else if ($Array->comparison == 'lt') {
@@ -363,12 +363,12 @@
                                 } else if ($Array->comparison == 'gt') {
                                 $StringFilter .= "AND " . $Field." >= '".ConvertDateToQuery($Array->value)."' ";
                             }
-						} else if ($Array->type == 'list') {
+                            } else if ($Array->type == 'list') {
                             $Array->field = $Field;
                             $StringFilter .= GetStringFromList($Array);
-						} else if ($Array->type == 'custom') {
+                            } else if ($Array->type == 'custom') {
                             $StringFilter .= "AND " . $Array->field . ' ';
-						} else {
+                            } else {
                             $StringFilter .= "AND " . $Field." LIKE '".$Array->value."%' ";
                         }
                     }
@@ -760,22 +760,22 @@
             }
 			foreach ($param['column'] as $key) {
 				$record[] = (isset($row[$key])) ? $row[$key] : '';
-			}
-
+            }
+            
 			// remove unused data
 			// $param['clean_column'] = 1;
 			if (!empty($param['clean_column'])) {
 				foreach ($row as $key => $value) {
 					if (!in_array($key, $param['column'])) {
 						unset($row[$key]);
-					}
-				}
-			}
+                    }
+                }
+            }
 			
             return $record;
         }
     }
-
+    
     if(! function_exists('GenerateInsertQueryByTypeData'))
     {
         function 
@@ -861,8 +861,8 @@
 			
 			
 			return $page_no;
-		}
-	}
+        }
+    }
 	
 	if (! function_exists('sent_mail')) {
 		function sent_mail($param) {
@@ -871,37 +871,37 @@
 			$headers  = 'From: noreply@lintasapps.com' . "\r\n";
 			$param['message'] = preg_replace('#<br\s*/?>#', "\n", $param['message']);
 			@mail($param['to'], $param['subject'], $param['message'], $headers);
-		}
-	}
+        }
+    }
 	
 	if (! function_exists('set_flash_message')) {
 		function set_flash_message($value) {
 			$_SESSION['flash_message'] = $value;
-		}
-	}
+        }
+    }
 	
 	if (! function_exists('get_flash_message')) {
 		function get_flash_message() {
 			$value = '';
 			if (isset($_SESSION['flash_message'])) {
 				$value = $_SESSION['flash_message'];
-			}
+            }
 			
 			$_SESSION['flash_message'] = '';
 			unset($_SESSION['flash_message']);
 			
 			return $value;
-		}
-	}
+        }
+    }
 	
 	if (! class_exists('CURL')) {
 		class CURL {
 			var $callback = false;
-
+            
 			function setCallback($func_name) {
 				$this->callback = $func_name;
-			}
-
+            }
+            
 			function doRequest($method, $url, $param = array()) {
 				// $vars, $referer_address, 
 				
@@ -914,39 +914,39 @@
 				curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookie.txt');
 				curl_setopt($ch, CURLOPT_TIMEOUT, 20);
 				
-//				curl_setopt($ch, CURLOPT_REFERER, $referer_address);
+                //				curl_setopt($ch, CURLOPT_REFERER, $referer_address);
 				
 				// post param
-//				if ($method == 'POST') {
-					curl_setopt($ch, CURLOPT_POST, 1);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, $param['param']);
-//				}
+                //				if ($method == 'POST') {
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $param['param']);
+                //				}
 				
 				// http header
-//				if (isset($param['header']) && count($param['header']) > 0) {
-//					curl_setopt($ch, CURLOPT_HEADER, 1);
-					
-					curl_setopt($ch, CURLOPT_HEADER, $param['header']);
-//					curl_setopt($ch, CURLOPT_HTTPHEADER, $param['header']);
-//				}
+                //				if (isset($param['header']) && count($param['header']) > 0) {
+                //					curl_setopt($ch, CURLOPT_HEADER, 1);
+                
+                curl_setopt($ch, CURLOPT_HEADER, $param['header']);
+                //					curl_setopt($ch, CURLOPT_HTTPHEADER, $param['header']);
+                //				}
 				
-/*		
-const CLIENT_ID = ****..*** ;
-const SECRET = ***..***;
-
-$base64EncodedClientID = base64_encode(self::CLIENT_ID . ":" . self::SECRET);
-// $headers = array("Authorization" => "Basic " . $base64EncodedClientId, "Accept" =>"**", "Content-type" => "multipart/form-data");
-$params = array("grant_type"=>"client_credentials");
-$url = "https://api.sandbox.paypal.com/v1/oauth2/token";
-
- $ch = curl_init();
- curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
- curl_setopt($ch,CURLOPT_URL, $url);
- curl_setopt($ch,CURLOPT_POST, true);
- curl_setopt($ch,CURLOPT_HEADER, $headers);
- curl_setopt($ch,CURLOPT_POSTFIELDS,$params);
- $response = curl_exec($ch);  
- /*	*/
+                /*		
+                    const CLIENT_ID = ****..*** ;
+                    const SECRET = ***..***;
+                    
+                    $base64EncodedClientID = base64_encode(self::CLIENT_ID . ":" . self::SECRET);
+                    // $headers = array("Authorization" => "Basic " . $base64EncodedClientId, "Accept" =>"**", "Content-type" => "multipart/form-data");
+                    $params = array("grant_type"=>"client_credentials");
+                    $url = "https://api.sandbox.paypal.com/v1/oauth2/token";
+                    
+                    $ch = curl_init();
+                    curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch,CURLOPT_URL, $url);
+                    curl_setopt($ch,CURLOPT_POST, true);
+                    curl_setopt($ch,CURLOPT_HEADER, $headers);
+                    curl_setopt($ch,CURLOPT_POSTFIELDS,$params);
+                    $response = curl_exec($ch);  
+                /*	*/
 				
 				$data = curl_exec($ch);
 				curl_close($ch);
@@ -956,26 +956,26 @@ $url = "https://api.sandbox.paypal.com/v1/oauth2/token";
 						$callback = $this->callback;
 						$this->callback = false;
 						return call_user_func($callback, $data);
-					} else {
+                        } else {
 						return $data;
-					}
-				} else {
+                    }
+                    } else {
 					if (is_resource($ch))
-						return curl_error($ch);
+                    return curl_error($ch);
 					else
-						return false;
-				}
-			}
-
+                    return false;
+                }
+            }
+            
 			function get($url, $referer_address = '', $param = array()) {
 				return $this->doRequest('GET', $url, NULL, $referer_address, $param);
-			}
-
+            }
+            
 			function post($url, $param = array()) {
 				return $this->doRequest('POST', $url, $param);
-			}
-		}
-	}
+            }
+        }
+    }
 	
 	if (! function_exists('save_tinymce')) {
 		function save_tinymce($value) {
@@ -984,6 +984,16 @@ $url = "https://api.sandbox.paypal.com/v1/oauth2/token";
 			$result = htmlentities($result, ENT_QUOTES);
 			
 			return $result;
-		}
-	}
+        }
+    }
+    
+    // limit words
+    
+    if (! function_exists('limit_words')) {
+        function limit_words($string, $word_limit)
+        {
+            $words = explode(" ",$string);
+            return implode(" ",array_splice($words,0,$word_limit));
+        }
+    }
 ?>
