@@ -127,6 +127,20 @@
             return $row;
         }
         
+		// make sure buyer have email, force add user by email
+		function force_login_buyer($param) {
+            $is_login = $this->is_login();
+            if (!$is_login) {
+                $temp = $this->get_by_id(array( 'email' => $param['email']));
+                if (count($temp) == 0) {
+                    $temp = $this->update(array( 'email' => $param['email'], 'name' => time() ));
+                }
+                
+                $user = $this->get_by_id(array( 'id' => $temp['id'] ));
+                $this->set_session($user);
+            }
+		}
+		
         /*	Region User Session */
         
         function login_user_required() {

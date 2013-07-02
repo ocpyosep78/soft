@@ -36,6 +36,9 @@
     define('PAYPAL_CLIENT_SECRET',					'EAvOaxBIxUXQiNjSHKkHW_onJG3b1Bmoakl8ISVptzxi_Lb_08I3LjBofNc7');
 	/*	*/
     
+	/*	DOKU */
+    define('DOKU_HOST',							'http://103.10.129.17/Suite/Receive');
+	
     /* USER */
     define('STATUS_USER_NEW',							'0');
     define('STATUS_USER_CONFIRM',							'1');
@@ -50,7 +53,9 @@
     define('STATUS_ITEM_APPROVE',							'2');
     
     define('CATEGORY',								'category');
+    define('CHECKOUT_DATA',							'checkout_data');
     define('DEFAULT_VALUE',							'default_value');
+    define('DOKU',									'doku');
     define('ITEM',									'item');
     define('ITEM_STATUS',									'item_status');
     define('PLATFORM',								'platform');

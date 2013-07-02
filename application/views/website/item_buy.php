@@ -6,6 +6,7 @@
 		exit;
 	}
 	
+	$user = $this->User_model->get_session();
 	$item = $this->Item_model->get_by_id(array( 'id' => $item_id ));
 	
 	$is_login = $this->User_model->is_login();
@@ -33,6 +34,7 @@
 	$paypal_add = ceil(($harga_dolar_asli * (3.4/100)) + 0.30);
 	$harga_dolar = number_format($harga_dolar_asli + $paypal_add, 2, '.', '');
 	
+	$cdata['item_id'] = $item_id;
 	$cdata['dolar'] = $harga_dolar_asli;
 	$cdata['paypal_add'] = $paypal_add;
 	$cdata['paypal_dolar'] = $harga_dolar;
@@ -43,6 +45,13 @@
 	$ipaymu_price = $item['price'] + $ipaymu_add;
 	$cdata['ipaymu_add'] = $ipaymu_add;
 	$cdata['ipaymu_price'] = $ipaymu_price;
+	
+	$doku_add = ceil(($item['price'] * (3.4/100)) + 0.30);
+	if ($doku_add<1000) $doku_add = 1000;
+	$doku_price = $item['price'] + $doku_add;
+	$doku_money = number_format($doku_price, 2, '.', '');
+	$cdata['doku_add'] = $doku_add;
+	$cdata['doku_price'] = $doku_price;
 	
 	$strdata = mysql_escape_string( json_encode($cdata) );
 	mysql_query("UPDATE checkout_data SET data = '$strdata' WHERE id = '$checkout_id'");
@@ -58,6 +67,10 @@
 <?php $this->load->view( 'website/common/meta' ); ?>
 <body>
     <?php $this->load->view( 'website/common/header' ); ?>
+	
+	<!-- doku -->
+	<script type="text/javascript" src="http://luna.nsiapay.com/dateformat.js"></script>
+	<script type="text/javascript" src="http://luna.nsiapay.com/sha-1.js"></script>
 	
 	<style>
 		.pilihbayar { background-color: #e9e9e9; }
@@ -171,6 +184,48 @@
 						</div>
 					</form>
 				</div>
+				
+				<div style="width: 300px; margin: 0 auto; text-align: center;">
+					<div class="span12 ll" style="padding: 8px 0;">
+						<form method="post" action="<?php echo DOKU_HOST; ?>" id="form-doku">
+							<input type="hidden" name="doku_prepare" value="0" />
+							
+							<input type="hidden" name="BASKET" value="<?php echo $item['name'].','.$doku_money.',1,'.$doku_money; ?>" />
+							<input type="hidden" name="MALLID" value="616" />
+							<input type="hidden" name="CHAINMERCHANT" value="NA" />
+							<input type="hidden" name="CURRENCY" value="360" />
+							<input type="hidden" name="PURCHASECURRENCY" value="360" />
+							<input type="hidden" name="AMOUNT" value="<?php echo $doku_money; ?>" />
+							<input type="hidden" name="PURCHASEAMOUNT" value="<?php echo $doku_money; ?>" />
+							<input type="hidden" name="TRANSIDMERCHANT" />
+							<input type="hidden" name="WORDS" />
+							<input type="hidden" name="REQUESTDATETIME" />
+							<input type="hidden" name="SESSIONID" />
+							<input type="hidden" name="PAYMENTCHANNEL" />
+							<input type="hidden" name="EMAIL" value="<?php echo @$user['email']; ?>" />
+							<input type="hidden" name="NAME" value="No Name" />
+							<input type="hidden" name="ADDRESS" value="No Address" />
+							<input type="hidden" name="COUNTRY" value="360" />
+							<input type="hidden" name="STATE" value="Jakarta" />
+							<input type="hidden" name="CITY" value="JAKARTA SELATAN" />
+							<input type="hidden" name="PROVINCE" value="JAKARTA" />
+							<input type="hidden" name="ZIPCODE" value="12000" />
+							<input type="hidden" name="HOMEPHONE" value="0217998391" />
+							<input type="hidden" name="MOBILEPHONE" value="0217998391" />
+							<input type="hidden" name="WORKPHONE" value="0217998391" />
+							<input type="hidden" name="BIRTHDATE" value="19880101" />
+							<input type="submit" class="btn btn-medium btn-primary" name="submit" value="Beli di Doku">
+							
+							<span class="via">
+								<img src="<?php echo base_url('static/img/logo_doku.gif'); ?>" alt="doku" style="height:20px; width:auto;" />
+								biaya Rp<?php echo number_format($doku_add, 0, '.', ','); ?>
+							</span>
+							<div class="paypal-option">
+								<img src="<?php echo base_url('static/img/doku_options.jpg'); ?>">
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
         </div>
         
@@ -189,7 +244,46 @@
     <?php $this->load->view( 'website/common/footer' ); ?>
     
 	<script type="text/javascript">
+		function randomString(STRlen) {
+			var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+			var string_length = STRlen;
+			var randomstring = '';
+			for (var i=0; i<string_length; i++) {
+				var rnum = Math.floor(Math.random() * chars.length);
+				randomstring += chars.substring(rnum,rnum+1);
+			}
+
+			return randomstring;
+		}
+		
 		$(function() {
+			// doku
+			var doku = {
+				get_invoice: function() {
+					var random = randomString(12);
+					$('#form-doku [name="TRANSIDMERCHANT"]').val(random);
+				},
+				get_request_datetime: function() {
+					var now = new Date();
+					$('#form-doku [name="REQUESTDATETIME"]').val(dateFormat(now, "yyyymmddHHMMss"));
+				},
+				get_session: function() {
+					var random = randomString(20);
+					$('#form-doku [name="SESSIONID"]').val(random);
+				},
+				get_word: function() {
+					var code = $('#form-doku [name="AMOUNT"]').val() + $('#form-doku [name="MALLID"]').val() + "4a7MKC7shZw9" + $('#form-doku [name="TRANSIDMERCHANT"]').val();
+					var code_secret = SHA1(code);
+					$('#form-doku [name="WORDS"]').val(code_secret);
+				},
+				init: function() {
+					doku.get_invoice();
+					doku.get_request_datetime();
+					doku.get_session();
+				}
+			}
+			doku.init();
+			
 			$("form.paypal-button").submit(function() {
 				var form_email = $("#user_email1");
 				if (form_email.length > 0) {
@@ -241,6 +335,49 @@
 				return true;
 			});
 			
+			$("#form-doku").submit(function() {
+				doku.get_word();
+				var form_email = $("#user_email1");
+				if (form_email.length > 0) {
+					var form = $("#form-payment");
+					form.validate({
+						rules: {
+							email: { required: true, email: true }
+						},
+						messages: {
+							email: { 
+								required: 'Mohon masukkan alamat e-mail anda untuk link download dan pencatatan pembelian', 
+								email: 'Email yang Anda masukkan tidak valid, mohon ulangi lagi' 
+							}
+						}
+					});
+					
+					if ( !form.valid() ) {
+						return false;
+					}
+					
+					// set email from email form
+					$('#form-doku [name="EMAIL"]').val(form_email.val());
+				}
+				
+				// doku prepare
+				var doku_prepare = $('#form-doku [name="doku_prepare"]').val();
+				if (doku_prepare == 0) {
+					var param = Site.Form.GetValue('form-doku');
+					if (form_email.length > 0) {
+						param.email = form_email.val();
+					}
+					
+					Func.ajax({ url: web.host + 'item/doku_prepare', param: param, callback: function(result) {
+						if (result.status) {
+							$('#form-doku [name="doku_prepare"]').val(1);
+							$("#form-doku .btn-primary").click();
+						}
+					} });
+					
+					return false;
+				}
+			});
 		});	
 	
         $(document).ready(function() {
@@ -270,7 +407,6 @@
                 
                 $('.btn-pay').parent('div').text('Harap tunggu sebentar, pembayaran Anda sedang diproses.');
                 Func.ajax({ url: web.host + 'item/payment', param: param, callback: function(result) {
-                    console.log(result);
                     if (result.status) {
                         window.location = result.link_next;
                         } else {

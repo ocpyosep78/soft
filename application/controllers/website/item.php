@@ -284,6 +284,81 @@
 			echo 'GAGAL';
         }
 		
+		function doku_prepare() {
+			$param['transidmerchant'] = $_POST['TRANSIDMERCHANT'];
+			$param['words'] = $_POST['WORDS'];
+			$param['trxstatus'] = 'Requested';
+			
+			// add login
+			if (isset($_POST['email']))
+				$this->User_model->force_login_buyer(array( 'email' => $_POST['email'] ));
+			
+			$transaction = $this->Doku_model->get_by_id(array( 'transidmerchant' => $param['transidmerchant'], 'trxstatus' => 'Requested' ));
+			if (count($transaction) > 0) {
+				$param['id'] = $transaction['id'];
+			}
+			
+			$result = $this->Doku_model->update($param);
+			echo json_encode($result);
+		}
+		
+		function doku_notify() {
+			$param_get['transidmerchant'] = (isset($_POST['TRANSIDMERCHANT'])) ? $_POST['TRANSIDMERCHANT'] : '';
+			$param_get['trxstatus'] = 'Requested';
+			$row = $this->Doku_model->get_by_id($param_get);
+			
+			// result from doku
+			$result_message = (isset($_POST['RESULTMSG'])) ? $_POST['RESULTMSG'] : '';
+			$result_message = strtoupper($result_message);
+			
+			// update row
+			$result = array( 'status' => false, 'message' => '' );
+			if (count($row) == 0) {
+				$result['message'] = 'Record tidak ditemukan.';
+			} else if ($result_message == 'SUCCESS') {
+				$param_update['id'] = $row['id'];
+				$param_update['words'] = $_POST['WORDS'];
+				$param_update['trxstatus'] = $_POST['RESULTMSG'];
+				$param_update['statustype'] = $_POST['STATUSTYPE'];
+				$param_update['totalamount'] = $_POST['AMOUNT'];
+				$param_update['response_code'] = $_POST['RESPONSECODE'];
+				$param_update['approvalcode'] = $_POST['APPROVALCODE'];
+				$param_update['payment_channel'] = $_POST['PAYMENTCHANNEL'];
+				$param_update['paymentcode'] = $_POST['PAYMENTCODE'];
+				$param_update['session_id'] = $_POST['SESSIONID'];
+				$param_update['bank_issuer'] = $_POST['BANK'];
+				$param_update['creditcard'] = $_POST['MCN'];
+				$param_update['payment_date_time'] = $_POST['PAYMENTDATETIME'];
+				$param_update['verifyid'] = $_POST['VERIFYID'];
+				$param_update['verifyscore'] = $_POST['VERIFYSCORE'];
+				$param_update['verifystatus'] = $_POST['VERIFYSTATUS'];
+				$result = $this->Doku_model->update($param_update);
+				
+				// prepare data & invoice
+				$checkout = $this->Checkout_Data_model->get_session();
+				$invoice_no = $this->User_Item_model->get_max_no();
+				$user = $this->get_session();
+				
+				// add invoice
+				$param_update = array(
+					'user_id' => $user['id'],
+					'price' => $param_update['totalamount'],
+					'item_id' => $checkout['detail']->item_id,
+					'invoice_no' => $invoice_no,
+					'payment_name' => 'doku',
+					'payment_date' => $this->config->item('current_datetime')
+				);
+				$this->User_Item_model->update($param_update);
+			} else {
+				$param_update['id'] = $row['id'];
+				$param_update['trxstatus'] = 'Failed';
+				$result = $this->Doku_model->update($param_update);
+				$result['message'] = 'Transaksi batal.';
+			}
+			
+			echo json_encode($result);
+		}
+		
 		function thanks() {
 			if (!empty($_SESSION['checkout_id']))
 				unset($_SESSION['checkout_id']);

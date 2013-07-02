@@ -33,3 +33,6 @@ account admin :
 link : http://software.simetri.in/lintasgps/panel
 user : herry@simetri.in
 pass : qwertyui
+
+
+http://localhost:8666/software/trunk/item/doku_notify
