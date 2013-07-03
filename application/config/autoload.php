@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'session', 'api', 'paypal','ipaymu');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('date', 'common', 'recaptcha', 'excel_reader', 'url', 'resize');
+$autoload['helper'] = array('date', 'common', 'recaptcha', 'excel_reader', 'url', 'resize','captcha');
 
 
 /*
