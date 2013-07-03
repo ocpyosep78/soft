@@ -100,7 +100,11 @@
             
             $ext = GetExtention($fileName);
             if (!in_array($ext, $this->allowed_ext)) {
-				$this->_jsonrpc(100, 'Tipe file tidak valid atau tidak cocok dengan platform aplikasi');
+				//$this->_jsonrpc(100, 'Tipe file tidak valid atau tidak cocok dengan platform aplikasi');
+                echo $ext;
+                echo "<br/>";
+                print_r($this->allowed_ext);
+                die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Tipe file tidak valid atau tidak cocok dengan platform aplikasi.."}');
             }
             
             // Clean the fileName for security reasons
