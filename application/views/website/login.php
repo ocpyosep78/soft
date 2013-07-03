@@ -25,7 +25,7 @@
 	<div class="container-fluid sidebar_content">
         <div class="row-fluid">
             
-            <div class="span8">
+            <div class="span10">
                 <br />
                 <div class="row-fluid">
                     <div class="span12">
@@ -124,9 +124,6 @@
                 </div>
             </div>
             
-            <div class="span4 sidebar"><br />
-                <?php //$this->load->view( 'website/common/info' ); ?>
-            </div>
             
         </div>	
     </div>

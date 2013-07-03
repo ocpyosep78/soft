@@ -1,0 +1,15 @@
+--- Begin doku notif 2013-07-03 06:56:24 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'wxf8DenF8AsL',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '100000.00',
+  'WORDS' => '47c851fd433b82a655b8530465768402df8c0a91',
+  'SESSIONID' => 'qZASCXfIDqlfx8DnbMVw',
+)
+-- End doku notif --
+

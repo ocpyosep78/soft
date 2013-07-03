@@ -187,8 +187,30 @@
         }
         
         function delete_session() {
+			$this->delete_human();
+			
             $_SESSION['user_login'] = array();
         }
         
+		function is_human() {
+			$result = false;
+			
+			if ($this->is_login()) {
+				$result = true;
+			} if (isset($_SESSION['is_human']) && $_SESSION['is_human'] = 1) {
+				$result = true;
+			}
+			
+			return $result;
+		}
+		
+		function set_human() {
+			$_SESSION['is_human'] = 1;
+		}
+		
+		function delete_human() {
+			$_SESSION['is_human'] = 0;
+		}
+		
         /*	End Region User Session */
     }        

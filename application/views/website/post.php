@@ -1,5 +1,9 @@
 <?php
-	$this->User_model->login_user_required();
+	$is_human = $this->User_model->is_human();
+	if (! $is_human) {
+		header("Location: ".base_url("capthca"));
+		exit;
+	}
 	
 	$array_category = $this->Category_model->get_array(array( 'limit' => 1000 ));
 	$array_platform = $this->Platform_model->get_array(array( 'limit' => 1000 ));
@@ -30,14 +34,18 @@
     </div>
     
     <div class="container-fluid sidebar_content"><div class="row-fluid">
-        <div class="span8">	
-            <br />
-            <h2><i class="icon-suitcase"></i>&nbsp;&nbsp;Unggah Apps</h2>
+        <div class="span10">	
+            <h2><i class="icon-suitcase"></i>&nbsp;&nbsp;Unggah Aplikasi/Item</h2>
+			
+			<div class="hero">
+				<p>Upload hasil kreasi anda, registrasikan akun anda, mulai berjualan di LintasApps.com, GRATIS</p>
+			</div>
             
             <form id="form-item">
                 <input type="hidden" name="action" value="update" />
                 
                 <h3>Detail Aplikasi Anda</h3>
+				
                 <fieldset class="detail">
                     <div class="row-fluid">
                         <div class="span6">
@@ -160,12 +168,11 @@
             
         </div>
         
-        <div class="span4 sidebar"><br /><br />
-            <?php //$this->load->view( 'website/common/info' ); ?>
-        </div>		
     </div></div>
     
     <?php $this->load->view( 'website/common/footer' ); ?>
+	<script type="text/javascript" src="<?php echo base_url('static/js/plupload/browserplus-min.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('static/js/plupload/plupload.full.js'); ?>"></script>
     
     <script>
         var thumbnail_set = function(p) {
@@ -182,6 +189,7 @@
                 max_file_size : '100mb', 
                 url: web.host + 'upload/file',
                 browse_button : 'pickfiles', 
+				chunk_size: '1mb',
                 container : 'uploadcontainer',
                 runtimes : 'gears,html5,flash,silverlight,browserplus',
                 flash_swf_url: web.base + 'static/js/plupload/plupload.flash.swf',
@@ -244,6 +252,7 @@
             uploader2 = new plupload.Uploader({
                 max_file_size : '100mb', 
                 url: web.host + 'upload/file?screenshot=1',
+				chunk_size: '1mb',
                 browse_button : 'pickfiles1', 
                 container : 'uploadcontainer1',
                 runtimes : 'gears,html5,flash,silverlight,browserplus',

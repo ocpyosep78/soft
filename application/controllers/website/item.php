@@ -302,7 +302,61 @@
 			echo json_encode($result);
 		}
 		
+		function doku_redirect() {
+			$this->doku->write_log();
+			
+			$param_get['transidmerchant'] = (isset($_POST['TRANSIDMERCHANT'])) ? $_POST['TRANSIDMERCHANT'] : '';
+			$row = $this->Doku_model->get_by_id($param_get);
+			
+			// update record
+			$result = array( 'status' => false );
+			if ($_POST['STATUSCODE'] == '0000') {
+				$param_update['id'] = $row['id'];
+				$param_update['words'] = $_POST['WORDS'];
+				$param_update['totalamount'] = $_POST['AMOUNT'];
+				$param_update['payment_channel'] = $_POST['PAYMENTCHANNEL'];
+				$param_update['paymentcode'] = $_POST['PAYMENTCODE'];
+				$param_update['session_id'] = $_POST['SESSIONID'];
+				$param_update['trxstatus'] = 'Done';
+				$result = $this->Doku_model->update($param_update);
+				
+				// prepare data & invoice
+				$checkout = $this->Checkout_Data_model->get_session();
+				$invoice_no = $this->User_Item_model->get_max_no();
+				$user = $this->User_model->get_session();
+				
+				// add invoice
+				$param_update = array(
+					'user_id' => @$user['id'],
+					'price' => $param_update['totalamount'],
+					'item_id' => $checkout['detail']->item_id,
+					'invoice_no' => $invoice_no,
+					'payment_name' => 'doku',
+					'payment_date' => $this->config->item('current_datetime')
+				);
+				$this->User_Item_model->update($param_update);
+				$this->doku->set_session($param_update);
+			} else {
+				$param_update['id'] = $row['id'];
+				$param_update['trxstatus'] = 'Failed';
+				$result = $this->Doku_model->update($param_update);
+				$result['message'] = 'Transaksi batal.';
+			}
+			
+			$this->load->view( 'website/payment/doku_redirect' );
+		}
+		
+		function doku_result() {
+			$session = $this->doku->get_session($param_update);
+			$invoice_link = base_url('item/invoice/'.$session['invoice_no']);
+			
+			header("Location: ".$invoice_link);
+			exit;
+		}
+
 		function doku_notify() {
+			$this->doku->write_log();
+			
 			$param_get['transidmerchant'] = (isset($_POST['TRANSIDMERCHANT'])) ? $_POST['TRANSIDMERCHANT'] : '';
 			$param_get['trxstatus'] = 'Requested';
 			$row = $this->Doku_model->get_by_id($param_get);

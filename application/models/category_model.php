@@ -66,7 +66,6 @@ class Category_model extends CI_Model {
 			ORDER BY $string_sorting
 			LIMIT $string_limit 		
 		";
-       // echo $select_query;
 		$select_result = mysql_query($select_query) or die(mysql_error());
 		while ( $row = mysql_fetch_assoc( $select_result ) ) {
 			$array[] = $this->sync($row, @$param['column']);

@@ -37,7 +37,10 @@
 	/*	*/
     
 	/*	DOKU */
-    define('DOKU_HOST',							'http://103.10.129.17/Suite/Receive');
+    /*
+    define('DOKU_HOST',							'https://pay.doku.com/Suite/Receive');
+	/*	*/
+	define('DOKU_HOST',							'http://103.10.129.17/Suite/Receive');
 	
     /* USER */
     define('STATUS_USER_NEW',							'0');

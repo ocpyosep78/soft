@@ -44,17 +44,24 @@
                 </div>	
                 <div class="span12 control-group"><h4>File Screenshot Aplikasi / Item </h4></div>
                 <div class="span12 control-group">
-                    <?php foreach($item_screenshot as $key=>$screenshot):?>
-                    <a href="<?php echo base_url('screenshots/'.$screenshot);?>" rel="shadowbox[Mixed]" title="screenshot <?php echo $key+1;?>">
-                    <?php
-                        $screenshot_mini = pathinfo(base_url('screenshots/'.$screenshot));
-                        $screenshot_no_ext = basename($screenshot_mini['basename'],".".$screenshot_mini['extension']);
-                        $screenshot_mini_file = $screenshot_no_ext."_thumb.".$screenshot_mini['extension'];
-                        $full_path_screenshot_mini_file = $screenshot_mini['dirname']."/".$screenshot_mini_file;
-                    ?>
-                    <img style="margin:2px;" class="img-polaroid" src="<?php echo $full_path_screenshot_mini_file ?>" alt="screnshot" />
-                    </a>
-                    <?php endforeach; ?>    
+                    <?php 
+                        if(isset($item_screenshot)){
+                        foreach($item_screenshot as $key=>$screenshot):?>
+                        <a href="<?php echo base_url('screenshots/'.$screenshot);?>" rel="shadowbox[Mixed]" title="screenshot <?php echo $key+1;?>">
+                        <?php
+                            $screenshot_mini = pathinfo(base_url('screenshots/'.$screenshot));
+                            $screenshot_no_ext = basename($screenshot_mini['basename'],".".$screenshot_mini['extension']);
+                            $screenshot_mini_file = $screenshot_no_ext."_thumb.".$screenshot_mini['extension'];
+                            $full_path_screenshot_mini_file = $screenshot_mini['dirname']."/".$screenshot_mini_file;
+                        ?>
+                        <img style="margin:2px;" class="img-polaroid" src="<?php echo $full_path_screenshot_mini_file ?>" alt="screnshot" />
+                        </a>
+                        <?php endforeach; 
+                        }else
+                        {?>  
+                        <div class="span12 control-group"><h4>Tidak ada Screenshot Aplikasi / Item </h4></div>
+                        <?php
+                        }?>
                 </div>
                 <br />
                 <br />
@@ -66,7 +73,10 @@
                 <?php if ($is_buy) { ?>
                     <a class="cursor btn btn-primary btn-success btn-download">Download</a>
                     <?php } else if ($item['item_status_id'] == ITEM_STATUS_APPROVE) { ?>
-                    <a href="<?php echo $item['item_buy_link']; ?>" class="btn btn-primary btn-success">Beli</a>
+                    <a href="<?php echo $item['item_buy_link']; ?>" class="btn btn-primary btn-large btn-xlarge btn-beli btn-success">
+						<span class="item-price"><?php echo rupiah($item['price']); ?></span>
+						<span class="x-beli">Beli</span>
+					</a>
                     <?php } else { ?>
                     <a class="btn btn-primary btn-success">Menunggu Persetujuan</a>
                 <?php } ?>
@@ -75,11 +85,10 @@
             <div class="row-fluid form-tooltip">
                 <div class="span12">
                     <h4>Detail</h4>
-                    <div>Nama  Apps :  <?php echo $item['name']; ?></div>
+                    <div>Nama :  <?php echo $item['name']; ?></div>
                     <div>Platform : <?php echo $item['platform_name']; ?></div>
                     <div>Kategori : <?php echo $item['category_name']; ?></div>
                     <div>Owner : <a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a></div>
-                    <div>Harga : <?php echo rupiah($item['price']); ?></div>
                 </div>	
             </div>
         </div>		

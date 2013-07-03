@@ -52,18 +52,25 @@
             <div class="span9"><div class="row-fluid">
                 <div class="span12">
                     <h2><a href="<?php echo base_url(); ?>">HOME</a> > Apps terbaru</h2>
-                    <table class="table table-striped"><tbody>
+                    <table class="table table-striped item-table"><tbody>
                         <?php foreach ($array_item as $item) { ?>
 							<tr>
-								<td style="width: 80%;">
-									<img src="<?php echo $item['thumbnail_link']; ?>" style="float: left; width: 80px; height: 55px; margin: 0 20px 0 0;" />
-									<strong><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></strong><br />
-									<?php echo limit_words(nl2br($item['description']),20); ?><br />
-									Oleh
-									<a href="<?php echo $item['author_link']; ?>"><?php echo $item['user_name']; ?></a> |
-									<a href="<?php echo $item['category_link']; ?>"><?php echo $item['category_name']; ?></a></td>
+								<td style="width: 10%">
+									<a href="<?php echo $item['item_link']; ?>">
+									<img src="<?php echo $item['thumbnail_link']; ?>" style="width:100%; height:auto;" />
+									</a>
+								</td>
+								<td style="width: 70%;">
+									<h2 class="item-title"><a href="<?php echo $item['item_link']; ?>"><?php echo $item['name']; ?></a></h2>
+									<p class="item-desc"><?php echo nl2br(limit_words($item['description'], 20)); ?></p>
+									
+									<p class="meta">
+										Oleh <a href="<?php echo $item['author_link']; ?>"><span class="label label-info"><?php echo $item['user_name']; ?></span></a>
+										<a href="<?php echo $item['category_link']; ?>"><span class="label label-warning"><?php echo $item['category_name']; ?></span></a>
+									</p>
+								</td>
 								<td style="width: 20%; text-align: center;">
-									<b><?php echo $item['price_text']; ?></b><br>
+									<div class="item-price"><?php echo $item['price_text']; ?></div>
 									<a class="btn btn-success" href="<?php echo $item['item_buy_link']; ?>">Beli</a>
 								</td>
 							</tr>

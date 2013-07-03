@@ -28,7 +28,7 @@
             'quantity' => $param['item_quantity'],
             'comments' => $param['item_comment'], // Optional
             'ureturn'  => 'https://www.lintasapps.com/item/ipaymu_confirm',
-            'unotify'  => 'https://www.lintasapps.com/notify-ipaymu.php',
+            'unotify'  => 'https://www.lintasapps.com/item/ipaymu_notif',
             'ucancel'  => 'https://www.lintasapps.com',
             
             /* Parameter untuk pembayaran lain menggunakan PayPal

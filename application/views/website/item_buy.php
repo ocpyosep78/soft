@@ -31,7 +31,7 @@
 	
 	$konversi_rupiah = $this->Default_Value_model->get_konversi_rupiah_dolar();
 	$harga_dolar_asli = $item['price'] / $konversi_rupiah['value'];
-	$paypal_add = ceil(($harga_dolar_asli * (3.4/100)) + 0.30);
+	$paypal_add = 0; //ceil(($harga_dolar_asli * (3.4/100)) + 0.30);
 	$harga_dolar = number_format($harga_dolar_asli + $paypal_add, 2, '.', '');
 	
 	$cdata['item_id'] = $item_id;
@@ -40,14 +40,14 @@
 	$cdata['paypal_dolar'] = $harga_dolar;
 	$cdata['konversi_rupiah'] = $konversi_rupiah['value'];
 	
-	$ipaymu_add = ceil(($item['price'] * (3.4/100)) + 0.30);
-	if ($ipaymu_add<1000) $ipaymu_add = 1000;
+	$ipaymu_add = 0; //ceil(($item['price'] * (3.4/100)) + 0.30);
+	//if ($ipaymu_add<1000) $ipaymu_add = 1000;
 	$ipaymu_price = $item['price'] + $ipaymu_add;
 	$cdata['ipaymu_add'] = $ipaymu_add;
 	$cdata['ipaymu_price'] = $ipaymu_price;
 	
-	$doku_add = ceil(($item['price'] * (3.4/100)) + 0.30);
-	if ($doku_add<1000) $doku_add = 1000;
+	$doku_add = 0; //ceil(($item['price'] * (3.4/100)) + 0.30);
+	//if ($doku_add<1000) $doku_add = 1000;
 	$doku_price = $item['price'] + $doku_add;
 	$doku_money = number_format($doku_price, 2, '.', '');
 	$cdata['doku_add'] = $doku_add;
@@ -69,29 +69,29 @@
     <?php $this->load->view( 'website/common/header' ); ?>
 	
 	<!-- doku -->
-	<script type="text/javascript" src="http://luna.nsiapay.com/dateformat.js"></script>
-	<script type="text/javascript" src="http://luna.nsiapay.com/sha-1.js"></script>
+	
+	<script type="text/javascript" src="<?php echo base_url('static/js/dateformat.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('static/js/sha-1.js'); ?>"></script>
 	
 	<style>
-		.pilihbayar { background-color: #e9e9e9; }
 		.pilihbayar form {margin:0;}
-		.pilihbayar div.span6 { padding:10px 0; margin:10px 0; text-align:center; }
-		.pilihbayar div.lx { border-right: 1px solid #bbb; }
-		.pilihbayar div.lx:hover, .pilihbayar div.ll:hover { background-color:#ddd; }
+        .pilihbayar div{padding-top:10px; }
 			
+		/*
 		.paypal-button { white-space: nowrap; padding:0 10px; }
 		.paypal-button button { white-space: nowrap; overflow: hidden; border-radius: 13px; font-family: "Arial", bold, italic; font-weight: bold; font-style: italic; border: 1px solid #ffa823; color: #0E3168; background: #ffa823; position: relative; text-shadow: 0 1px 0 rgba(255,255,255,.5); cursor: pointer; z-index: 0; }
 		.paypal-button button:before { content: " "; position: absolute; width: 100%; height: 100%; border-radius: 11px; top: 0; left: 0; background: #ffa823; background: -webkit-linear-gradient(top, #FFAA00 0%,#FFAA00 80%,#FFF8FC 100%); background: -moz-linear-gradient(top, #FFAA00 0%,#FFAA00 80%,#FFF8FC 100%); background: -ms-linear-gradient(top, #FFAA00 0%,#FFAA00 80%,#FFF8FC 100%); background: linear-gradient(top, #FFAA00 0%,#FFAA00 80%,#FFF8FC 100%); z-index: -2; }
 		.paypal-button button:after { content: " "; position: absolute; width: 98%; height: 60%; border-radius: 40px 40px 38px 38px; top: 0; left: 0; background: -webkit-linear-gradient(top, #fefefe 0%, #fed994 100%); background: -moz-linear-gradient(top, #fefefe 0%, #fed994 100%); background: -ms-linear-gradient(top, #fefefe 0%, #fed994 100%); background: linear-gradient(top, #fefefe 0%, #fed994 100%); z-index: -1; -webkit-transform: translateX(1%);-moz-transform: translateX(1%); -ms-transform: translateX(1%); transform: translateX(1%); }
 		.paypal-button button.small { padding: 3px 15px; font-size: 12px; }
 		.paypal-button button.large { padding: 4px 19px; font-size: 14px; }
+		*/
 		
 		.via { font-weight:bold; display:block; padding:5px 0;}
 		.paypal-option { padding:5px 0; }
 		
 		@media (max-width: 767px) {
 			.pilihbayar div.lx { border-right: none; border-bottom:1px solid #bbb; }
-			.pilihbayar div.span6 { margin:0; text-align:center; }
+			.pilihbayar div.span4 { margin:0; text-align:center; padding:10px 0; }
 		}
 	</style>
     
@@ -113,8 +113,11 @@
 					</div>
 					<?php endif; ?>
 				
-					<div>Item : <?php echo $item['name']; ?></div>
-					<div>Harga: <?php echo $item['price_text']; ?> / US $<?php echo number_format($harga_dolar_asli, 2, '.', ','); ?></div>
+					<h1><?php echo $item['name']; ?></h1>
+					<div class="item-price">
+						<span class="label-info" style="color:#fff;"><?php echo $item['price_text']; ?></span>
+						<span class="label-success" style="color:#fff;">US $<?php echo number_format($harga_dolar_asli, 2, '.', ','); ?></span>
+					</div>
 					
 					<?php if (! $is_login) { ?>
 					<div style="margin-top:20px;">
@@ -143,7 +146,7 @@
 			</div>
 			
 			<div class="row-fluid pilihbayar">
-				<div class="span6 lx">
+				<div class="span4 text-center lx">
 					<form method="post" action="https://www.paypal.com/cgi-bin/webscr" class="paypal-button" target="_top">
 						<input type="hidden" id="custom_email" name="custom" value="">
 						<input type="hidden" name="button" value="buynow">
@@ -160,21 +163,28 @@
 						<input type="hidden" name="bn" value="SIMETRI_BuyNow_WPS_ID">
 						<input type="hidden" name="env" value="www">
 						<input type="hidden" name="no_shipping" value="1">
+						
+						<button type="submit" class="btn btn-large btn-primary btn-xlarge"><span class="paypal">&nbsp;</span></button>
+						<!--
 						<button type="submit" class="paypal-button large">Beli dengan PayPal</button>
 						<span class="via">(+$<?php echo $paypal_add; ?> biaya)</span>
 						<div class="paypal-option">
 							<img src="<?php echo base_url('static/img/paypal_options.jpg'); ?>">
 						</div>
+						-->
 					</form>
 				</div>
-				<div class="span6 ll">
+				<div class="span4 text-center lx">
 					<form method="post" action="<?php echo base_url('item/ipaymu2'); ?>" id="formipaymu">
-						<button type="submit" class="btn btn-medium btn-primary">Beli di iPayMu</button>
 						<input type="hidden" id="emailsaya" name="email" value="">
 						<input type="hidden" name="item_id" value="<?php echo $item['id']; ?>">
 						<input type="hidden" name="item_price" value="<?php echo $ipaymu_price; ?>">
 						<input type="hidden" name="item_add" value="<?php echo $ipaymu_add; ?>">
 						<input type="hidden" name="checkout_id" value="<?php echo $checkout_id; ?>">
+						
+						<button type="submit" class="btn btn-large btn-biasa btn-xlarge"><span class="ipaymu">&nbsp;</span></button>
+						
+						<!--
 						<span class="via">
 							<img src="<?php echo base_url('static/img/logo-ipaymu.png'); ?>" alt="ipaymu" style="height:12px; width:auto;" />
 							biaya Rp<?php echo number_format($ipaymu_add, 0, '.', ','); ?>
@@ -182,11 +192,12 @@
 						<div class="paypal-option">
 							<img src="<?php echo base_url('static/img/ipaymu_options.jpg'); ?>">
 						</div>
+						-->
 					</form>
 				</div>
 				
-				<div style="width: 300px; margin: 0 auto; text-align: center;">
-					<div class="span12 ll" style="padding: 8px 0;">
+			
+					<div class="span4 text-center ll">
 						<form method="post" action="<?php echo DOKU_HOST; ?>" id="form-doku">
 							<input type="hidden" name="doku_prepare" value="0" />
 							
@@ -214,8 +225,11 @@
 							<input type="hidden" name="MOBILEPHONE" value="0217998391" />
 							<input type="hidden" name="WORKPHONE" value="0217998391" />
 							<input type="hidden" name="BIRTHDATE" value="19880101" />
-							<input type="submit" class="btn btn-medium btn-primary" name="submit" value="Beli di Doku">
 							
+							<button type="submit" class="btn btn-large btn-warning btn-xlarge"><span class="doku">Debit/Kredit</span></button>
+							
+							<!--
+							<input type="submit" class="btn btn-medium btn-primary" name="submit" value="Beli di Doku">
 							<span class="via">
 								<img src="<?php echo base_url('static/img/logo_doku.gif'); ?>" alt="doku" style="height:20px; width:auto;" />
 								biaya Rp<?php echo number_format($doku_add, 0, '.', ','); ?>
@@ -223,15 +237,18 @@
 							<div class="paypal-option">
 								<img src="<?php echo base_url('static/img/doku_options.jpg'); ?>">
 							</div>
+							-->
 						</form>
 					</div>
-				</div>
+				
 			</div>
         </div>
         
-        <div class="span4 sidebar"><br /><br />
+        <div class="span4 sidebar">
             <div class="row-fluid form-tooltip">	
                 <div class="span12">
+					<br /><br />
+					
                     <h4>Detail</h4>
                     <div>Platform : <?php echo $item['platform_name']; ?></div>
                     <div>Category : <?php echo $item['category_name']; ?></div>
@@ -409,8 +426,8 @@
                 Func.ajax({ url: web.host + 'item/payment', param: param, callback: function(result) {
                     if (result.status) {
                         window.location = result.link_next;
-                        } else {
-                        Func.show_notice({ title: 'Informasi', text: result.message });
+					} else {
+						Func.show_notice({ title: 'Informasi', text: result.message });
                     }
                 } });
             });

@@ -19,6 +19,8 @@ if ($array_url[0] != 'panel') {
 	$route['history'] = "website/history";
 	$route['history/(:any)'] = "website/history";
 	$route['thank'] = "website/thank";
+	$route['capthca'] = "website/capthca";
+	$route['capthca/(:any)'] = "website/capthca";
 	$route['contact'] = "website/contact";
 }
 

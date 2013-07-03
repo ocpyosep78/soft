@@ -37,6 +37,8 @@ class Doku_model extends CI_Model {
 			$select_query  = "SELECT * FROM ".DOKU." WHERE id = '".$param['id']."' LIMIT 1";
 		} else if (isset($param['transidmerchant']) && isset($param['trxstatus'])) {
 			$select_query  = "SELECT * FROM ".DOKU." WHERE transidmerchant = '".$param['transidmerchant']."' AND trxstatus = '".$param['trxstatus']."' LIMIT 1";
+		} else if (isset($param['transidmerchant'])) {
+			$select_query  = "SELECT * FROM ".DOKU." WHERE transidmerchant = '".$param['transidmerchant']."' LIMIT 1";
 		}
 		
 		$select_result = mysql_query($select_query) or die(mysql_error());

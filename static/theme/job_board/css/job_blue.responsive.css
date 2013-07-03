@@ -1,2 +1,20 @@
-@import url("job_blue.css");
+@import url("job_blue.min.css");
 @import url("job_blue_responsive.css");
+
+.item-table h2.item-title { margin-top: 0; line-height: 1; }
+.item-price { font-size:16px; font-weight:bold; margin: 10px 0; }
+.btn-beli {font-size: 25px; }
+.item-price .label-success, .item-price .label-info {padding: 7px 12px;}
+.label {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+.hero p {font-size:16px; margin: 10px 0;}
+.btn-biasa { background-color: #eee; }
+.btn-xlarge { text-align: center; font-weight: bold; line-height: normal; }
+.btn-xlarge span.paypal { background: url(../../../img/buynow.png) no-repeat right center; padding-right: 95px; }
+.btn-xlarge span.doku { background: url(../../../img/logo_doku.png) no-repeat right center; padding-right: 30px; }
+.btn-xlarge span.ipaymu { background: url(../../../img/logo-ipaymu1.png) no-repeat right center; padding-right: 130px; }
+.btn-large span.beli { font-size:25px; }
+span.x-beli {display:block;}
