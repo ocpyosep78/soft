@@ -56,6 +56,7 @@
     define('STATUS_ITEM_APPROVE',							'2');
     
     define('CATEGORY',								'category');
+    define('PAGES',								'pages');
     define('CHECKOUT_DATA',							'checkout_data');
     define('DEFAULT_VALUE',							'default_value');
     define('DOKU',									'doku');
