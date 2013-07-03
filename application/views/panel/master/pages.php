@@ -33,7 +33,7 @@
                     <div class="control-group">
                         <label class="control-label" for="input_content" >Content</label>
                         <div class="controls">
-                            <textarea id="input_content" name="content_text" class="span12 tinymce" style="width: 100%; height: 250px;" data-original-title="Content Pages"></textarea>
+                            <textarea id="input_content" name="content" class="span12 tinymce" style="width: 100%; height: 250px;" data-original-title="Content Pages"></textarea>
                         </div>
                     </div>
                 </form>
@@ -134,7 +134,7 @@
                 $('#WinPages input[name="id"]').val(record.id);
                 $('#WinPages input[name="name"]').val(record.name);
                 $('#WinPages input[name="title"]').val(record.title);
-                $('#WinPages textarea[name="content_text"]').text(record.content);
+                $('#WinPages textarea[name="content"]').text(record.content);
                 $('#WinPages').modal();
             });
             $('#pages').on('click','tbody td img.delete', function () {

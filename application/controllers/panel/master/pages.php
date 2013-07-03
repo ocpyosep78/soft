@@ -15,7 +15,6 @@ class pages extends PANEL_Controller {
 		
 		// user
 		$user = $this->User_model->get_session();
-		
 		$result = array();
 		if ($action == 'update') {
 			$result = $this->Pages_model->update($_POST);
