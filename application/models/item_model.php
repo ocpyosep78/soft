@@ -7,7 +7,8 @@
 				'id', 'user_id', 'category_id', 'platform_id', 'item_status_id', 'name', 'description', 'price', 'thumbnail', 'filename', 'date_update', 'screenshot',
             );
             // user
-            //$this->user = $this->User_model->get_session();
+           
+            $this->admin_user = $this->config->item('admin_user_id');
         }
         
         function update($param) {
@@ -68,11 +69,23 @@
         }
         
         function get_array($param = array(),$pendingApprove = null,$pending = null,$approve = null) {
-            
+            $user   = $this->User_model->get_session();
             $array = array();
             
             $string_keyword = (!empty($param['keyword'])) ? "AND Item.name LIKE '%".$param['keyword']."%'" : '';
-            $string_username = (!empty($param['user_name'])) ? "AND User.name = '".$param['user_name']."'" : '';
+            if(!empty($user))
+            {
+                if(in_array($user['id'], $this->admin_user)) 
+                { 
+                    $string_username = (!empty($param['user_name'])) ? "AND User.name = '".$param['user_name']."'" : '';
+                }else
+                {
+                    $string_username = '';
+                }
+            }else
+            {
+                $string_username ='';
+            }
             $string_category = (!empty($param['category_id'])) ? "AND Item.category_id = '".$param['category_id']."'" : '';
             $string_platform = (!empty($param['platform_id'])) ? "AND Item.platform_id = '".$param['platform_id']."'" : '';
             $string_item_status = (!empty($param['item_status_id'])) ? "AND Item.item_status_id = '".$param['item_status_id']."'" : '';
