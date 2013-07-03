@@ -77,14 +77,14 @@
             {
                 if(in_array($user['id'], $this->admin_user)) 
                 { 
-                    $string_username = (!empty($param['user_name'])) ? "AND User.name = '".$param['user_name']."'" : '';
+                    $string_username = '';
                 }else
                 {
-                    $string_username = '';
+                    $string_username = (!empty($param['user_name'])) ? "AND User.name = '".$param['user_name']."'" : '';
                 }
             }else
             {
-                $string_username ='';
+                $string_username =(!empty($param['user_name'])) ? "AND User.name = '".$param['user_name']."'" : '';
             }
             $string_category = (!empty($param['category_id'])) ? "AND Item.category_id = '".$param['category_id']."'" : '';
             $string_platform = (!empty($param['platform_id'])) ? "AND Item.platform_id = '".$param['platform_id']."'" : '';
