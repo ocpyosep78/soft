@@ -5,6 +5,10 @@
 		exit;
 	}
 	
+	preg_match('/\/post\/([\d]+)$/i', $_SERVER['REQUEST_URI'], $match);
+	$item_id = (isset($match[1])) ? $match[1] : 0;
+	$item = $this->Item_model->get_by_id(array( 'id' => $item_id ));
+	
 	$array_category = $this->Category_model->get_array(array( 'limit' => 1000 ));
 	$array_platform = $this->Platform_model->get_array(array( 'limit' => 1000 ));
 	$platforms=array();
@@ -31,6 +35,7 @@
     
     <div class="hide">
         <iframe name="iframe_thumbnail" src="<?php echo base_url('upload?callback=thumbnail_set'); ?>"></iframe>
+		<div class="cnt-item"><?php echo json_encode($item); ?></div>
     </div>
     
     <div class="container-fluid sidebar_content"><div class="row-fluid">
@@ -293,7 +298,7 @@
                 if (json.error != null && json.error.code != null) {
                     div.remove();
                     Func.show_notice({ title: 'Informasi', text: json.error.message });
-                    } else {
+				} else {
                     div.removeClass('addedfile').addClass('completefile').find('b').html("100%");
                     div.append('<br><img src="' + json.relativePath + '/' + json.thumbName + '">');
                     div.after('<input type="hidden" name="item_screenshot[]" value="' + json.new_dir + '/' + json.fileName + '">');
@@ -380,7 +385,20 @@
                 
                 return false;
             });
-        });
+        
+			// edit
+			var raw = $('.cnt-item').text();
+			if (raw.length > 10) {
+				eval('var item = ' + raw);
+				
+				$('#form-item [name="name"]').val(item.name);
+				$('#form-item [name="price"]').val(item.price);
+				$('#form-item [name="platform_id"]').val(item.platform_id);
+				$('#form-item [name="category_id"]').val(item.category_id);
+				$('#form-item [name="description"]').val(item.description);
+				$('#form-item [name="thumbnail"]').val(item.thumbnail);
+			}
+		});
     </script>
     
 </body>

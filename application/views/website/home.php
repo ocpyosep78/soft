@@ -71,7 +71,7 @@
 								</td>
 								<td style="width: 20%; text-align: center;">
 									<div class="item-price"><?php echo $item['price_text']; ?></div>
-									<a class="btn btn-success" href="<?php echo $item['item_buy_link']; ?>">Beli</a>
+									<a class="btn btn-success" href="<?php echo $item['item_link']; ?>">Beli</a>
 								</td>
 							</tr>
                         <?php } ?>

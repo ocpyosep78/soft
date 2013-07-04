@@ -62,9 +62,9 @@ $(document).ready(function() {
 			description: { required: true }
 		},
 		messages: {
-			email: { required: 'Silakan masukkan email Anda', email: 'Email tidak valid' },
-			subject: { required: 'Silakan masukkan judul / subyek yang Anda inginkan' },
-			description: { required: 'Silakan tambahkan deskripsi Anda' }
+			email: { required: 'Silahkan mengisi field ini', email: 'Email tidak valid' },
+			subject: { required: 'Silahkan mengisi field ini' },
+			description: { required: 'Silahkan mengisi field ini' }
 		}
 	});
 	$('.btn-item-submit').click(function() {

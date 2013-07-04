@@ -22,7 +22,6 @@ if ($array_url[0] != 'panel') {
 	$route['capthca'] = "website/capthca";
 	$route['capthca/(:any)'] = "website/capthca";
 	$route['contact'] = "website/contact";
-	$route['pages/(:any)'] = "website/pages";
 }
 
 $route['default_controller'] = "website/home";

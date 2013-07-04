@@ -488,7 +488,11 @@ LintasApps.com
                 exit;
 			} else {
 				$_SESSION['email'] = $email;
-				header("Location: ".base_url('item/buy/'.$cdata['item_id']) . '?error=1');
+				if ( !empty($_GET['tmp']) ) {
+					header("Location: ".base_url('item/'.$cdata['item_id']) . '?error=1');
+				} else {
+					header("Location: ".base_url('item/buy/'.$cdata['item_id']) . '?error=1');
+				}
 			}
 		}
 		

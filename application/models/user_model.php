@@ -109,11 +109,11 @@
                 $param['is_custom'] .= 
 				'<img class="cursor confirm" src="'.base_url('static/img/button_confirm.png').'" style="width: 15px; height: 16px;" alt="confirm"> ' .
 				'<img class="cursor banned" src="'.base_url('static/img/button_cancel.png').'" style="width: 15px; height: 16px;" alt="banned"> ';
-                }elseif (in_array($row['is_active'], array(STATUS_USER_CONFIRM))) {
+            }elseif (in_array($row['is_active'], array(STATUS_USER_CONFIRM))) {
                 $param['is_custom']  = (isset($param['is_custom'])) ? $param['is_custom'] : '';
                 $param['is_custom'] .=
 				'<img class="cursor banned" src="'.base_url('static/img/button_cancel.png').'" style="width: 15px; height: 16px;" alt="banned"> ';
-                }elseif (in_array($row['is_active'], array(STATUS_USER_BANNED))) {
+            }elseif (in_array($row['is_active'], array(STATUS_USER_BANNED))) {
                 $param['is_custom']  = (isset($param['is_custom'])) ? $param['is_custom'] : '';
                 $param['is_custom'] .= 
 				'<img class="cursor confirm" src="'.base_url('static/img/button_confirm.png').'" style="width: 15px; height: 16px;" alt="confirm"> ';
@@ -139,28 +139,10 @@
                 $user = $this->get_by_id(array( 'id' => $temp['id'] ));
                 $this->set_session($user);
             }
-        }
+		}
 		
-        /* Region User CAPTCHA  */
-        function captcha_required()
-        {
-            $str = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $shuffled = str_shuffle($str);
-            $vals = array(
-            'word'	 => substr($shuffled,0,6),
-            'img_path'	 => './captcha/',
-            'img_url'	 => $this->config->item('base_url')."/captcha/",
-            'font_path'	 => './system/fonts/texb.ttf',
-            'img_width'	 => 150,
-            'img_height' => 30,
-            'expiration' => 7200
-            );
-            
-            $cap = create_captcha($vals);
-            return $cap;
-        }
-        
         /*	Region User Session */
+        
         function login_user_required() {
             $user = $this->get_session();
             
@@ -213,4 +195,4 @@
 		}
 		
         /*	End Region User Session */
-    }        
+    }    

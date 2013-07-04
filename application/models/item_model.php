@@ -161,6 +161,11 @@
             if (!empty($row['filename'])) {
                 $row['array_filename'] = json_decode($row['filename']);
             }
+			
+            // item screenshot
+            if (!empty($row['screenshot'])) {
+                $row['array_screenshot'] = json_decode($row['screenshot']);
+            }
             
             // link author
 			$row['author_link'] = '#';
