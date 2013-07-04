@@ -333,6 +333,7 @@
 					'invoice_no' => $invoice_no,
 					'currency' => 'IDR',
 					'payment_name' => 'doku',
+					'ref_id' => $row['transidmerchant'],
 					'payment_date' => $this->config->item('current_datetime')
 				);
 				$this->User_Item_model->update($param_update);

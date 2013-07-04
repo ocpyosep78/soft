@@ -199,7 +199,7 @@
 			$item = $this->Item_model->get_by_id(array( 'id' => $param['item_id'] ));
 			
 			$is_owner = false;
-			if ($item['user_id'] == @$user['id']) {
+			if (isset($item['user_id']) && $item['user_id'] == @$user['id']) {
 				$is_owner = true;
 			}
 			

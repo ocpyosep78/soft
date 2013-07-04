@@ -312,7 +312,7 @@
                     Func.show_notice({ title: 'Informasi', text: json.error.message });
 				} else {
                     div.removeClass('addedfile').addClass('completefile').find('b').html("100%");
-                    div.append('<br><img src="' + json.relativePath + '/' + json.thumbName + '">');
+                    div.append('<br><img src="/' + json.relativePath + '/' + json.thumbName + '">');
                     div.append('<input type="hidden" name="item_screenshot[]" value="' + json.new_dir + '/' + json.fileName + '">');
                 }
                 
