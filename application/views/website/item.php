@@ -20,6 +20,8 @@
 		$is_buy = $this->User_Item_model->is_buy(array( 'user_id' => $user['id'], 'item_id' => $item['id'] ));
     }
 	
+	$is_owner = $this->User_model->is_owner(array( 'item_id' => $item_id ));
+	
 	//SEMENTARA
 	$cdata = array('item_id' => $item['id']);
 	$checkout_id = empty($_SESSION['checkout_id']) ? 0 : $_SESSION['checkout_id'];
@@ -210,12 +212,14 @@
                 </div>	
             </div>
 			
+			<?php if ($is_owner) { ?>
             <div class="row-fluid form-tooltip">
                 <div class="span12">
                     <h4>Pilihan</h4>
                     <a href="<?php echo base_url('post/'.$item['id']); ?>">Ubah Data</a>
                 </div>	
             </div>
+			<?php } ?>
         </div>		
     </div></div>
     

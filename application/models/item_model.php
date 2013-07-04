@@ -163,8 +163,16 @@
             }
 			
             // item screenshot
+			$row['array_screenshot'] = array();
             if (!empty($row['screenshot'])) {
-                $row['array_screenshot'] = json_decode($row['screenshot']);
+				$array_temp = json_decode($row['screenshot']);
+				foreach ($array_temp as $screenshot) {
+					$row['array_screenshot'][] = array(
+						'name' => $screenshot,
+						'basename' => basename($screenshot),
+						'link' => base_url( 'screenshots/'.$screenshot
+					) );
+				}
             }
             
             // link author

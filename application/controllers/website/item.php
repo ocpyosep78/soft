@@ -331,6 +331,7 @@
 					'price' => $param_update['totalamount'],
 					'item_id' => $checkout['detail']->item_id,
 					'invoice_no' => $invoice_no,
+					'currency' => 'IDR',
 					'payment_name' => 'doku',
 					'payment_date' => $this->config->item('current_datetime')
 				);

@@ -9,6 +9,12 @@
 	$item_id = (isset($match[1])) ? $match[1] : 0;
 	$item = $this->Item_model->get_by_id(array( 'id' => $item_id ));
 	
+	$is_owner = $this->User_model->is_owner(array( 'item_id' => $item_id ));
+	if (! empty($item_id) && ! $is_owner) {
+		header("Location: ".base_url('login'));
+		exit;
+	}
+	
 	$array_category = $this->Category_model->get_array(array( 'limit' => 1000 ));
 	$array_platform = $this->Platform_model->get_array(array( 'limit' => 1000 ));
 	$platforms=array();
@@ -25,6 +31,7 @@
 
 <?php $this->load->view( 'website/common/meta' ); ?>
 <style>
+	.cursor { cursor: pointer !important; }
     fieldset.detail .control-group {margin-bottom:0;}
     fieldset.screenshot { background-color:#eee; padding:0 5px;}
     fieldset.files { background-color:#ddd; padding-left:10px;}
@@ -47,6 +54,7 @@
 			</div>
             
             <form id="form-item">
+                <input type="hidden" name="id" value="0" />
                 <input type="hidden" name="action" value="update" />
                 
                 <h3>Detail Aplikasi Anda</h3>
@@ -217,7 +225,7 @@
             
             uploader.bind('FilesAdded', function(up, files) {
                 $.each(files, function(i, file) {
-                    $('#filelist').append('<div class="addedfile uploadfile" id="' + file.id + '"><span class="filename">' + file.name + '</span> (' + plupload.formatSize(file.size) + ') <b></b>' + '</div>');
+                    $('#filelist').append('<div class="addedfile uploadfile" id="' + file.id + '"><a class="cursor remove-uploadfile">(remove)</a> <span class="filename">' + file.name + '</span> <b></b>' + '</div>');
                 });
                 up.refresh(); // Reposition Flash/Silverlight
                 $('#uploadfiles').click();
@@ -239,10 +247,14 @@
                 if (json.error != null && json.error.code != null) {
                     div.remove();
                     Func.show_notice({ title: 'Informasi', text: json.error.message });
-                    } else {
+				} else {
                     div.removeClass('addedfile').addClass('completefile').find('b').html("100%");
-                    div.after('<input type="hidden" name="item_file[]" value="' + json.new_dir + '/' + json.fileName + '">');
+                    div.append('<input type="hidden" name="item_file[]" value="' + json.new_dir + '/' + json.fileName + '">');
                 }
+				
+				div.find('.remove-uploadfile').click(function() {
+					$(this).parents('.uploadfile').remove();
+				});
                 
                 //submit form
                 var $form = $("#form-item");
@@ -276,7 +288,7 @@
             
             uploader2.bind('FilesAdded', function(up, files) {
                 $.each(files, function(i, file) {
-                    $('#filelist1').append('<div class="addedfile uploadfile" id="' + file.id + '"><span class="filename">' + file.name + '</span> (' + plupload.formatSize(file.size) + ') <b></b>' + '</div>');
+                    $('#filelist1').append('<div class="addedfile uploadfile" id="' + file.id + '"><a class="cursor remove-uploadfile">(remove)</a> <span class="filename">' + file.name + '</span> <b></b>' + '</div>');
                 });
                 up.refresh(); // Reposition Flash/Silverlight
                 $('#uploadfiles1').click();
@@ -301,9 +313,13 @@
 				} else {
                     div.removeClass('addedfile').addClass('completefile').find('b').html("100%");
                     div.append('<br><img src="' + json.relativePath + '/' + json.thumbName + '">');
-                    div.after('<input type="hidden" name="item_screenshot[]" value="' + json.new_dir + '/' + json.fileName + '">');
+                    div.append('<input type="hidden" name="item_screenshot[]" value="' + json.new_dir + '/' + json.fileName + '">');
                 }
                 
+				div.find('.remove-uploadfile').click(function() {
+					$(this).parents('.uploadfile').remove();
+				});
+				
                 //submit form
                 var $form = $("#form-item");
                 if ( $("#filelist1 .addedfile").length == 0 && $form.data('isSubmit') == true ) {
@@ -391,12 +407,43 @@
 			if (raw.length > 10) {
 				eval('var item = ' + raw);
 				
+				$('#form-item [name="id"]').val(item.id);
 				$('#form-item [name="name"]').val(item.name);
 				$('#form-item [name="price"]').val(item.price);
 				$('#form-item [name="platform_id"]').val(item.platform_id);
 				$('#form-item [name="category_id"]').val(item.category_id);
 				$('#form-item [name="description"]').val(item.description);
 				$('#form-item [name="thumbnail"]').val(item.thumbnail);
+				$('#form-item [name="platform_id"]').change();
+				
+				// screenshot
+				var content = '';
+				for (var i = 0; i < item.array_screenshot.length; i++) {
+					var file = item.array_screenshot[i];
+					content += '<div class="uploadfile">';
+					content += '<span class="filename"><a class="cursor remove-uploadfile">(remove)</a> ' + file.basename + '</span> <strong>100%</strong><br>';
+					content += '<img src="' + file.link + '" />';
+					content += '<input type="hidden" name="item_screenshot[]" value="' + file.name + '">';
+					content += '</div>';
+				}
+				$('#filelist1').html(content);
+				
+				// file
+				var content = '';
+				for (var i = 0; i < item.array_filename.length; i++) {
+					var file = item.array_filename[i];
+					var filename = file.replace(new RegExp(/^\d+\/\d+\/\d+\//gi), '');
+					
+					content += '<div class="uploadfile">';
+					content += '<span class="filename"><a class="cursor remove-uploadfile">(remove)</a> ' + filename + '</span> <strong>100%</strong><br>';
+					content += '<input type="hidden" name="item_file[]" value="' + file.name + '">';
+					content += '</div>';
+				}
+				$('#filelist').html(content);
+				
+				$('.remove-uploadfile').click(function() {
+					$(this).parents('.uploadfile').remove();
+				});
 			}
 		});
     </script>

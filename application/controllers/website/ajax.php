@@ -21,9 +21,8 @@ class ajax extends CI_Controller {
 		
 		$result = array('status' => false, 'message' => '');
 		if ($action == 'update') {
-			if (empty($_POST['id'])) {
-				$_POST['item_status_id'] = ITEM_STATUS_PENDING;
-			}
+			$_POST['item_status_id'] = ITEM_STATUS_PENDING;
+			
 			if (isset($_POST['item_file'])) {
 				$_POST['filename'] = json_encode($_POST['item_file']);
 			}
@@ -31,10 +30,12 @@ class ajax extends CI_Controller {
 				$_POST['screenshot'] = json_encode($_POST['item_screenshot']);
 			}
 			
-			$_POST['user_id'] = empty($user['id'])?0:$user['id'];
+			$_POST['user_id'] = empty($user['id']) ? 0 : $user['id'];
+			
             // Strip HTML and PHP tags from a string
             $_POST['description'] = strip_tags($_POST['description']);
 			$result = $this->Item_model->update($_POST);
+			
 			if ($result['status']) {
 			
 				$result['link_next'] = base_url('post/confirm/'.$result['id']);

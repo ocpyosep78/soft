@@ -194,5 +194,17 @@
 			$_SESSION['is_human'] = 0;
 		}
 		
+		function is_owner($param) {
+			$user = $this->User_model->get_session();
+			$item = $this->Item_model->get_by_id(array( 'id' => $param['item_id'] ));
+			
+			$is_owner = false;
+			if ($item['user_id'] == @$user['id']) {
+				$is_owner = true;
+			}
+			
+			return $is_owner;
+		}
+		
         /*	End Region User Session */
     }    
