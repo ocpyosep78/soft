@@ -13,15 +13,29 @@
         $categoryId =  mysql_real_escape_string(urldecode($this->uri->segment(3)));
         //get category 
         $categoryData = $this->Category_model->get_by_id(array( 'id' => $categoryId ));
-        $titlePages   = "Download Aplikasi Dengan Category ". $categoryData['name'] ." | LintasApps.com ";
-        $descriptionPages = "Anda memilih aplikasi dengan category ". $categoryData['name'];
-    }else if(!empty($isParamItem) && $isParamItem == 'item')
+        if(!empty($categoryData))
+        {
+            $titlePages   = "Download Aplikasi Dengan Category ". $categoryData['name'] ." | LintasApps.com ";
+            $descriptionPages = "Anda memilih aplikasi dengan category ". $categoryData['name'];
+        }else
+        {
+            $titlePages = "Portal Download Aplikasi,Foto,Video | LintasApps.com";
+            $descriptionPages = "Portal Download Aplikasi,Foto,Video | LintasApps.com";
+        }    
+    }else if(!empty($isParamItem) && $isParamItem == 'item' && $this->uri->segment(2)!='buy')
     {
         $itemId = mysql_real_escape_string(urldecode($this->uri->segment(2)));
         //get item detail
         $itemData  = $this->Item_model->get_by_id(array( 'id' => $itemId ));
-        $titlePages   = "Download Aplikasi ". $itemData['name'] ." dengan harga ". rupiah($itemData['price']) ."| LintasApps.com ";
-        $descriptionPages = nl2br(limit_words($itemData['description'], 20));
+        if(!empty($itemData))
+        {
+            $titlePages   = "Download Aplikasi ". $itemData['name'] ." dengan harga ". rupiah($itemData['price']) ."| LintasApps.com ";
+            $descriptionPages = nl2br(limit_words($itemData['description'], 20));
+        }else
+        {
+            $titlePages = "Portal Download Aplikasi,Foto,Video | LintasApps.com";
+            $descriptionPages = "Portal Download Aplikasi,Foto,Video | LintasApps.com";
+        }
     }else if(!empty($isParamItem) && $isParamItem == 'post')
     {
         $titlePages   = "Upload Aplikasi Milik Anda di | LintasApps.com ";
