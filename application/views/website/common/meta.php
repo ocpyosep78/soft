@@ -1,11 +1,42 @@
+<?php
+    $isParam = $this->uri->segment(1);
+    $isParamCategory = $this->uri->segment(2);
+    $isParamItem = $this->uri->segment(1);
+    if(!empty($isParam) && $isParam == 'author')
+    {
+        $titlePages = urldecode($this->uri->segment(2));
+        $titlePages .= "Download Aplikasi Milik ".$titlePages." | LintasApps.com ";
+        $descriptionPages = "Anda memilih aplikasi dengan author ". $titlePages;
+        
+    }else if(!empty($isParamCategory) && $isParamCategory == 'category')
+    {
+        $categoryId =  mysql_real_escape_string(urldecode($this->uri->segment(3)));
+        //get category 
+        $categoryData = $this->Category_model->get_by_id(array( 'id' => $categoryId ));
+        $titlePages   = "Download Aplikasi Dengan Category ". $categoryData['name'] ." | LintasApps.com ";
+        $descriptionPages = "Anda memilih aplikasi dengan category ". $categoryData['name'];
+    }else if(!empty($isParamItem) && $isParamItem == 'item')
+    {
+        $itemId = mysql_real_escape_string(urldecode($this->uri->segment(2)));
+        //get item detail
+        $itemData  = $this->Item_model->get_by_id(array( 'id' => $itemId ));
+        $titlePages   = "Download Aplikasi ". $itemData['name'] ." dengan harga ". rupiah($itemData['price']) ."| LintasApps.com ";
+        $descriptionPages = nl2br(limit_words($itemData['description'], 20));
+    }
+    else
+    {
+        $titlePages = "Portal Download Aplikasi,Foto,Video | LintasApps.com";
+        $descriptionPages = "Portal Download Aplikasi,Foto,Video | LintasApps.com";
+    }
+    ?>
 <!DOCTYPE html>
 <html lang="en"><head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<title>Portal Download Aplikasi,Foto,Video | LintasApps.com</title>
+	<title><?php echo $titlePages;?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="description" content="<?php echo $descriptionPages;?>">
+	<meta name="author" content="LintasApps">
 	<script>var web = { host: '<?php echo base_url(); ?>' } </script>
 	<link rel="stylesheet" href="<?php echo base_url('static/theme/job_board/css/job_blue.responsive.css'); ?>" title="job_blue" type="text/css">
 	<link rel="stylesheet" href="<?php echo base_url('static/lib/gritter/jquery.gritter.css'); ?>" title="job_blue" type="text/css">
