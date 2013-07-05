@@ -22,6 +22,22 @@
         $itemData  = $this->Item_model->get_by_id(array( 'id' => $itemId ));
         $titlePages   = "Download Aplikasi ". $itemData['name'] ." dengan harga ". rupiah($itemData['price']) ."| LintasApps.com ";
         $descriptionPages = nl2br(limit_words($itemData['description'], 20));
+    }else if(!empty($isParamItem) && $isParamItem == 'post')
+    {
+        $titlePages   = "Upload Aplikasi Milik Anda di | LintasApps.com ";
+        $descriptionPages = "Dapatkan tambahan penghasilan dari aplikasi yang Anda buat, kami yang akan mengurus penjualannya";
+    }else if(!empty($isParamItem) && $isParamItem == 'login')
+    {
+        $titlePages   = "Mendaftar Atau Login di | LintasApps.com";
+        $descriptionPages = "Daftarkan diri Anda di  | LintasApps.com  atau silakan Login bagi Anda yang telah terdaftar";
+    }else if(!empty($isParamItem) && $isParamItem == 'contact')
+    {
+        $titlePages   = "Hubungi Kami di | LintasApps.com";
+        $descriptionPages = "Jika Anda ingin bertanya atau mengalami kesulitan tanyakan pada kami";
+    }else if(!empty($isParamItem) && $isParamItem == 'browse')
+    {
+        $titlePages   = "Download Aplikasi di | LintasApps.com ";
+        $descriptionPages = "Pilihlah aplikasi dari | LintasApps.com, semudah anda menekan tombol beli untuk Anda miliki";
     }
     else
     {
