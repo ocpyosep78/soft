@@ -324,12 +324,13 @@
 				$checkout = $this->Checkout_Data_model->get_session();
 				$invoice_no = $this->User_Item_model->get_max_no();
 				$user = $this->User_model->get_session();
+				$item = $this->Item_model->get_by_id(array( 'id' => $checkout['detail']->item_id ));
 				
 				// add invoice
 				$param_update = array(
 					'user_id' => @$user['id'],
 					'price' => $param_update['totalamount'],
-					'item_id' => $checkout['detail']->item_id,
+					'item_id' => $item['id'],
 					'invoice_no' => $invoice_no,
 					'currency' => 'IDR',
 					'payment_name' => 'doku',
@@ -337,6 +338,14 @@
 					'payment_date' => $this->config->item('current_datetime')
 				);
 				$this->User_Item_model->update($param_update);
+				
+				// add saldo
+				$param_update = array(
+					'id' => $item['user_id'],
+					'saldo_rupiah' => $param_update['totalamount']
+				);
+				$this->User_model->update_saldo($param_update);
+				
 				$this->doku->set_session($param_update);
 			} else {
 				$param_update['id'] = $row['id'];

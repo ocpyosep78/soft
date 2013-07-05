@@ -4,7 +4,7 @@
         function __construct() {
             parent::__construct();
             
-            $this->field = array('id', 'name', 'email', 'fullname', 'passwd', 'address', 'deposit','is_active', 'reset');
+            $this->field = array('id', 'name', 'email', 'fullname', 'passwd', 'address', 'saldo_rupiah', 'saldo_dollar', 'is_active', 'reset');
             
             /*	User Info */
             /*	User Session
@@ -140,6 +140,23 @@
                 $this->set_session($user);
             }
 		}
+		
+		/*	Region Saldo */
+		
+		function update_saldo($param) {
+			$user = $this->get_by_id(array( 'id' => $param['id'] ));
+			
+			$update['id'] = $user['id'];
+			if (isset($param['saldo_rupiah'])) {
+				$update['saldo_rupiah'] = $user['saldo_rupiah'] + $param['saldo_rupiah'];
+			}
+			if (isset($param['saldo_dollar'])) {
+				$update['saldo_dollar'] = $user['saldo_dollar'] + $param['saldo_dollar'];
+			}
+			$this->update($update);
+		}
+		
+		/*	End Region Saldo */
 		
         /*	Region User Session */
         

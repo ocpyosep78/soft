@@ -123,4 +123,16 @@ if (! function_exists('GetFormatDate')) {
 		return date($Param['FormatDate'], strtotime($String));
 	}
 }
+
+if (! function_exists('SwapDate')) {
+	function SwapDate($value) {
+		if (empty($value)) {
+			return '';
+		}
+		
+		$array = explode('-', $value);
+		$result = $array[2].'-'.$array[1].'-'.$array[0];
+		return $result;
+	}
+}
 ?>

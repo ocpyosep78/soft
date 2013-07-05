@@ -52,6 +52,7 @@
 				
 				<ul class="nav nav-pills">
 					<?php if ($is_login) { ?>
+					<li><a href="<?php echo base_url('rekap'); ?>">Hasil Jualan</a></li>
 					<li><a href="<?php echo base_url('history'); ?>">History</a></li>
 					<?php } ?>
 					<li><a href="<?php echo base_url('browse'); ?>">Browse</a></li>

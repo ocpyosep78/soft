@@ -1015,4 +1015,12 @@
             return $rupiah;
         }
     }
+	
+    // dollar format
+    if (! function_exists('dollar')) {
+        function dollar($value) {
+			$result = '$ '.number_format($value, 2, '.', ',');
+			return $result;
+        }
+    }
 ?>
