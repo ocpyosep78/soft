@@ -199,8 +199,6 @@
 			
 					<div class="span4 text-center ll">
 						<form method="post" action="<?php echo DOKU_HOST; ?>" id="form-doku">
-							<input type="hidden" name="doku_prepare" value="0" />
-							
 							<input type="hidden" name="BASKET" value="<?php echo $item['name'].','.$doku_money.',1,'.$doku_money; ?>" />
 							<input type="hidden" name="MALLID" value="616" />
 							<input type="hidden" name="CHAINMERCHANT" value="NA" />
@@ -214,19 +212,20 @@
 							<input type="hidden" name="SESSIONID" />
 							<input type="hidden" name="PAYMENTCHANNEL" />
 							<input type="hidden" name="EMAIL" value="<?php echo @$user['email']; ?>" />
-							<input type="hidden" name="NAME" value="No Name" />
-							<input type="hidden" name="ADDRESS" value="No Address" />
+							<input type="hidden" name="NAME" value="<?php echo @$user['fullname']; ?>" />
+							<input type="hidden" name="ADDRESS" value="<?php echo @$user['address']; ?>" />
 							<input type="hidden" name="COUNTRY" value="360" />
-							<input type="hidden" name="STATE" value="Jakarta" />
-							<input type="hidden" name="CITY" value="JAKARTA SELATAN" />
-							<input type="hidden" name="PROVINCE" value="JAKARTA" />
-							<input type="hidden" name="ZIPCODE" value="12000" />
-							<input type="hidden" name="HOMEPHONE" value="0217998391" />
-							<input type="hidden" name="MOBILEPHONE" value="0217998391" />
-							<input type="hidden" name="WORKPHONE" value="0217998391" />
-							<input type="hidden" name="BIRTHDATE" value="19880101" />
+							<input type="hidden" name="STATE" value="<?php echo @$user['propinsi']; ?>" />
+							<input type="hidden" name="CITY" value="<?php echo @$user['city']; ?>" />
+							<input type="hidden" name="PROVINCE" value="<?php echo @$user['propinsi']; ?>" />
+							<input type="hidden" name="ZIPCODE" value="<?php echo @$user['zipcode']; ?>" />
+							<input type="hidden" name="HOMEPHONE" value="<?php echo @$user['phone']; ?>" />
+							<input type="hidden" name="MOBILEPHONE" value="<?php echo @$user['mobile']; ?>" />
+							<input type="hidden" name="WORKPHONE" value="<?php echo @$user['office']; ?>" />
+							<input type="hidden" name="BIRTHDATE" value="<?php echo preg_replace('/([^0-9]+)/i', '', @$user['birthdate']); ?>" />
 							
-							<button type="submit" class="btn btn-large btn-warning btn-xlarge"><span class="doku">Debit/Kredit</span></button>
+							<button type="button" class="btn btn-large btn-warning btn-xlarge btn-prepare"><span>Credit Card</span></button>
+							<button type="submit" class="btn btn-large btn-warning btn-xlarge hide"><span class="doku">Credit Card</span></button>
 							
 							<!--
 							<input type="submit" class="btn btn-medium btn-primary" name="submit" value="Beli di Doku">
@@ -259,6 +258,76 @@
     </div></div>
     
     <?php $this->load->view( 'website/common/footer' ); ?>
+	
+	<div id="win-doku" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+		<div class="modal-header">
+			<a href="#" class="close" data-dismiss="modal">&times;</a>
+			<h3>Form Pembayaran Doku</h3>
+		</div>
+		<div class="modal-body" style="padding-left: 0px;">
+			<div class="pad-alert" style="padding-left: 15px;"></div>
+			<form class="form-horizontal" style="padding-left: 0px;">
+				<div class="control-group">
+					<label class="control-label" for="input_fullname">Nama</label>
+					<div class="controls">
+						<input type="text" id="input_fullname" name="fullname" placeholder="Nama" class="span4" rel="twipsy" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input_address">Alamat</label>
+					<div class="controls">
+						<input type="text" id="input_address" name="address" placeholder="Alamat" class="span4" rel="twipsy" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input_city">Kota</label>
+					<div class="controls">
+						<input type="text" id="input_city" name="city" placeholder="Kota" class="span4" rel="twipsy" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input_propinsi">Propinsi</label>
+					<div class="controls">
+						<input type="text" id="input_propinsi" name="propinsi" placeholder="Propinsi" class="span4" rel="twipsy" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input_zipcode">Kodepos</label>
+					<div class="controls">
+						<input type="text" id="input_zipcode" name="zipcode" placeholder="Kodepos" class="span4" rel="twipsy" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input_phone">Telp Rumah</label>
+					<div class="controls">
+						<input type="text" id="input_phone" name="phone" placeholder="Telepon Rumah" class="span4" rel="twipsy" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input_mobile">Telp Genggam</label>
+					<div class="controls">
+						<input type="text" id="input_mobile" name="mobile" placeholder="Telepon Genggam" class="span4" rel="twipsy" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input_office">Telp Kantor</label>
+					<div class="controls">
+						<input type="text" id="input_office" name="office" placeholder="Telepon Kantor" class="span4" rel="twipsy" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input_birthdate">Tanggal Lahir</label>
+					<div class="controls">
+						<input type="text" id="input_birthdate" name="birthdate" placeholder="DD-MM-YYYY" class="span4" rel="twipsy" />
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a class="btn cursor cancel">Cancel</a>
+			<a class="btn cursor save btn-primary">OK</a>
+		</div>
+	</div>
     
 	<script type="text/javascript">
 		function randomString(STRlen) {
@@ -297,6 +366,32 @@
 					doku.get_invoice();
 					doku.get_request_datetime();
 					doku.get_session();
+					
+					// form validation
+					$("#win-doku form").validate({
+						rules: {
+							fullname: { required: true },
+							address: { required: true },
+							city: { required: true },
+							propinsi: { required: true },
+							zipcode: { required: true },
+							phone: { required: true },
+							mobile: { required: true },
+							office: { required: true },
+							birthdate: { required: true }
+						},
+						messages: {
+							fullname: { required: 'Mahon memasukkan nama' },
+							address: { required: 'Mahon memasukkan alamat' },
+							city: { required: 'Mahon memasukkan kota' },
+							propinsi: { required: 'Mahon memasukkan propinsi' },
+							zipcode: { required: 'Mahon memasukkan kodepos' },
+							phone: { required: 'Mahon memasukkan telepon rumah' },
+							mobile: { required: 'Mahon memasukkan telepon genggam' },
+							office: { required: 'Mahon memasukkan telepon kantor' },
+							birthdate: { required: 'Mahon memasukkan tanggal lahir' }
+						}
+					});
 				}
 			}
 			doku.init();
@@ -352,8 +447,7 @@
 				return true;
 			});
 			
-			$("#form-doku").submit(function() {
-				doku.get_word();
+			$('#form-doku .btn-prepare').click(function() {
 				var form_email = $("#user_email1");
 				if (form_email.length > 0) {
 					var form = $("#form-payment");
@@ -377,23 +471,55 @@
 					$('#form-doku [name="EMAIL"]').val(form_email.val());
 				}
 				
-				// doku prepare
-				var doku_prepare = $('#form-doku [name="doku_prepare"]').val();
-				if (doku_prepare == 0) {
-					var param = Site.Form.GetValue('form-doku');
-					if (form_email.length > 0) {
-						param.email = form_email.val();
-					}
-					
-					Func.ajax({ url: web.host + 'item/doku_prepare', param: param, callback: function(result) {
-						if (result.status) {
-							$('#form-doku [name="doku_prepare"]').val(1);
-							$("#form-doku .btn-primary").click();
-						}
-					} });
-					
-					return false;
+				// set data to form
+				var param = Site.Form.GetValue('form-doku');
+				$('#win-doku [name="fullname"]').val(param.NAME);
+				$('#win-doku [name="address"]').val(param.ADDRESS);
+				$('#win-doku [name="city"]').val(param.CITY);
+				$('#win-doku [name="propinsi"]').val(param.PROVINCE);
+				$('#win-doku [name="zipcode"]').val(param.ZIPCODE);
+				$('#win-doku [name="phone"]').val(param.HOMEPHONE);
+				$('#win-doku [name="mobile"]').val(param.MOBILEPHONE);
+				$('#win-doku [name="office"]').val(param.WORKPHONE);
+				$('#win-doku [name="birthdate"]').val(param.BIRTHDATE);
+				$('#win-doku').modal();
+			});
+			$('#win-doku .save').click(function() {
+				if (! $('#win-doku form').valid()) {
+					return;
 				}
+				
+				// set config doku
+				doku.get_word();
+				
+				var param = Site.Form.GetValue('win-doku');
+				param.email = $('#form-doku [name="EMAIL"]').val();
+				param.birthdate = Func.SwapDate(param.birthdate);
+				param.TRANSIDMERCHANT = $('#form-doku [name="TRANSIDMERCHANT"]').val();
+				param.WORDS = $('#form-doku [name="WORDS"]').val();
+				
+				Func.ajax({ url: web.host + 'item/doku_prepare', param: param, callback: function(result) {
+					if (result.status) {
+						var birthdate = param.birthdate;
+						birthdate = Func.SwapDate(birthdate);
+						birthdate = birthdate.replace(new RegExp(/[^0-9]/gi), '');
+						
+						$('#form-doku [name="NAME"]').val(param.fullname);
+						$('#form-doku [name="ADDRESS"]').val(param.address);
+						$('#form-doku [name="CITY"]').val(param.city);
+						$('#form-doku [name="STATE"]').val(param.propinsi);
+						$('#form-doku [name="PROVINCE"]').val(param.propinsi);
+						$('#form-doku [name="ZIPCODE"]').val(param.zipcode);
+						$('#form-doku [name="HOMEPHONE"]').val(param.phone);
+						$('#form-doku [name="MOBILEPHONE"]').val(param.mobile);
+						$('#form-doku [name="WORKPHONE"]').val(param.office);
+						$('#form-doku [name="BIRTHDATE"]').val(birthdate);
+						$("#form-doku").submit();
+					}
+				} });
+			});
+			$('#win-doku .cancel').click(function() {
+				$('#win-doku').modal('hide');
 			});
 		});	
 	

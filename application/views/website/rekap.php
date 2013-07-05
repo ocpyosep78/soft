@@ -1,7 +1,9 @@
 <?php
+	$user = $this->User_model->get_session();
 	$date_start = (isset($_POST['date_start'])) ? $_POST['date_start'] : date("01-m-Y");
 	$date_end = (isset($_POST['date_end'])) ? $_POST['date_end'] : date("d-m-Y");
 	
+	$param_rekap['item_user_id'] = $user['id'];
 	$param_rekap['date_start'] = SwapDate($date_start);
 	$param_rekap['date_end'] = SwapDate($date_end);
 	$param_rekap['limit'] = 1000;
@@ -61,6 +63,8 @@
 						<td style="text-align: center;"><?php echo rupiah($total_rupiah); ?></td>
 						<td style="text-align: center; min-width: 70px;"><?php echo dollar($total_dollar); ?></td></tr>
 					</table>
+					<?php } else { ?>
+					<div>Jualan nya belum laku bro, upload yang banyak untuk peluang yang lebih baser</div>
 					<?php } ?>
 				</div>
 			</div>

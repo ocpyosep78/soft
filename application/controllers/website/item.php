@@ -289,9 +289,28 @@
 			$param['words'] = $_POST['WORDS'];
 			$param['trxstatus'] = 'Requested';
 			
+			/*
 			// add login
 			if (isset($_POST['email']))
 				$this->User_model->force_login_buyer(array( 'email' => $_POST['email'] ));
+			/*	*/
+			
+			$is_login = $this->User_model->is_login();
+			if ($is_login) {
+				$user = $this->User_model->get_session();
+				$update_user = $_POST;
+				$update_user['id'] = $user['id'];
+				$this->User_model->update($update_user);
+				
+				// renew session
+				$user = $this->User_model->get_by_id(array( 'id' => $user['id'] ));
+				$this->User_model->get_session($user);
+			} else {
+				$user = $this->User_model->get_by_id(array( 'email' => $_POST['email'] ));
+				$update_user = $_POST;
+				$update_user['id'] = $user['id'];
+				$this->User_model->update($update_user);
+			}
 			
 			$transaction = $this->Doku_model->get_by_id(array( 'transidmerchant' => $param['transidmerchant'], 'trxstatus' => 'Requested' ));
 			if (count($transaction) > 0) {
@@ -327,7 +346,7 @@
 				$item = $this->Item_model->get_by_id(array( 'id' => $checkout['detail']->item_id ));
 				
 				// add invoice
-				$param_update = array(
+				$param_invoice = array(
 					'user_id' => @$user['id'],
 					'price' => $param_update['totalamount'],
 					'item_id' => $item['id'],
@@ -337,28 +356,33 @@
 					'ref_id' => $row['transidmerchant'],
 					'payment_date' => $this->config->item('current_datetime')
 				);
-				$this->User_Item_model->update($param_update);
+				$this->User_Item_model->update($param_invoice);
 				
 				// add saldo
-				$param_update = array(
+				$param_saldo = array(
 					'id' => $item['user_id'],
 					'saldo_rupiah' => $param_update['totalamount']
 				);
-				$this->User_model->update_saldo($param_update);
+				$this->User_model->update_saldo($param_saldo);
 				
-				$this->doku->set_session($param_update);
+				$this->doku->set_session($param_invoice);
 			} else {
 				$param_update['id'] = $row['id'];
 				$param_update['trxstatus'] = 'Failed';
 				$result = $this->Doku_model->update($param_update);
-				$result['message'] = 'Transaksi batal.';
+				
+				// redirect
+				$checkout = $this->Checkout_Data_model->get_session();
+				$link_redirect = base_url('item/'.$checkout['detail']->item_id);
+				header("Location: ".$link_redirect);
+				exit;
 			}
 			
 			$this->load->view( 'website/payment/doku_redirect' );
 		}
 		
 		function doku_result() {
-			$session = $this->doku->get_session($param_update);
+			$session = $this->doku->get_session();
 			$invoice_link = base_url('item/invoice/'.$session['invoice_no']);
 			
 			header("Location: ".$invoice_link);
@@ -469,6 +493,14 @@
 				$invoice_id = mysql_insert_id();
                 $this->User_Item_model->update(array('id' => $invoice_id, 'invoice_no' => $invoice_id));
 				$invoice_no = $invoice_id;
+				
+				// add saldo
+				$item = $this->Item_model->get_by_id(array( 'id' => $cdata['item_id'] ));
+				$param_saldo = array(
+					'id' => $item['user_id'],
+					'saldo_dollar' => $price
+				);
+				$this->User_model->update_saldo($param_saldo);
 				
                 // sent mail
 				$pricestr = number_format($item['price'], 2, '.', ',');

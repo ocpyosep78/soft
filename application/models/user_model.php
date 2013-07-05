@@ -101,7 +101,7 @@
         }
         
         function sync($row, $param = array()) {
-            $row = StripArray($row);
+            $row = StripArray($row, array('birthdate'));
             
             $param['is_edit'] = 1;
             if (in_array($row['is_active'], array(STATUS_USER_NEW))) {
@@ -153,6 +153,7 @@
 			if (isset($param['saldo_dollar'])) {
 				$update['saldo_dollar'] = $user['saldo_dollar'] + $param['saldo_dollar'];
 			}
+			
 			$this->update($update);
 		}
 		

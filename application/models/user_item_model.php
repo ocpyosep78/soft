@@ -57,10 +57,11 @@ class User_Item_model extends CI_Model {
 	function get_array($param = array()) {
 		$array = array();
 		
+		$string_item_user = (!empty($param['item_user_id'])) ? "AND Item.user_id = '".$param['item_user_id']."'" : '';
 		$string_user = (!empty($param['user_id'])) ? "AND UserItem.user_id = '".$param['user_id']."'" : '';
 		$string_item = (!empty($param['item_id'])) ? "AND UserItem.item_id = '".$param['item_id']."'" : '';
-		$string_date_start = (!empty($param['date_start'])) ? "AND UserItem.payment_date >= '".$param['date_start']."'" : '';
-		$string_date_end   = (!empty($param['date_end'])) ? "AND UserItem.payment_date <= '".$param['date_end']."'" : '';
+		$string_date_start = (!empty($param['date_start'])) ? "AND DATE(UserItem.payment_date) >= '".$param['date_start']."'" : '';
+		$string_date_end   = (!empty($param['date_end'])) ? "AND DATE(UserItem.payment_date) <= '".$param['date_end']."'" : '';
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'item_id ASC');
 		$string_limit = GetStringLimit($param);
@@ -72,11 +73,10 @@ class User_Item_model extends CI_Model {
 			LEFT JOIN ".ITEM." Item ON Item.id = UserItem.item_id
 			LEFT JOIN ".USER." Author ON Author.id = Item.user_id
 			LEFT JOIN ".CATEGORY." Category ON Category.id = Item.category_id
-			WHERE 1 $string_user $string_item $string_date_start $string_date_end $string_filter
+			WHERE 1 $string_item_user $string_user $string_item $string_date_start $string_date_end $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
-		
 		$select_result = mysql_query($select_query) or die(mysql_error());
 		while ( $row = mysql_fetch_assoc( $select_result ) ) {
 			$array[] = $this->sync($row, @$param['column']);

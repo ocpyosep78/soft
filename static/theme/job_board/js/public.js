@@ -286,6 +286,18 @@ var Func = {
 		str = '{' + str + '}';
 		return str;
 	},
+	SwapDate: function(Value) {
+		if (Value == null) {
+			return '';
+		}
+		
+		var ArrayValue = Value.split('-');
+		if (ArrayValue.length != 3) {
+			return '';
+		}
+		
+		return ArrayValue[2] + '-' + ArrayValue[1] + '-' + ArrayValue[0];
+	},
 	SetValue: function(Param) {
 		// Func.SetValue({ Action : 'City', ForceID: Param.city_id, Combo: WinGateway.city });
 
