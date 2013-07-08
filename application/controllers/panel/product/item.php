@@ -17,159 +17,134 @@
         function action() {
             $action = (isset($_POST['action'])) ? $_POST['action'] : '';
             unset($_POST['action']);
-            
 			// user
 			$user = $this->User_model->get_session();
 			
             $result = array();
-            if ($action == 'get_item_by_id') {
+            if ($action == 'get_item_by_id') 
+            {
                 $result = $this->Item_model->get_by_id(array('id' => $_POST['id']));
             }
-            else if ($action == 'update') {
-                
-                // picture
-                if (isset($_POST['item_picture']) && is_array($_POST['item_picture'])) {
-                    foreach($_POST['item_picture'] as $value) {
-                        //$picture = $this->Picture_model->update(array('picture_name' => $value));
-                        $picture_name = $value;
-                        
-                        $this->load->helper('resize');
-                        $this->load->helper('watermark');
-                        //watermark original image
-                        //WatermarkImage($this->config->item('base_path').'/static/upload/'.$value,null,get_store(),null,null);
-                        
-                        // small / _s
-                        // 60px X 60px
-                        $originalImages = $this->config->item('base_path').'/static/upload/'.$value;
-                        $imagesInfo     = pathinfo($originalImages);
-                        
-                        $smallNewImages = $imagesInfo['dirname']."/".$imagesInfo['filename']."_s.".$imagesInfo['extension'];
-                        $mediumNewImages = $imagesInfo['dirname']."/".$imagesInfo['filename']."_m.".$imagesInfo['extension'];
-                        $largeNewImages = $imagesInfo['dirname']."/".$imagesInfo['filename']."_l.".$imagesInfo['extension'];
-                        $imageSize      = getimagesize($originalImages);
-                        $widthImage     = $imageSize[0];
-                        $heightImage    = $imageSize[1];
-                        if($widthImage != $heightImage)
-                        {
-                            ImageResize($originalImages, $smallNewImages, 60, 60, 1);
-                            ImageResize($originalImages, $mediumNewImages, 470, 470, 1);
-                            ImageResize($originalImages, $largeNewImages, 800, 800, 1);
-                        }
-                        else
-                        {
-                            ImageResize($originalImages, $smallNewImages, 60, 60, 0);
-                            ImageResize($originalImages, $mediumNewImages, 470, 470, 0);
-                            ImageResize($originalImages, $largeNewImages, 800, 800, 0);
-                        }
-                        WatermarkImage($this->config->item('base_path').'/static/upload/'.$value,'_s','Olshop',60,60,7);
-                        
-                        // medium / _m
-                        // 470px X 470px
-                        WatermarkImage($this->config->item('base_path').'/static/upload/'.$value,'_m','Olshop',470,470,12);
-                        
-                        // large / _l
-                        // 800px X 800px
-                        WatermarkImage($this->config->item('base_path').'/static/upload/'.$value,'_l','Olshop',800,800,16);
-                        
-                        //$this->Item_Picture_model->update(array('item_id' => $result['id'], 'picture_id' => $picture['id']));
-                    }
-                    
-                    // update thumbnail
-                    // $this->Item_model->update(array('id' => $result['id'], 'thumbnail' => $value));
-                    $_POST['thumbnail'] = $value;
+            else if($action == 'del_thumbnail_current')
+            {
+                $dataItem = $this->Item_model->get_by_id(array('id' => $_POST['id']));
+                $thumbnail_current = $dataItem['thumbnail'];
+                //delete thumbnail image
+                if(file_exists($this->config->item('base_path')."/static/upload/".$thumbnail_current))
+                {
+                    unlink($this->config->item('base_path')."/static/upload/".$thumbnail_current);
+                    $_POST['thumbnail']='';
+                    }else{
+                    $_POST['thumbnail']='';
                 }
-                // insert file
-				if (isset($_POST['item_file']) && is_array($_POST['item_file'])) {
-                    $_POST['filename'] = "";
-                    $file ="";
-                    $file .="[";
-					foreach($_POST['item_file'] as $value) {
-						$file .="\"".$value."\",";
-                    }
-                    $file .="]";
-                    $_POST['filename'] = $file;
-                }
-                
-                $_POST['date_update'] = $this->config->item('current_datetime');
-               
                 $result = $this->Item_model->update($_POST);
-                
-                
-                /*
-                    // insert category
-                    $this->Item_Category_model->delete(array('item_id' => $result['id']));
-                    if (is_array($_POST['category_id'])) {
-                    foreach($_POST['category_id'] as $value) {
-                    $this->Item_Category_model->update(array('item_id' => $result['id'], 'category_id' => $value));
-                    }
-                    }
-                    
-                    // insert price
-                    $this->Item_Price_model->delete(array('item_id' => $result['id']));
-                    $this->Item_Price_model->update(array('item_id' => $result['id'], 'currency_id' => $_POST['currency_id'], 'price' => $_POST['price']));
-                    
-                    // insert picture
-                    $this->Item_Picture_model->delete(array('item_id' => $result['id']));
-                    if (isset($_POST['item_picture']) && is_array($_POST['item_picture'])) {
-                    foreach($_POST['item_picture'] as $value) {
-                    $picture = $this->Picture_model->update(array('picture_name' => $value));
-                    
-                    $this->load->helper('resize');
-                    $this->load->helper('watermark');
-                    //watermark original image
-                    //WatermarkImage($this->config->item('base_path').'/static/upload/'.$value,null,get_store(),null,null);
-                    
-                    // small / _s
-                    // 60px X 60px
-                    $originalImages = $this->config->item('base_path').'/static/upload/'.$value;
-                    $imagesInfo     = pathinfo($originalImages);
-                    
-                    $smallNewImages = $imagesInfo['dirname']."/".$imagesInfo['filename']."_s.".$imagesInfo['extension'];
-                    $mediumNewImages = $imagesInfo['dirname']."/".$imagesInfo['filename']."_m.".$imagesInfo['extension'];
-                    $largeNewImages = $imagesInfo['dirname']."/".$imagesInfo['filename']."_l.".$imagesInfo['extension'];
-                    $imageSize      = getimagesize($originalImages);
-                    $widthImage     = $imageSize[0];
-                    $heightImage    = $imageSize[1];
-                    if($widthImage != $heightImage)
-                    {
-                    ImageResize($originalImages, $smallNewImages, 60, 60, 1);
-                    ImageResize($originalImages, $mediumNewImages, 470, 470, 1);
-                    ImageResize($originalImages, $largeNewImages, 800, 800, 1);
-                    }
-                    else
-                    {
-                    ImageResize($originalImages, $smallNewImages, 60, 60, 0);
-                    ImageResize($originalImages, $mediumNewImages, 470, 470, 0);
-                    ImageResize($originalImages, $largeNewImages, 800, 800, 0);
-                    }
-                    WatermarkImage($this->config->item('base_path').'/static/upload/'.$value,'_s','Olshop',60,60,7);
-                    
-                    // medium / _m
-                    // 470px X 470px
-                    WatermarkImage($this->config->item('base_path').'/static/upload/'.$value,'_m','Olshop',470,470,12);
-                    
-                    // large / _l
-                    // 800px X 800px
-                    WatermarkImage($this->config->item('base_path').'/static/upload/'.$value,'_l','Olshop',800,800,16);
-                    
-                    $this->Item_Picture_model->update(array('item_id' => $result['id'], 'picture_id' => $picture['id']));
-                    }
-                    
-                    // update thumbnail
-                    $this->Item_model->update(array('id' => $result['id'], 'thumbnail' => $value));
-                    }
-                    
-                    // insert file
-                    $this->Item_File_model->delete(array('item_id' => $result['id']));
-                    if (isset($_POST['item_file']) && is_array($_POST['item_file'])) {
-					foreach($_POST['item_file'] as $value) {
-                    $file = $this->File_model->get_by_id(array( 'file_name' => $value, 'force_insert' => 1 ));
-                    $this->Item_File_model->update(array( 'item_id'=> $result['id'], 'file_id' => $file['id'] ));
-					}
-                    }
-                */
+                //print_r($dataItem['array_screenshot']);exit;
             }
-            else if ($action == 'delete') {
+            else if($action == 'del_screenshot_current')
+            {
+                $dataItem = $this->Item_model->get_by_id(array('id' => $_POST['id']));
+                $screenshot_current = json_decode($dataItem['screenshot']);
+                $arrRestScreenshot = array();
+                foreach($screenshot_current as $key=>$value)
+                {
+                    if($value == $_POST['screenshot']){
+                        if(file_exists($this->config->item('base_path')."/screenshots/".$value))
+                        {
+                            // file gambar besar
+                            unlink($this->config->item('base_path')."/screenshots/".$value);
+                            
+                        }
+                        else{
+                            $arrRestScreenshot[]=$value;
+                        }
+                        // file thumbnail
+                        $screenshot_mini = pathinfo($this->config->item('base_path')."/screenshots/".$value);
+                        $screenshot_no_ext = basename($screenshot_mini['basename'],".".$screenshot_mini['extension']);
+                        $screenshot_mini_file = $screenshot_mini['dirname']."/".$screenshot_no_ext."_thumb.".$screenshot_mini['extension'];
+                        if(file_exists($screenshot_mini_file))
+                        {
+                            unlink($screenshot_mini_file);
+                        }
+                    }else
+                    {
+                        $arrRestScreenshot[]=$value;
+                    }
+                }
+                //exit;
+                $_POST['screenshot'] = json_encode($arrRestScreenshot);
+                $result = $this->Item_model->update($_POST);
+            }
+            else if($action == 'del_filename_current')
+            {
+                $dataItem = $this->Item_model->get_by_id(array('id' => $_POST['id']));
+                $filename_current = json_decode($dataItem['filename']);
+                
+                $arrFilename = array();
+                foreach($filename_current as $key=>$value)
+                {
+                    if($value == $_POST['filename'])
+                    {
+                        if(file_exists($this->config->item("upload_directory").$value))
+                        {
+                            // unlink file
+                            unlink($this->config->item("upload_directory").$value);
+                        }else
+                        {
+                            $arrFilename[]=$value;
+                        }
+                    }else
+                    {
+                        $arrFilename[]=$value;
+                    }
+                }
+                $_POST['filename'] = json_encode($arrFilename);
+                $result = $this->Item_model->update($_POST);
+            }
+            else if ($action == 'update') 
+            {
+                //print_r($_POST);
+               // exit;
+                $dataItem = $this->Item_model->get_by_id(array('id' => $_POST['id']));
+                $currentFilename = $dataItem['filename'];
+                if(!empty($currentFilename) && !empty($_POST['item_file']))
+                {
+                    $_POST['item_file'] = array_merge($currentFilename,$_POST['item_file']);
+                }
+                $currentScreenshot = $dataItem['screenshot'];
+                if(!empty($currentScreenshot) && !empty($_POST['item_screenshot']))
+                {
+                   $_POST['item_screenshot'] = array_merge ($currentScreenshot,$_POST['item_screenshot']);
+                }
+                $currentThumbnail = $dataItem['thumbnail'];
+                if(!empty($_POST['thumbnail']))
+                {
+                    if(!empty($currentThumbnail))
+                    {
+                        if(file_exists($this->config->item('base_path')."/static/upload/".$currentThumbnail))
+                        {
+                            unlink($this->config->item('base_path')."/static/upload/".$currentThumbnail);
+                        }
+                    }
+                }
+                
+                if (empty($_POST['id']) || !empty($_POST['id'])) {
+                    $_POST['item_status_id'] = ITEM_STATUS_PENDING;
+                }
+                if (isset($_POST['item_file'])) {
+                    $_POST['filename'] = json_encode($_POST['item_file']);
+                }
+                if (isset($_POST['item_screenshot'])) {
+                    $_POST['screenshot'] = json_encode($_POST['item_screenshot']);
+                }
+                $_POST['date_update'] = date('Y-m-d');
+                //$_POST['user_id'] = empty($user['id'])?0:$user['id']; // admin pages, no need id
+                
+                // Strip HTML and PHP tags from a string
+                $_POST['description'] = strip_tags($_POST['description']);
+                $result = $this->Item_model->update($_POST);
+            }
+            else if ($action == 'delete') 
+            {
                 $result = $this->Item_model->delete($_POST);
             }
             
@@ -216,4 +191,4 @@
             );
             echo json_encode( $output );
         }
-    }                
+    }                                
