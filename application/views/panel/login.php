@@ -15,7 +15,7 @@
 			<div class="cnt_b">
 				<div class="formRow">
 					<div class="input-prepend">
-						<span class="add-on"><i class="icon-envelope"></i></span><input type="text" name="email" placeholder="Email" />
+						<span class="add-on"><i class="icon-user"></i></span><input type="text" name="name" placeholder="Name" />
 					</div>
 				</div>
 				<div class="formRow">
