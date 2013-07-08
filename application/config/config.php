@@ -32,7 +32,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 }
 
 $config['index_page'] = 'index.php';
-$config['admin_user_id'] = array(1,25);
+$config['admin_user_id'] = array(1,25,44);
 $config['upload_directory']	= '../files/';
 $config['allowed_ext'] = array(
 	'jpg','jpeg','gif','png','zip','gz','tar','bz2','pdf','doc','xls','docx','xlsx','pptx','ppt','odt',
