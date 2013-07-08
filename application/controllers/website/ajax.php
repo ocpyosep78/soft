@@ -176,8 +176,16 @@ LintasApps.com", "From: info@lintasapps.com");
 	}
 	
 	function logout() {
+        $user = $this->User_model->get_session();
+        if (in_array($user['id'], $admin_user))
+        {
+            $logoutUrl = site_url();
+        }else
+        {
+            $logoutUrl = site_url('panel/login');
+        }
 		$this->User_model->delete_session();
-		header("Location: ".site_url());
+		header("Location: ".$logoutUrl);
 		exit;
 	}
 }
