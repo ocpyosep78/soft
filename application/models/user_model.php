@@ -171,6 +171,16 @@
             }
         }
         
+        function login_user_admin_required() {
+            $user = $this->get_session();
+            
+            $valid = $this->is_login();
+            if (! $valid) {
+                header("Location: ".site_url('panel/login'));
+                exit;
+            }
+        }
+        
         function is_login() {
             $user = $this->get_session();
 			$is_login = (count($user) == 0) ? false : true;
