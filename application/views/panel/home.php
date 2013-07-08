@@ -47,18 +47,20 @@
 				<div class="dash-message"></div>
 				
 				<div class="row-fluid"><div class="span12">
-					<h3 class="heading">Selamat Datang</h3>
-					<div class="alert alert-info">
+					<h3 class="heading">Selamat Datang <?php echo $user['fullname']; ?></h3>
+                    <!--<div class="alert alert-info">
 						Deposit hasil penjualan Anda saat ini Rp. <?php echo MoneyFormat($user['deposit']); ?>
 						<div style="float: right;">
 							<a href="javascript:void(0)" class="add-payment btn btn-gebo btn-mini">Request Payment</a>
-						</div>
-					</div>
-				</div></div>
-			</div>
-		</div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+                </div>
+            </div>
+        </div>
 		<?php $this->load->view( 'panel/common/sidebar' ); ?>
-	</div>
+    </div>
 	
 	<?php $this->load->view( 'panel/common/js' ); ?>
 	<script>
@@ -84,15 +86,15 @@
 					if (result.status == 1) {
 						Func.popup_result('.dash-message', 'Harap menunggu konfirmasi admin untuk pengiriman dana Anda.');
 						$('#WinPayment').modal('hide');
-                    } else {
+                        } else {
 						Func.popup_error('#WinPayment', result.message);
-					}
+                    }
                 } });
             });
 			$('#WinPayment .cancel').click(function() {
 				$('#WinPayment').modal('hide');
             });
-		});
-	</script>
+        });
+    </script>
 </body>
 </html>
