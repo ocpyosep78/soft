@@ -307,9 +307,15 @@
 				$this->User_model->get_session($user);
 			} else {
 				$user = $this->User_model->get_by_id(array( 'email' => $_POST['email'] ));
-				$update_user = $_POST;
-				$update_user['id'] = $user['id'];
-				$this->User_model->update($update_user);
+				if (count($user) == 0) {
+					$update_user = $_POST;
+					$update_user['name'] = time().rand(1000,9999);
+					$this->User_model->update($update_user);
+				} else {
+					$update_user = $_POST;
+					$update_user['id'] = $user['id'];
+					$this->User_model->update($update_user);
+				}
 			}
 			
 			$transaction = $this->Doku_model->get_by_id(array( 'transidmerchant' => $param['transidmerchant'], 'trxstatus' => 'Requested' ));

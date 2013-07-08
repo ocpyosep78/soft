@@ -111,13 +111,7 @@ $autoload['language'] = array();
 
 $autoload['model'] = array(
 	'Item_model', 'Item_Status_model','User_model', 'Category_model', 'Platform_model', 'Default_Value_model', 'User_Item_model','Status_Nota_model','Nota_model','Transaction_model',
-	'Doku_model', 'Checkout_Data_model','Pages_model'
-	/*
-	'Item_model','Item_Catalog_model','Item_Category_model', 'Catalog_model', 'Ajax_model', 'Store_Detail_model', 'Blog_model', 'Category_model', 'Store_model','Theme_model', 'Item_Price_model','Picture_model',
-	'Currency_model', 'Theme_model', 'Item_Picture_model', 'Cart_model', 'City_model', 'Country_model', 'Province_model', 'Nota_model', 'Transaction_model', 'User_model', 'Address_model', 'Newsletter_model',
-	'Store_Image_Slide_model', 'Item_Status_model', 'Blog_Status_model', 'User_Store_model', 'Payment_Method_model', 'Store_Payment_Method_model', 'Bank_model','Bank_Account_model', 'Status_Nota_model','Shipment_model',
-	'Default_Value_model','File_model','Item_File_model', 'User_Item_model', 'User_Payment_model'
-	/*	*/
+	'Doku_model', 'Checkout_Data_model', 'Pages_model', 'Withdraw_model'
 );
 
 

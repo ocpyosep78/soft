@@ -69,7 +69,6 @@
     <?php $this->load->view( 'website/common/header' ); ?>
 	
 	<!-- doku -->
-	
 	<script type="text/javascript" src="<?php echo base_url('static/js/dateformat.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('static/js/sha-1.js'); ?>"></script>
 	
@@ -119,7 +118,7 @@
 						<span class="label-success" style="color:#fff;">US $<?php echo number_format($harga_dolar_asli, 2, '.', ','); ?></span>
 					</div>
 					
-					<?php if (! $is_login) { ?>
+					<?php if (! $is_login && false) { ?>
 					<div style="margin-top:20px;">
 						<label for="user_email1">Masukkan alamat e-mail anda atau <a href="https://www.lintasapps.com/login?next=<?php echo rawurlencode($_SERVER['REQUEST_URI']); ?>">login</a> untuk membeli</label>
 						<input type="text" name="email" id="user_email1" value="<?php echo $email; ?>" class="input_tooltips" data-placement="right" title="Untuk mencatat pembelian anda, mohon masukkan alamat e-mail anda. Link download juga akan dikirim ke e-mail anda."/>
@@ -164,7 +163,8 @@
 						<input type="hidden" name="env" value="www">
 						<input type="hidden" name="no_shipping" value="1">
 						
-						<button type="submit" class="btn btn-large btn-primary btn-xlarge"><span class="paypal">&nbsp;</span></button>
+						<button type="button" class="btn btn-large btn-primary btn-xlarge btn-paypal"><span class="paypal">&nbsp;</span></button>
+						<button type="submit" class="btn btn-large btn-primary btn-xlarge btn-paypal-submit hide"><span class="paypal">&nbsp;</span></button>
 						<!--
 						<button type="submit" class="paypal-button large">Beli dengan PayPal</button>
 						<span class="via">(+$<?php echo $paypal_add; ?> biaya)</span>
@@ -195,51 +195,37 @@
 						-->
 					</form>
 				</div>
-				
-			
-					<div class="span4 text-center ll">
-						<form method="post" action="<?php echo DOKU_HOST; ?>" id="form-doku">
-							<input type="hidden" name="BASKET" value="<?php echo $item['name'].','.$doku_money.',1,'.$doku_money; ?>" />
-							<input type="hidden" name="MALLID" value="616" />
-							<input type="hidden" name="CHAINMERCHANT" value="NA" />
-							<input type="hidden" name="CURRENCY" value="360" />
-							<input type="hidden" name="PURCHASECURRENCY" value="360" />
-							<input type="hidden" name="AMOUNT" value="<?php echo $doku_money; ?>" />
-							<input type="hidden" name="PURCHASEAMOUNT" value="<?php echo $doku_money; ?>" />
-							<input type="hidden" name="TRANSIDMERCHANT" />
-							<input type="hidden" name="WORDS" />
-							<input type="hidden" name="REQUESTDATETIME" />
-							<input type="hidden" name="SESSIONID" />
-							<input type="hidden" name="PAYMENTCHANNEL" />
-							<input type="hidden" name="EMAIL" value="<?php echo @$user['email']; ?>" />
-							<input type="hidden" name="NAME" value="<?php echo @$user['fullname']; ?>" />
-							<input type="hidden" name="ADDRESS" value="<?php echo @$user['address']; ?>" />
-							<input type="hidden" name="COUNTRY" value="360" />
-							<input type="hidden" name="STATE" value="<?php echo @$user['propinsi']; ?>" />
-							<input type="hidden" name="CITY" value="<?php echo @$user['city']; ?>" />
-							<input type="hidden" name="PROVINCE" value="<?php echo @$user['propinsi']; ?>" />
-							<input type="hidden" name="ZIPCODE" value="<?php echo @$user['zipcode']; ?>" />
-							<input type="hidden" name="HOMEPHONE" value="<?php echo @$user['phone']; ?>" />
-							<input type="hidden" name="MOBILEPHONE" value="<?php echo @$user['mobile']; ?>" />
-							<input type="hidden" name="WORKPHONE" value="<?php echo @$user['office']; ?>" />
-							<input type="hidden" name="BIRTHDATE" value="<?php echo preg_replace('/([^0-9]+)/i', '', @$user['birthdate']); ?>" />
-							
-							<button type="button" class="btn btn-large btn-warning btn-xlarge btn-prepare"><span>Credit Card</span></button>
-							<button type="submit" class="btn btn-large btn-warning btn-xlarge hide"><span class="doku">Credit Card</span></button>
-							
-							<!--
-							<input type="submit" class="btn btn-medium btn-primary" name="submit" value="Beli di Doku">
-							<span class="via">
-								<img src="<?php echo base_url('static/img/logo_doku.gif'); ?>" alt="doku" style="height:20px; width:auto;" />
-								biaya Rp<?php echo number_format($doku_add, 0, '.', ','); ?>
-							</span>
-							<div class="paypal-option">
-								<img src="<?php echo base_url('static/img/doku_options.jpg'); ?>">
-							</div>
-							-->
-						</form>
-					</div>
-				
+				<div class="span4 text-center ll">
+					<form method="post" action="<?php echo DOKU_HOST; ?>" id="form-doku">
+						<input type="hidden" name="BASKET" value="<?php echo $item['name'].','.$doku_money.',1,'.$doku_money; ?>" />
+						<input type="hidden" name="MALLID" value="616" />
+						<input type="hidden" name="CHAINMERCHANT" value="NA" />
+						<input type="hidden" name="CURRENCY" value="360" />
+						<input type="hidden" name="PURCHASECURRENCY" value="360" />
+						<input type="hidden" name="AMOUNT" value="<?php echo $doku_money; ?>" />
+						<input type="hidden" name="PURCHASEAMOUNT" value="<?php echo $doku_money; ?>" />
+						<input type="hidden" name="TRANSIDMERCHANT" />
+						<input type="hidden" name="WORDS" />
+						<input type="hidden" name="REQUESTDATETIME" />
+						<input type="hidden" name="SESSIONID" />
+						<input type="hidden" name="PAYMENTCHANNEL" />
+						<input type="hidden" name="EMAIL" value="<?php echo @$user['email']; ?>" />
+						<input type="hidden" name="NAME" value="<?php echo @$user['fullname']; ?>" />
+						<input type="hidden" name="ADDRESS" value="<?php echo @$user['address']; ?>" />
+						<input type="hidden" name="COUNTRY" value="360" />
+						<input type="hidden" name="STATE" value="<?php echo @$user['propinsi']; ?>" />
+						<input type="hidden" name="CITY" value="<?php echo @$user['city']; ?>" />
+						<input type="hidden" name="PROVINCE" value="<?php echo @$user['propinsi']; ?>" />
+						<input type="hidden" name="ZIPCODE" value="<?php echo @$user['zipcode']; ?>" />
+						<input type="hidden" name="HOMEPHONE" value="<?php echo @$user['phone']; ?>" />
+						<input type="hidden" name="MOBILEPHONE" value="<?php echo @$user['mobile']; ?>" />
+						<input type="hidden" name="WORKPHONE" value="<?php echo @$user['office']; ?>" />
+						<input type="hidden" name="BIRTHDATE" value="<?php echo preg_replace('/([^0-9]+)/i', '', @$user['birthdate']); ?>" />
+						
+						<button type="button" class="btn btn-large btn-warning btn-xlarge btn-prepare"><span>Credit Card</span></button>
+						<button type="submit" class="btn btn-large btn-warning btn-xlarge hide"><span class="doku">Credit Card</span></button>
+					</form>
+				</div>
 			</div>
         </div>
         
@@ -259,14 +245,42 @@
     
     <?php $this->load->view( 'website/common/footer' ); ?>
 	
-	<div id="win-doku" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+	<div id="win-paypal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-header">
 			<a href="#" class="close" data-dismiss="modal">&times;</a>
-			<h3>Form Pembayaran Doku</h3>
+			<h3>Isikan email anda</h3>
 		</div>
 		<div class="modal-body" style="padding-left: 0px;">
 			<div class="pad-alert" style="padding-left: 15px;"></div>
 			<form class="form-horizontal" style="padding-left: 0px;">
+				<div class="control-group">
+					<label class="control-label">Email</label>
+					<div class="controls">
+						<input type="text" name="email" placeholder="Email" class="span4" rel="twipsy" />
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a class="btn cursor cancel">Cancel</a>
+			<a class="btn cursor save btn-primary">OK</a>
+		</div>
+	</div>
+	
+	<div id="win-doku" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+		<div class="modal-header">
+			<a href="#" class="close" data-dismiss="modal">&times;</a>
+			<h3>isikan biodata anda sesuai dengan credit card</h3>
+		</div>
+		<div class="modal-body" style="padding-left: 0px;">
+			<div class="pad-alert" style="padding-left: 15px;"></div>
+			<form class="form-horizontal" style="padding-left: 0px;">
+				<div class="control-group">
+					<label class="control-label">Email</label>
+					<div class="controls">
+						<input type="text" name="email" placeholder="Email" class="span4" rel="twipsy" />
+					</div>
+				</div>
 				<div class="control-group">
 					<label class="control-label" for="input_fullname">Nama</label>
 					<div class="controls">
@@ -342,8 +356,25 @@
 			return randomstring;
 		}
 		
-		$(function() {
-			// doku
+		$(document).ready(function() {
+			var is_login = ($('[name="is_login"]').val() == 1) ? true : false;
+			
+			// paypal helper
+			var paypal = {
+				init: function() {
+					$("#win-paypal form").validate({
+						rules: {
+							email: { required: true, email: true }
+						},
+						messages: {
+							email: { required: 'Silakan masukkan alamat e-mail Anda, alamat download akan dikirimkan ke e-mail anda', email: 'Alamat e-mail yang Anda masukkan tidak valid, mohon ulangi lagi' }
+						}
+					});
+				}
+			}
+			paypal.init();
+			
+			// doku helper
 			var doku = {
 				get_invoice: function() {
 					var random = randomString(12);
@@ -370,6 +401,7 @@
 					// form validation
 					$("#win-doku form").validate({
 						rules: {
+							email: { required: true, email: true },
 							fullname: { required: true },
 							address: { required: true },
 							city: { required: true },
@@ -381,6 +413,7 @@
 							birthdate: { required: true }
 						},
 						messages: {
+							email: { required: 'Silakan masukkan alamat e-mail Anda, alamat download akan dikirimkan ke e-mail anda', email: 'Alamat e-mail yang Anda masukkan tidak valid, mohon ulangi lagi' },
 							fullname: { required: 'Mahon memasukkan nama' },
 							address: { required: 'Mahon memasukkan alamat' },
 							city: { required: 'Mahon memasukkan kota' },
@@ -396,32 +429,36 @@
 			}
 			doku.init();
 			
-			$("form.paypal-button").submit(function() {
-				var form_email = $("#user_email1");
-				if (form_email.length > 0) {
-					var form = $("#form-payment");
-					form.validate({
-						rules: {
-							email: { required: true, email: true }
-						},
-						messages: {
-							email: { 
-								required: 'Mohon masukkan alamat e-mail anda untuk link download dan pencatatan pembelian', 
-								email: 'Email yang Anda masukkan tidak valid, mohon ulangi lagi' 
-							}
-						}
-					});
-					
-					if ( !form.valid() ) {
-						return false;
-					}
-					
-					$("#custom_email").val(form_email.val());
-					$("input[name=return]").val( $("input[name=return]").val()+'&email='+encodeURIComponent(form_email.val()) );
+			// paypal
+			$("form .btn-paypal").click(function() {
+				if (is_login) {
+					$("form .btn-paypal-submit").click();
+				} else {
+					$('#win-paypal').modal();
 				}
-				return true;
+			});
+			$('#win-paypal .save').click(function() {
+				if (! $('#win-paypal form').valid()) {
+					return;
+				}
+				
+				$("form .btn-paypal-submit").click();
+			});
+			$('#win-paypal .cancel').click(function() {
+				$('#win-paypal').modal('hide');
+			});
+			$('#win-paypal form').submit(function() {
+				return false;
+			});
+			$("form.paypal-button").submit(function() {
+				if (! is_login) {
+					var param = Site.Form.GetValue('win-paypal');
+					$("#custom_email").val(param.email);
+					$("input[name=return]").val( $("input[name=return]").val()+'&email='+encodeURIComponent(param.email) );
+				}
 			});
 			
+			// paymu
 			$("#formipaymu").submit(function() {
 				var form_email = $("#user_email1");
 				if (form_email.length > 0) {
@@ -447,32 +484,11 @@
 				return true;
 			});
 			
+			// doku
 			$('#form-doku .btn-prepare').click(function() {
-				var form_email = $("#user_email1");
-				if (form_email.length > 0) {
-					var form = $("#form-payment");
-					form.validate({
-						rules: {
-							email: { required: true, email: true }
-						},
-						messages: {
-							email: { 
-								required: 'Mohon masukkan alamat e-mail anda untuk link download dan pencatatan pembelian', 
-								email: 'Email yang Anda masukkan tidak valid, mohon ulangi lagi' 
-							}
-						}
-					});
-					
-					if ( !form.valid() ) {
-						return false;
-					}
-					
-					// set email from email form
-					$('#form-doku [name="EMAIL"]').val(form_email.val());
-				}
-				
 				// set data to form
 				var param = Site.Form.GetValue('form-doku');
+				$('#win-doku [name="email"]').val(param.EMAIL);
 				$('#win-doku [name="fullname"]').val(param.NAME);
 				$('#win-doku [name="address"]').val(param.ADDRESS);
 				$('#win-doku [name="city"]').val(param.CITY);
@@ -493,10 +509,9 @@
 				doku.get_word();
 				
 				var param = Site.Form.GetValue('win-doku');
-				param.email = $('#form-doku [name="EMAIL"]').val();
 				param.birthdate = Func.SwapDate(param.birthdate);
-				param.TRANSIDMERCHANT = $('#form-doku [name="TRANSIDMERCHANT"]').val();
 				param.WORDS = $('#form-doku [name="WORDS"]').val();
+				param.TRANSIDMERCHANT = $('#form-doku [name="TRANSIDMERCHANT"]').val();
 				
 				Func.ajax({ url: web.host + 'item/doku_prepare', param: param, callback: function(result) {
 					if (result.status) {
@@ -504,6 +519,7 @@
 						birthdate = Func.SwapDate(birthdate);
 						birthdate = birthdate.replace(new RegExp(/[^0-9]/gi), '');
 						
+						$('#form-doku [name="EMAIL"]').val(param.email);
 						$('#form-doku [name="NAME"]').val(param.fullname);
 						$('#form-doku [name="ADDRESS"]').val(param.address);
 						$('#form-doku [name="CITY"]').val(param.city);
@@ -521,43 +537,7 @@
 			$('#win-doku .cancel').click(function() {
 				$('#win-doku').modal('hide');
 			});
-		});	
-	
-        $(document).ready(function() {
-            var is_login = ($('[name="is_login"]').val() == 1) ? true : false;
-            if (! is_login) {
-                $("#form-payment").validate({
-                    rules: {
-                        email: { required: true, email: true }
-                    },
-                    messages: {
-                        email: { required: 'Silakan masukkan alamat e-mail Anda, alamat download akan dikirimkan ke e-mail anda', email: 'Alamat e-mail yang Anda masukkan tidak valid, mohon ulangi lagi' }
-                    }
-                });
-            }
-            
-            $('.btn-pay').click(function() {
-                var param = Site.Form.GetValue('form-payment');
-                param.payment = $('input[name=payment]:checked').val();
-                if (param.payment == null) {
-                    Func.show_notice({ title: 'Informasi', text: 'Harap memilih salah satu metode pembayaran' });
-                    return false;
-                }
-                
-                if (! is_login && ! $("#form-payment").valid()) {
-                    return false;
-                }
-                
-                $('.btn-pay').parent('div').text('Harap tunggu sebentar, pembayaran Anda sedang diproses.');
-                Func.ajax({ url: web.host + 'item/payment', param: param, callback: function(result) {
-                    if (result.status) {
-                        window.location = result.link_next;
-					} else {
-						Func.show_notice({ title: 'Informasi', text: result.message });
-                    }
-                } });
-            });
-        });
+		});
     </script>
     
 </body>

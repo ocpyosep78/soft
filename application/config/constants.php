@@ -36,6 +36,10 @@
     define('PAYPAL_CLIENT_SECRET',					'EAvOaxBIxUXQiNjSHKkHW_onJG3b1Bmoakl8ISVptzxi_Lb_08I3LjBofNc7');
 	/*	*/
     
+	/* WITHDRAW */
+	define('MINIMIN_RUPIAH',						1500000);
+	define('MINIMIN_DOLLAR',						1500);
+	
 	/*	DOKU */
     /*
     define('DOKU_HOST',							'https://pay.doku.com/Suite/Receive');
@@ -65,9 +69,10 @@
     define('PLATFORM',								'platform');
     define('USER',									'user');
     define('USER_ITEM',								'user_item');
-    define('NOTA',								'nota');
-    define('STATUS_NOTA',								'status_nota');
-    define('TRANSACTION',								'transaction');
+    define('NOTA',									'nota');
+    define('STATUS_NOTA',							'status_nota');
+    define('TRANSACTION',							'transaction');
+    define('WITHDRAW',								'withdraw');
     
     
     /* End of file constants.php */
