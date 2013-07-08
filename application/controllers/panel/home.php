@@ -6,7 +6,7 @@ class home extends CI_Controller {
     }
     
     function index() {
-		$this->User_model->login_user_required();
+		$this->User_model->login_user_admin_required();
 		$this->load->view( 'panel/home' );
     }
 	
