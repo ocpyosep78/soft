@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Gebo Admin Panel</title>
+	<title>Admin LintasApps.com</title>
 	<link rel="shortcut icon" href="<?php echo base_url(); ?>static/img/favicon.ico" />
 	<link rel="stylesheet" href="<?php echo base_url(); ?>static/lib/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="<?php echo base_url(); ?>static/lib/bootstrap/css/bootstrap-responsive.min.css" />
