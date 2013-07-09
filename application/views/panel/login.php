@@ -9,8 +9,8 @@
 	<br/>
 	<div class="login_box">
 		<form method="post" id="login_form">
-			<div class="top_b">Sign in to Shop</div>
-			<div id="alert" class="alert alert-info alert-login">Enter Email and Password.</div>
+			<div class="top_b">Sign in to Admin Panel</div>
+			<div id="alert" class="alert alert-info alert-login">Enter Username and Password.</div>
 			
 			<div class="cnt_b">
 				<div class="formRow">
