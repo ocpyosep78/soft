@@ -100,6 +100,8 @@ class Pages_model extends CI_Model {
 	
 	function sync($row, $column = array()) {
 		$row = StripArray($row);
+		$row['content_html'] = save_tinymce($row['content']);
+		
 		if (count($column) > 0) {
 			$row = dt_view($row, $column, array('is_edit' => 1));
 		}

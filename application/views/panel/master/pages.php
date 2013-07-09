@@ -128,13 +128,12 @@
             
             $('#pages').on('click','tbody td img.edit', function () {
                 var raw = $(this).parent('td').find('.hide').text();
-                //console.log($(this).parent('td').find('.hide'));
-                //console.log(eval(raw));
                 eval('var record = ' + raw);
+                
                 $('#WinPages input[name="id"]').val(record.id);
                 $('#WinPages input[name="name"]').val(record.name);
                 $('#WinPages input[name="title"]').val(record.title);
-                $('#WinPages textarea[name="content"]').text(record.content);
+                $('#WinPages textarea[name="content"]').text(record.content_html);
                 $('#WinPages').modal();
             });
             $('#pages').on('click','tbody td img.delete', function () {

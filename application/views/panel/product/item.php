@@ -175,6 +175,11 @@
         
         var uploader, uploader2;
         $(document).ready(function() {
+			Func.InitForm({
+				Container: '#form-item',
+				rule: { }
+			});
+		
             // thumbnail
             $('#form-item .btn-thumbnail').click(function() { window.iframe_thumbnail.browse() });
             

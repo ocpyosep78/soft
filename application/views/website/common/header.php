@@ -29,6 +29,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="row-fluid header_bar navbar navbar-fixed-top main-theme">
 	<div class="navbar-inner">
 		<div class="container-fluid">
@@ -65,5 +66,27 @@
 				</ul>
 			</div>
 		</div>
+	</div>
+</div>
+
+<div id="win-profile" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-header">
+		<a href="#" class="close" data-dismiss="modal">&times;</a>
+		<h3>Isikan email anda</h3>
+	</div>
+	<div class="modal-body" style="padding-left: 0px;">
+		<div class="pad-alert" style="padding-left: 15px;"></div>
+		<form class="form-horizontal" style="padding-left: 0px;">
+			<div class="control-group">
+				<label class="control-label">Email</label>
+				<div class="controls">
+					<input type="text" name="email" placeholder="Email" class="span4" rel="twipsy" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a class="btn cursor cancel">Cancel</a>
+		<a class="btn cursor save btn-primary">OK</a>
 	</div>
 </div>
