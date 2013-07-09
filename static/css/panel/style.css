@@ -802,3 +802,8 @@
 .upload_multi .item .delete img { cursor: pointer; }
 .upload_multi .item .thumbail { position: absolute; top: 3px; left: 7px; }
 .upload_multi .item .thumbail img { cursor: pointer; background: #FFFFFF; padding: 2px; }
+
+
+/* list item screenshot */
+    .del_screeshot_current{margin-left:-24px;margin-top:-40px;cursor:pointer;}
+    .del_filname_current{margin-left:10px; cursor:pointer;}
