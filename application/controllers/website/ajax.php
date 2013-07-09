@@ -23,17 +23,27 @@ class ajax extends CI_Controller {
 		if ($action == 'update') {
 			$_POST['item_status_id'] = ITEM_STATUS_PENDING;
 			
+			if ( isset($_POST['title']) && strlen($_POST['title']) > 40 ) {
+                $result['message'] = 'Maaf, panjang judul/nama aplikasi harus kurang dari 40 karakter';
+				die(json_encode($result));
+			}
+			
 			if (isset($_POST['item_file'])) {
 				$_POST['filename'] = json_encode($_POST['item_file']);
 			}
+			
 			if (isset($_POST['item_screenshot'])) {
 				$_POST['screenshot'] = json_encode($_POST['item_screenshot']);
 			}
 			
-			$_POST['user_id'] = empty($user['id']) ? 0 : $user['id'];
+			if ( isset($_POST['price']) && intval($_POST['price']) < 50000 ) {
+                $result['message'] = 'Maaf, harga aplikasi minimal Rp50.000';
+				die(json_encode($result));
+			}
 			
-            // Strip HTML and PHP tags from a string
+			$_POST['user_id'] = empty($user['id']) ? 0 : $user['id'];
             $_POST['description'] = strip_tags($_POST['description']);
+			
 			$result = $this->Item_model->update($_POST);
 			
 			if ($result['status']) {

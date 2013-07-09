@@ -40,13 +40,19 @@
             
             // data
             $user = $this->User_model->get_session();
+			if (!$user) $user['id'] = 0;
+			
             $item = $this->Item_model->get_by_id(array( 'id' => $item_id ));
+			if (!$item) {
+				show_404();
+				exit;
+			}
             
             // make sure this user have buy this file
             $is_buy = $this->User_Item_model->is_buy(array( 'item_id' => $item_id, 'user_id' => $user['id'] ));
             if (! $is_buy) {
-                echo 'Please login / buy this item';
-                exit;
+				show_404();
+				exit;
             }
             
             // get file info
