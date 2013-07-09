@@ -81,10 +81,10 @@
             
             if ($newTargetDir['targetDir'] != null or $newTargetDir['targetDir'] != '') {
                 $targetDir      = $newTargetDir['targetDir'];
-                $relativePath   = $newTargetDir['relativePath'];
+                $relativePath   = base_url().$newTargetDir['relativePath'];
 			} else {
                 $targetDir  = $this->root_directory.$this->upload_directory;
-                $relativePath = $this->upload_directory;
+                $relativePath = base_url().$this->upload_directory;
             }
             
             $cleanupTargetDir = true; // Remove old files
