@@ -13,3 +13,423 @@ POST: array (
 )
 -- End doku notif --
 
+--- Begin doku notif 2013-07-03 07:08:18 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'FPKd5TubhVtU',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '100000.00',
+  'WORDS' => '32bd1b877e38eebef268b9514826ed7164a56562',
+  'SESSIONID' => 'MSdLiFuN6w98nxXQ3Vw3',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-03 07:16:01 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'CwdIfPsah81g',
+  'PAYMENTCHANNEL' => '05',
+  'STATUSCODE' => '5511',
+  'PAYMENTCODE' => '8975061600000154',
+  'AMOUNT' => '100000.00',
+  'WORDS' => 'adbf5dd8ae7e29869b4473a1e9aa1a102bb42ec5',
+  'SESSIONID' => '3e1pS9Sv9hXXuQeLGdts',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-03 07:37:10 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'ftUWGDTFD21s',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '100000.00',
+  'WORDS' => '14463f3cd9724bca1672d49379abb58c6d7d7dd8',
+  'SESSIONID' => 'eq4vpO2Cd7TAz8x47IWU',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-03 07:44:44 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'om7laSgCBsmX',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '950000.00',
+  'WORDS' => '90172b5a3495789f490438b95e5154bfb0de9857',
+  'SESSIONID' => 'fGx5IDO4Mdkdu3gypzWi',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-03 07:51:16 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'TRFDOU92ifBQ',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '100000.00',
+  'WORDS' => 'aee0fc20d7b2894cfdc47142926f63c8b94aadfc',
+  'SESSIONID' => 'pxckAHm4IopkDUNgm9os',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-03 08:05:46 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 't38hg3DbEcfv',
+  'PAYMENTCHANNEL' => '05',
+  'STATUSCODE' => '5511',
+  'PAYMENTCODE' => '8975061600000167',
+  'AMOUNT' => '100000.00',
+  'WORDS' => 'cb6047f7a5c73e2afbd1761e0750894a9ed9c624',
+  'SESSIONID' => '9RXaEWGUK6XTT4HJraaq',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-03 08:10:26 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'x5khZQM8CbmU',
+  'PAYMENTCHANNEL' => '05',
+  'STATUSCODE' => '5511',
+  'PAYMENTCODE' => '8975061600000168',
+  'AMOUNT' => '100000.00',
+  'WORDS' => '8fa75a7c43e1884217923d5adf36dadc6b4c05a0',
+  'SESSIONID' => 'albS0bM8FQIFTnqho9Cd',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-04 06:55:22 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'n5bnZewLMFDJ',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '24a3e700693ff1bd490002bc813aadc4a177c50f',
+  'SESSIONID' => 'Ci6QqGfbq5w5bla1gh6d',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-04 07:30:04 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => '9VCpVZfTZmMi',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => 'd98078b15955bf8ea461ea0f26c60fc4205fd606',
+  'SESSIONID' => 'O3RZSmnhJ40szdJKytTL',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-04 08:20:27 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 180.247.162.206
+POST: array (
+  'TRANSIDMERCHANT' => 'VmtQdmRqSRx1',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '5510',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '4ec40c951c8c7033c6dec60a8318f7ce049d21be',
+  'SESSIONID' => 'MUHdTyTrfUATMiUeK9E2',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 02:43:57 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => '1NWgP9Suz1Fm',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '100000.00',
+  'WORDS' => '3bec65836a1e50a98ca44d4489139d8b0cc78a36',
+  'SESSIONID' => 'ANhWNOATzgTGJrJGzkfl',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 02:46:05 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'VxOUILLyGzA7',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '100000.00',
+  'WORDS' => 'ffa600977240384aa26a9d71e5518affeca9c7b4',
+  'SESSIONID' => 'eVyJQmAVP1efGFXXOLx6',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:02:07 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'Thk9oNK3RpT3',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => 'cbbd8c371ce89c888e5e296b68465d75918aff88',
+  'SESSIONID' => '2ucD4viOypINGM5TDmEW',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:05:33 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'Thk9oNK3RpT3',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => 'cbbd8c371ce89c888e5e296b68465d75918aff88',
+  'SESSIONID' => '2ucD4viOypINGM5TDmEW',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:05:54 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'Thk9oNK3RpT3',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => 'cbbd8c371ce89c888e5e296b68465d75918aff88',
+  'SESSIONID' => '2ucD4viOypINGM5TDmEW',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:06:59 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'r9ozr4E74ILn',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '8a776ae82cc984fe6c052fb468689a0950fb4a91',
+  'SESSIONID' => '1R1DypoQUcsKT05KcAli',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:08:44 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => '1deWIWoq3h4I',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '3fd2606ef137e2cf0d3b6ed5b206f8da377fd416',
+  'SESSIONID' => 'ViQKnE2qamntaZmVfq7o',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:09:06 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'aKC8ht8R2Qmn',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '100000.00',
+  'WORDS' => '5bc303cf59f9634cbd23a20190c85a88cc53e53d',
+  'SESSIONID' => 'eryCEAeASBEIyKIcKW8c',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:13:23 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'irchGchWKHke',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => 'a9c0ef59626fecba8c65335c4f0d0bc7ceb87462',
+  'SESSIONID' => 'IAPE2Ton4vrK8uMOw1OI',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:14:57 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'hqfvNX8hggNw',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '5510',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '50a77157b8d69cf0ca95b919e27b733a24237386',
+  'SESSIONID' => 'VMloerqZmdtllIgqHNSG',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:17:16 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'AmvSqB6eHWA3',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '5510',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => 'f5d9becd57f692964e51b3a0fb1f552c3d864f21',
+  'SESSIONID' => 'woKoRzuasrTPdtHzhqtP',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 03:42:35 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 114.110.21.14
+POST: array (
+  'TRANSIDMERCHANT' => 'MxLKsqQkTiag',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '0865645c075630786a5f1bb73d0f1cc85a76d593',
+  'SESSIONID' => 'uoHnKmTWMaoG3VKALdvq',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 04:33:30 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 114.110.21.14
+POST: array (
+  'TRANSIDMERCHANT' => 'BXLxvkTeOZhp',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '159bb752bf00fb6c1f4c269facef8b7253450d47',
+  'SESSIONID' => 'GrKWCeFTxPTZT4nW34Em',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 07:59:34 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'pxa0wPmsbk1e',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '5000.00',
+  'WORDS' => 'f504d9aad667ed0c45bc96ec7993f3e8546e69b2',
+  'SESSIONID' => '2TEuUWMv2E12uAGy1vqz',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 08:09:31 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 175.45.189.139
+POST: array (
+  'TRANSIDMERCHANT' => 'QrElpVKPmAEo',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '683d181831141158d914f6f7b1b7497657b2c04b',
+  'SESSIONID' => 'x0EFlN7c7H393vETriN8',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-05 09:45:43 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 27.131.7.174
+POST: array (
+  'TRANSIDMERCHANT' => 'a8XWt9Qf4IVk',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '5510',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => 'f73e2a63589ee3b507f56adb7802d21645001cfe',
+  'SESSIONID' => 'ElJbhl6mKqxh2rKs4es4',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-08 03:14:07 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'XlywpAynxzo5',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '915a3b9d9c565c1578b011103765be39932f73c5',
+  'SESSIONID' => 'R18rQdweSd3GHgCe5Qwr',
+)
+-- End doku notif --
+
+--- Begin doku notif 2013-07-08 03:31:36 --
+URL: /item/doku_redirect
+QUERY: 
+IP: 49.128.182.6
+POST: array (
+  'TRANSIDMERCHANT' => 'W5NAKI8fuH0e',
+  'PAYMENTCHANNEL' => '01',
+  'STATUSCODE' => '0000',
+  'PAYMENTCODE' => '',
+  'AMOUNT' => '1000.00',
+  'WORDS' => '1916a8e0118026cf1ee7b61e5a48a406582fe260',
+  'SESSIONID' => 'hbXzbmTTPUhmUpNPNEET',
+)
+-- End doku notif --
+

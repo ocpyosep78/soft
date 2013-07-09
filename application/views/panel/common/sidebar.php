@@ -38,6 +38,7 @@
 					<ul class="nav nav-list">
                         <?php if (in_array($user['id'], $admin_user)) { ?>
                             <li><a href="<?php echo site_url('panel/order/nota'); ?>">Nota</a></li>
+                            <li><a href="<?php echo site_url('panel/order/withdraw'); ?>">Withdraw</a></li>
                         <?php } ?>
                         <li><a href="<?php echo site_url('panel/order/transaction'); ?>">Transaction Summary</a></li>
                     </ul>

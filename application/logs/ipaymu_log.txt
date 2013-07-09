@@ -1,0 +1,35 @@
+--- Begin ipaymu request https://my.ipaymu.com/payment.htm 2013-07-01 02:12:06 --
+Request: key=T0JZ9psRD8JW9EUCXIVvFUuUQC.fw1&action=payment&product=Video+Editor+CS&price=6000&quantity=1&comments=Pembayaran+untuk+LintasApps.com&ureturn=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fthanks%3Ftipe%3Dipaymu%26email%3Dhasanrosidi%2540simetri.in%26id%3D7&unotify=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fipaymu_notif%3Fid%3D7&ucancel=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fbuy%2F1&format=json
+Response: {"sessionID":"7ec002dd6e424fefd6bb15e85b440fe4ea5b26a500b0d9bfa5aa360294a6ddf4981b3a66618077c291aa02a2b0a77887a1933b31d7a208126062160e7b01ba9a","url":"https:\/\/my.ipaymu.com\/process.htm?sessionID=7ec002dd6e424fefd6bb15e85b440fe4ea5b26a500b0d9bfa5aa360294a6ddf4981b3a66618077c291aa02a2b0a77887a1933b31d7a208126062160e7b01ba9a"}
+-- End ipaymu request --
+
+--- Begin ipaymu request https://my.ipaymu.com/payment.htm 2013-07-01 02:34:50 --
+Request: key=T0JZ9psRD8JW9EUCXIVvFUuUQC.fw1&action=payment&product=Video+Editor+CS&price=6000&quantity=1&comments=Pembayaran+untuk+LintasApps.com&ureturn=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fthanks%3Ftipe%3Dipaymu%26email%3Dherry%2540simetri.in%26id%3D8&unotify=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fipaymu_notif%3Fid%3D8&ucancel=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fbuy%2F1&format=json
+Response: {"sessionID":"cca41544089415586fc0ade017dfb5631d364b66caa20d223b238198e4c0f025e362e1c4513d0198446ad022a89e3f43e34aec8d181ee17ce0b0b4e9d64c84c2","url":"https:\/\/my.ipaymu.com\/process.htm?sessionID=cca41544089415586fc0ade017dfb5631d364b66caa20d223b238198e4c0f025e362e1c4513d0198446ad022a89e3f43e34aec8d181ee17ce0b0b4e9d64c84c2"}
+-- End ipaymu request --
+
+--- Begin ipaymu request https://my.ipaymu.com/payment.htm 2013-07-02 17:27:13 --
+Request: key=T0JZ9psRD8JW9EUCXIVvFUuUQC.fw1&action=payment&product=Indoretail&price=982301&quantity=1&comments=Pembayaran+untuk+LintasApps.com&ureturn=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fthanks%3Ftipe%3Dipaymu%26email%3D%26id%3D23&unotify=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fipaymu_notif%3Fid%3D23&ucancel=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fbuy%2F1&format=json
+Response: {"sessionID":"859fe62dd4730becc428ac90df9e69c87e74110bfa985a2b411444b26538abd1735d67cda91f99c431d754df5ccd00aaa5e609e974d510b3ba2dde78e1bd5be1","url":"https:\/\/my.ipaymu.com\/process.htm?sessionID=859fe62dd4730becc428ac90df9e69c87e74110bfa985a2b411444b26538abd1735d67cda91f99c431d754df5ccd00aaa5e609e974d510b3ba2dde78e1bd5be1"}
+-- End ipaymu request --
+
+--- Begin ipaymu request https://my.ipaymu.com/payment.htm 2013-07-02 18:49:19 --
+Request: key=T0JZ9psRD8JW9EUCXIVvFUuUQC.fw1&action=payment&product=Indoretail&price=950000&quantity=1&comments=Pembayaran+untuk+LintasApps.com&ureturn=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fthanks%3Ftipe%3Dipaymu%26email%3D%26id%3D23&unotify=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fipaymu_notif%3Fid%3D23&ucancel=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fbuy%2F1&format=json
+Response: {"sessionID":"88deea5ebc6395c66cc076a0840cb8b49b30afea39d4510ef0c4278b2bbb5c553de650acc60e8dcce8229fc49fcb4cf61c44ab1f0f2edf95f34f8c432ee43c66","url":"https:\/\/my.ipaymu.com\/process.htm?sessionID=88deea5ebc6395c66cc076a0840cb8b49b30afea39d4510ef0c4278b2bbb5c553de650acc60e8dcce8229fc49fcb4cf61c44ab1f0f2edf95f34f8c432ee43c66"}
+-- End ipaymu request --
+
+--- Begin ipaymu request https://my.ipaymu.com/payment.htm 2013-07-02 18:49:29 --
+Request: key=T0JZ9psRD8JW9EUCXIVvFUuUQC.fw1&action=payment&product=Indoretail&price=950000&quantity=1&comments=Pembayaran+untuk+LintasApps.com&ureturn=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fthanks%3Ftipe%3Dipaymu%26email%3D%26id%3D23&unotify=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fipaymu_notif%3Fid%3D23&ucancel=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fbuy%2F1&format=json
+Response: {"sessionID":"0ac7bc46be264061c1eafbf0cfe6319f117ac53e6d0050ec6c5519de9525937ff4261f027a036540649ee467bf54705ccd9e32ae579490ab2e9099ba3a16cca0","url":"https:\/\/my.ipaymu.com\/process.htm?sessionID=0ac7bc46be264061c1eafbf0cfe6319f117ac53e6d0050ec6c5519de9525937ff4261f027a036540649ee467bf54705ccd9e32ae579490ab2e9099ba3a16cca0"}
+-- End ipaymu request --
+
+--- Begin ipaymu request https://my.ipaymu.com/payment.htm 2013-07-05 10:04:41 --
+Request: key=T0JZ9psRD8JW9EUCXIVvFUuUQC.fw1&action=payment&product=Wallpaper+Big+Size&price=1000&quantity=1&comments=Pembayaran+untuk+LintasApps.com&ureturn=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fthanks%3Ftipe%3Dipaymu%26email%3D%26id%3D41&unotify=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fipaymu_notif%3Fid%3D41&ucancel=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fbuy%2F7&format=json
+Response: 
+-- End ipaymu request --
+
+--- Begin ipaymu request https://my.ipaymu.com/payment.htm 2013-07-05 10:04:57 --
+Request: key=T0JZ9psRD8JW9EUCXIVvFUuUQC.fw1&action=payment&product=Wallpaper+Big+Size&price=1000&quantity=1&comments=Pembayaran+untuk+LintasApps.com&ureturn=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fthanks%3Ftipe%3Dipaymu%26email%3Dapiek_rastie4ever%2540yahoo.com%26id%3D52&unotify=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fipaymu_notif%3Fid%3D52&ucancel=https%3A%2F%2Fwww.lintasapps.com%2Fitem%2Fbuy%2F7&format=json
+Response: 
+-- End ipaymu request --
+

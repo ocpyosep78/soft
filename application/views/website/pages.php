@@ -8,7 +8,7 @@
     }
     ?>
 	
-	<div class="container-fluid sidebar_content">
+	<div class="container-fluid">
         <div class="row-fluid">
             
             <div class="span12">
@@ -17,11 +17,9 @@
                     <div class="span12">
                         <?php if(!empty($pages_detail)){?>
                             <h2><i class="icon-key"></i>&nbsp;&nbsp;<?php echo $pages_detail['title']?></h2>
-                            <p>
-                            <?php echo nl2br($pages_detail['content'])?>    
-                            </p>
-                            <p><a href="<?php echo base_url('contact'); ?>">Hubungi Kami</a></p>
-                            <br/><br/><br/>
+							<div class="page-content">
+								<?php echo $pages_detail['content']; ?>
+							</div>
                         <?php } else {?>
                             <p>
                             <h3>Halaman yang Anda cari tidak ada.</h3>   

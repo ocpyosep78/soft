@@ -21,8 +21,8 @@ if ($array_url[0] != 'panel') {
 	$route['thank'] = "website/thank";
 	$route['rekap'] = "website/rekap";
 	$route['rekap/(:any)'] = "website/rekap";
-	$route['capthca'] = "website/capthca";
-	$route['capthca/(:any)'] = "website/capthca";
+	$route['hello'] = "website/hello";
+	$route['hello/(:any)'] = "website/hello";
 	$route['contact'] = "website/contact";
     $route['pages/(:any)'] = "website/pages";
 }

@@ -22,10 +22,10 @@
 <body>
 	<?php $this->load->view( 'website/common/header' ); ?>
 	
-	<div class="container-fluid sidebar_content">
+	<div class="container-fluid">
         <div class="row-fluid">
             
-            <div class="span10">
+            <div class="span12">
                 <br />
                 <div class="row-fluid">
                     <div class="span12">
@@ -72,7 +72,7 @@
                                 <hr/>
                                 <div class="control-group">
                                     <ol>
-                                        <li>Dengan mendaftar account, Anda menyetujui Ketentuan Kami dan bahwa Anda telah membaca Kebijakan Penggunaan Data, termasuk penggunaan Cookie </li>
+                                        <li>Dengan mendaftar account, <a href="https://www.lintasapps.com/ketentuan">Anda menyetujui Ketentuan Kami dan bahwa Anda telah membaca Kebijakan Penggunaan Data</a>, termasuk penggunaan Cookie </li>
                                         <li>Link verifikasi akan dikirim ke email Anda </li>
                                         <li>Apabila email tidak terkirim, mohon cek folder spam ada terlebih dahulu, atau hubungi team support LintasAPPS </li>
                                     </ol>

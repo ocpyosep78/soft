@@ -50,7 +50,17 @@
             $this->root_directory = $this->config->item('base_path')."/";            
             $this->upload_directory = $this->config->item('upload_directory');
 			
-			if ( empty($_GET['screenshot']) )
+			if (!empty($_GET['screenshot']))
+			{
+				$this->allowed_ext = array('jpg','png','gif','jpeg');
+				$this->upload_directory = 'screenshots/';
+			}
+			else if (!empty($_GET['icon']))
+			{
+				$this->allowed_ext = array('jpg','png','gif','jpeg');
+				$this->upload_directory = 'static/upload/';
+			}
+			else
 			{
 				$platform_id = @$_POST['platform_id'];
 				if (!$platform_id) $platform_id = 5;
@@ -59,11 +69,6 @@
 				if ($rr = $query->row_array()) {
 					$this->allowed_ext = array_filter(array_map('trim', explode(',', $rr['file_type'])));
 				}
-			}
-			else
-			{
-				$this->allowed_ext = array('jpg','png','gif','jpeg');
-				$this->upload_directory = 'screenshots/';
 			}
 			
             header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -208,11 +213,47 @@
                 if($this->image_lib->resize()) {
 					$config2['create_thumb'] = true;
                     $config2['thumb_marker'] = '_thumb';
-					$config2['width'] = 100;
-					$config2['height'] = 100;
+					$config2['width'] = 150;
+					$config2['height'] = 150;
 					
 					$this->image_lib->initialize($config2);
 					
+					if ($this->image_lib->resize()) {
+						$thumb = substr($this->image_lib->full_dst_path, strlen($this->image_lib->dest_folder));
+						$result['thumbName'] = $thumb;
+					}
+                }
+			} else if ( !empty($_GET['icon']) ) {
+				list($width, $height, $type, $attr) = getimagesize($filePath);
+				if ($width > $height) {
+					$config2 = array(
+						'image_library' => 'gd2',
+						'source_image' => $filePath,
+						'width' => $height,
+						'height' => $height,
+						'x_axis' => ($width-$height)/2
+					);
+				} else {
+					$config2 = array(
+						'image_library' => 'gd2',
+						'source_image' => $filePath,
+						'width' => $width,
+						'height' => $width,
+						'x_axis' => ($height-$width)/2
+					);
+				}
+				
+                $this->load->library('image_lib', $config2);
+                if($this->image_lib->crop()) {
+					$config2 = array(
+						'image_library' => 'gd2',
+						'source_image' => $filePath,
+						'maintain_ratio' => true,
+						'width' => 150,
+						'height' => 150,
+					);
+					
+					$this->image_lib->initialize($config2);
 					if ($this->image_lib->resize()) {
 						$thumb = substr($this->image_lib->full_dst_path, strlen($this->image_lib->dest_folder));
 						$result['thumbName'] = $thumb;
