@@ -42,9 +42,9 @@ LintasApps.com", "From: info@lintasapps.com" );
 <body>
 <?php $this->load->view( 'website/common/header' ); ?>
 
-<div class="container-fluid sidebar_content">
+<div class="container-fluid">
 	<div class="row-fluid">
-		<div class="span8">	
+		<div class="span12">	
 			<br />
 			<h2><i class="icon-suitcase"></i>&nbsp;&nbsp;Upload Sukses</h2>
 			
@@ -59,15 +59,16 @@ LintasApps.com", "From: info@lintasapps.com" );
 					
 					<?php if ( !$user ): ?>
 					<hr>
-					<h4>Untuk mencatat profil anda, silahkan <a class="btn btn-primary" href="<?php echo base_url('login'); ?>?next=<?php echo rawurlencode(base_url('post/confirm/'.$item_id).'?check='.$_SESSION['check']); ?>">login atau registrasi</a></h4>
+					<?php 
+					$check = isset($_SESSION['check'])?$_SESSION['check']:'';
+					?>
+					<h4>Untuk mencatat profil anda, silahkan <a class="btn btn-primary" href="<?php echo base_url('login'); ?>?next=<?php echo rawurlencode(base_url('post/confirm/'.$item_id).'?check='.$check); ?>">login atau registrasi</a></h4>
 					<?php endif; ?>
+				
+					<br><br>
 				</div>	
 			</div>
 		</div>
-		
-		<div class="span4 sidebar">	
-			&nbsp;
-		</div>		
 	</div>
 </div>
 
