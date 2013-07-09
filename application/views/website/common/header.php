@@ -46,7 +46,7 @@
 			
 			<div class="nav-collapse pull-right">
 				<?php if ($is_login) { ?>
-				<div class="my-title">Hallo <?php echo $user['name']; ?></div>
+				<div class="my-title">Hallo <?php echo $user['name']; ?>, <span class="show-profile" style="cursor: pointer;">ubah profile</span></div>
 				<?php } else { ?>
 				<div class="my-title">&nbsp;</div>
 				<?php } ?>
@@ -69,10 +69,10 @@
 	</div>
 </div>
 
-<div id="win-profile" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="win-profile" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
 	<div class="modal-header">
 		<a href="#" class="close" data-dismiss="modal">&times;</a>
-		<h3>Isikan email anda</h3>
+		<h3>Update Profile</h3>
 	</div>
 	<div class="modal-body" style="padding-left: 0px;">
 		<div class="pad-alert" style="padding-left: 15px;"></div>
@@ -83,6 +83,30 @@
 					<input type="text" name="email" placeholder="Email" class="span4" rel="twipsy" />
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="control-label" for="input_fullname">Nama</label>
+				<div class="controls">
+					<input type="text" id="input_fullname" name="fullname" placeholder="Nama" class="span4" rel="twipsy" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input_address">Alamat</label>
+				<div class="controls">
+					<input type="text" id="input_address" name="address" placeholder="Alamat" class="span4" rel="twipsy" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input_city">Kota</label>
+				<div class="controls">
+					<input type="text" id="input_city" name="city" placeholder="Kota" class="span4" rel="twipsy" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input_propinsi">Password</label>
+				<div class="controls">
+					<input type="text" id="input_propinsi" name="propinsi" placeholder="Biarkan kosong jika anda tidak ingin merubahnya" class="span4" rel="twipsy" />
+				</div>
+			</div>
 		</form>
 	</div>
 	<div class="modal-footer">
@@ -90,3 +114,53 @@
 		<a class="btn cursor save btn-primary">OK</a>
 	</div>
 </div>
+
+<script>
+$(document).ready(function() {
+	$("#win-profile form").validate({
+		rules: {
+			email: { required: true, email: true },
+			fullname: { required: true },
+			address: { required: true },
+			city: { required: true },
+			propinsi: { required: true },
+			zipcode: { required: true },
+			phone: { required: true },
+			mobile: { required: true },
+			office: { required: true },
+			birthdate: { required: true }
+		},
+		messages: {
+			email: { required: 'Silakan masukkan alamat e-mail Anda, alamat download akan dikirimkan ke e-mail anda', email: 'Alamat e-mail yang Anda masukkan tidak valid, mohon ulangi lagi' },
+			fullname: { required: 'Mahon memasukkan nama' },
+			address: { required: 'Mahon memasukkan alamat' },
+			city: { required: 'Mahon memasukkan kota' },
+			propinsi: { required: 'Mahon memasukkan propinsi' },
+			zipcode: { required: 'Mahon memasukkan kodepos' },
+			phone: { required: 'Mahon memasukkan telepon rumah' },
+			mobile: { required: 'Mahon memasukkan telepon genggam' },
+			office: { required: 'Mahon memasukkan telepon kantor' },
+			birthdate: { required: 'Mahon memasukkan tanggal lahir' }
+		}
+	});
+	
+	$('.show-profile').click(function() {
+		$('#win-profile').modal();
+	});
+	
+	$('#win-profile .save').click(function() {
+		if (! $('#win-profile form').valid()) {
+			return;
+		}
+		
+		Func.ajax({ url: web.host + 'item/doku_prepare', param: param, callback: function(result) {
+			if (result.status) {
+				$('#win-profile').modal('hide');
+			}
+		} });
+	});
+	$('#win-profile .cancel').click(function() {
+		$('#win-profile').modal('hide');
+	});
+});
+</script>
