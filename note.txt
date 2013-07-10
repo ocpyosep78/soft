@@ -1,11 +1,5 @@
-Website - Profile :
-- edit profil user (ganti password)
-- Status sudah selesai
-
-NEXT
-
-Perubahan Cara Download
-- akan dikerjakan
+Form Hasil Jualan :
+- Tambah datepicker
 
 Website - Item :
 - tampilkan buy count item
