@@ -310,15 +310,15 @@
                     var param = { action: 'get_item_by_id', id: temp.id };
                     Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(record) {
                         // common data
-                        $('#form-item [name="id"]').val(record.id);
-                        $('#form-item [name="user_id"]').val(record.user_id);
-                        $('#form-item [name="name"]').val(record.name);
-                        $('#form-item [name="description"]').text(record.description);
-                        $('#form-item [name="price"]').val(record.price);
-                        $('#form-item [name="platform_id"]').val(record.platform_id);
+                        $('#form-item input[name="id"]').val(record.id);
+                        $('#form-item input[name="user_id"]').val(record.user_id);
+                        $('#form-item input[name="name"]').val(record.name);
+                        $('#form-item textarea[name="description"]').text(record.content_html);
+                        $('#form-item input[name="price"]').val(record.price);
+                        $('#form-item input[name="platform_id"]').val(record.platform_id);
                         $('#form-item [name="category_id"]').val(record.category_id);
                         $('#form-item [name="item_status_id"]').val(item_status_id);
-                        
+                         $('#WinPages').modal();
                         var param = Site.Form.GetValue('form-item');
                         param.action = 'update';
                         Func.ajax({ url: web.host + 'panel/product/item/action', param: param, callback: function(result) {
