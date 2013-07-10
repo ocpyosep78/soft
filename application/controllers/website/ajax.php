@@ -68,8 +68,9 @@ LintasApps.com", "From: info@lintasapps.com" );
 				}
 				
 			}
-		} else if ($action == 'get_item') {
-			$result = $this->Item_model->get_by_id(array( 'id' => $_POST['item_id'] ));
+		}
+		else if ($action == 'get_item') {
+			$result = $this->Item_model->get_by_id(array( 'id' => $_POST['item_id'], 'download' => true ));
 		}
 		
 		echo json_encode($result);
@@ -161,6 +162,23 @@ Terima kasih
 LintasApps.com", "From: info@lintasapps.com");
 			
 			$result['message'] = 'Email untuk mereset password anda berhasil dikirim';
+		}
+		else if ($action == 'update') {
+			if (!empty($_POST['passwd'])) {
+				$_POST['passwd'] = EncriptPassword($_POST['passwd']);
+			} else {
+				unset($_POST['passwd']);
+			}
+			
+			$result = $this->User_model->update($_POST);
+			
+			// update sesion
+			$user = $this->User_model->get_by_id(array( 'id' => $result['id'] ));
+			$this->User_model->set_session($user);
+		}
+		else if ($action == 'get_user') {
+			$user = $this->User_model->get_by_id(array( 'id' => $_POST['id'] ));
+			$result = array_merge($result, $user);
 		}
 		
 		echo json_encode($result);

@@ -351,10 +351,14 @@ var Func = {
 	force_download: function(p) {
 		var param = { action: 'get_item', item_id: p.item_id };
 		Func.ajax({ url: web.host + 'ajax/item', param: param, callback: function(result) {
-			var content = '';
-			for (var i = 0; i < result.array_filename.length; i++) {
-				var link = download = web.host + 'item/download/' + param.item_id + '/' + i;
-				window.open(link);
+			if (result.array_download.length == 0) {
+				return;
+			}
+			
+			if (result.array_download.length == 1) {
+				window.open(result.array_download[0].file_link);
+			} else {
+				window.location.href = result.link_download
 			}
 		} });
 	}

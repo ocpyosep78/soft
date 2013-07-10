@@ -34,36 +34,59 @@
         }
         
         function download() {
-            preg_match('/([\d]+)\/([\d]+)/i', $_SERVER['REQUEST_URI'], $match);
+            preg_match('/item\/download\/([\d]+)\/(\w+)\/?([\d]+)?/i', $_SERVER['REQUEST_URI'], $match);
             $item_id = (!empty($match[1])) ? $match[1] : 0;
-            $file_no = (!empty($match[2])) ? $match[2] : 0;
-            
+            $hashcode = (!empty($match[2])) ? $match[2] : 0;
+            $file_no = (isset($match[3])) ? $match[3] : '';
+			
             // data
             $user = $this->User_model->get_session();
-			if (!$user) $user['id'] = 0;
-			
-            $item = $this->Item_model->get_by_id(array( 'id' => $item_id ));
+            $item = $this->Item_model->get_by_id(array( 'id' => $item_id, 'download' => true ));
+			$is_admin = $this->User_model->is_admin(array( 'user_id' => @$user['id'] ));
+			$user['id'] = (empty($user['id'])) ? 0 : $user['id'];
 			if (!$item) {
 				show_404();
 				exit;
 			}
             
-            // make sure this user have buy this file
-            $is_buy = $this->User_Item_model->is_buy(array( 'item_id' => $item_id, 'user_id' => $user['id'] ));
-            if (! $is_buy) {
-				show_404();
-				exit;
-            }
-            
-            // get file info
-            $path_file = $this->config->item('base_path').'/../files';
-            $path_file = realpath($path_file).'/'.$item['array_filename'][$file_no];
+			// bypass admin
+			if ($is_admin) {
+				// admin previlege
+			}
+			// validation for normal user
+			else {
+				// make sure this user have buy this file
+				$is_buy = $this->User_Item_model->is_buy(array( 'item_id' => $item_id, 'user_id' => @$user['id'] ));
+				if (! $is_buy) {
+					show_404();
+					exit;
+				}
+				
+				// check hash code
+				if (empty($item['hashcode'])) {
+					show_404();
+					exit;
+				} else if ($item['hashcode'] != $hashcode) {
+					show_404();
+					exit;
+				}
+			}
 			
-            // force download
-            header('Content-Disposition: attachment; filename=' . basename($path_file));
-            readfile($path_file);
-            exit;
-        }
+			// is it list download ?
+			if ($file_no == '') {
+				$this->load->view( 'website/item_download', array( 'item' => $item ) );
+			} else {
+				// get file info
+				$path_file = $this->config->item('base_path').'/../files';
+				$path_file = realpath($path_file).'/'.$item['array_filename'][$file_no];
+				
+				// force download
+				header('Content-Disposition: attachment; Content-type: ' . mime_content_type($path_file) . '; filename=' . basename($path_file));
+				
+				readfile($path_file);
+				exit;
+			}
+		}
         
         function payment() {
             // action

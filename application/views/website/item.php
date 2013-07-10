@@ -8,7 +8,7 @@
 	
 	$is_buy = false;
 	$is_login = $this->User_model->is_login();
-	$item = $this->Item_model->get_by_id(array( 'id' => $item_id ));
+	$item = $this->Item_model->get_by_id(array( 'id' => $item_id, 'download' => true ));
 	if (!$item) {
 		show_404();
 		exit;
@@ -172,9 +172,7 @@
         <div class="span4 sidebar"><br /><br />
             <div style="text-align: center; padding: 0 0 20px 0;">
                 <?php if ($is_buy) { ?>
-                    
-					<a class="cursor btn btn-primary btn-success btn-download">Download</a>
-					
+					<a class="btn btn-primary btn-large btn-item-submit" href="<?php echo $item['link_download']; ?>">Download</a>
 				<?php } else if ($item['item_status_id'] == ITEM_STATUS_APPROVE) { ?>
 				
 					<div class="item-price"><span class="label-success" style="color:#fff;"><?php echo rupiah($item['price']); ?></span></div>
@@ -530,11 +528,6 @@
 			$('#win-doku .cancel').click(function() {
 				$('#win-doku').modal('hide');
 			});
-			
-			// download
-			$('.btn-download').click(function() {
-                Func.force_download({ item_id: $('[name="item_id"]').val() });
-            });
 			
 			/*
 			$("form.paypal-button").submit(function() {

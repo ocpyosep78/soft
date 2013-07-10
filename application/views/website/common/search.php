@@ -8,7 +8,7 @@
 	}
 	$categories=array();
 	foreach($array_category as $row) {
-		list($parent,$child)=array_map('trim', explode('-', $row['name']));
+		@list($parent,$child)=array_map('trim', explode('-', $row['name']));
 		$categories[$parent][$row['id']]=$child;
 	}
 ?>

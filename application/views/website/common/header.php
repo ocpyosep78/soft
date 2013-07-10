@@ -46,7 +46,7 @@
 			
 			<div class="nav-collapse pull-right">
 				<?php if ($is_login) { ?>
-				<div class="my-title">Hallo <?php echo $user['name']; ?>, <span class="show-profile" style="cursor: pointer;">ubah profile</span></div>
+				<div class="my-title">Hallo <?php echo $user['display_name']; ?>, <span class="show-profile" style="cursor: pointer;">ubah profile</span></div>
 				<?php } else { ?>
 				<div class="my-title">&nbsp;</div>
 				<?php } ?>
@@ -77,35 +77,29 @@
 	<div class="modal-body" style="padding-left: 0px;">
 		<div class="pad-alert" style="padding-left: 15px;"></div>
 		<form class="form-horizontal" style="padding-left: 0px;">
+			<input type="hidden" name="action" value="update" />
+			<input type="hidden" name="id" value="<?php echo @$user['id']; ?>" />
+			<input type="submit" name="submit" value="submit" class="hide" />
+			
 			<div class="control-group">
 				<label class="control-label">Email</label>
-				<div class="controls">
-					<input type="text" name="email" placeholder="Email" class="span4" rel="twipsy" />
-				</div>
+				<div class="controls"><input type="text" name="email" placeholder="Email" class="span4" rel="twipsy" /></div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="input_fullname">Nama</label>
-				<div class="controls">
-					<input type="text" id="input_fullname" name="fullname" placeholder="Nama" class="span4" rel="twipsy" />
-				</div>
+				<label class="control-label">Nama</label>
+				<div class="controls"><input type="text" name="fullname" placeholder="Nama" class="span4" rel="twipsy" /></div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="input_address">Alamat</label>
-				<div class="controls">
-					<input type="text" id="input_address" name="address" placeholder="Alamat" class="span4" rel="twipsy" />
-				</div>
+				<label class="control-label">Alamat</label>
+				<div class="controls"><input type="text" name="address" placeholder="Alamat" class="span4" rel="twipsy" /></div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="input_city">Kota</label>
-				<div class="controls">
-					<input type="text" id="input_city" name="city" placeholder="Kota" class="span4" rel="twipsy" />
-				</div>
+				<label class="control-label">Kota</label>
+				<div class="controls"><input type="text" name="city" placeholder="Kota" class="span4" rel="twipsy" /></div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="input_propinsi">Password</label>
-				<div class="controls">
-					<input type="text" id="input_propinsi" name="propinsi" placeholder="Biarkan kosong jika anda tidak ingin merubahnya" class="span4" rel="twipsy" />
-				</div>
+				<label class="control-label">Password</label>
+				<div class="controls"><input type="password" name="passwd" placeholder="Biarkan kosong jika anda tidak ingin merubahnya" class="span4" rel="twipsy" /></div>
 			</div>
 		</form>
 	</div>
@@ -145,19 +139,31 @@ $(document).ready(function() {
 	});
 	
 	$('.show-profile').click(function() {
-		$('#win-profile').modal();
+		Func.ajax({ url: web.host + 'ajax/user', param: { action: 'get_user', id: $('#win-profile [name="id"]').val()  }, callback: function(result) {
+			$('#win-profile [name="email"]').val(result.email);
+			$('#win-profile [name="fullname"]').val(result.fullname);
+			$('#win-profile [name="address"]').val(result.address);
+			$('#win-profile [name="city"]').val(result.city);
+			$('#win-profile [name="passwd"]').val('');
+			$('#win-profile').modal();
+		} });
 	});
-	
 	$('#win-profile .save').click(function() {
+		$('#win-profile form').submit();
+	} );
+	$('#win-profile form').submit(function() {
 		if (! $('#win-profile form').valid()) {
 			return;
 		}
 		
-		Func.ajax({ url: web.host + 'item/doku_prepare', param: param, callback: function(result) {
+		var param = Site.Form.GetValue('win-profile');
+		Func.ajax({ url: web.host + 'ajax/user', param: param, callback: function(result) {
+			Func.show_notice({ title: 'Informasi', text: result.message });
 			if (result.status) {
 				$('#win-profile').modal('hide');
 			}
 		} });
+		return false;
 	});
 	$('#win-profile .cancel').click(function() {
 		$('#win-profile').modal('hide');

@@ -1,38 +1,56 @@
-Website : 
-1. registrasi toko/user
-2. login toko/user
-3. upload item
-4. index
-5. search
-7. item detail
-8. Checkout Paypal
-6. item by author
-9. Download ( kirim email link )
-10. history user
-12. Contact Us
-11. Forget password
+Website - Profile :
+- edit profil user (ganti password)
+- Status sudah selesai
+
+NEXT
+
+Perubahan Cara Download
+- akan dikerjakan
+
+Website - Item :
+- tampilkan buy count item
+- increment buy count item
+
+Isi Windows Optimizer :
+["2013\/06\/23\/blog_article_3.jpg"]
+["2013\/06\/23\/blog_article_3.jpg","2013\/06\/23\/creative_2_03_3.jpg","2013\/06\/23\/event01.jpg","2013\/06\/23\/events_article.jpg"]
 
 
-Panel Admin Toko / author :
-1. daftar transaksi toko
 
-Panel Admin:
-1. backend approval registrasi toko
-2. admin/pending item, 
-3. admin/publish item, 
+Next : 
 
-account paypal pemilik toko :
-bisnis@simetri.in
-bisnis*96
+Konsep downloadnya :
 
-account paypal untuk pembeli :
-personal@simetri.in
-personal*96
+User disediakan Link download, 
+a. jika isi file = 1, User langsung diarahkan ke download
+b. Jika isi file banyak, user diarahkan ke halaman download yang berisi link2 download per file
 
-account admin :
-link : http://software.simetri.in/lintasgps/panel
-user : herry@simetri.in
-pass : qwertyui
+Format link download
+https://www.lintasapps.com/item/download/$ITEM_ID/$RANDOM_HASH_YANG_DICEK_DENGAN_USER_ITEM/ -> berisi list files
+https://www.lintasapps.com/item/download/$ITEM_ID/$RANDOM_HASH_YANG_DICEK_DENGAN_USER_ITEM/NamaFile(.apk|jpg|jad|cod|dll)
 
+Random hash bisa berupa:
+SHA1( $SALT:$USER_ITEM_ID )
 
-http://localhost:8666/software/trunk/item/doku_notify
+SALT anda tentukan sendiri
+Random Hash dibypass jika user adalah admin (admin review aplikasi)
+Kemudian halaman invoice, email dan halaman history, sebaiknya berisi link download yang dimasukkan ke href daripada menggunakan javascript,
+kadang2 handphone ga support JS
+
+jangan lupa set mime type yang benar saat mengirim konten, jika tidak tahu caranya, begini
+header( "Content-type: $mime_type" );
+
+yang dikenal adalah:
+image/jpeg
+image/gif
+image/png
+dll..
+
+yang tidak umum mungkin adalah .APK/ .SIS / .JAD / .JAR / .COD
+.apk = application/vnd.android.package-archive
+.cod = application/vnd.rim.cod
+.jad = text/vnd.sun.j2me.app-descriptor
+.jar = application/java-archive
+.sis = application/vnd.symbian.install
+
+tolong saya diupdate setelah perubahan selesai,

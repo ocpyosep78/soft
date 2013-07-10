@@ -49,20 +49,10 @@
 				LIMIT 1
                 ";
             }
-            //print_r($select_query);
+			
             $select_result = mysql_query($select_query) or die(mysql_error());
             if (false !== $row = mysql_fetch_assoc($select_result)) {
-                $array = $this->sync($row);
-                // add category & platform
-                $param = array(
-				'filter' => '[' .
-                '{"type":"numeric","comparison":"eq","value":"'.$array['id'].'","field":"item_id"}' .
-				']'
-                );
-                //$array['array_platfrom'] = $this->Item_Platform_model->get_array($param);
-                //$array['array_category'] = $this->Item_Category_model->get_array($param);
-                //$array['array_picture'] = $this->Item_Picture_model->get_array(array('item_id' => $array['id']));
-                //$array['array_file'] = $this->Item_File_model->get_array(array('item_id' => $array['id']));
+                $array = $this->sync($row, $param);
             }
             
             return $array;
@@ -108,7 +98,7 @@
             
             $select_result = mysql_query($select_query) or die(mysql_error());
             while ( $row = mysql_fetch_assoc( $select_result ) ) {
-                $array[] = $this->sync($row, @$param['column'], $pendingApprove,$pending,$approve);
+                $array[] = $this->sync($row, $param, $pendingApprove,$pending,$approve);
             }
             return $array;
         }
@@ -141,9 +131,10 @@
             return $result;
         }
         
-        function sync($row, $column = array(),$pendingAprove = null,$pending=null, $approve=null) {
+        function sync($row, $param = array(),$pendingAprove = null,$pending=null, $approve=null) {
             $row = StripArray($row);
-            
+			$is_login = $this->User_model->is_login();
+			
             // set image thumbnail
             $row['thumbnail_link'] = base_url('static/img/images.jpg');
             if (!empty($row['thumbnail'])) {
@@ -161,6 +152,32 @@
             if (!empty($row['filename'])) {
                 $row['array_filename'] = json_decode($row['filename']);
             }
+			
+			// array download
+			$row['link_download'] = '#';
+			$row['array_download'] = array();
+			if ($is_login && @$param['download']) {
+				$user = $this->User_model->get_session();
+				$user_item = $this->User_Item_model->get_by_id(array( 'item_id' => $row['id'], 'user_id' => $user['id'] ));
+				
+				if (count($user_item)) {
+					$hashcode = EncriptPassword($user_item['id']);
+					$row['hashcode'] = $hashcode;
+					$row['link_download'] = base_url('item/download/'.$row['id'].'/'.$hashcode).'/';
+					
+					foreach ($row['array_filename'] as $key => $value) {
+						$array = array(
+							'file_no' => $key,
+							'file_name' => $value,
+							'file_basename' => basename($value),
+							'file_link' => $row['link_download'].$key.'/'.basename($value)
+						);
+						$row['array_download'][] = $array;
+					}
+				}
+			}
+			$row['single_file'] = (count($row['array_download']) == 1) ? true : false;
+			$row['link_download'] = ($row['single_file']) ? $row['array_download'][0]['file_link'] : $row['link_download'];
 			
             // item screenshot
 			$row['array_screenshot'] = array();
@@ -197,17 +214,17 @@
             
             // user dt_view_set for more improvement
             
-            if (count($column) > 0) {
+            if (count(@$param['column']) > 0) {
                 if($pendingAprove == false)
                 {
-                    $row = dt_view($row, $column, array('is_edit' => 1));
+                    $row = dt_view($row, $param['column'], array('is_edit' => 1));
                 }
                 elseif($pending == true)
                 {
-                    $row = dt_view($row, $column, array('is_custom' => '<img class="cursor confirm" src="'.base_url('static/img/button_confirm.png').'" style="width: 15px; height: 16px;">'));
+                    $row = dt_view($row, $param['column'], array('is_custom' => '<img class="cursor confirm" src="'.base_url('static/img/button_confirm.png').'" style="width: 15px; height: 16px;">'));
                 }elseif($approve == true)
                 {
-                    $row = dt_view($row, $column,array('is_custom' => '<img class="cursor cancel" src="'.base_url('static/img/button_cancel.png').'" style="width: 15px; height: 16px;"> '));
+                    $row = dt_view($row, $param['column'],array('is_custom' => '<img class="cursor cancel" src="'.base_url('static/img/button_cancel.png').'" style="width: 15px; height: 16px;"> '));
                 } 
             }
             

@@ -4,8 +4,11 @@
         function __construct() {
             parent::__construct();
             
-            $this->field = array('id', 'name', 'email', 'fullname', 'passwd', 'address', 'saldo_rupiah', 'saldo_dollar', 'is_active', 'reset');
-            
+            $this->field = array(
+				'id', 'name', 'email', 'fullname', 'passwd', 'address', 'city', 'propinsi', 'zipcode', 'phone', 'mobile', 'office', 'birthdate',
+				'saldo_rupiah', 'saldo_dollar', 'is_active', 'reset'
+			);
+			
             /*	User Info */
             /*	User Session
                 name : user_login => array user
@@ -102,6 +105,7 @@
         
         function sync($row, $param = array()) {
             $row = StripArray($row, array('birthdate'));
+			$row['display_name'] = (empty($row['fullname'])) ? $row['name'] : $row['fullname'];
             
             $param['is_edit'] = 1;
             if (in_array($row['is_active'], array(STATUS_USER_NEW))) {
@@ -232,6 +236,12 @@
 			}
 			
 			return $is_owner;
+		}
+		
+		function is_admin($param) {
+			$admin_user = $this->config->item('admin_user_id');
+			$result = (in_array($param['user_id'], $admin_user)) ? true : false;
+			return $result;
 		}
 		
         /*	End Region User Session */
