@@ -34,9 +34,12 @@
                 {
                     unlink($this->config->item('base_path')."/static/upload/".$thumbnail_current);
                     $_POST['thumbnail']='';
-                    }else{
+                }
+                else
+                {
                     $_POST['thumbnail']='';
                 }
+                
                 $result = $this->Item_model->update($_POST);
                 //print_r($dataItem['array_screenshot']);exit;
             }
@@ -102,20 +105,20 @@
             }
             else if ($action == 'update') 
             {
-                //print_r($_POST);
+               // print_r($_POST);
                // exit;
                 $dataItem = $this->Item_model->get_by_id(array('id' => $_POST['id']));
-                $currentFilename = $dataItem['filename'];
+                $currentFilename = json_decode($dataItem['filename']);
                 if(!empty($currentFilename) && !empty($_POST['item_file']))
                 {
                     $_POST['item_file'] = array_merge($currentFilename,$_POST['item_file']);
                 }
-                $currentScreenshot = $dataItem['screenshot'];
+                $currentScreenshot = json_decode($dataItem['screenshot']);
                 if(!empty($currentScreenshot) && !empty($_POST['item_screenshot']))
                 {
-                   $_POST['item_screenshot'] = array_merge ($currentScreenshot,$_POST['item_screenshot']);
+                    $_POST['item_screenshot'] = array_merge ($currentScreenshot,$_POST['item_screenshot']);
                 }
-                $currentThumbnail = $dataItem['thumbnail'];
+                $currentThumbnail = json_decode($dataItem['thumbnail']);
                 if(!empty($_POST['thumbnail']))
                 {
                     if(!empty($currentThumbnail))
@@ -127,9 +130,10 @@
                     }
                 }
                 
-                if (empty($_POST['id']) || !empty($_POST['id'])) {
-                    $_POST['item_status_id'] = ITEM_STATUS_PENDING;
+                /*if (empty($_POST['id']) || !empty($_POST['id'])) {
+                    //$_POST['item_status_id'] = ITEM_STATUS_PENDING;
                 }
+                */
                 if (isset($_POST['item_file'])) {
                     $_POST['filename'] = json_encode($_POST['item_file']);
                 }
@@ -191,4 +195,4 @@
             );
             echo json_encode( $output );
         }
-    }                                
+    }                                    
