@@ -133,6 +133,7 @@
         
         function sync($row, $param = array(),$pendingAprove = null,$pending=null, $approve=null) {
             $row = StripArray($row);
+            $row['content_html'] = save_tinymce($row['description']);
 			$is_login = $this->User_model->is_login();
 			
             // set image thumbnail
