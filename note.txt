@@ -1,3 +1,103 @@
+Dear Pak Herry,
+
+Berdasarkan URL ini :
+
+
+https://www.lintasapps.com/item/buy/7
+https://www.lintasapps.com/item/buy/1
+https://www.lintasapps.com/item/buy/2
+
+Bahwa, untuk malakukan testing harus menginput Biodata yang tersedia,
+
+Supaya untuk memperlancar Production Integration, pihak Team Bisnis meminta IT Merchant agar membuatkan form khusus di halaman website Simetri yang tidak memerlukan input biodata pada saat Testing Development.
+
+Terimakasih,
+
+
+Email Ferdhie :
+Maaf revisi lagi, khusus rekap, karena ini sensitif banget
+
+saya udah buat FAQ nya sebagai background, silahkan baca2
+https://www.lintasapps.com/pages/faq
+
+1. Saldo penjual = 
+   Revenue Rp = (query SUM(IDR) item yg terjual sukses)
+   Revenue USD = (query SUM(USD) item yg terjual sukses)
+   Revenue total = Total Rp + (total USD * currency saat itu)
+
+Penampilan di rekap sidebar SBB:
+
+Total
+Sales
+XXX / sejak (dd/mm/yyyy) [a]
+Revenue (Rp)
+XXX [b]
+Revenue (USD)
+XXX / 1USD = RpXXXX.XX [c]
+Total Revenue
+RpXXXXXXX
+Hasil Anda
+Prosentase
+XX% [d]
+Profit (Rp)
+RpXXX [e]
+
+
+[a] -> tanggal diambil dari tanggal awal berjualan jika belum withdraw, ambil dr tgl widthdraw terakhir jika sudah
+[b] -> revenue Rp dihitung dari pembelian yang sukses dengan currency Rp - kurangkan 10% untuk pajak PPN
+[c] -> revenue USD dihitung dari pembelian yang sukses dengan currency USD, rate adalah rate sekarang  - kurangkan 10% untuk pajak PPN,
+        total revenue adalah total dikurangkan dengan jumlah yang sudah dia withdraw total
+
+[d] -> prosentase silahkan ambil dari tabel berikut [ini terkonfigurasi di tabel / rule config array yang dapat diubah2 tentunya]
+Prosentase Penjual:	Sales volume TOTAL (Rp):
+60%	Rp0
+65%	 Rp5.000.000
+70%	Rp10.000.000
+80%	 Rp20.000.000
+[e] profit adalah total revenue * prosentase
+
+untuk withdrawal, nanti skrip akan di jalankan crontab untuk semua user, tetapi bisa dimanual trigger dari admin, untuk user tertentu
+nanti jumlah withdraw = jumlah profit dia, jadi sehabis withdraw sukses ,profit dia = 0
+simpan di tabel user_withdraw , dengan kolom sbb:
+  request_datetime, user_id, last_user_item_id, amout_rp, amount_idr, prosentase, currency, status
+keterangan field:
+request_datetime = tgljam request
+user_id = user yg melakukan withdraw
+last_user_item_id = id user_item terakhir (untuk tanggal total sales)
+amount_rp = saldo rp user saat last_user_item_id
+amount_idr = saldo idr user saat last_user_item_id
+prosentase = dihitung saat admin ACK/OK withdrawal / crontab dieksekusi
+currency diambil dihitung saat admin ACK/OK withdrawal / crontab dieksekusi
+
+konfigurasi yang dibutuhkan:
+1. array untuk prosentase
+$prosentase = array(
+  array( 60 /*persen*/, 5000 /*nanti dikalikan seribu*/  ),
+  array( 65 /*persen*/, 5000 /*nanti dikalikan seribu*/  ),
+  ...
+)
+2. min withdrawal
+untuk menentukan user mana yang sudah boleh dieksekusi withdrawal nya, misalnya: sales harus lebih besar dari 1.000.000 baru akan dieksekusi withdrawal nya
+
+PENTING:
+Hasil saldo itu di QUERY, jangan lakukan update saat transaksi karena banyak tidak validnya, nanti akan susah validasinya jika pakai UPDATE saldo kolom ketika admin refund, dll
+
+
+Yang kedua
+Profile -> untuk penjual, ada tambahan profile yaitu profile penjual / info pembayaran:
+Tipe account: PAYPAL/BANK
+Paypal: ID/EMAIL PAYPAL
+BANK: NAMA BANK / NOREK / NAMA REKENING
+
+Yang ketiga
+Halaman Rekap tanggal harus datepicker
+
+
+Silahkan direvisi, jika ada yang kurang jelas silahkan chat/whatsapp di 08123368855 atau email.
+
+
+
+
 Form Hasil Jualan :
 - Tambah datepicker
 

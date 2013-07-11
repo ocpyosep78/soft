@@ -327,24 +327,30 @@
 			$is_login = $this->User_model->is_login();
 			if ($is_login) {
 				$user = $this->User_model->get_session();
-				$update_user = $_POST;
-				$update_user['id'] = $user['id'];
-				$this->User_model->update($update_user);
-				
-				// renew session
-				$user = $this->User_model->get_by_id(array( 'id' => $user['id'] ));
-				$this->User_model->get_session($user);
+				if (!empty($_POST['birthdate'])) {
+					$update_user = $_POST;
+					$update_user['id'] = $user['id'];
+					$this->User_model->update($update_user);
+					
+					// renew session
+					$user = $this->User_model->get_by_id(array( 'id' => $user['id'] ));
+					$this->User_model->set_session($user);
+				}
 			} else {
 				$user = $this->User_model->get_by_id(array( 'email' => $_POST['email'] ));
 				if (count($user) == 0) {
 					$update_user = $_POST;
 					$update_user['name'] = time().rand(1000,9999);
-					$this->User_model->update($update_user);
+					$user = $this->User_model->update($update_user);
 				} else {
 					$update_user = $_POST;
 					$update_user['id'] = $user['id'];
-					$this->User_model->update($update_user);
+					$user = $this->User_model->update($update_user);
 				}
+				
+				// renew session
+				$user = $this->User_model->get_by_id(array( 'id' => $user['id'] ));
+				$this->User_model->set_session($user);
 			}
 			
 			$transaction = $this->Doku_model->get_by_id(array( 'transidmerchant' => $param['transidmerchant'], 'trxstatus' => 'Requested' ));

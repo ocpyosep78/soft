@@ -477,19 +477,30 @@
 			
 			// doku
 			$('#form-doku .btn-prepare').click(function() {
-				// set data to form
 				var param = Site.Form.GetValue('form-doku');
-				$('#win-doku [name="email"]').val(param.EMAIL);
-				$('#win-doku [name="fullname"]').val(param.NAME);
-				$('#win-doku [name="address"]').val(param.ADDRESS);
-				$('#win-doku [name="city"]').val(param.CITY);
-				$('#win-doku [name="propinsi"]').val(param.PROVINCE);
-				$('#win-doku [name="zipcode"]').val(param.ZIPCODE);
-				$('#win-doku [name="phone"]').val(param.HOMEPHONE);
-				$('#win-doku [name="mobile"]').val(param.MOBILEPHONE);
-				$('#win-doku [name="office"]').val(param.WORKPHONE);
-				$('#win-doku [name="birthdate"]').val(param.BIRTHDATE);
-				$('#win-doku').modal();
+				
+				if (param.BIRTHDATE.length > 0) {
+					doku.get_word();
+					param.WORDS = $('#form-doku [name="WORDS"]').val();
+					param.TRANSIDMERCHANT = $('#form-doku [name="TRANSIDMERCHANT"]').val();
+					
+					Func.ajax({ url: web.host + 'item/doku_prepare', param: param, callback: function(result) {
+						if (result.status) { $("#form-doku").submit(); }
+					} });
+				} else {
+					// set data to form
+					$('#win-doku [name="email"]').val(param.EMAIL);
+					$('#win-doku [name="fullname"]').val(param.NAME);
+					$('#win-doku [name="address"]').val(param.ADDRESS);
+					$('#win-doku [name="city"]').val(param.CITY);
+					$('#win-doku [name="propinsi"]').val(param.PROVINCE);
+					$('#win-doku [name="zipcode"]').val(param.ZIPCODE);
+					$('#win-doku [name="phone"]').val(param.HOMEPHONE);
+					$('#win-doku [name="mobile"]').val(param.MOBILEPHONE);
+					$('#win-doku [name="office"]').val(param.WORKPHONE);
+					$('#win-doku [name="birthdate"]').val(param.BIRTHDATE);
+					$('#win-doku').modal();
+				}
 			});
 			$('#win-doku .save').click(function() {
 				if (! $('#win-doku form').valid()) {
