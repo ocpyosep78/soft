@@ -3,8 +3,8 @@
 	$date_start = (isset($_POST['date_start'])) ? $_POST['date_start'] : date("01-m-Y");
 	$date_end = (isset($_POST['date_end'])) ? $_POST['date_end'] : date("d-m-Y");
 	
-	// prepare dara
-	$user = $this->User_model->get_by_id(array( 'id' => $user['id'] ));
+	// prepare data
+	$saldo = $this->User_model->get_saldo(array( 'user_id' => $user['id'] ));
 	
 	$param_rekap['item_user_id'] = $user['id'];
 	$param_rekap['date_start'] = SwapDate($date_start);
@@ -75,9 +75,14 @@
 		
 		<div class="span4 sidebar"><br />
 			<h2>Informasi Saldo :</h2>
-			<div>Saldo Rupiah : <?php echo rupiah($user['saldo_rupiah']); ?></div>
-			<div>Saldo Dollar : <?php echo dollar($user['saldo_dollar']); ?></div>
-			<div style="padding: 20px 0 0 0;"><a class="show-withdraw cursor btn btn-success">Tarik Uang</a></div>
+			<div style="text-align: right; font-weight: bold;">Total</div>
+			<div>Sales : <?php echo $user['display_name']; ?> / Sejak bergabung</div>
+			<div>Revenue (Rp) : <?php echo rupiah($saldo['saldo_rupiah']); ?></div>
+			<div>Revenue (USD) : <?php echo dollar($saldo['saldo_dollar']); ?></div>
+			<div>Total Revenue : <?php echo rupiah($saldo['saldo_total']); ?></div>
+			<div style="text-align: right; font-weight: bold;">Hasil Anda</div>
+			<div>Prosentase : <?php echo $saldo['saldo_percent']['percent_text']; ?></div>
+			<div>Profit (Rp) : <?php echo rupiah($saldo['saldo_profit']); ?></div>
 		</div>
 	</div>
 	

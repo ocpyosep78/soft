@@ -111,7 +111,7 @@ $autoload['language'] = array();
 
 $autoload['model'] = array(
 	'Item_model', 'Item_Status_model','User_model', 'Category_model', 'Platform_model', 'Default_Value_model', 'User_Item_model','Status_Nota_model','Nota_model','Transaction_model',
-	'Doku_model', 'Checkout_Data_model', 'Pages_model', 'Withdraw_model'
+	'Doku_model', 'Checkout_Data_model', 'Pages_model', 'Withdraw_model', 'Sales_Percent_model'
 );
 
 

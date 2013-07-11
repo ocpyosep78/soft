@@ -104,6 +104,48 @@ class User_Item_model extends CI_Model {
 		return $invoice_no;
 	}
 	
+	function get_saldo_rupiah($param) {
+		$saldo_rupiah = 0;
+		$select_query = "
+			SELECT SUM(price) saldo_rupiah
+			FROM ".USER_ITEM."
+			WHERE
+				ref_id != ''
+				AND currency = 'IDR'
+				AND user_id = '".$param['user_id']."'
+		";
+		$select_result = mysql_query($select_query) or die(mysql_error());
+		if (false !== $row = mysql_fetch_assoc($select_result)) {
+			$saldo_rupiah = $row['saldo_rupiah'];
+		}
+		
+		// PPN 10%
+		$saldo_rupiah = $saldo_rupiah - ($saldo_rupiah * 0.1);
+		
+		return $saldo_rupiah;
+	}
+	
+	function get_saldo_dollar($param) {
+		$saldo_dollar = 0;
+		$select_query = "
+			SELECT SUM(terbayar) saldo_dollar
+			FROM ".USER_ITEM."
+			WHERE
+				ref_id != ''
+				AND currency = 'USD'
+				AND user_id = '".$param['user_id']."'
+		";
+		$select_result = mysql_query($select_query) or die(mysql_error());
+		if (false !== $row = mysql_fetch_assoc($select_result)) {
+			$saldo_dollar = $row['saldo_dollar'];
+		}
+		
+		// PPN 10%
+		$saldo_dollar = $saldo_dollar - ($saldo_dollar * 0.1);
+		
+		return $saldo_dollar;
+	}
+	
 	function delete($param) {
 		if (isset($param['id'])) {
 			$delete_query  = "DELETE FROM ".USER_ITEM." WHERE id = '".$param['id']."' LIMIT 1";
