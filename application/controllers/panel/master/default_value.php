@@ -1,12 +1,12 @@
 <?php
 
-class category extends PANEL_Controller {
+class default_value extends PANEL_Controller {
     function __construct() {
         parent::__construct();
     }
     
     function index() {
-		$this->load->view( 'panel/master/category' );
+		$this->load->view( 'panel/master/default_value' );
     }
 	
 	function action() {
@@ -18,9 +18,9 @@ class category extends PANEL_Controller {
 		
 		$result = array();
 		if ($action == 'update') {
-			$result = $this->Category_model->update($_POST);
+			$result = $this->Default_Value_model->update($_POST);
 		} else if ($action == 'delete') {
-			$result = $this->Category_model->delete($_POST);
+			$result = $this->Default_Value_model->delete($_POST);
 		}
 		
 		echo json_encode($result);
@@ -30,11 +30,11 @@ class category extends PANEL_Controller {
 		// user
 		$user = $this->User_model->get_session();
 		
-		$_POST['column'] = array( 'name' );
+		$_POST['column'] = array('name','value');
 		$output = array(
 			"sEcho" => intval($_POST['sEcho']),
-			"aaData" => $this->Category_model->get_array($_POST),
-			"iTotalDisplayRecords" => $this->Category_model->get_count()
+			"aaData" => $this->Default_Value_model->get_array($_POST),
+			"iTotalDisplayRecords" => $this->Default_Value_model->get_count()
 		);
 		echo json_encode( $output );
 	}
