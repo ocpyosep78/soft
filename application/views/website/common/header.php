@@ -101,6 +101,40 @@
 				<label class="control-label">Password</label>
 				<div class="controls"><input type="password" name="passwd" placeholder="Biarkan kosong jika anda tidak ingin merubahnya" class="span4" rel="twipsy" /></div>
 			</div>
+            <div class="control-group">
+				<label class="control-label">Tipe Account</label>
+				<div class="controls">
+                    <select name="type_account">
+                        <option value="">- pilih tipe account -</option>
+                        <option value="PAYPAL">Paypal</option>
+                        <option value="BANK">Bank</option>
+                    </select>
+                </div>
+			</div>
+            <div class="control-group paypal-group hide">
+                <label class="control-label">Paypal ID/ Email</label>
+				<div class="controls">
+                    <input type="text" name="paypal_email" placeholder="Paypal ID / Email" class="span4" rel="twipsy" />
+                </div>
+			</div>
+            <div class="control-group bank-group hide">
+                <label class="control-label">Nama Bank</label>
+				<div class="controls">
+                    <input type="text" name="bank_name" placeholder="Nama Bank" class="span4" rel="twipsy" />
+                </div>
+			</div>
+            <div class="control-group bank-group hide">
+                <label class="control-label">Nomer Rek</label>
+				<div class="controls">
+                    <input type="text" name="bank_account" placeholder="Nomer Rekening" class="span4" rel="twipsy" />
+                </div>
+			</div>
+            <div class="control-group bank-group hide">
+                <label class="control-label">Nama Rek</label>
+				<div class="controls">
+                    <input type="text" name="bank_account_name" placeholder="Nama di Rekening" class="span4" rel="twipsy" />
+                </div>
+			</div>
 		</form>
 	</div>
 	<div class="modal-footer">
@@ -122,7 +156,9 @@ $(document).ready(function() {
 			phone: { required: true },
 			mobile: { required: true },
 			office: { required: true },
-			birthdate: { required: true }
+			birthdate: { required: true },
+            paypal_email: { email: true }
+           
 		},
 		messages: {
 			email: { required: 'Silakan masukkan alamat e-mail Anda, alamat download akan dikirimkan ke e-mail anda', email: 'Alamat e-mail yang Anda masukkan tidak valid, mohon ulangi lagi' },
@@ -134,7 +170,9 @@ $(document).ready(function() {
 			phone: { required: 'Mahon memasukkan telepon rumah' },
 			mobile: { required: 'Mahon memasukkan telepon genggam' },
 			office: { required: 'Mahon memasukkan telepon kantor' },
-			birthdate: { required: 'Mahon memasukkan tanggal lahir' }
+			birthdate: { required: 'Mahon memasukkan tanggal lahir' },
+            paypal_email: { required: 'Alamat e-mail yang Anda masukkan tidak valid, mohon ulangi lagi' }
+       
 		}
 	});
 	
@@ -145,9 +183,35 @@ $(document).ready(function() {
 			$('#win-profile [name="address"]').val(result.address);
 			$('#win-profile [name="city"]').val(result.city);
 			$('#win-profile [name="passwd"]').val('');
+            $('#win-profile [name="type_account"] option[value='+ result.type_account +']').prop('selected', true);
+			$('#win-profile [name="paypal_email"]').val(result.paypal_email);
+			$('#win-profile [name="bank_name"]').val(result.bank_name);
+			$('#win-profile [name="bank_account"]').val(result.bank_account);
+			$('#win-profile [name="bank_account_name"]').val(result.bank_account_name);
+            if(result.type_account == 'PAYPAL')
+            {
+                $('.paypal-group').show();
+                $('.bank-group').hide();
+            }else
+            {
+                $('.paypal-group').hide();
+                $('.bank-group').show();
+            }
 			$('#win-profile').modal();
 		} });
 	});
+    $('#win-profile [name="type_account"]').change(function() {
+        var selVal = $(this).find(":selected").val();
+        if(selVal =='PAYPAL')
+        {
+            $('.paypal-group').show();
+            $('.bank-group').hide();
+        }else if(selVal =='BANK')
+        {
+            $('.paypal-group').hide();
+            $('.bank-group').show();
+        }
+    });
 	$('#win-profile .save').click(function() {
 		$('#win-profile form').submit();
 	} );

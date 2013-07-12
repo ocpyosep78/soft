@@ -6,7 +6,8 @@
             
             $this->field = array(
 				'id', 'name', 'email', 'fullname', 'passwd', 'address', 'city', 'propinsi', 'zipcode', 'phone', 'mobile', 'office', 'birthdate',
-				'saldo_rupiah', 'saldo_dollar', 'is_active', 'reset'
+				'saldo_rupiah', 'saldo_dollar', 'is_active', 'reset',
+                'type_account','paypal_email','bank_name','bank_account','bank_account_name'
 			);
 			
             /*	User Info */

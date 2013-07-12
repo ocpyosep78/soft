@@ -45,7 +45,9 @@
     define('DOKU_HOST',							'https://pay.doku.com/Suite/Receive');
 	/*	*/
 	define('DOKU_HOST',							'http://103.10.129.17/Suite/Receive');
-	
+	/* TIPE ACCOUNT */
+    define('PAYPAL',							'1');
+    define('BANK',							'2');
     /* USER */
     define('STATUS_USER_NEW',							'0');
     define('STATUS_USER_CONFIRM',							'1');
