@@ -1,4 +1,5 @@
 <?php
+	$this->User_model->login_user_required();
 	$user = $this->User_model->get_session();
 	$date_start = (isset($_POST['date_start'])) ? $_POST['date_start'] : date("01-m-Y");
 	$date_end = (isset($_POST['date_end'])) ? $_POST['date_end'] : date("d-m-Y");
@@ -22,6 +23,12 @@
 </style>
 
 <div class="container-fluid sidebar_content">
+	<div class="hide">
+		<div class="cnt-saldo"><?php echo json_encode($saldo); ?></div>
+	</div>
+	
+	
+	
 	<div class="row-fluid">
 		<div class="span8"><br />
 			<div class="row-fluid">
@@ -30,10 +37,10 @@
 					
 					<div><form method="post" id="form-rekap">
 						<div style="float: left; width: 150px;">Tanggal Mulai</div>
-						<div style="float: left; width: 150px;"><input type="text" name="date_start" value="<?php echo $date_start; ?>" /></div>
+						<div style="float: left; width: 150px;"><input type="text" name="date_start" class="datepicker" value="<?php echo $date_start; ?>" /></div>
 						<div style="clear: both;"></div>
 						<div style="float: left; width: 150px;">Tanggal Selesai</div>
-						<div style="float: left; width: 150px;"><input type="text" name="date_end" value="<?php echo $date_end; ?>" /></div>
+						<div style="float: left; width: 150px;"><input type="text" name="date_end" class="datepicker" value="<?php echo $date_end; ?>" /></div>
 						<div style="clear: both;"></div>
 						<div style="float: left; width: 150px;">&nbsp;</div>
 						<div style="float: left; width: 150px;"><input type="submit" name="Submit" value="Submit" class="btn btn-success" /></div>
@@ -76,13 +83,24 @@
 		<div class="span4 sidebar"><br />
 			<h2>Informasi Saldo :</h2>
 			<div style="text-align: right; font-weight: bold;">Total</div>
-			<div>Sales : <?php echo $user['display_name']; ?> / Sejak bergabung</div>
+			<div>Sales : <?php echo $user['display_name']; ?></div>
+			
+			<?php if (count($saldo['last_withdraw']) > 0) { ?>
+			<div>Sejak Withdraw pada : <?php echo GetFormatDate($saldo['last_withdraw']['request_datetime'], array( 'FormatDate' => "d/m/Y" )); ?></div>
+			<?php } else { ?>
+			<div>Sejak Mulai Bergabung</div>
+			<?php } ?>
+			
 			<div>Revenue (Rp) : <?php echo rupiah($saldo['saldo_rupiah']); ?></div>
 			<div>Revenue (USD) : <?php echo dollar($saldo['saldo_dollar']); ?></div>
 			<div>Total Revenue : <?php echo rupiah($saldo['saldo_total']); ?></div>
 			<div style="text-align: right; font-weight: bold;">Hasil Anda</div>
 			<div>Prosentase : <?php echo $saldo['saldo_percent']['percent_text']; ?></div>
 			<div>Profit (Rp) : <?php echo rupiah($saldo['saldo_profit']); ?></div>
+			
+			<div style="padding: 35px 0 0 0;">
+				<a class="btn show-withdraw">Penarikan</a>
+			</div>
 		</div>
 	</div>
 	
@@ -91,21 +109,11 @@
 			<a href="#" class="close" data-dismiss="modal">&times;</a>
 			<h3>Form Penarikan</h3>
 		</div>
-		<div class="modal-body" style="padding-left: 0px;">
-			<div class="pad-alert" style="padding-left: 15px;"></div>
-			<form class="form-horizontal" style="padding-left: 0px;">
-				<input type="hidden" name="action" value="add_withdraw" />
-				<input type="submit" name="submit" value="submit" class="hide" />
-				
-				<div class="control-group">
-					<label class="control-label">Nilai Rupiah</label>
-					<div class="controls"><input type="text" name="value_rupiah" placeholder="Nilai Rupiah" class="span4" rel="twipsy" /></div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Nilai Dollar</label>
-					<div class="controls"><input type="text" name="value_dollar" placeholder="Nilai Dollar" class="span4" rel="twipsy" /></div>
-				</div>
-			</form>
+		<div class="modal-body" style="">
+			Penarikan revenue seluruh hasil penjualan dengan :<br />
+			Prosentase : <?php echo $saldo['saldo_percent']['percent_text']; ?><br />
+			Profit (Rp) : <?php echo rupiah($saldo['saldo_profit']); ?><br /><br />
+			Apa anda yakin akan melakukan menarikan sekarang ?
 		</div>
 		<div class="modal-footer">
 			<a class="btn cursor cancel">Cancel</a>
@@ -117,38 +125,21 @@
 
 <script>
 $(document).ready(function() {
+	$('.datepicker').datepicker({ format: 'dd-mm-yyyy' });
+	
 	// withdraw
-	$("#win-withdraw form").validate({
-		rules: {
-			value_rupiah: { required: true },
-			value_dollar: { required: true }
-		},
-		messages: {
-			value_rupiah: { required: 'Silakan masukkan dana yang akan anda tarik' },
-			value_dollar: { required: 'Silakan masukkan dana yang akan anda tarik' }
-		}
-	});
 	$('.show-withdraw').click(function() {
-		$('#win-withdraw form')[0].reset();
 		$('#win-withdraw').modal();
 	});
-	$('#win-withdraw .save').click(function() { $('#win-withdraw form').submit(); });
-	$('#win-withdraw .cancel').click(function() { $('#win-withdraw').modal('hide'); });
-	$('#win-withdraw form').submit(function() {
-		if (! $("#win-withdraw form").valid()) {
-			return false;
-		}
-		
-		var param = Site.Form.GetValue('win-withdraw form');
-		Func.ajax({ url: web.host + 'rekap/action', param: param, callback: function(result) {
+	$('#win-withdraw .save').click(function() {
+		Func.ajax({ url: web.host + 'rekap/action', param: { action: 'add_withdraw' }, callback: function(result) {
 			Func.show_notice({ title: 'Informasi', text: result.message });
 			if (result.status) {
 				$('#win-withdraw').modal('hide');
 			}
 		} });
-		
-		return false;
 	});
+	$('#win-withdraw .cancel').click(function() { $('#win-withdraw').modal('hide'); });
 });
 </script>
 </body>

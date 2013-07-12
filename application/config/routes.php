@@ -5,7 +5,7 @@ $url = preg_replace('/^\//i', '', $url);
 $url = preg_replace('/\/$/i', '', $url);
 $array_url = explode('/', $url);
 
-if ($array_url[0] != 'panel') {
+if (! in_array($array_url[0], array('panel', 'cron'))) {
 	$route['login'] = "website/login";
 	$route['logout'] = "website/logout";
 	$route['ajax/(:any)'] = "website/ajax";

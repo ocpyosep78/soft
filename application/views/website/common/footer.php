@@ -39,9 +39,8 @@
 <script type="text/javascript" src="<?php echo base_url('static/theme/job_board/js/jquery.validate.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/theme/job_board/js/public.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('static/lib/gritter/jquery.gritter.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('static/lib/bootstrap/js/bootstrap-datepicker.js'); ?>"></script>
 <script>
-    
-    
     $(function() {
         $('.input_tooltips').tooltip();
         $.stylesheetInit();

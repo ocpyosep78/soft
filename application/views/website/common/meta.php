@@ -70,6 +70,7 @@
 	<script>var web = { host: '<?php echo base_url(); ?>' } </script>
 	<link rel="stylesheet" href="<?php echo base_url('static/theme/job_board/css/job_blue.responsive.css'); ?>" title="job_blue" type="text/css">
 	<link rel="stylesheet" href="<?php echo base_url('static/lib/gritter/jquery.gritter.css'); ?>" title="job_blue" type="text/css">
+	<link rel="stylesheet" href="<?php echo base_url('static/lib/bootstrap/css/bootstrap-datepicker.css'); ?>" />
 	<link rel="icon shortcut" href="<?php echo base_url('static/img/favicon.ico'); ?>" type="image/x-icon" />
 	
     <!--[if lt IE 9]>

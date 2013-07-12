@@ -21,11 +21,14 @@
 						<div class="nota-message"></div>
 						<table id="nota" class="table table-striped table-bordered dTableR">
 							<thead><tr>
-								<th style="width: 135px;">&nbsp;</th>
+								<th>&nbsp;</th>
 								<th>Tanggal</th>
 								<th>User</th>
 								<th>Nilai Rupiah</th>
-								<th>Nilai Dollar</th>
+								<th>Nilai Konversi Dollar</th>
+								<th>%</th>
+								<th>Profit</th>
+								<th>Currency</th>
 								<th>Status</th>
                             </tr></thead>
 							<tbody><tr><td class="dataTables_empty">Loading data from server</td></tr></tbody>
@@ -50,11 +53,14 @@
 					"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
 					"sAjaxSource": web.host + 'panel/order/withdraw/grid',
 					"aoColumns": [
+                    { "sClass": "center", "bSortable": false, sWidth: "7%" },
+                    null,
+                    null,
+                    null,
+                    null,
                     { "sClass": "center", "bSortable": false },
+                    { "bSortable": false },
                     null,
-                    null,
-                    null,
-                    { "sClass": "center", "bSortable": false },
                     null
 					]
                 } );

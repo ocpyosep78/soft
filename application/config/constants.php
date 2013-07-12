@@ -37,7 +37,7 @@
 	/*	*/
     
 	/* WITHDRAW */
-	define('MINIMIN_RUPIAH',						1500000);
+	define('MINIMIN_RUPIAH',						1000000);
 	define('MINIMIN_DOLLAR',						1500);
 	
 	/*	DOKU */
@@ -75,7 +75,7 @@
     define('SALES_PERCENT',							'sales_percent');
     define('STATUS_NOTA',							'status_nota');
     define('TRANSACTION',							'transaction');
-    define('WITHDRAW',								'withdraw');
+    define('WITHDRAW',								'user_withdraw');
     
     
     /* End of file constants.php */

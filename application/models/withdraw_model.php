@@ -3,7 +3,7 @@
 class Withdraw_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
-		$this->field = array( 'id', 'user_id', 'withdraw_date', 'value_rupiah', 'value_dollar', 'status' );
+		$this->field = array( 'id', 'user_id', 'request_datetime', 'last_user_item_id', 'amout_rp', 'amount_idr', 'prosentase', 'currency', 'status' );
 	}
 	
 	function update($param) {
@@ -45,7 +45,11 @@ class Withdraw_model extends CI_Model {
 	function get_array($param = array()) {
 		$array = array();
 		
+		$param['field_replace']['user_name'] = 'User.name';
+		$param['field_replace']['profit'] = 'Withdraw.amount_idr';
+		
 		$string_user = (empty($param['user_id'])) ? '' : "AND Withdraw.user_id = '".$param['user_id']."'";
+		$string_status = (empty($param['status'])) ? '' : "AND Withdraw.status = '".$param['status']."'";
 		$string_filter = GetStringFilter($param, @$param['column']);
 		$string_sorting = GetStringSorting($param, @$param['column'], 'name ASC');
 		$string_limit = GetStringLimit($param);
@@ -54,7 +58,7 @@ class Withdraw_model extends CI_Model {
 			SELECT SQL_CALC_FOUND_ROWS Withdraw.*, User.name user_name
 			FROM ".WITHDRAW." Withdraw
 			LEFT JOIN ".USER." User ON User.id = Withdraw.user_id
-			WHERE 1 $string_user $string_filter
+			WHERE 1 $string_status $string_user $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit 		
 		";
@@ -75,6 +79,17 @@ class Withdraw_model extends CI_Model {
 		return $TotalRecord;
 	}
 	
+	function get_last_record($param) {
+		$array = array();
+		$select_query  = "SELECT * FROM ".WITHDRAW." WHERE user_id = '".$param['user_id']."' ORDER BY request_datetime DESC LIMIT 1";
+		$select_result = mysql_query($select_query) or die(mysql_error());
+		if (false !== $row = mysql_fetch_assoc($select_result)) {
+			$array = $this->sync($row);
+		}
+		
+		return $array;
+	}
+	
 	function delete($param) {
 		$delete_query  = "DELETE FROM ".WITHDRAW." WHERE id = '".$param['id']."' LIMIT 1";
 		$delete_result = mysql_query($delete_query) or die(mysql_error());
@@ -87,6 +102,7 @@ class Withdraw_model extends CI_Model {
 	
 	function sync($row, $param = array()) {
 		$row = StripArray($row);
+		$row['profit'] = ($row['prosentase'] * ($row['amout_rp'] + $row['amount_idr'])) / 100;
 		
 		$param['is_custom'] = (empty($param['is_custom'])) ? '&nbsp;' : $param['is_custom'];
 		if ($row['status'] == 'pending') {

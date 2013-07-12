@@ -23,18 +23,10 @@ class withdraw extends PANEL_Controller {
 			if ($withdraw['status'] != 'pending') {
 				$result['status'] = false;
 				$result['message'] = 'Withdraw tidak bisa diperbaharui.';
-			} else if ($user['saldo_rupiah'] < $withdraw['value_rupiah'] || $user['saldo_dollar'] < $withdraw['value_dollar']) {
-				$_POST['status'] = 'cancel';
-				$this->Withdraw_model->update($_POST);
-				
+			} else if ($withdraw['profit'] < MINIMIN_RUPIAH) {
 				$result['status'] = false;
-				$result['message'] = 'Saldo user yang bersangkutan tidak mencukupi.';
+				$result['message'] = 'Withdraw gagal, profit dibawah minumum penarikan ('.rupiah(MINIMIN_RUPIAH).').';
 			} else {
-				$param_withdraw['id'] = $withdraw['user_id'];
-				$param_withdraw['saldo_rupiah'] = 0 - $withdraw['value_rupiah'];
-				$param_withdraw['saldo_dollar'] = 0 - $withdraw['value_dollar'];
-				$this->User_model->update_saldo($param_withdraw);
-				
 				$result = $this->Withdraw_model->update($_POST);
 			}
 		} else if ($action == 'delete') {
@@ -45,8 +37,7 @@ class withdraw extends PANEL_Controller {
 	}
 	
 	function grid() {
-		$_POST['column'] = array( 'withdraw_date', 'user_name', 'value_rupiah', 'value_dollar', 'status' );
-		
+		$_POST['column'] = array( 'request_datetime', 'user_name', 'amout_rp', 'amount_idr', 'prosentase', 'profit', 'currency', 'status' );
 		$output = array(
 			"sEcho" => intval($_POST['sEcho']),
 			"aaData" => $this->Withdraw_model->get_array($_POST),

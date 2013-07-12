@@ -1,59 +1,16 @@
 Daily Report
 
-Doku Payment :
-- Update Request Doku untuk skip modal doku payment
-- Status sudah selesai
-
-1. Saldo penjual = 
-   Revenue Rp = (query SUM(IDR) item yg terjual sukses)
-   Revenue USD = (query SUM(USD) item yg terjual sukses)
-   Revenue total = Total Rp + (total USD * currency saat itu)
-- status sudah selesai
-
-Penampilan di rekap sidebar SBB:
-													Total
-Sales : XXX / sejak (dd/mm/yyyy) [a]
-Revenue (Rp) : XXX [b]
-Revenue (USD) : XXX / 1USD = RpXXXX.XX [c]
-Total Revenue : RpXXXXXXX
-													Hasil Anda
-Prosentase : XX% [d]
-Profit (Rp) : RpXXX [e]
-- status sudah selesai
-
-
 [a] -> tanggal diambil dari tanggal awal berjualan jika belum withdraw, ambil dr tgl widthdraw terakhir jika sudah
-- status untuk awal sudah bisa tapi masih belum support untuk yang withdraw, masih akan dilanjutkan
-
-[b] -> revenue Rp dihitung dari pembelian yang sukses dengan currency Rp - kurangkan 10% untuk pajak PPN
-- status sudah diambilkan dari query dan sudah termasuk PPN
+- status untuk awal sudah bisa dan sudah support untuk withdraw
 - status sudah selesai
-
-[c] -> revenue USD dihitung dari pembelian yang sukses dengan currency USD, rate adalah rate sekarang  - kurangkan 10% untuk pajak PPN,
-        total revenue adalah total dikurangkan dengan jumlah yang sudah dia withdraw total
-- status sudah diambilkan dari penjumlahan revenue dolar & rupiah dari query
-- status sudah selesai
-
-[d] -> prosentase silahkan ambil dari tabel berikut [ini terkonfigurasi di tabel / rule config array yang dapat diubah2 tentunya]
-Prosentase Penjual:	Sales volume TOTAL (Rp):
-60%	Rp0
-65%	 Rp5.000.000
-70%	Rp10.000.000
-80%	 Rp20.000.000
-- sudah dibuatkan table untuk prosentasi penjualan 'sales_percent'
-- pencarian prosentasi juga sudah sesuai dan sudah digunakan
-- status sudah selesai
-
-[e] profit adalah total revenue * prosentase
-- status sudah selesai
-
-
-
-
 
 Rekap Saldo Penjualan :
 untuk withdrawal, nanti skrip akan di jalankan crontab untuk semua user, tetapi bisa dimanual trigger dari admin, untuk user tertentu
-nanti jumlah withdraw = jumlah profit dia, jadi sehabis withdraw sukses ,profit dia = 0
+- untuk script cronnya sudah siap, berikut link cronnya : http://localhost:8666/software/trunk/index.php/panel/order/withdraw
+- untuk manual trigger dari admin bisa diakses di Panel -> Order -> Withdraw
+- status done
+
+nanti jumlah withdraw = jumlah profit dia, jadi sehabis withdraw sukses, profit dia = 0
 simpan di tabel user_withdraw , dengan kolom sbb:
   request_datetime, user_id, last_user_item_id, amout_rp, amount_idr, prosentase, currency, status
 keterangan field:
@@ -64,6 +21,8 @@ amount_rp = saldo rp user saat last_user_item_id
 amount_idr = saldo idr user saat last_user_item_id
 prosentase = dihitung saat admin ACK/OK withdrawal / crontab dieksekusi
 currency diambil dihitung saat admin ACK/OK withdrawal / crontab dieksekusi
+- table user_withdraw sudah dibuatkan sesuai data diatas
+- proses withdraw sudah selesai dan sudah disimpan ditable ini
 
 konfigurasi yang dibutuhkan:
 1. array untuk prosentase
@@ -72,24 +31,29 @@ $prosentase = array(
   array( 65 /*persen*/, 5000 /*nanti dikalikan seribu*/  ),
   ...
 )
+- masih belum mengerti, apa ini yang dimaksud sama dengan : 
+Prosentase Penjual:	Sales volume TOTAL (Rp):
+60%	Rp0
+65%	 Rp5.000.000
+70%	Rp10.000.000
+80%	 Rp20.000.000
+- mohon bantuannya jelasin dikit :)
+
 2. min withdrawal
 untuk menentukan user mana yang sudah boleh dieksekusi withdrawal nya, misalnya: sales harus lebih besar dari 1.000.000 baru akan dieksekusi withdrawal nya
-
-PENTING:
-Hasil saldo itu di QUERY, jangan lakukan update saat transaksi karena banyak tidak validnya, nanti akan susah validasinya jika pakai UPDATE saldo kolom ketika admin refund, dll
-
+- status validasi sudah ditambahkan
 
 Yang kedua
 Profile -> untuk penjual, ada tambahan profile yaitu profile penjual / info pembayaran:
 Tipe account: PAYPAL/BANK
 Paypal: ID/EMAIL PAYPAL
 BANK: NAMA BANK / NOREK / NAMA REKENING
+- sedang dikerjakan Mas Hasan
 
 Yang ketiga
 Halaman Rekap tanggal harus datepicker
+- datepicker sudah ditambahkan
 
-
-Silahkan direvisi, jika ada yang kurang jelas silahkan chat/whatsapp di 08123368855 atau email.
 
 
 

@@ -73,7 +73,7 @@ class User_Item_model extends CI_Model {
 			LEFT JOIN ".ITEM." Item ON Item.id = UserItem.item_id
 			LEFT JOIN ".USER." Author ON Author.id = Item.user_id
 			LEFT JOIN ".CATEGORY." Category ON Category.id = Item.category_id
-			WHERE 1 $string_item_user $string_user $string_item $string_date_start $string_date_end $string_filter
+			WHERE 1 AND ref_id != '' $string_item_user $string_user $string_item $string_date_start $string_date_end $string_filter
 			ORDER BY $string_sorting
 			LIMIT $string_limit
 		";
@@ -105,14 +105,18 @@ class User_Item_model extends CI_Model {
 	}
 	
 	function get_saldo_rupiah($param) {
+		$last_user_item = $this->get_last_user_item_id(array( 'user_id' => $param['user_id'] ));
+		
 		$saldo_rupiah = 0;
 		$select_query = "
-			SELECT SUM(price) saldo_rupiah
-			FROM ".USER_ITEM."
+			SELECT SUM(UserItem.price) saldo_rupiah
+			FROM ".USER_ITEM." UserItem
+			LEFT JOIN ".ITEM." Item ON Item.id = UserItem.item_id
 			WHERE
 				ref_id != ''
 				AND currency = 'IDR'
-				AND user_id = '".$param['user_id']."'
+				AND Item.user_id = '".$param['user_id']."'
+				AND UserItem.id > '".$last_user_item['id']."'
 		";
 		$select_result = mysql_query($select_query) or die(mysql_error());
 		if (false !== $row = mysql_fetch_assoc($select_result)) {
@@ -126,14 +130,18 @@ class User_Item_model extends CI_Model {
 	}
 	
 	function get_saldo_dollar($param) {
+		$last_user_item = $this->get_last_user_item_id(array( 'user_id' => $param['user_id'] ));
+		
 		$saldo_dollar = 0;
 		$select_query = "
-			SELECT SUM(terbayar) saldo_dollar
-			FROM ".USER_ITEM."
+			SELECT SUM(UserItem.terbayar) saldo_dollar
+			FROM ".USER_ITEM." UserItem
+			LEFT JOIN ".ITEM." Item ON Item.id = UserItem.item_id
 			WHERE
 				ref_id != ''
 				AND currency = 'USD'
-				AND user_id = '".$param['user_id']."'
+				AND Item.user_id = '".$param['user_id']."'
+				AND UserItem.id > '".$last_user_item['id']."'
 		";
 		$select_result = mysql_query($select_query) or die(mysql_error());
 		if (false !== $row = mysql_fetch_assoc($select_result)) {
@@ -144,6 +152,26 @@ class User_Item_model extends CI_Model {
 		$saldo_dollar = $saldo_dollar - ($saldo_dollar * 0.1);
 		
 		return $saldo_dollar;
+	}
+	
+	function get_last_user_item_id($param) {
+		$result = array();
+		$select_query = "
+			SELECT UserItem.*
+			FROM ".USER_ITEM." UserItem
+			LEFT JOIN ".ITEM." Item ON Item.id = UserItem.item_id
+			WHERE
+				ref_id != ''
+				AND Item.user_id = '".$param['user_id']."'
+			ORDER BY UserItem.id DESC
+			LIMIT 1
+		";
+		$select_result = mysql_query($select_query) or die(mysql_error());
+		if (false !== $row = mysql_fetch_assoc($select_result)) {
+			$result = $row;
+		}
+		
+		return $result;
 	}
 	
 	function delete($param) {

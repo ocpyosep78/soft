@@ -166,10 +166,12 @@
 			$result['kurs_dollar'] = $this->Default_Value_model->get_konversi_rupiah_dolar();
 			$result['saldo_rupiah'] = $this->User_Item_model->get_saldo_rupiah(array( 'user_id' => $param['user_id'] ));
 			$result['saldo_dollar'] = $this->User_Item_model->get_saldo_dollar(array( 'user_id' => $param['user_id'] ));
-			$result['saldo_dollar_at_rupiah'] = $result['kurs_dollar']['value'] * $result['saldo_dollar'];
+			$result['saldo_dollar_at_rupiah'] = floor($result['kurs_dollar']['value'] * $result['saldo_dollar']);
 			$result['saldo_total'] = $result['saldo_rupiah'] + $result['saldo_dollar_at_rupiah'];
 			$result['saldo_percent'] = $this->Sales_Percent_model->get_percent(array( 'value' => $result['saldo_total'] ));
 			$result['saldo_profit'] = round(($result['saldo_percent']['percent'] * $result['saldo_total']) / 100);
+			$result['last_user_item_id'] = $this->User_Item_model->get_last_user_item_id(array( 'user_id' => $param['user_id'] ));
+			$result['last_withdraw'] = $this->Withdraw_model->get_last_record(array( 'user_id' => $param['user_id'] ));
 			
 			return $result;
 		}
