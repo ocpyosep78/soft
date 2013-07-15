@@ -87,6 +87,7 @@
                         <ul class="nav nav-list">
                             <li><a href="<?php echo site_url('panel/master/category'); ?>">Category</a></li>
                             <li><a href="<?php echo site_url('panel/master/platform'); ?>">Platform</a></li>
+                            <li><a href="<?php echo site_url('panel/master/sales_percent'); ?>">Sales Percent</a></li>
                             <li><a href="<?php echo site_url('panel/master/item_status'); ?>">Item Status</a></li>
                             <li><a href="<?php echo site_url('panel/master/pages'); ?>">Pages</a></li>
                             <li><a href="<?php echo site_url('panel/master/default_value'); ?>">Default Value</a></li>
