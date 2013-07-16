@@ -3,7 +3,7 @@
 class Sales_Percent_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
-		$this->field = array( 'id', 'percent', 'rupiah' );
+		$this->field = array('id', 'percent', 'rupiah');
 	}
 	
 	function update($param) {
@@ -60,7 +60,6 @@ class Sales_Percent_model extends CI_Model {
 		while ( $row = mysql_fetch_assoc( $select_result ) ) {
 			$array[] = $this->sync($row, $param);
 		}
-		
 		return $array;
 	}
 	
@@ -99,9 +98,13 @@ class Sales_Percent_model extends CI_Model {
 		$row['percent_text'] = $row['percent'].' %';
 		
 		if (count(@$param['column']) > 0) {
-			$row = dt_view_set($row, $param['column'], array('is_edit' => 1));
+            $paramCol = @$param;
+            $paramCol['is_edit'] = 1;
+			$row = dt_view_set($row, $paramCol);
 		}
-		
+		/*if (count($column) > 0) {
+			$row = dt_view($row, $column, array('is_edit' => 1));
+		}*/
 		return $row;
 	}
 }

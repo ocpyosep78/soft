@@ -12,80 +12,109 @@
             <div class="status-user-confirm"><?php echo STATUS_USER_CONFIRM; ?></div>
             <div class="status-user-banned"><?php echo STATUS_USER_BANNED; ?></div>
         </div>
-		<div id="WinUser" class="modal modal-big hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
-			<div class="modal-header">
-				<a href="#" class="close" data-dismiss="modal">&times;</a>
-				<h3>Form User</h3>
-            </div>
-			<div class="modal-body" style="padding-left: 0px;">
-				<div class="pad-alert" style="padding-left: 15px;"></div>
-				<form class="form-horizontal" style="padding-left: 0px;">
-					<input type="hidden" name="id" value="0" />
-					<div class="control-group">
-						<label class="control-label" for="input_fullname">Nama Lengkap</label>
-						<div class="controls">
-							<input type="text" id="input_fullname" name="fullname" placeholder="Nama Lengkap" class="span5" rel="twipsy" />
+		<div id="contentwrapper">
+			<div class="main_content">
+				<?php $this->load->view( 'panel/common/breadcrumb', array( 'array_menu' => $array_menu ) ); ?>
+				<div class="item-message"></div>
+                <form id="WinUser" class="hide">
+                    <h3>Form User</h3>
+                    <input type="hidden" name="id" value="0" />
+                    <div class="control-group">
+                        <label class="control-label" for="input_fullname">Nama Lengkap</label>
+                        <div class="controls">
+                            <input type="text" id="input_fullname" name="fullname" placeholder="Nama Lengkap" class="span5" rel="twipsy" />
                         </div>
                     </div>
-					<div class="control-group">
-						<label class="control-label" for="input_name">Username</label>
-						<div class="controls">
-							<input type="text" id="input_name" name="name" placeholder="Username" class="span5" rel="twipsy" />
+                    <div class="control-group">
+                        <label class="control-label" for="input_name">Username</label>
+                        <div class="controls">
+                            <input type="text" id="input_name" name="name" placeholder="Username" class="span5" rel="twipsy" />
                         </div>
                     </div>
-					<div class="control-group">
-						<label class="control-label" for="input_email">Email</label>
-						<div class="controls">
-							<input type="text" id="input_email" name="email" placeholder="Email" class="span5" rel="twipsy" />
+                    <div class="control-group">
+                        <label class="control-label" for="input_passwd">Password</label>
+                        <div class="controls">
+                            <input type="text" id="input_passwd" name="passwd" placeholder="Password" class="span5" rel="twipsy" />
                         </div>
                     </div>
-					<div class="control-group">
-						<label class="control-label" for="input_address">Address</label>
-						<div class="controls">
-							<textarea id="input_address" name="address" placeholder="Alamat" class="span5" rel="twipsy" ></textarea>
+                    <div class="control-group">
+                        <label class="control-label" for="input_email">Email</label>
+                        <div class="controls">
+                            <input type="text" id="input_email" name="email" placeholder="Email" class="span5" rel="twipsy" />
                         </div>
                     </div>
-					<div class="control-group">
-						<label class="control-label" for="input_passwd">Password</label>
-						<div class="controls">
-							<input type="text" id="input_passwd" name="passwd" placeholder="Password" class="span5" rel="twipsy" />
+                    <div class="control-group">
+                        <label class="control-label" for="input_address">Address</label>
+                        <div class="controls">
+                            <textarea id="input_address" name="address" placeholder="Alamat" class="span5" rel="twipsy" ></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="input_city">Kota</label>
+                        <div class="controls">
+                            <input type="text" id="input_city" name="city" placeholder="Kota" class="span5" rel="twipsy" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="input_propinsi">Propinsi</label>
+                        <div class="controls">
+                            <input type="text" id="input_propinsi" name="propinsi" placeholder="Propinsi" class="span3" rel="twipsy" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="input_zipcode">Kode Pos</label>
+                        <div class="controls">
+                            <input type="text" id="input_zipcode" name="zipcode" placeholder="Kode Pos" class="span2" rel="twipsy" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="input_phone">Telp Rumah</label>
+                        <div class="controls">
+                            <input type="text" id="input_phone" name="phone" placeholder="Telp Rumah" class="span2" rel="twipsy" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="input_mobile">Telp Genggam</label>
+                        <div class="controls">
+                            <input type="text" id="input_mobile" name="mobile" placeholder="Telp Genggam" class="span2" rel="twipsy" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="input_office">Telp Kantor</label>
+                        <div class="controls">
+                            <input type="text" id="input_office" name="office" placeholder="Telp Kantor" class="span2" rel="twipsy" />
                         </div>
                     </div>
                     
                     <input type="text" id="input_is_active" name="is_active" placeholder="is_active" class="span5 hidden" rel="twipsy" />
-                </form>
-            </div>
-			<div class="modal-footer">
-				<a class="btn cursor cancel">Cancel</a>
-				<a class="btn cursor save btn-primary">OK</a>
-            </div>
-        </div>
-		
-		<div id="contentwrapper">
-			<div class="main_content">
-				<?php $this->load->view( 'panel/common/breadcrumb', array( 'array_menu' => $array_menu ) ); ?>
-				
-				<div class="row-fluid">
-					<div class="btn-group">
-						<button class="btn btn-gebo AddUser">Tambah</button>
+                    <div class="modal-footer">
+                        <a class="btn cursor cancel">Cancel</a>
+                        <a class="btn cursor save btn-primary">OK</a>
                     </div>
-                </div>
-				
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="user-message"></div>
-						<table id="user" class="table table-striped table-bordered dTableR">
-							<thead><tr>
-								<th style="width: 85px;">&nbsp;</th>
-								<th>Nama</th>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Alamat</th>
-								<th>Deposit</th>
-								<th>Status</th>
-                            </tr></thead>
-							<tbody><tr><td class="dataTables_empty">Loading data from server</td></tr></tbody>
-                        </table>
+                </form>
+                <div id="grid-data">				
+                    <div class="row-fluid">
+                        <div class="btn-group">
+                            <button class="btn btn-gebo AddUser">Tambah</button>
+                        </div>
+                    </div>
+                    
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="user-message"></div>
+                            <table id="user" class="table table-striped table-bordered dTableR">
+                                <thead><tr>
+                                    <th style="width: 85px;">&nbsp;</th>
+                                    <th>Nama</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Alamat</th>
+                                    <th>Deposit</th>
+                                    <th>Status</th>
+                                </tr></thead>
+                                <tbody><tr><td class="dataTables_empty">Loading data from server</td></tr></tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,7 +139,8 @@
 			$('.AddUser').click(function() {
 				$('#WinUser form')[0].reset()
 				$('#WinUser input[name="id"]').val(0);
-				$('#WinUser').modal();
+				$('#WinUser').show();
+                $('#grid-data').hide();
             });
 			$('#WinUser .save').click(function() {
 				if (! $('#WinUser form').valid()) {
@@ -122,7 +152,8 @@
 				Func.ajax({ url: web.host + 'panel/account/user/action', param: param, callback: function(result) {
 					if (result.status == 1) {
 						Func.popup_result('.user-message', result.message);
-						$('#WinUser').modal('hide');
+						$('#WinUser').hide();
+                $('#grid-data').show();
 						grid_user.load();
                         } else {
 						Func.popup_error('#WinUser', result.message);
@@ -130,7 +161,9 @@
                 } });
             });
 			$('#WinUser .cancel').click(function() {
-				$('#WinUser').modal('hide');
+				//$('#WinUser').modal('hide');
+                $('#WinUser').hide();
+                $('#grid-data').show();
             });
 			
 			function init_table() {
@@ -173,7 +206,10 @@
 					$('#WinUser [name="email"]').val(record.email);
 					$('#WinUser [name="address"]').val(record.address);
 					$('#WinUser [name="passwd"]').val('');
-					$('#WinUser').modal();
+                    $('#WinUser').show();
+                    $('#grid-data').hide();
+                    
+					//$('#WinUser').modal();
                 });
                 
 				$('#user').on('click','tbody td img.delete', function () {
