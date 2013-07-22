@@ -105,7 +105,8 @@ class User_Item_model extends CI_Model {
 	}
 	
 	function get_saldo_rupiah($param) {
-		$last_user_item = $this->get_last_user_item_id(array( 'user_id' => $param['user_id'] ));
+		$last_withdraw = $this->Withdraw_model->get_last_record(array( 'user_id' => $param['user_id'] ));
+		$string_user_item = (count($last_withdraw) > 0) ? "AND UserItem.id > '".$last_withdraw['last_user_item_id']."'" : '';
 		
 		$saldo_rupiah = 0;
 		$select_query = "
@@ -116,7 +117,7 @@ class User_Item_model extends CI_Model {
 				ref_id != ''
 				AND currency = 'IDR'
 				AND Item.user_id = '".$param['user_id']."'
-				AND UserItem.id > '".$last_user_item['id']."'
+				$string_user_item
 		";
 		$select_result = mysql_query($select_query) or die(mysql_error());
 		if (false !== $row = mysql_fetch_assoc($select_result)) {
@@ -130,7 +131,8 @@ class User_Item_model extends CI_Model {
 	}
 	
 	function get_saldo_dollar($param) {
-		$last_user_item = $this->get_last_user_item_id(array( 'user_id' => $param['user_id'] ));
+		$last_withdraw = $this->Withdraw_model->get_last_record(array( 'user_id' => $param['user_id'] ));
+		$string_user_item = (count($last_withdraw) > 0) ? "AND UserItem.id > '".$last_withdraw['last_user_item_id']."'" : '';
 		
 		$saldo_dollar = 0;
 		$select_query = "
@@ -141,7 +143,7 @@ class User_Item_model extends CI_Model {
 				ref_id != ''
 				AND currency = 'USD'
 				AND Item.user_id = '".$param['user_id']."'
-				AND UserItem.id > '".$last_user_item['id']."'
+				$string_user_item
 		";
 		$select_result = mysql_query($select_query) or die(mysql_error());
 		if (false !== $row = mysql_fetch_assoc($select_result)) {

@@ -6,7 +6,7 @@ Daily Report
 
 Rekap Saldo Penjualan :
 untuk withdrawal, nanti skrip akan di jalankan crontab untuk semua user, tetapi bisa dimanual trigger dari admin, untuk user tertentu
-- untuk script cronnya sudah siap, berikut link cronnya : http://localhost:8666/software/trunk/index.php/panel/order/withdraw
+- untuk script cronnya sudah siap, berikut link cronnya : https://www.lintasapps.com/cron/withdraw
 - untuk manual trigger dari admin bisa diakses di Panel -> Order -> Withdraw
 - status done
 
